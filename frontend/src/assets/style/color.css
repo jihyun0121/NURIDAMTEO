@@ -1,0 +1,34 @@
+:root {
+    --Gray-Light: #eeeeee;
+    --gray-light-hover: #e6e6e6;
+    --gray-light-active: #cacaca;
+    --Gray-Nomar: #555555;
+    --gray-nomar-hover: #4d4d4d;
+    --gray-nomar-active: #444444;
+    --Gray-Dark: #404040;
+    --gray-dark-hover: #333333;
+    --gray-dark-active: #262626;
+    --Gray-Darker: #1e1e1e;
+
+    --Orange-Light: #fff5ec;
+    --orange-light-hover: #fff0e3;
+    --orange-light-active: #ffe0c5;
+    --Orange-Nomar: #ff9b43;
+    --orange-nomar-hover: #e68c3c;
+    --orange-nomar-active: #cc7c36;
+    --Orange-Dark: #bf7432;
+    --orange-dark-hover: #995d28;
+    --orange-dark-active: #73461e;
+    --Orange-Darker: #593617;
+
+    --Yellow-Light: #fff8eb;
+    --yellow-light-hover: #fff5e1;
+    --yellow-light-active: #ffeac1;
+    --Yellow-Nomar: #ffbc38;
+    --yellow-nomar-hover: #e6a932;
+    --yellow-nomar-active: #cc962d;
+    --Yellow-Dark: #bf8d2a;
+    --yellow-dark-hover: #997122;
+    --yellow-dark-active: #735519;
+    --Yellow-Darker: #594214;
+}
