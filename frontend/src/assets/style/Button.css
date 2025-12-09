@@ -1,0 +1,17 @@
+.label-btn {
+    display: inline-flex;
+    padding: 8px 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4px;
+    border-radius: 12px;
+    border: 1px solid;
+    background: #FFF;
+
+    font-size: var(--label-large-size);
+    font-weight: var(--label-large-weight);
+    line-height: var(--label-large-line);
+
+    cursor: pointer;
+}
