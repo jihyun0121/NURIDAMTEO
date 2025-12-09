@@ -15,3 +15,35 @@
 
     cursor: pointer;
 }
+
+.text-btn-s,
+.text-btn-l {
+    display: flex;
+    align-items: center;
+
+    border-radius: 12px;
+    border: 1px solid var(--orange-normal-base);
+    background: var(--white);
+
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    line-height: var(--title-xlarge-line);
+
+    cursor: pointer;
+}
+
+.text-btn-s {
+    width: 227px;
+    height: 60px;
+    padding: 8px 12px;
+    gap: 4px;
+
+}
+
+.text-btn-l {
+    width: 648px;
+    padding: 16px 24px;
+    justify-content: center;
+    gap: 8px;
+
+}
