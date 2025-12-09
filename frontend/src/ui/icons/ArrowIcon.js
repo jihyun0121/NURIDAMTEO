@@ -15,11 +15,11 @@ const RECT_PROPS = {
     up: { width: 44, height: 44, rx: 22 },
 };
 
-export default function ArrowIcon({ direction, type = "default", size }) {
+export default function ArrowIcon({ variant, type = "default", size }) {
     const [state, setState] = useState("default");
 
-    const pathD = ARROW_PATHS[direction] || ARROW_PATHS.left;
-    const rectProps = RECT_PROPS[direction] || RECT_PROPS.left;
+    const pathD = ARROW_PATHS[variant] || ARROW_PATHS.left;
+    const rectProps = RECT_PROPS[variant] || RECT_PROPS.left;
 
     const icons = {
         default: (
