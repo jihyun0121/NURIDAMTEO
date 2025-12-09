@@ -1,0 +1,17 @@
+.bg {
+    background-color: #CDCDCD;
+    width: 100vw;
+    height: 100vh;
+}
+
+.icon {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.icons {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
