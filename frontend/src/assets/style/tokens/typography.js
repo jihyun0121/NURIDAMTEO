@@ -19,9 +19,9 @@ export const typography = {
         small: { size: "18px", weight: 500, line: "24px" },
     },
     label: {
-        xlarge: { size: "18px", weight: 700, line: "22px" },
-        large: { size: "16px", weight: 500, line: "20px" },
-        medium: { size: "14px", weight: 800, line: "18px" },
-        small: { size: "14px", weight: 700, line: "18px" },
+        large: { size: "16px", weight: 700, line: "22px" },
+        medium: { size: "16px", weight: 500, line: "20px" },
+        small: { size: "14px", weight: 800, line: "18px" },
+        small_underline: { size: "14px", weight: 700, line: "18px" },
     },
 };

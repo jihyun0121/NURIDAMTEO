@@ -10,7 +10,9 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./assets/style/style.css";
 import "./assets/style/font.css";
-import "./assets/style/Button.css";
+import "./assets/style/button.css";
+import "./assets/style/tokens/colors.css";
+import "./assets/style/tokens/typography.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

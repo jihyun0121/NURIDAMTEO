@@ -1,0 +1,69 @@
+:root {
+    --headline-xlarge-size: 44px;
+    --headline-xlarge-weight: 700;
+    --headline-xlarge-line: 56px;
+
+    --headline-large-size: 36px;
+    --headline-large-weight: 700;
+    --headline-large-line: 48px;
+
+    --headline-medium-size: 28px;
+    --headline-medium-weight: 700;
+    --headline-medium-line: 36px;
+
+    --headline-small-size: 28px;
+    --headline-small-weight: 500;
+    --headline-small-line: 36px;
+
+    --headline-xsmall-size: 26px;
+    --headline-xsmall-weight: 800;
+    --headline-xsmall-line: 32px;
+
+    --title-xlarge-size: 24px;
+    --title-xlarge-weight: 700;
+    --title-xlarge-line: 32px;
+
+    --title-large-size: 22px;
+    --title-large-weight: 700;
+    --title-large-line: 28px;
+
+    --title-medium-size: 20px;
+    --title-medium-weight: 700;
+    --title-medium-line: 26px;
+
+    --title-small-size: 18px;
+    --title-small-weight: 700;
+    --title-small-line: 24px;
+
+    --body-xlarge-size: 24px;
+    --body-xlarge-weight: 500;
+    --body-xlarge-line: 32px;
+
+    --body-large-size: 22px;
+    --body-large-weight: 500;
+    --body-large-line: 28px;
+
+    --body-medium-size: 20px;
+    --body-medium-weight: 500;
+    --body-medium-line: 26px;
+
+    --body-small-size: 18px;
+    --body-small-weight: 500;
+    --body-small-line: 24px;
+
+    --label-large-size: 16px;
+    --label-large-weight: 700;
+    --label-large-line: 22px;
+
+    --label-medium-size: 16px;
+    --label-medium-weight: 500;
+    --label-medium-line: 20px;
+
+    --label-small-size: 14px;
+    --label-small-weight: 800;
+    --label-small-line: 18px;
+
+    --label-small_underline-size: 14px;
+    --label-small_underline-weight: 700;
+    --label-small_underline-line: 18px;
+}
