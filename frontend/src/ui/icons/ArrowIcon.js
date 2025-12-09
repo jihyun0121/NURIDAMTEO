@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
 
 const ARROW_PATHS = {
@@ -15,37 +14,43 @@ const RECT_PROPS = {
     up: { width: 44, height: 44, rx: 22 },
 };
 
-export default function ArrowIcon({ variant, type = "default", size }) {
-    const [state, setState] = useState("default");
+export default function ArrowIcon({ direction, type = "default", size }) {
+    const pathD = ARROW_PATHS[direction] || ARROW_PATHS.left;
+    const rectProps = RECT_PROPS[direction] || RECT_PROPS.left;
+    let icon = null;
 
-    const pathD = ARROW_PATHS[variant] || ARROW_PATHS.left;
-    const rectProps = RECT_PROPS[variant] || RECT_PROPS.left;
-
-    const icons = {
-        default: (
+    if (type === "default") {
+        icon = (
             <>
-                {type === "fill" && <rect {...rectProps} fill={colors.gray.light.base} />}
-
                 <path d={pathD} stroke={colors.gray.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </>
-        ),
-        hover: (
+        );
+    } else if (type === "fill") {
+        icon = (
+            <>
+                <rect {...rectProps} fill={colors.gray.light.base} />
+                <path d={pathD} stroke={colors.gray.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </>
+        );
+    } else if (type === "hover") {
+        icon = (
             <>
                 <rect {...rectProps} fill={colors.orange.light.base} />
                 <path d={pathD} stroke={colors.orange.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </>
-        ),
-        action: (
+        );
+    } else if (type === "active") {
+        icon = (
             <>
                 <rect {...rectProps} fill={colors.orange.light.active} />
                 <path d={pathD} stroke={colors.orange.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </>
-        ),
-    };
+        );
+    }
 
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ cursor: "pointer" }} onMouseEnter={() => setState("hover")} onMouseLeave={() => setState("default")} onMouseDown={() => setState("action")} onMouseUp={() => setState("hover")}>
-            {icons[state]}
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none">
+            {icon}
         </svg>
     );
 }
