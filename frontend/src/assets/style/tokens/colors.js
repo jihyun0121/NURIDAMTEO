@@ -17,6 +17,7 @@ export const colors = {
         dark: { base: "#bf8d2a", hover: "#997122", active: "#735519" },
         darker: { base: "#594214" },
     },
-    red: "#FF4343",
-    green: "#48BE7D",
+    red: "#ff4343",
+    green: "#48be7d",
+    white: "#ffffff",
 };
