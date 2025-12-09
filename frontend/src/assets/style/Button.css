@@ -54,10 +54,11 @@
     align-items: center;
     gap: 8px;
 
+    border: none;
     border-radius: 50px;
-    background: var(--Grey-White, #FFF);
+    background: var(--white);
 
-    color: var(--Grey-Dark, #595959);
+    color: #595959;
 
     font-size: var(--title-medium-size);
     font-weight: var(--title-medium-weight);
