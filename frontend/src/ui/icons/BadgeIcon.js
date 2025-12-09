@@ -12,10 +12,5 @@ export default function BadgeIcon({ type = "user", size }) {
     const IconComponent = ICON_MAP[type.toLowerCase()];
 
     if (!IconComponent) return null;
-
-    return (
-        <div style={{ width: size, height: size }}>
-            <IconComponent width={size} height={size} />
-        </div>
-    );
+    return <IconComponent width={size} height={size} />;
 }

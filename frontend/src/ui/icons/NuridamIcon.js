@@ -15,9 +15,5 @@ export default function NuridamIcon({ type = "user", size }) {
 
     if (!IconComponent) return null;
 
-    return (
-        <div style={{ width: size, height: size }}>
-            <IconComponent width={size} height={size} />
-        </div>
-    );
+    return <IconComponent width={size} height={size} />;
 }
