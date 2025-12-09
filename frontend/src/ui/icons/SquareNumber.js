@@ -1,7 +1,7 @@
 import { colors } from "../../assets/style/tokens/colors";
 import { typography } from "../../assets/style/tokens/typography";
 
-export default function SquareNumber({ value, type = "default", size = 44 }) {
+export default function SquareNumber({ value, type = "default", size, color = "default" }) {
     let style = {};
 
     if (type === "default") {
@@ -41,6 +41,8 @@ export default function SquareNumber({ value, type = "default", size = 44 }) {
                 fontSize: typography.body.xlarge.size,
                 fontWeight: typography.body.xlarge.weight,
                 lineHeight: typography.body.xlarge.line,
+
+                color: color === "default" ? colors.gray.normal.base : "inherit",
 
                 ...style,
             }}

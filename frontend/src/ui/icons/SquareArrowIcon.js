@@ -11,7 +11,7 @@ const ARROW_PATHS = {
     },
 };
 
-export default function ArrowIcon({ direction, variant = "single", type = "default", size = 44 }) {
+export default function ArrowIcon({ direction, variant = "single", type = "default", size, color = "default" }) {
     const paths = ARROW_PATHS[direction][variant];
     let icon = null;
 
@@ -19,7 +19,7 @@ export default function ArrowIcon({ direction, variant = "single", type = "defau
         icon = (
             <>
                 {paths.map((d, idx) => (
-                    <path key={idx} d={d} stroke={colors.gray.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path key={idx} d={d} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 ))}
             </>
         );
@@ -56,7 +56,7 @@ export default function ArrowIcon({ direction, variant = "single", type = "defau
     }
 
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ color: color === "default" ? colors.gray.normal.base : "inherit" }}>
             {icon}
         </svg>
     );

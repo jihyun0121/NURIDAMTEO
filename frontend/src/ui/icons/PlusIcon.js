@@ -1,12 +1,12 @@
 import { colors } from "../../assets/style/tokens/colors";
 
-export default function PlusIcon({ type = "default", size }) {
+export default function PlusIcon({ type = "default", size, color = "default" }) {
     let icon = null;
 
     if (type === "default") {
         icon = (
             <>
-                <path d="M22 12V32M12 22H32" stroke={colors.gray.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M22 12V32M12 22H32" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </>
         );
     } else if (type === "fill") {
@@ -32,7 +32,7 @@ export default function PlusIcon({ type = "default", size }) {
         );
     }
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ color: color === "default" ? colors.gray.normal.base : "inherit" }}>
             {icon}
         </svg>
     );

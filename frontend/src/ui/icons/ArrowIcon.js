@@ -7,14 +7,14 @@ const ARROW_PATHS = {
     up: "M30 24L22 16L14 24",
 };
 
-export default function ArrowIcon({ direction, type = "default", size }) {
+export default function ArrowIcon({ direction, type = "default", size, color = "default" }) {
     const pathD = ARROW_PATHS[direction] || ARROW_PATHS.left;
     let icon = null;
 
     if (type === "default") {
         icon = (
             <>
-                <path d={pathD} stroke={colors.gray.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d={pathD} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </>
         );
     } else if (type === "fill") {
@@ -41,7 +41,7 @@ export default function ArrowIcon({ direction, type = "default", size }) {
     }
 
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ color: color === "default" ? colors.gray.normal.base : "inherit" }}>
             {icon}
         </svg>
     );

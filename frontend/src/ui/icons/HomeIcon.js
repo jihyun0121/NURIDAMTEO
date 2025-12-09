@@ -1,6 +1,6 @@
 import { colors } from "../../assets/style/tokens/colors";
 
-export default function HomeIcon({ type = "default", size }) {
+export default function HomeIcon({ type = "default", size, color = "default" }) {
     let icon = null;
 
     if (type === "default") {
@@ -8,7 +8,7 @@ export default function HomeIcon({ type = "default", size }) {
             <>
                 <path
                     d="M32 30.7302V19.9365C32 19.7394 31.9548 19.5449 31.868 19.3686C31.7812 19.1923 31.6552 19.0389 31.5 18.9206L22.75 12.254C22.5336 12.0891 22.2705 12 22 12C21.7295 12 21.4664 12.0891 21.25 12.254L12.5 18.9206C12.3448 19.0389 12.2188 19.1923 12.132 19.3686C12.0452 19.5449 12 19.7394 12 19.9365V30.7302C12 31.0669 12.1317 31.3899 12.3661 31.6281C12.6005 31.8662 12.9185 32 13.25 32H18.25C18.5815 32 18.8995 31.8662 19.1339 31.6281C19.3683 31.3899 19.5 31.0669 19.5 30.7302V26.9206C19.5 26.5839 19.6317 26.2609 19.8661 26.0227C20.1005 25.7846 20.4185 25.6508 20.75 25.6508H23.25C23.5815 25.6508 23.8995 25.7846 24.1339 26.0227C24.3683 26.2609 24.5 26.5839 24.5 26.9206V30.7302C24.5 31.0669 24.6317 31.3899 24.8661 31.6281C25.1005 31.8662 25.4185 32 25.75 32H30.75C31.0815 32 31.3995 31.8662 31.6339 31.6281C31.8683 31.3899 32 31.0669 32 30.7302Z"
-                    stroke={colors.gray.normal.base}
+                    stroke="currentColor"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -56,7 +56,7 @@ export default function HomeIcon({ type = "default", size }) {
         );
     }
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ color: color === "default" ? colors.gray.normal.base : "inherit" }}>
             {icon}
         </svg>
     );
