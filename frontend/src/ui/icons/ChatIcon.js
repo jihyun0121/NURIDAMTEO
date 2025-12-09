@@ -1,83 +1,107 @@
-import { useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
 
 export default function ChatIcon({ variant, type = "default", size }) {
-    const [state, setState] = useState("default");
+    let icon = null;
 
-    const icons = {
-        default: (
+    if (type === "default") {
+        icon = (
             <>
-                {type === "fill" && <rect width="44" height="44" rx="22" fill={colors.gray.light.base} />}
                 {variant === "line" ? (
                     <path
                         d="M22 31.1304C28.0744 31.1304 33 26.8475 33 21.5652C33 16.2829 28.0744 12 22 12C15.9256 12 11 16.2829 11 21.5652C11 24.0046 12.0499 26.2296 13.7781 27.9188C14.3061 28.4371 14.6826 29.1246 14.4943 29.8214C14.2876 30.5831 13.9019 31.2906 13.3662 31.891C13.7954 31.9639 14.2306 32.0004 14.6667 32C16.2336 32 17.6856 31.5339 18.8772 30.7397C19.8672 30.9948 20.9159 31.1304 22 31.1304Z"
                         stroke={colors.gray.normal.base}
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                 ) : (
                     <path
                         d="M22 31.1304C28.0744 31.1304 33 26.8475 33 21.5652C33 16.2829 28.0744 12 22 12C15.9256 12 11 16.2829 11 21.5652C11 24.0046 12.0499 26.2296 13.7781 27.9188C14.3061 28.4371 14.6826 29.1246 14.4943 29.8214C14.2876 30.5831 13.9019 31.2906 13.3662 31.891C13.7954 31.9639 14.2306 32.0004 14.6667 32C16.2336 32 17.6856 31.5339 18.8772 30.7397C19.8672 30.9948 20.9159 31.1304 22 31.1304Z"
                         fill={colors.gray.normal.base}
                         stroke={colors.gray.normal.base}
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                 )}
             </>
-        ),
-        hover: (
+        );
+    } else if (type === "fill") {
+        icon = (
+            <>
+                <rect width="44" height="44" rx="22" fill={colors.gray.light.base} />
+                {variant === "line" ? (
+                    <path
+                        d="M22 31.1304C28.0744 31.1304 33 26.8475 33 21.5652C33 16.2829 28.0744 12 22 12C15.9256 12 11 16.2829 11 21.5652C11 24.0046 12.0499 26.2296 13.7781 27.9188C14.3061 28.4371 14.6826 29.1246 14.4943 29.8214C14.2876 30.5831 13.9019 31.2906 13.3662 31.891C13.7954 31.9639 14.2306 32.0004 14.6667 32C16.2336 32 17.6856 31.5339 18.8772 30.7397C19.8672 30.9948 20.9159 31.1304 22 31.1304Z"
+                        stroke={colors.gray.normal.base}
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+                ) : (
+                    <path
+                        d="M22 31.1304C28.0744 31.1304 33 26.8475 33 21.5652C33 16.2829 28.0744 12 22 12C15.9256 12 11 16.2829 11 21.5652C11 24.0046 12.0499 26.2296 13.7781 27.9188C14.3061 28.4371 14.6826 29.1246 14.4943 29.8214C14.2876 30.5831 13.9019 31.2906 13.3662 31.891C13.7954 31.9639 14.2306 32.0004 14.6667 32C16.2336 32 17.6856 31.5339 18.8772 30.7397C19.8672 30.9948 20.9159 31.1304 22 31.1304Z"
+                        fill={colors.gray.normal.base}
+                        stroke={colors.gray.normal.base}
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+                )}
+            </>
+        );
+    } else if (type === "hover") {
+        icon = (
             <>
                 <rect width="44" height="44" rx="22" fill={colors.orange.light.base} />
                 {variant === "line" ? (
                     <path
                         d="M22 31.1304C28.0744 31.1304 33 26.8475 33 21.5652C33 16.2829 28.0744 12 22 12C15.9256 12 11 16.2829 11 21.5652C11 24.0046 12.0499 26.2296 13.7781 27.9188C14.3061 28.4371 14.6826 29.1246 14.4943 29.8214C14.2876 30.5831 13.9019 31.2906 13.3662 31.891C13.7954 31.9639 14.2306 32.0004 14.6667 32C16.2336 32 17.6856 31.5339 18.8772 30.7397C19.8672 30.9948 20.9159 31.1304 22 31.1304Z"
                         stroke={colors.orange.normal.base}
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                 ) : (
                     <path
                         d="M22 31.1304C28.0744 31.1304 33 26.8475 33 21.5652C33 16.2829 28.0744 12 22 12C15.9256 12 11 16.2829 11 21.5652C11 24.0046 12.0499 26.2296 13.7781 27.9188C14.3061 28.4371 14.6826 29.1246 14.4943 29.8214C14.2876 30.5831 13.9019 31.2906 13.3662 31.891C13.7954 31.9639 14.2306 32.0004 14.6667 32C16.2336 32 17.6856 31.5339 18.8772 30.7397C19.8672 30.9948 20.9159 31.1304 22 31.1304Z"
                         fill={colors.orange.normal.base}
                         stroke={colors.orange.normal.base}
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                 )}
             </>
-        ),
-        action: (
+        );
+    } else if (type === "active") {
+        icon = (
             <>
                 <rect width="44" height="44" rx="22" fill={colors.orange.light.active} />
                 {variant === "line" ? (
                     <path
                         d="M22 31.1304C28.0744 31.1304 33 26.8475 33 21.5652C33 16.2829 28.0744 12 22 12C15.9256 12 11 16.2829 11 21.5652C11 24.0046 12.0499 26.2296 13.7781 27.9188C14.3061 28.4371 14.6826 29.1246 14.4943 29.8214C14.2876 30.5831 13.9019 31.2906 13.3662 31.891C13.7954 31.9639 14.2306 32.0004 14.6667 32C16.2336 32 17.6856 31.5339 18.8772 30.7397C19.8672 30.9948 20.9159 31.1304 22 31.1304Z"
                         stroke={colors.orange.normal.base}
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                 ) : (
                     <path
                         d="M22 31.1304C28.0744 31.1304 33 26.8475 33 21.5652C33 16.2829 28.0744 12 22 12C15.9256 12 11 16.2829 11 21.5652C11 24.0046 12.0499 26.2296 13.7781 27.9188C14.3061 28.4371 14.6826 29.1246 14.4943 29.8214C14.2876 30.5831 13.9019 31.2906 13.3662 31.891C13.7954 31.9639 14.2306 32.0004 14.6667 32C16.2336 32 17.6856 31.5339 18.8772 30.7397C19.8672 30.9948 20.9159 31.1304 22 31.1304Z"
                         fill={colors.orange.normal.base}
                         stroke={colors.orange.normal.base}
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                 )}
             </>
-        ),
-    };
+        );
+    }
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ cursor: "pointer" }} onMouseEnter={() => setState("hover")} onMouseLeave={() => setState("default")} onMouseDown={() => setState("action")} onMouseUp={() => setState("hover")}>
-            {icons[state]}
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none">
+            {icon}
         </svg>
     );
 }
