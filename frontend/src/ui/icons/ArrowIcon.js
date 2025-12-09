@@ -15,7 +15,7 @@ const RECT_PROPS = {
     up: { width: 44, height: 44, rx: 22 },
 };
 
-export default function ArrowIcon({ direction = "left", type = "default" }) {
+export default function ArrowIcon({ direction, type = "default", size }) {
     const [state, setState] = useState("default");
 
     const pathD = ARROW_PATHS[direction] || ARROW_PATHS.left;
@@ -44,7 +44,7 @@ export default function ArrowIcon({ direction = "left", type = "default" }) {
     };
 
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none" style={{ cursor: "pointer" }} onMouseEnter={() => setState("hover")} onMouseLeave={() => setState("default")} onMouseDown={() => setState("action")} onMouseUp={() => setState("hover")}>
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ cursor: "pointer" }} onMouseEnter={() => setState("hover")} onMouseLeave={() => setState("default")} onMouseDown={() => setState("action")} onMouseUp={() => setState("hover")}>
             {icons[state]}
         </svg>
     );

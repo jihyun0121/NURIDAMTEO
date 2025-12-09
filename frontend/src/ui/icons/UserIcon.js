@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
 
-export default function UserIcon({ type = "default" }) {
+export default function UserIcon({ type = "default", size }) {
     const [state, setState] = useState("default");
 
     const icons = {
@@ -29,7 +29,7 @@ export default function UserIcon({ type = "default" }) {
         ),
     };
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none" style={{ cursor: "pointer" }} onMouseEnter={() => setState("hover")} onMouseLeave={() => setState("default")} onMouseDown={() => setState("action")} onMouseUp={() => setState("hover")}>
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ cursor: "pointer" }} onMouseEnter={() => setState("hover")} onMouseLeave={() => setState("default")} onMouseDown={() => setState("action")} onMouseUp={() => setState("hover")}>
             {icons[state]}
         </svg>
     );
