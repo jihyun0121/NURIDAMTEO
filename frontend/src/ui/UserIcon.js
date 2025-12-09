@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function UserIcon({ type = "default", size = 44 }) {
+export default function UserIcon({ type = "default" }) {
     const [state, setState] = useState("default");
 
     const icons = {
