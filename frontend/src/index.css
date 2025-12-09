@@ -1,10 +1,10 @@
 body {
   margin: 0;
-  font-family: 'SUIT', sans-serif;
+  font-family: 'SUIT';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: 'SUIT', monospace;
+  font-family: 'SUIT';
 }
