@@ -7,16 +7,8 @@ const ARROW_PATHS = {
     up: "M30 24L22 16L14 24",
 };
 
-const RECT_PROPS = {
-    left: { y: 44, width: 44, height: 44, rx: 22, transform: "rotate(-90 0 44)" },
-    right: { x: 44, y: 0, width: 44, height: 44, rx: 22, transform: "rotate(90 44 0)" },
-    down: { x: 44, y: 44, width: 44, height: 44, rx: 22, transform: "rotate(180 44 44)" },
-    up: { width: 44, height: 44, rx: 22 },
-};
-
 export default function ArrowIcon({ direction, type = "default", size }) {
     const pathD = ARROW_PATHS[direction] || ARROW_PATHS.left;
-    const rectProps = RECT_PROPS[direction] || RECT_PROPS.left;
     let icon = null;
 
     if (type === "default") {
@@ -28,21 +20,21 @@ export default function ArrowIcon({ direction, type = "default", size }) {
     } else if (type === "fill") {
         icon = (
             <>
-                <rect {...rectProps} fill={colors.gray.light.base} />
+                <rect y="44" width="44" height="44" rx="22" transform="rotate(-90 0 44)" fill={colors.gray.light.base} />
                 <path d={pathD} stroke={colors.gray.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </>
         );
     } else if (type === "hover") {
         icon = (
             <>
-                <rect {...rectProps} fill={colors.orange.light.base} />
+                <rect y="44" width="44" height="44" rx="22" transform="rotate(-90 0 44)" fill={colors.orange.light.base} />
                 <path d={pathD} stroke={colors.orange.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </>
         );
     } else if (type === "active") {
         icon = (
             <>
-                <rect {...rectProps} fill={colors.orange.light.active} />
+                <rect y="44" width="44" height="44" rx="22" transform="rotate(-90 0 44)" fill={colors.orange.light.active} />
                 <path d={pathD} stroke={colors.orange.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </>
         );
