@@ -10,7 +10,7 @@ const ICON_MAP = {
     nuri: Nuri,
 };
 
-export default function NuridamIcon({ type = "user", size = 44 }) {
+export default function NuridamIcon({ type = "user", size }) {
     const IconComponent = ICON_MAP[type.toLowerCase()];
 
     if (!IconComponent) return null;
