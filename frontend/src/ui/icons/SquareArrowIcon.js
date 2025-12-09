@@ -11,12 +11,7 @@ const ARROW_PATHS = {
     },
 };
 
-export default function ArrowIcon({
-    direction = "left", // ✅ 기본값 추가
-    variant = "single",
-    type = "default",
-    size = 44,
-}) {
+export default function ArrowIcon({ direction, variant = "single", type = "default", size = 44 }) {
     const paths = ARROW_PATHS[direction][variant];
     let icon = null;
 
