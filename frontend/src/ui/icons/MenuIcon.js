@@ -1,32 +1,39 @@
-import { useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
 
 export default function MenuIcon({ type = "default", size }) {
-    const [state, setState] = useState("default");
+    let icon = null;
 
-    const icons = {
-        default: (
+    if (type === "default") {
+        icon = (
             <>
-                {type === "fill" && <rect width="44" height="44" rx="22" fill={colors.gray.light.base} />}
-                <path d="M12 14H32M12 22H32M12 30H32" stroke={colors.gray.normal.base} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M12 14H32M12 22H32M12 30H32" stroke={colors.gray.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </>
-        ),
-        hover: (
+        );
+    } else if (type === "fill") {
+        icon = (
+            <>
+                <rect width="44" height="44" rx="22" fill={colors.gray.light.base} />
+                <path d="M12 14H32M12 22H32M12 30H32" stroke={colors.gray.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </>
+        );
+    } else if (type === "hover") {
+        icon = (
             <>
                 <rect width="44" height="44" rx="22" fill={colors.orange.light.base} />
-                <path d="M12 14H32M12 22H32M12 30H32" stroke={colors.orange.normal.base} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M12 14H32M12 22H32M12 30H32" stroke={colors.orange.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </>
-        ),
-        action: (
+        );
+    } else if (type === "active") {
+        icon = (
             <>
                 <rect width="44" height="44" rx="22" fill={colors.orange.light.active} />
-                <path d="M12 14H32M12 22H32M12 30H32" stroke={colors.orange.normal.base} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M12 14H32M12 22H32M12 30H32" stroke={colors.orange.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </>
-        ),
-    };
+        );
+    }
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ cursor: "pointer" }} onMouseEnter={() => setState("hover")} onMouseLeave={() => setState("default")} onMouseDown={() => setState("action")} onMouseUp={() => setState("hover")}>
-            {icons[state]}
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none">
+            {icon}
         </svg>
     );
 }
