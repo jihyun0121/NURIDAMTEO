@@ -1,3 +1,21 @@
+.nav-text {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+
+    color: var(--Grey-Normal, #777);
+    text-align: right;
+
+    font-size: var(--body-small-size);
+    font-weight: var(--body-small-weight);
+    line-height: var(--body-small-line);
+
+    cursor: pointer;
+}
+
+/* 컴포넌트 테스트 */
 .bg {
     background-color: #ebebeb;
     width: 100%;
