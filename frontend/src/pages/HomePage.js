@@ -243,6 +243,7 @@ export default function HomePage() {
 
                         <div className="icons">
                             <AuthButton content="Text" type="nuri" />
+                            <AuthButton content="페이 전환" type="line" />
                         </div>
 
                         <div className="icons">
@@ -311,7 +312,7 @@ export default function HomePage() {
 
                         <div className="icons">
                             <input className="check-box" type="checkbox"></input>
-                            <input className="check-box" type="checkbox"></input>
+                            <input className="check-box" type="checkbox" checked></input>
                         </div>
                     </div>
                 </div>

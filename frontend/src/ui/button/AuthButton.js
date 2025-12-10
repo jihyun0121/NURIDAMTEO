@@ -6,11 +6,25 @@ export default function AuthButton({ content, type = "user", onClick }) {
     const [state, setState] = useState("default");
 
     const styles = {
+        default: {
+            border: type === "line" ? `1px solid ${colors.gray.light.active}` : "none",
+            width: type === "line" ? "125px" : "auto",
+            height: type === "line" ? "42px" : "auto",
+            justifyContent: type === "line" ? "center" : "start",
+        },
         hover: {
             backgroundColor: colors.orange.light.hover,
+            border: type === "line" ? `1px solid ${colors.gray.light.active}` : "none",
+            width: type === "line" ? "125px" : "auto",
+            height: type === "line" ? "42px" : "auto",
+            justifyContent: type === "line" ? "center" : "start",
         },
         action: {
             backgroundColor: colors.orange.light.active,
+            border: type === "line" ? `1px solid ${colors.gray.light.active}` : "none",
+            width: type === "line" ? "125px" : "auto",
+            height: type === "line" ? "42px" : "auto",
+            justifyContent: type === "line" ? "center" : "start",
         },
     };
 
