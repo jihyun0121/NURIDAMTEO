@@ -1,0 +1,12 @@
+.level-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    color: var(--orange-normal-base);
+    background: none;
+
+    font-size: var(--label-medium-size);
+    font-weight: var(--label-medium-weight);
+    line-height: var(--label-medium-line);
+}
