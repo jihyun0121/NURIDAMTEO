@@ -30,6 +30,7 @@ import LevelLabel from "../ui/LevelLabel";
 import NoticeLabel from "../ui/NoticeLabel";
 import NoticeIcon from "../ui/icons/NoticeIcon";
 import MyPageButton from "../ui/button/MyPageButton";
+import TextInputBox from "../ui/input/TextInputBox";
 
 export default function HomePage() {
     return (
@@ -41,7 +42,6 @@ export default function HomePage() {
                         <Logo size="m" />
                         <Logo size="s" />
                     </div>
-
                     <div className="icon">
                         <div className="icons">
                             <UserIcon size="44" />
@@ -102,6 +102,12 @@ export default function HomePage() {
                             <EyeIcon type="fill" size="44" />
                             <EyeIcon type="hover" size="44" />
                             <EyeIcon type="active" size="44" />
+                        </div>
+                        <div className="icons">
+                            <EyeIcon variant="line" size="44" />
+                            <EyeIcon variant="line" type="fill" size="44" />
+                            <EyeIcon variant="line" type="hover" size="44" />
+                            <EyeIcon variant="line" type="active" size="44" />
                         </div>
                         <div className="icons">
                             <HeartIcon variant="line" size="44" />
@@ -168,12 +174,6 @@ export default function HomePage() {
                             <SettingIcon type="fill" size="44" />
                             <SettingIcon type="hover" size="44" />
                             <SettingIcon type="active" size="44" />
-                        </div>
-                        <div className="icons">
-                            <HomeIcon size="44" />
-                            <HomeIcon type="fill" size="44" />
-                            <HomeIcon type="hover" size="44" />
-                            <HomeIcon type="active" size="44" />
                         </div>
                         <div className="icons">
                             <HomeIcon size="44" />
@@ -278,6 +278,40 @@ export default function HomePage() {
                             <MyPageButton text="Text" type="line">
                                 <CoinIcon size={44} color="inherit" />
                             </MyPageButton>
+                        </div>
+
+                        <div className="icons">
+                            <TextInputBox>
+                                <SearchIcon size={44} color="inherit" />
+                            </TextInputBox>
+                            <TextInputBox>
+                                <ArrowIcon direction="down" size={44} color="inherit" />
+                            </TextInputBox>
+                            <TextInputBox>
+                                <EyeIcon size={44} color="inherit" />
+                            </TextInputBox>
+                            <TextInputBox>
+                                <EyeIcon variant="line" size={44} color="inherit" />
+                            </TextInputBox>
+                        </div>
+                        <div className="icons">
+                            <TextInputBox type="long">
+                                <SearchIcon size={44} color="inherit" />
+                            </TextInputBox>
+                            <TextInputBox type="long">
+                                <ArrowIcon direction="down" size={44} color="inherit" />
+                            </TextInputBox>
+                            <TextInputBox type="long">
+                                <EyeIcon size={44} color="inherit" />
+                            </TextInputBox>
+                            <TextInputBox type="long">
+                                <EyeIcon variant="line" size={44} color="inherit" />
+                            </TextInputBox>
+                        </div>
+
+                        <div className="icons">
+                            <input className="check-box" type="checkbox"></input>
+                            <input className="check-box" type="checkbox"></input>
                         </div>
                     </div>
                 </div>
