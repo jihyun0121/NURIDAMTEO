@@ -22,6 +22,7 @@ import NuridamIcon from "../ui/icons/NuridamIcon";
 import BadgeIcon from "../ui/icons/BadgeIcon";
 import LabelButton from "../ui/button/LabelButton";
 import AuthButton from "../ui/button/AuthButton";
+import ProfileButton from "../ui/button/ProfileButton";
 import TextButtonS from "../ui/button/TextButtonS";
 import TextButtonL from "../ui/button/TextButtonL";
 
@@ -211,7 +212,7 @@ export default function HomePage() {
                             <NuridamIcon type="nuri" size="25" />
                             <NuridamIcon type="sodam" size="25" />
                             <NuridamIcon type="guruem" size="25" />
-                            <NuridamIcon type="user" size="25" />
+                            <NuridamIcon size="25" />
                         </div>
 
                         <div className="icons">
@@ -229,7 +230,16 @@ export default function HomePage() {
                         </div>
 
                         <div className="icons">
-                            <AuthButton content="Text" type="gray" />
+                            <AuthButton content="Text" type="nuri" />
+                        </div>
+
+                        <div className="icons">
+                            <ProfileButton content="Text">
+                                <CoinIcon size={44} color="inherit" />
+                            </ProfileButton>
+                            <ProfileButton content="Text" type="select">
+                                <CoinIcon size={44} color="inherit" />
+                            </ProfileButton>
                         </div>
 
                         <div className="icons">
@@ -239,7 +249,7 @@ export default function HomePage() {
                         </div>
 
                         <div className="icons">
-                            <TextButtonL content="Text" type="gray" />
+                            <TextButtonL content="Text" />
                         </div>
                     </div>
                 </div>
