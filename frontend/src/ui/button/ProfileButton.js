@@ -7,6 +7,7 @@ export default function ProfileButton({ children, content, onClick, defaultActiv
 
     const styles = isPressed
         ? {
+              color: colors.white,
               backgroundColor: colors.orange.normal.base,
               borderRadius: "12px 12px 0 0",
           }
