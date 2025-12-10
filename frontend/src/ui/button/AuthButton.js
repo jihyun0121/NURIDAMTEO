@@ -6,7 +6,6 @@ export default function AuthButton({ content, type = "user", onClick }) {
     const [state, setState] = useState("default");
 
     const styles = {
-        default: {},
         hover: {
             backgroundColor: colors.orange.light.hover,
         },

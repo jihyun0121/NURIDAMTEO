@@ -29,6 +29,7 @@ import Profile from "../ui/Profile";
 import LevelLabel from "../ui/LevelLabel";
 import NoticeLabel from "../ui/NoticeLabel";
 import NoticeIcon from "../ui/icons/NoticeIcon";
+import MyPageButton from "../ui/button/MyPageButton";
 
 export default function HomePage() {
     return (
@@ -268,6 +269,15 @@ export default function HomePage() {
                         <div className="icons">
                             <Profile />
                             <LevelLabel level="1" type="guruem" />
+                        </div>
+
+                        <div className="icons">
+                            <MyPageButton text="Text">
+                                <CoinIcon size={44} color="inherit" />
+                            </MyPageButton>
+                            <MyPageButton text="Text" type="line">
+                                <CoinIcon size={44} color="inherit" />
+                            </MyPageButton>
                         </div>
                     </div>
                 </div>

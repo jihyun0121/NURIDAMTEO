@@ -88,3 +88,32 @@
 
     cursor: pointer;
 }
+
+.mypage-btn {
+    display: flex;
+    width: 276px;
+    height: 52px;
+    padding: 4px 8px;
+    justify-content: space-between;
+    align-items: center;
+
+    border: none;
+
+    border-radius: 12px;
+    background: var(--white);
+    color: var(--gray-normal-base);
+
+    flex: 1 0 0;
+
+    font-size: var(--body-medium-size);
+    font-weight: var(--body-medium-weight);
+    line-height: var(--body-medium-line);
+
+    cursor: pointer;
+}
+
+.mypage-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
