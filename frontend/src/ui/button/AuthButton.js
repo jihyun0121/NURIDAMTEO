@@ -2,12 +2,13 @@ import { useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
 import NuridamIcon from "../icons/NuridamIcon";
 
-export default function AuthButton({ content, type = "user", onClick }) {
+export default function AuthButton({ content, type = "user", color, onClick }) {
     const [state, setState] = useState("default");
 
     const styles = {
         default: {
             border: type === "line" ? `1px solid ${colors.gray.light.active}` : "none",
+            backgroundColor: color === "hover" ? colors.orange.light.hover : colors.white,
             width: type === "line" ? "125px" : "auto",
             height: type === "line" ? "42px" : "auto",
             justifyContent: type === "line" ? "center" : "start",
