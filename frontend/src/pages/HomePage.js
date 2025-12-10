@@ -31,6 +31,7 @@ import NoticeLabel from "../ui/NoticeLabel";
 import NoticeIcon from "../ui/icons/NoticeIcon";
 import MyPageButton from "../ui/button/MyPageButton";
 import TextInputBox from "../ui/input/TextInputBox";
+import ProfileCard from "../components/home/ProfileCard";
 
 export default function HomePage() {
     return (
@@ -234,11 +235,11 @@ export default function HomePage() {
                         </div>
 
                         <div className="icons">
-                            <LabelButton content="Button" type="gray" />
-                            <LabelButton content="Button" type="red" />
-                            <LabelButton content="Button" type="green" />
-                            <LabelButton content="Button" type="primary" />
-                            <LabelButton content="Button" type="fill" />
+                            <LabelButton content="Label" type="gray" />
+                            <LabelButton content="Label" type="red" />
+                            <LabelButton content="Label" type="green" />
+                            <LabelButton content="Label" type="primary" />
+                            <LabelButton content="Label" type="fill" />
                         </div>
 
                         <div className="icons">
@@ -273,10 +274,10 @@ export default function HomePage() {
                         </div>
 
                         <div className="icons">
-                            <MyPageButton text="Text">
+                            <MyPageButton content="Text">
                                 <CoinIcon size={44} color="inherit" />
                             </MyPageButton>
-                            <MyPageButton text="Text" type="line">
+                            <MyPageButton content="Text" type="line">
                                 <CoinIcon size={44} color="inherit" />
                             </MyPageButton>
                         </div>
@@ -313,6 +314,10 @@ export default function HomePage() {
                         <div className="icons">
                             <input className="check-box" type="checkbox"></input>
                             <input className="check-box" type="checkbox" checked></input>
+                        </div>
+
+                        <div className="icons">
+                            <ProfileCard />
                         </div>
                     </div>
                 </div>
