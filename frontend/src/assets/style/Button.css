@@ -36,7 +36,9 @@
     width: 227px;
     height: 60px;
     padding: 8px 12px;
-    gap: 4px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 
     cursor: pointer;
 }
