@@ -248,9 +248,6 @@ export default function HomePage() {
                             <ProfileButton content="Text">
                                 <CoinIcon size={44} color="inherit" />
                             </ProfileButton>
-                            <ProfileButton content="Text" type="select">
-                                <CoinIcon size={44} color="inherit" />
-                            </ProfileButton>
                         </div>
 
                         <div className="icons">
@@ -260,18 +257,17 @@ export default function HomePage() {
                         </div>
 
                         <div className="icons">
+                            <NoticeLabel text="설문 등록" subText="공무원">
+                                <NoticeIcon size={44} color="inherit" />
+                            </NoticeLabel>
+                        </div>
+                        <div className="icons">
                             <TextButtonL content="Text" />
                         </div>
 
                         <div className="icons">
                             <Profile />
                             <LevelLabel level="1" type="guruem" />
-                        </div>
-
-                        <div className="icons">
-                            <NoticeLabel text="설문 등록" subText="공무원">
-                                <NoticeIcon size={44} color="inherit" />
-                            </NoticeLabel>
                         </div>
                     </div>
                 </div>
