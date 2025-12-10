@@ -1,10 +1,10 @@
-import { ReactComponent as UserIcon } from "../../assets/image/User.svg";
+import { ReactComponent as User } from "../../assets/image/User.svg";
 import { ReactComponent as Guruem } from "../../assets/image/Guruem.svg";
 import { ReactComponent as Sodam } from "../../assets/image/Sodam.svg";
 import { ReactComponent as Nuri } from "../../assets/image/Nuri.svg";
 
 const ICON_MAP = {
-    user: UserIcon,
+    user: User,
     guruem: Guruem,
     sodam: Sodam,
     nuri: Nuri,

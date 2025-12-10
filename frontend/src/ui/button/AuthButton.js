@@ -2,7 +2,7 @@ import { useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
 import NuridamIcon from "../icons/NuridamIcon";
 
-export default function AuthButton({ content, onClick }) {
+export default function AuthButton({ content, type = "user", onClick }) {
     const [state, setState] = useState("default");
 
     const styles = {
@@ -17,7 +17,7 @@ export default function AuthButton({ content, onClick }) {
 
     return (
         <button className="auth-btn" style={styles[state]} onMouseEnter={() => setState("hover")} onMouseLeave={() => setState("default")} onMouseDown={() => setState("action")} onMouseUp={() => setState("hover")} onClick={onClick}>
-            <NuridamIcon type="nuri" size="25" />
+            <NuridamIcon type={type} size="25" />
             {content}
         </button>
     );

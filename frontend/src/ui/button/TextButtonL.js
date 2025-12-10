@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
 
-export default function TextButtonS({ children, content, onClick }) {
+export default function TextButtonS({ content, onClick }) {
     const [state, setState] = useState("default");
 
     const styles = {
@@ -20,7 +20,6 @@ export default function TextButtonS({ children, content, onClick }) {
 
     return (
         <button className="text-btn-l" style={styles[state]} onMouseEnter={() => setState("hover")} onMouseLeave={() => setState("default")} onMouseDown={() => setState("action")} onMouseUp={() => setState("hover")} onClick={onClick}>
-            {children}
             {content}
         </button>
     );
