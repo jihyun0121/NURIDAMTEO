@@ -1,4 +1,4 @@
-export default function AuthButton({ children, text, subText }) {
+export default function NoticeLabel({ children, text, subText }) {
     return (
         <div className="notice-label">
             <div>{children}</div>

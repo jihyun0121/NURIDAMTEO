@@ -1,7 +1,7 @@
 import LevelLabel from "./LevelLabel";
 import { ReactComponent as UserProfile } from "../assets/image/profile/User_Icon.svg";
 
-export default function AuthButton({ userId }) {
+export default function Profile({ userId }) {
     const email = "username@naver.com";
     const name = "User Name";
     const level = 1;

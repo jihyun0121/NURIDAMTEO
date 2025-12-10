@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
 
-export default function TextButtonS({ content, onClick }) {
+export default function TextButtonL({ content, onClick }) {
     const [state, setState] = useState("default");
 
     const styles = {

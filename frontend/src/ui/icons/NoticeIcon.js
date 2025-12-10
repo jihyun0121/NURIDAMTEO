@@ -1,6 +1,6 @@
 import { colors } from "../../assets/style/tokens/colors";
 
-export default function BellIcon({ type = "list", size }) {
+export default function NoticeIcon({ type = "list", size }) {
     let icon = null;
 
     if (type === "list") {

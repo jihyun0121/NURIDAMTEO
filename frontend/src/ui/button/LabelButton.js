@@ -1,6 +1,6 @@
 import { colors } from "../../assets/style/tokens/colors";
 
-export default function NuridamIcon({ content, type = "gray", onClick, disabled = false, ...props }) {
+export default function LabelButton({ content, type = "gray", onClick, disabled = false, ...props }) {
     let style = {};
 
     if (type === "gray") {
