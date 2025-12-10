@@ -8,6 +8,7 @@ import "./App.css";
 import "./assets/style/style.css";
 import "./assets/style/font.css";
 import "./assets/style/button.css";
+import "./assets/style/label.css";
 import "./assets/style/profile.css";
 import "./assets/style/tokens/colors.css";
 import "./assets/style/tokens/typography.css";

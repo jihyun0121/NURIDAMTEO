@@ -25,6 +25,10 @@ import AuthButton from "../ui/button/AuthButton";
 import ProfileButton from "../ui/button/ProfileButton";
 import TextButtonS from "../ui/button/TextButtonS";
 import TextButtonL from "../ui/button/TextButtonL";
+import Profile from "../ui/Profile";
+import LevelLabel from "../ui/LevelLabel";
+import NoticeLabel from "../ui/NoticeLabel";
+import NoticeIcon from "../ui/icons/NoticeIcon";
 
 export default function HomePage() {
     return (
@@ -209,6 +213,13 @@ export default function HomePage() {
                         </div>
 
                         <div className="icons">
+                            <NoticeIcon type="list" size={44} />
+                            <NoticeIcon type="news" size={44} />
+                            <NoticeIcon type="pen" size={44} />
+                            <NoticeIcon type="heart" size={44} />
+                        </div>
+
+                        <div className="icons">
                             <NuridamIcon type="nuri" size="25" />
                             <NuridamIcon type="sodam" size="25" />
                             <NuridamIcon type="guruem" size="25" />
@@ -250,6 +261,17 @@ export default function HomePage() {
 
                         <div className="icons">
                             <TextButtonL content="Text" />
+                        </div>
+
+                        <div className="icons">
+                            <Profile />
+                            <LevelLabel level="1" type="guruem" />
+                        </div>
+
+                        <div className="icons">
+                            <NoticeLabel text="설문 등록" subText="공무원">
+                                <NoticeIcon size={44} color="inherit" />
+                            </NoticeLabel>
                         </div>
                     </div>
                 </div>

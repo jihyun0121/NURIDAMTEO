@@ -1,0 +1,44 @@
+.level-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    color: var(--orange-normal-base);
+    background: none;
+
+    font-size: var(--label-medium-size);
+    font-weight: var(--label-medium-weight);
+    line-height: var(--label-medium-line);
+}
+
+.notice-label {
+    display: flex;
+    width: 263px;
+    height: 80px;
+    padding: 16px 24px;
+    align-items: center;
+    gap: 21px;
+
+    border-radius: 40px;
+    border: 1px solid var(--Orange-Normal, #FF9B43);
+    background: #FFF;
+}
+
+.notice-text {
+    align-self: stretch;
+    color: var(--Grey-Dark, #595959);
+
+    font-size: var(--body-medium-size);
+    font-weight: var(--body-medium-weight);
+    line-height: var(--body-medium-line);
+}
+
+.notice-sub {
+    align-self: stretch;
+
+    color: var(--Grey-Dark, #595959);
+
+    font-size: var(--label-medium-size);
+    font-weight: var(--label-medium-weight);
+    line-height: var(--label-medium-line);
+}
