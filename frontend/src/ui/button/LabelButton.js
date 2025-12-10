@@ -1,6 +1,6 @@
 import { colors } from "../../assets/style/tokens/colors";
 
-export default function LabelButton({ content, type = "gray", onClick, disabled = false, ...props }) {
+export default function LabelButton({ content, type = "gray" }) {
     let style = {};
 
     if (type === "gray") {
@@ -32,7 +32,7 @@ export default function LabelButton({ content, type = "gray", onClick, disabled 
     }
 
     return (
-        <button className="label-btn" style={{ ...style }} onClick={onClick} disabled={disabled} {...props}>
+        <button className="label-btn" style={{ ...style }}>
             {content}
         </button>
     );

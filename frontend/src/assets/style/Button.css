@@ -12,8 +12,6 @@
     font-size: var(--label-large-size);
     font-weight: var(--label-large-weight);
     line-height: var(--label-large-line);
-
-    cursor: pointer;
 }
 
 .text-btn-s,
