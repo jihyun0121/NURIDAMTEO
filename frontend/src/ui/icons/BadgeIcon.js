@@ -1,6 +1,6 @@
-import { ReactComponent as Guruem } from "../../assets/image/Guruem-1.svg";
-import { ReactComponent as Sodam } from "../../assets/image/Sodam-1.svg";
-import { ReactComponent as Nuri } from "../../assets/image/Nuri-1.svg";
+import { ReactComponent as Guruem } from "../../assets/image/icon/Guruem-1.svg";
+import { ReactComponent as Sodam } from "../../assets/image/icon/Sodam-1.svg";
+import { ReactComponent as Nuri } from "../../assets/image/icon/Nuri-1.svg";
 
 const ICON_MAP = {
     guruem: Guruem,
