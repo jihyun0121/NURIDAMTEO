@@ -1,6 +1,6 @@
 export default function TextInputBox({ children, type = "short", onClick }) {
     const styles = {
-        width: type === "short" ? `648px` : "none",
+        width: type === "short" ? "none" : "648px",
     };
 
     return (
