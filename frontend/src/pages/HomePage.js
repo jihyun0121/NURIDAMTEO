@@ -283,20 +283,6 @@ export default function HomePage() {
                         </div>
 
                         <div className="icons">
-                            <TextInputBox>
-                                <SearchIcon size={44} color="inherit" />
-                            </TextInputBox>
-                            <TextInputBox>
-                                <ArrowIcon direction="down" size={44} color="inherit" />
-                            </TextInputBox>
-                            <TextInputBox>
-                                <EyeIcon size={44} color="inherit" />
-                            </TextInputBox>
-                            <TextInputBox>
-                                <EyeIcon variant="line" size={44} color="inherit" />
-                            </TextInputBox>
-                        </div>
-                        <div className="icons">
                             <TextInputBox type="long">
                                 <SearchIcon size={44} color="inherit" />
                             </TextInputBox>
@@ -314,6 +300,26 @@ export default function HomePage() {
                         <div className="icons">
                             <input className="check-box" type="checkbox"></input>
                             <input className="check-box" type="checkbox" checked></input>
+                        </div>
+
+                        <div className="icons">
+                            <input className="radio-box" name="radio" type="radio"></input>
+                            <input className="radio-box" name="radio" type="radio" checked></input>
+                        </div>
+
+                        <div className="icons">
+                            <TextInputBox>
+                                <SearchIcon size={44} color="inherit" />
+                            </TextInputBox>
+                            <TextInputBox>
+                                <ArrowIcon direction="down" size={44} color="inherit" />
+                            </TextInputBox>
+                            <TextInputBox>
+                                <EyeIcon size={44} color="inherit" />
+                            </TextInputBox>
+                            <TextInputBox>
+                                <EyeIcon variant="line" size={44} color="inherit" />
+                            </TextInputBox>
                         </div>
 
                         <div className="icons">
