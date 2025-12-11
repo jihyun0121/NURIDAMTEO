@@ -125,9 +125,8 @@
     border-radius: 0 0 12px 12px;
     border: 1px solid var(--gray-light-active);
     border-top: none;
-
     background: var(--white);
-    /* z-index: 10; */
+    z-index: 10;
 }
 
 .dropdown-text {
@@ -136,4 +135,109 @@
     padding-top: 10px;
     cursor: pointer;
     border-radius: 4px;
+
+    font-size: var(--body-medium-size);
+    font-weight: var(--body-medium-weight);
+    line-height: var(--body-medium-line);
+    cursor: pointer;
+}
+
+.search-dropdown {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    display: flex;
+    width: 203px;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+
+    border: none;
+    border-right: 1px solid var(--gray-light-active);
+    position: relative;
+
+
+    color: var(--Grey-Dark, #595959);
+
+    font-size: var(--body-medium-size);
+    font-weight: var(--body-medium-weight);
+    line-height: var(--body-medium-line);
+
+    cursor: pointer;
+}
+
+.search-dropdown-label {
+    width: 125px;
+
+    font-size: var(--body-medium-size);
+    font-weight: var(--body-medium-weight);
+    line-height: var(--body-medium-line);
+}
+
+.search-dropdown-option {
+    position: absolute;
+    top: 60px;
+    left: -24px;
+
+    display: flex;
+    width: 227px;
+    padding: 24px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    border-radius: 12px;
+    border: 1px solid var(--gray-light-active);
+    background: var(--white);
+    z-index: 10;
+}
+
+.search-dropdown-text {
+    width: 100%;
+
+    font-size: var(--body-medium-size);
+    font-weight: var(--body-medium-weight);
+    line-height: var(--body-medium-line);
+    cursor: pointer;
+}
+
+.search-container {
+    display: flex;
+    padding: 8px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    border-radius: 12px;
+    border: 1px solid var(--gray-light-active);
+    background: var(--white);
+}
+
+.search-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1 0 0;
+}
+
+.search-input {
+    flex: 1 0 0;
+
+    color: var(--gray-normal-base);
+
+    font-size: var(--body-medium-size);
+    font-weight: var(--body-medium-weight);
+    line-height: var(--body-medium-line);
+}
+
+.search-input::placeholder {
+    flex: 1 0 0;
+
+    color: var(--gray-light-active);
+
+    font-size: var(--body-medium-size);
+    font-weight: var(--body-medium-weight);
+    line-height: var(--body-medium-line);
 }

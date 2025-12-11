@@ -31,7 +31,10 @@ import NoticeLabel from "../ui/NoticeLabel";
 import NoticeIcon from "../ui/icons/NoticeIcon";
 import MyPageButton from "../ui/button/MyPageButton";
 import TextInputBox from "../ui/input/TextInputBox";
+import SearchBar from "../ui/input/SearchBar";
+import DropdownBox from "../ui/input/FromDropdown";
 import ProfileCard from "../components/home/ProfileCard";
+import ProposalBox from "../components/proposal/ProposalBox";
 
 export default function HomePage() {
     return (
@@ -254,18 +257,9 @@ export default function HomePage() {
                         </div>
 
                         <div className="icons">
-                            <TextButtonS content="Text">
-                                <CheckIcon size={44} color="inherit" />
-                            </TextButtonS>
-                        </div>
-
-                        <div className="icons">
                             <NoticeLabel text="설문 등록" subText="공무원">
                                 <NoticeIcon size={44} color="inherit" />
                             </NoticeLabel>
-                        </div>
-                        <div className="icons">
-                            <TextButtonL content="Text" />
                         </div>
 
                         <div className="icons">
@@ -283,6 +277,51 @@ export default function HomePage() {
                         </div>
 
                         <div className="icons">
+                            <input className="check-box" type="checkbox"></input>
+                            <input className="check-box" type="checkbox" checked></input>
+                        </div>
+
+                        <div className="icons">
+                            <input className="radio-box" name="radio" type="radio"></input>
+                            <input className="radio-box" name="radio" type="radio" checked></input>
+                        </div>
+
+                        <div className="icons">
+                            <DropdownBox />
+                        </div>
+
+                        <div className="icons">
+                            <TextButtonS content="Text">
+                                <CheckIcon size={44} color="inherit" />
+                            </TextButtonS>
+                        </div>
+
+                        <div className="icons">
+                            <TextButtonL content="Text" />
+                        </div>
+
+                        <div className="icons">
+                            <SearchBar type="long" />
+                        </div>
+
+                        <div className="icons" style={{ width: "1520px", display: "inline-flex", alignItems: "center", gap: "32px", flexDirection: "row" }}>
+                            <DropdownBox />
+                            <SearchBar type="short" />
+                        </div>
+
+                        {/* <div className="icons">
+                            <ProposalBox type="long">
+                                <SearchIcon size={44} color="inherit" />
+                            </ProposalBox>
+                        </div>
+
+                        <div className="icons">
+                            <ProposalBox>
+                                <SearchIcon size={44} color="inherit" />
+                            </ProposalBox>
+                        </div> */}
+
+                        <div className="icons">
                             <TextInputBox type="long">
                                 <SearchIcon size={44} color="inherit" />
                             </TextInputBox>
@@ -295,16 +334,6 @@ export default function HomePage() {
                             <TextInputBox type="long">
                                 <EyeIcon variant="line" size={44} color="inherit" />
                             </TextInputBox>
-                        </div>
-
-                        <div className="icons">
-                            <input className="check-box" type="checkbox"></input>
-                            <input className="check-box" type="checkbox" checked></input>
-                        </div>
-
-                        <div className="icons">
-                            <input className="radio-box" name="radio" type="radio"></input>
-                            <input className="radio-box" name="radio" type="radio" checked></input>
                         </div>
 
                         <div className="icons">
