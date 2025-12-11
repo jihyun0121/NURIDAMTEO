@@ -34,6 +34,7 @@ import TextInputBox from "../ui/input/TextInputBox";
 import SearchBar from "../ui/input/SearchBar";
 import DropdownBox from "../ui/input/FromDropdown";
 import ProfileCard from "../components/home/ProfileCard";
+import ProposalBox from "../components/proposal/ProposalBox";
 
 export default function HomePage() {
     return (
