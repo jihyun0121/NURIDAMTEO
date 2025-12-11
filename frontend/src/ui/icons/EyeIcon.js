@@ -1,6 +1,6 @@
 import { colors } from "../../assets/style/tokens/colors";
 
-export default function HeartIcon({ variant, type = "default", size, color = "default" }) {
+export default function EyeIcon({ variant, type = "default", size, color = "default" }) {
     let icon = null;
 
     if (type === "default") {

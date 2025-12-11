@@ -11,7 +11,7 @@ const ARROW_PATHS = {
     },
 };
 
-export default function ArrowIcon({ direction, variant = "single", type = "default", size, color = "default" }) {
+export default function SquareArroIcon({ direction, variant = "single", type = "default", size, color = "default" }) {
     const paths = ARROW_PATHS[direction][variant];
     let icon = null;
 

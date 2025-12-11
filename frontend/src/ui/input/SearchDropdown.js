@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ArrowIcon from "../icons/ArrowIcon";
 
-export default function Dropdown({ optionData = [] }) {
+export default function SearchDropdown({ optionData = [] }) {
     const [currentValue, setCurrentValue] = useState("주제 선택");
     const [showOptions, setShowOptions] = useState(false);
 

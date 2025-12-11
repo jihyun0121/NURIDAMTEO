@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ArrowIcon from "../icons/ArrowIcon";
 
-export default function Dropdown({ optionData = [] }) {
+export default function FormDropdown({ optionData = [] }) {
     const [currentValue, setCurrentValue] = useState("Text");
     const [showOptions, setShowOptions] = useState(false);
 
