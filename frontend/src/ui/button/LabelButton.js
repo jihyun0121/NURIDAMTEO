@@ -5,27 +5,27 @@ export default function LabelButton({ content, type = "gray" }) {
 
     if (type === "gray") {
         style = {
-            borderColor: colors.gray.normal.base,
+            boxShadow: `0 0 0 1px ${colors.gray.normal.base} inset`,
             color: colors.gray.normal.base,
         };
     } else if (type === "red") {
         style = {
-            borderColor: colors.red,
+            boxShadow: `0 0 0 1px ${colors.red} inset`,
             color: colors.red,
         };
     } else if (type === "green") {
         style = {
-            borderColor: colors.green,
+            boxShadow: `0 0 0 1px ${colors.green} inset`,
             color: colors.green,
         };
     } else if (type === "primary") {
         style = {
-            borderColor: colors.orange.normal.base,
+            boxShadow: `0 0 0 1px ${colors.orange.normal.base} inset`,
             color: colors.orange.normal.base,
         };
     } else if (type === "fill") {
         style = {
-            borderColor: colors.orange.normal.base,
+            boxShadow: `0 0 0 1px ${colors.orange.normal.base} inset`,
             backgroundColor: colors.orange.normal.base,
             color: "#FFF",
         };

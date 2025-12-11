@@ -1,12 +1,11 @@
 .text-input-box {
     display: flex;
-    width: 316px;
-    padding: 8px 24px;
+    padding: 0.5rem 1.5rem;
     justify-content: space-between;
     align-items: center;
 
-    border-radius: 12px;
-    border: 1px solid var(--gray-light-active);
+    border-radius: 0.75rem;
+    box-shadow: 0 0 0 1px var(--gray-light-active) inset;
     background: var(--white);
 }
 
@@ -29,15 +28,15 @@
     -moz-appearance: none;
 
     display: flex;
-    width: 20px;
-    height: 20px;
+    width: 1.25rem;
+    height: 1.25rem;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 0.625rem;
     aspect-ratio: 1/1;
 
-    border-radius: 2px;
-    border: 1px solid var(--gray-light-base);
+    border-radius: 0.125rem;
+    box-shadow: 0 0 0 1px var(--gray-light-base) inset;
     background: var(--white);
 
     cursor: pointer;
@@ -45,7 +44,7 @@
 
 .check-box:checked {
     background-color: var(--orange-normal-base);
-    border-color: var(--orange-normal-base);
+    box-shadow: 0 0 0 1px var(--orange-normal-base) inset;
 
     background-image: url("../image/icon/check.svg");
     background-repeat: no-repeat;
@@ -58,12 +57,12 @@
     -webkit-appearance: none;
     -moz-appearance: none;
 
-    width: 44px;
-    height: 44px;
+    width: 2.75rem;
+    height: 2.75rem;
     aspect-ratio: 1/1;
 
-    border-radius: 60px;
-    border: 1px solid var(--gray-light-active);
+    border-radius: 3.75rem;
+    box-shadow: 0 0 0 1px var(--gray-light-active) inset;
     background: var(--white);
 
     cursor: pointer;
@@ -71,7 +70,7 @@
 
 .radio-box:checked {
     background-color: var(--orange-normal-base);
-    border-color: var(--orange-normal-base);
+    box-shadow: 0 0 0 1px var(--orange-normal-base) inset;
 
     background-image: url("../image/icon/check.svg");
     background-repeat: no-repeat;
@@ -85,19 +84,19 @@
     -moz-appearance: none;
 
     display: flex;
-    width: 227px;
-    padding: 8px 24px;
+    width: 14.1875rem;
+    padding: 0.5rem 1.5rem;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 0.5rem;
 
-    border-radius: 12px;
-    border: 1px solid var(--gray-light-active);
+    flex: 1 0 0;
+
+    border-radius: 0.75rem;
+    box-shadow: 0 0 0 1px var(--gray-light-active) inset;
     background: var(--white);
 
     position: relative;
-
-    flex: 1 0 0;
 
     color: var(--Grey-Dark, #595959);
 
@@ -109,7 +108,7 @@
 }
 
 .dropdown-label {
-    width: 125px;
+    width: 7.8125rem;
 
     font-size: var(--body-medium-size);
     font-weight: var(--body-medium-weight);
@@ -123,7 +122,7 @@
     padding: 0 0px 12px 24px;
 
     border-radius: 0 0 12px 12px;
-    border: 1px solid var(--gray-light-active);
+    box-shadow: 0 0 0 1px var(--gray-light-active) inset;
     border-top: none;
     background: var(--white);
     z-index: 10;
@@ -190,7 +189,7 @@
     gap: 16px;
 
     border-radius: 12px;
-    border: 1px solid var(--gray-light-active);
+    box-shadow: 0 0 0 1px var(--gray-light-active) inset;
     background: var(--white);
     z-index: 10;
 }
@@ -212,7 +211,7 @@
     gap: 12px;
 
     border-radius: 12px;
-    border: 1px solid var(--gray-light-active);
+    box-shadow: 0 0 0 1px var(--gray-light-active) inset;
     background: var(--white);
 }
 

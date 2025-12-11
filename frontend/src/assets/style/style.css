@@ -1,10 +1,5 @@
 .nav-text {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 10px;
     align-self: stretch;
-
     color: var(--Grey-Normal, #777);
     text-align: right;
 
@@ -13,4 +8,24 @@
     line-height: var(--body-small-line);
 
     cursor: pointer;
+}
+
+.bg {
+    background-color: #ebebeb;
+    width: 100%;
+    height: 100%;
+}
+
+.icon {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.icons {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
 }

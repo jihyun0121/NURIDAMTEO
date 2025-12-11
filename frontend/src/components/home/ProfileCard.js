@@ -9,7 +9,7 @@ import BookmarkIcon from "../../ui/icons/BookmarkIcon";
 import ProfileDetail from "./ProfileDetail";
 
 export default function ProfileCard() {
-    const login = false;
+    const login = true;
     let content = null;
 
     const userId = 1;

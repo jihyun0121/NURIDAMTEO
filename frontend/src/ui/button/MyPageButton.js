@@ -7,12 +7,12 @@ export default function MyPageButton({ children, content, type = "default", onCl
 
     const styles = {
         default: {
-            border: type === "line" ? `1px solid ${colors.orange.normal.base}` : "none",
+            boxShadow: type === "line" ? `0 0 0 1px ${colors.orange.normal.base} inset` : "none",
             color: colors.gray.normal.base,
             backgroundColor: colors.white,
         },
         action: {
-            border: type === "line" ? `1px solid ${colors.orange.normal.base}` : "none",
+            boxShadow: type === "line" ? `0 0 0 1px ${colors.orange.normal.base} inset` : "none",
             color: colors.white,
             backgroundColor: colors.orange.normal.base,
         },

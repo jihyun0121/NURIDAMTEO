@@ -7,24 +7,24 @@ export default function AuthButton({ content, type = "user", color, onClick }) {
 
     const styles = {
         default: {
-            border: type === "line" ? `1px solid ${colors.gray.light.active}` : "none",
+            boxShadow: type === "line" ? `0 0 0 1px ${colors.gray.light.active} inset` : "none",
             backgroundColor: color === "hover" ? colors.orange.light.hover : colors.white,
-            width: type === "line" ? "100%" : "auto",
-            height: type === "line" ? "42px" : "auto",
+            width: type === "line" ? "7.8125rem" : "auto",
+            height: type === "line" ? "2.625rem" : "auto",
             justifyContent: type === "line" ? "center" : "start",
         },
         hover: {
             backgroundColor: colors.orange.light.hover,
-            border: type === "line" ? `1px solid ${colors.gray.light.active}` : "none",
-            width: type === "line" ? "100%" : "auto",
-            height: type === "line" ? "42px" : "auto",
+            boxShadow: type === "line" ? `0 0 0 1px ${colors.gray.light.active} inset` : "none",
+            width: type === "line" ? "7.8125rem" : "auto",
+            height: type === "line" ? "2.625rem" : "auto",
             justifyContent: type === "line" ? "center" : "start",
         },
         action: {
             backgroundColor: colors.orange.light.active,
-            border: type === "line" ? `1px solid ${colors.gray.light.active}` : "none",
-            width: type === "line" ? "100%" : "auto",
-            height: type === "line" ? "42px" : "auto",
+            boxShadow: type === "line" ? `0 0 0 1px ${colors.gray.light.active} inset` : "none",
+            width: type === "line" ? "7.8125rem" : "auto",
+            height: type === "line" ? "2.625rem" : "auto",
             justifyContent: type === "line" ? "center" : "start",
         },
     };

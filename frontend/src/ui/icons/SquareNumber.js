@@ -30,14 +30,14 @@ export default function SquareNumber({ value, type = "default", size, color = "d
             style={{
                 width: `${size}px`,
                 height: `${size}px`,
+
                 display: "flex",
+                padding: "0.5rem 1.25rem",
                 justifyContent: "center",
                 alignItems: "center",
-                gap: "4px",
-                borderRadius: "12px",
-                textAlign: "center",
+                gap: "0.25rem",
+                borderRadius: "0.75rem",
 
-                fontFamily: "SUIT",
                 fontSize: typography.body.xlarge.size,
                 fontWeight: typography.body.xlarge.weight,
                 lineHeight: typography.body.xlarge.line,

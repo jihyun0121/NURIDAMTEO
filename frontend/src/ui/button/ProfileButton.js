@@ -8,17 +8,17 @@ export default function ProfileButton({ children, content, active = false, onCli
         ? {
               color: colors.white,
               backgroundColor: colors.orange.normal.base,
-              borderRadius: "12px 12px 0 0",
+              borderRadius: "0.75rem 0.75rem 0 0",
           }
         : active
         ? {
               color: colors.orange.normal.base,
               backgroundColor: colors.orange.light.hover,
-              borderRadius: "12px 12px 0 0",
+              borderRadius: "0.75rem 0.75rem 0 0",
           }
         : {
               backgroundColor: "var(--white)",
-              borderRadius: "12px",
+              borderRadius: "0.75rem",
           };
 
     return (

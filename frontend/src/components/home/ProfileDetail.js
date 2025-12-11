@@ -26,8 +26,7 @@ export default function ProfileDetail({ mileage, type = "coin" }) {
             </>
         );
         style = {
-            gap: "16px",
-            borderRadius: "0 24px 24px 24px",
+            borderRadius: "0 1.5rem 1.5rem 1.5rem",
         };
     } else if (type === "vote") {
         content = (
@@ -37,7 +36,7 @@ export default function ProfileDetail({ mileage, type = "coin" }) {
                 <div className="nav-text">전체 보기</div>
             </>
         );
-        style = { borderRadius: "24px" };
+        style = { gap: "0.5rem", borderRadius: "1.5rem" };
     } else if (type === "bookmark") {
         content = (
             <>
@@ -46,7 +45,7 @@ export default function ProfileDetail({ mileage, type = "coin" }) {
                 <div className="nav-text">전체 보기</div>
             </>
         );
-        style = { borderRadius: "24px 0 24px 24px" };
+        style = { gap: "0.5rem", borderRadius: "1.5rem 0 1.5rem 1.5rem" };
     }
     return (
         <>
