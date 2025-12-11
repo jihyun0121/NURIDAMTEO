@@ -11,10 +11,10 @@ export default function ProfileCard() {
     const userId = 1;
     const mileage = 6420;
 
-    const [activeTab, setActiveTab] = useState(null);
+    const [activeTab, setActiveTab] = useState("none");
 
-    const handleToggle = (tab) => {
-        setActiveTab((prev) => (prev === tab ? null : tab));
+    const handleTabClick = (tab) => {
+        setActiveTab((prev) => (prev === tab ? "none" : tab));
     };
 
     return (
@@ -25,15 +25,15 @@ export default function ProfileCard() {
             </div>
 
             <div className="profile-card-menu">
-                <ProfileButton content="마일리지" isActive={activeTab === "coin"} onClick={() => handleToggle("coin")}>
+                <ProfileButton content="마일리지" active={activeTab === "coin"} onClick={() => handleTabClick("coin")}>
                     <CoinIcon size={44} color="inherit" />
                 </ProfileButton>
 
-                <ProfileButton content="제안" isActive={activeTab === "vote"} onClick={() => handleToggle("vote")}>
+                <ProfileButton content="제안" active={activeTab === "vote"} onClick={() => handleTabClick("vote")}>
                     <VoteIcon size={44} color="inherit" />
                 </ProfileButton>
 
-                <ProfileButton content="북마크" isActive={activeTab === "bookmark"} onClick={() => handleToggle("bookmark")}>
+                <ProfileButton content="북마크" active={activeTab === "bookmark"} onClick={() => handleTabClick("bookmark")}>
                     <BookmarkIcon size={44} variant="line" color="inherit" />
                 </ProfileButton>
             </div>

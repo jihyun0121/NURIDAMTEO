@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
 
-export default function ProfileButton({ children, content, onClick, defaultActive = false }) {
-    const [isActive, setIsActive] = useState(defaultActive);
+export default function ProfileButton({ children, content, active = false, onClick }) {
     const [isPressed, setIsPressed] = useState(false);
 
     const styles = isPressed
@@ -11,7 +10,7 @@ export default function ProfileButton({ children, content, onClick, defaultActiv
               backgroundColor: colors.orange.normal.base,
               borderRadius: "12px 12px 0 0",
           }
-        : isActive
+        : active
         ? {
               color: colors.orange.normal.base,
               backgroundColor: colors.orange.light.hover,
@@ -22,13 +21,8 @@ export default function ProfileButton({ children, content, onClick, defaultActiv
               borderRadius: "12px",
           };
 
-    const handleClick = () => {
-        setIsActive((prev) => !prev);
-        if (onClick) onClick();
-    };
-
     return (
-        <button className="profile-btn" style={styles} onMouseDown={() => setIsPressed(true)} onMouseUp={() => setIsPressed(false)} onMouseLeave={() => setIsPressed(false)} onClick={handleClick}>
+        <button className="profile-btn" style={styles} onMouseDown={() => setIsPressed(true)} onMouseUp={() => setIsPressed(false)} onMouseLeave={() => setIsPressed(false)} onClick={onClick}>
             {children}
             {content}
         </button>

@@ -1,5 +1,6 @@
 import AuthButton from "../../ui/button/AuthButton";
 import SurveyList from "./SurveyList";
+import { colors } from "../../assets/style/tokens/colors";
 
 export default function ProfileDetail({ mileage, type = "coin" }) {
     let content = null;
@@ -8,7 +9,7 @@ export default function ProfileDetail({ mileage, type = "coin" }) {
     mileage = mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
     if (type === "none") {
-        content = <></>;
+        style = { backgroundColor: colors.white, display: "none" };
     } else if (type === "coin") {
         content = (
             <>

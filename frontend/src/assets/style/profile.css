@@ -72,7 +72,7 @@
 
 .profile-card-detail {
     display: flex;
-    width: 437px;
+    width: 439px;
     padding: 16px;
     flex-direction: column;
     align-items: center;
@@ -90,25 +90,17 @@
 
     color: var(--Grey-Dark, #595959);
 
-    /* Title/title_xlarge */
-    font-family: SUIT;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 32px;
-    /* 133.333% */
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    line-height: var(--title-xlarge-line);
 }
 
 .mileage-text {
-    color: var(--Orange-Normal, #FF9B43);
+    color: var(--orange-normal-base);
 
-    /* Title/title_xlarge */
-    font-family: SUIT;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 32px;
-    /* 133.333% */
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    line-height: var(--title-xlarge-line);
 }
 
 .mileage-menu {
@@ -127,8 +119,8 @@
     align-self: stretch;
 
     border-radius: 12px;
-    border: 1px solid var(--gray-light-active, #CACACA);
-    background: var(--Gray-White, #FFF);
+    border: 1px solid var(--gray-light-active);
+    background: var(--white);
 }
 
 .survey-list-text {
@@ -143,7 +135,7 @@
     justify-content: center;
     align-self: stretch;
 
-    color: var(--Orange-Normal, #FF9B43);
+    color: var(--orange-normal-base);
     text-align: center;
 
     font-size: var(--title-small-size);
