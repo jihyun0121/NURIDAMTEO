@@ -52,3 +52,29 @@
     background-position: center;
     background-size: 10px 7px;
 }
+
+.radio-box {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    width: 44px;
+    height: 44px;
+    aspect-ratio: 1/1;
+
+    border-radius: 60px;
+    border: 1px solid var(--gray-light-active);
+    background: var(--white);
+
+    cursor: pointer;
+}
+
+.radio-box:checked {
+    background-color: var(--orange-normal-base);
+    border-color: var(--orange-normal-base);
+
+    background-image: url("../image/icon/check.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 19px 13px;
+}
