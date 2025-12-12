@@ -1,69 +1,69 @@
 :root {
-    --headline-xlarge-size: 44px;
+    --headline-xlarge-size: 2.75rem;
     --headline-xlarge-weight: 700;
-    --headline-xlarge-line: 56px;
+    --headline-xlarge-line: 3.5rem;
 
-    --headline-large-size: 36px;
+    --headline-large-size: 2.25rem;
     --headline-large-weight: 700;
-    --headline-large-line: 48px;
+    --headline-large-line: 3rem;
 
-    --headline-medium-size: 28px;
+    --headline-medium-size: 1.75rem;
     --headline-medium-weight: 800;
-    --headline-medium-line: 36px;
+    --headline-medium-line: 2.25rem;
 
-    --headline-small-size: 28px;
+    --headline-small-size: 1.75rem;
     --headline-small-weight: 700;
-    --headline-small-line: 36px;
+    --headline-small-line: 2.25rem;
 
-    --headline-xsmall-size: 26px;
+    --headline-xsmall-size: 1.625rem;
     --headline-xsmall-weight: 800;
-    --headline-xsmall-line: 32px;
+    --headline-xsmall-line: 2rem;
 
-    --title-xlarge-size: 24px;
+    --title-xlarge-size: 1.5rem;
     --title-xlarge-weight: 700;
-    --title-xlarge-line: 32px;
+    --title-xlarge-line: 2rem;
 
-    --title-large-size: 22px;
+    --title-large-size: 1.375rem;
     --title-large-weight: 700;
-    --title-large-line: 28px;
+    --title-large-line: 1.75rem;
 
-    --title-medium-size: 20px;
+    --title-medium-size: 1.25rem;
     --title-medium-weight: 700;
-    --title-medium-line: 26px;
+    --title-medium-line: 1.625rem;
 
-    --title-small-size: 18px;
+    --title-small-size: 1.125rem;
     --title-small-weight: 700;
-    --title-small-line: 24px;
+    --title-small-line: 1.5rem;
 
-    --body-xlarge-size: 24px;
+    --body-xlarge-size: 1.5rem;
     --body-xlarge-weight: 500;
-    --body-xlarge-line: 32px;
+    --body-xlarge-line: 2rem;
 
-    --body-large-size: 22px;
+    --body-large-size: 1.375rem;
     --body-large-weight: 500;
-    --body-large-line: 28px;
+    --body-large-line: 1.75rem;
 
-    --body-medium-size: 20px;
+    --body-medium-size: 1.25rem;
     --body-medium-weight: 500;
-    --body-medium-line: 26px;
+    --body-medium-line: 1.75rem;
 
-    --body-small-size: 18px;
+    --body-small-size: 1.125rem;
     --body-small-weight: 500;
-    --body-small-line: 24px;
+    --body-small-line: 1.5rem;
 
-    --label-large-size: 16px;
+    --label-large-size: 1rem;
     --label-large-weight: 700;
-    --label-large-line: 22px;
+    --label-large-line: 1.375rem;
 
-    --label-medium-size: 16px;
+    --label-medium-size: 1rem;
     --label-medium-weight: 500;
-    --label-medium-line: 20px;
+    --label-medium-line: 1.25rem;
 
-    --label-small-size: 14px;
+    --label-small-size: 0.875rem;
     --label-small-weight: 800;
-    --label-small-line: 18px;
+    --label-small-line: 1.125rem;
 
-    --label-small_underline-size: 14px;
+    --label-small_underline-size: 0.875rem;
     --label-small_underline-weight: 700;
-    --label-small_underline-line: 18px;
+    --label-small_underline-line: 1.125rem;
 }
