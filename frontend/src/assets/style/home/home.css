@@ -1,0 +1,12 @@
+.home-container {
+    overflow-y: auto;
+}
+
+.home-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+
+    padding: 7.5rem 12.47rem;
+}

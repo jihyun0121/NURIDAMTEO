@@ -10,6 +10,11 @@
 
 body {
   font-family: 'SUIT';
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .App {
