@@ -50,9 +50,10 @@
     align-items: center;
 
     border-radius: 1.5rem;
-    box-shadow: 0 0 0 1px var(--gray-light-hover) inset;
+    box-shadow:
+        0 0 0 1px var(--gray-light-hover) inset,
+        2px 2px 8px 0 rgba(0, 0, 0, 0.06);
     background: var(--white);
-    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.06);
 }
 
 .profile-card-none {
@@ -66,9 +67,10 @@
     gap: 1.5rem;
 
     border-radius: 1.5rem;
-    box-shadow: 0 0 0 1px var(--gray-light-hover) inset;
+    box-shadow:
+        0 0 0 1px var(--gray-light-hover) inset,
+        2px 2px 8px 0 rgba(0, 0, 0, 0.06);
     background: var(--Grey-White, #FFF);
-    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.06);
 }
 
 .profile-card-desc {
