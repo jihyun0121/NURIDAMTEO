@@ -1,5 +1,3 @@
-import { colors } from "../../assets/style/tokens/colors";
-
 export default function ShortcutButton() {
     return (
         <>
