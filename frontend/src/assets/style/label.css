@@ -1,7 +1,7 @@
 .level-label {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 0.25rem;
 
     color: var(--orange-normal-base);
     background: none;
@@ -13,13 +13,13 @@
 
 .notice-label {
     display: flex;
-    width: 263px;
-    height: 80px;
-    padding: 16px 24px;
+    width: 16.4375rem;
+    height: 5rem;
+    padding: 1rem 1.5rem;
     align-items: center;
-    gap: 21px;
+    gap: 1.3125rem;
 
-    border-radius: 40px;
+    border-radius: 2.5rem;
     box-shadow: 0 0 0 1px var(--orange-normal-base) inset;
     background: #FFF;
 }

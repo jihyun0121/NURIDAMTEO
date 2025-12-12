@@ -3,7 +3,7 @@ import SearchDropdqon from "../input/SearchDropdown";
 
 export default function SearchBar({ type = "short", onClick }) {
     const styles = {
-        width: type === "long" ? "1520px" : "1261px",
+        width: type === "long" ? "95rem" : "78.8125rem",
     };
 
     return (
