@@ -1,4 +1,4 @@
-package com.nuridamteo.backend.dtos;
+package com.nuridamteo.backend.dtos.user;
 
 import com.fasterxml.jackson.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.nuridamteo.backend.dtos;
+package com.nuridamteo.backend.dtos.user;
 
 import java.time.LocalDateTime;
 
@@ -12,12 +12,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class SettingDTO {
-    @JsonProperty("email")
-    private String email;
-
-    @JsonProperty("name")
-    private String name;
-
     @JsonProperty("level_id")
     private Long level;
 
