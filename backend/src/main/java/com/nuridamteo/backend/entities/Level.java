@@ -1,6 +1,7 @@
 package com.nuridamteo.backend.entities;
 
 import com.fasterxml.jackson.annotation.*;
+import com.nuridamteo.backend.enums.LevelName;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,13 +16,15 @@ import lombok.*;
 public class Level {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "level_id", nullable = false)
+    @Column(name = "level_id")
     @JsonProperty("level_id")
     private Long levelId;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "level_name", nullable = false, length = 50)
     @JsonProperty("level_name")
-    private String levelName;
+    @Builder.Default
+    private LevelName levelName = LevelName.GUREUM;
 
     @Column(name = "min_mileage", nullable = false)
     @JsonProperty("min_mileage")
