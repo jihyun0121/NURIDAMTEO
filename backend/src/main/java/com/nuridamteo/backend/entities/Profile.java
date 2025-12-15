@@ -17,11 +17,14 @@ import lombok.*;
 public class Profile {
     @Id
     @Column(name = "profile_id")
-    private Long userId;
+    @JsonProperty("postal_code")
+    private Long profile_id;
 
     @MapsId
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonProperty("user_id")
+    @JsonIgnore
     private Users user;
 
     @Column(name = "name", nullable = false, length = 50)

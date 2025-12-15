@@ -11,8 +11,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SettingDTO {
+public class UsersDTO {
+    @JsonProperty("user_id")
+    private Long userId;
+
     private String email;
+
+    private String password;
 
     @JsonProperty("level_id")
     private Long level;
@@ -32,6 +37,9 @@ public class SettingDTO {
     @JsonProperty("is_deleted")
     @Builder.Default
     private Boolean isDeleted = false;
+
+    @JsonProperty("created_at")
+    private LocalDateTime createdAt;
 
     @JsonProperty("updated_at")
     private LocalDateTime updatedAt;
