@@ -28,8 +28,10 @@ public class Suggestion {
     @JsonIgnore
     private Users user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     @JsonProperty("category_id")
+    @JsonIgnore
     private Category category;
 
     @Column(name = "title", nullable = false, length = 100)
