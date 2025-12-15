@@ -17,7 +17,7 @@ import lombok.*;
 public class Profile {
     @Id
     @Column(name = "profile_id")
-    @JsonProperty("postal_code")
+    @JsonProperty("profile_id")
     private Long profile_id;
 
     @MapsId

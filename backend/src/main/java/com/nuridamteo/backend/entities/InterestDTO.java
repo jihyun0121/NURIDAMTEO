@@ -1,27 +1,24 @@
 package com.nuridamteo.backend.entities;
 
-import com.fasterxml.jackson.annotation.*;
-
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "interest")
-public class Interest {
+public class InterestDTO {
+    @EmbeddedId
+    private InterestId id;
+
+    @MapsId("userId")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonProperty("user_id")
-    @JsonIgnore
     private Users user;
 
+    @MapsId("categoryId")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
-    @JsonProperty("category_id")
-    @JsonIgnore
+    @JoinColumn(name = "category_id")
     private Category category;
 }
