@@ -13,12 +13,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class UserProfileDTO {
     @JsonProperty("user_id")
     private Long userId;
 
     private String email;
+
+    private Long level;
 
     private String name;
 

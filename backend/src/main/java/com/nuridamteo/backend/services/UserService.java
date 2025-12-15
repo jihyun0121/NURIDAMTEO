@@ -33,6 +33,7 @@ public class UserService {
         return UserProfileDTO.builder()
                 .userId(user.getUserId())
                 .email(user.getEmail())
+                .level(user.getLevel().getLevelId())
                 .name(profile.getName())
                 .gender(profile.getGender())
                 .birthday(profile.getBirthday())
