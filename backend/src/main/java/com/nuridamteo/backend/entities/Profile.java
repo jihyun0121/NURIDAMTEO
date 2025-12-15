@@ -20,7 +20,6 @@ public class Profile {
     @JsonProperty("profile_id")
     private Long profile_id;
 
-    @MapsId
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonProperty("user_id")
