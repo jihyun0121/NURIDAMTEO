@@ -5,6 +5,7 @@ import java.util.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import com.nuridamteo.backend.dtos.PasswordDTO;
 import com.nuridamteo.backend.dtos.SettingDTO;
 import com.nuridamteo.backend.services.UserService;
 
@@ -27,5 +28,13 @@ public class UserController {
             @RequestBody SettingDTO dto) {
         userService.updateUser(userId, dto);
         return ResponseEntity.ok(Map.of("message", "회원정보 수정 완료"));
+    }
+
+    @PutMapping("/{userId}/password")
+    public ResponseEntity<?> updatePassword(
+            @PathVariable Long userId,
+            @RequestBody PasswordDTO dto) {
+        userService.updatePassword(userId, dto);
+        return ResponseEntity.ok(Map.of("message", "비밀번호 변경 완료"));
     }
 }
