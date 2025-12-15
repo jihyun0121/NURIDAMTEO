@@ -13,7 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UpdateUserDTO {
+public class ProfileDTO {
     private Users user;
 
     private String name;
