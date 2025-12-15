@@ -11,8 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "level")
-
+@Table(name = "faq")
 public class Faq {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -15,8 +15,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "level")
-
+@Table(name = "survey")
 public class Survey {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

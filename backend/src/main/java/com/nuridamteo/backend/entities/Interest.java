@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "level")
+@Table(name = "interest")
 public class Interest {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

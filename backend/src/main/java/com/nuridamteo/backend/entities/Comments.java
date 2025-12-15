@@ -13,8 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "level")
-
+@Table(name = "comments")
 public class Comments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

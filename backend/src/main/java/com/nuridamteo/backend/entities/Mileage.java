@@ -13,8 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "level")
-
+@Table(name = "mileage")
 public class Mileage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
