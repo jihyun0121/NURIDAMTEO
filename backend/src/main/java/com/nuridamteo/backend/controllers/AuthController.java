@@ -1,0 +1,24 @@
+package com.nuridamteo.backend.controllers;
+
+import java.util.*;
+
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+
+import com.nuridamteo.backend.dtos.SignupDTO;
+import com.nuridamteo.backend.services.AuthService;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/auth")
+public class AuthController {
+    private final AuthService authService;
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> signUp(@RequestBody SignupDTO dto) {
+        authService.signUp(dto);
+        return ResponseEntity.ok(Map.of("message", "회원가입 성공"));
+    }
+}
