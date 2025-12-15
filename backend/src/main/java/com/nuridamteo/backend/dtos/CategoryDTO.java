@@ -15,7 +15,4 @@ public class CategoryDTO {
 
     @JsonProperty("category_name")
     private String categoryName;
-
-    @JsonProperty("category_type")
-    private String categoryType;
 }

@@ -22,8 +22,4 @@ public class Category {
     @Column(name = "category_name", nullable = false, length = 100)
     @JsonProperty("category_name")
     private String categoryName;
-
-    @Column(name = "category_type", nullable = false, length = 50)
-    @JsonProperty("category_type")
-    private String categoryType;
 }
