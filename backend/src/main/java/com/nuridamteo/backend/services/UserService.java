@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nuridamteo.backend.dtos.PasswordDTO;
 import com.nuridamteo.backend.dtos.user.ProfileDTO;
+import com.nuridamteo.backend.dtos.user.SettingDTO;
 import com.nuridamteo.backend.dtos.user.UsersDTO;
 import com.nuridamteo.backend.entities.Profile;
 import com.nuridamteo.backend.entities.Users;
@@ -36,7 +37,7 @@ public class UserService {
 
     @Transactional
     public void updateProfile(Long userId, ProfileDTO dto) {
-        Profile profile = profileRepository.findById(userId)
+        Profile profile = profileRepository.findByUsers_UserId(userId)
                 .orElseThrow(() -> new IllegalArgumentException("프로필이 없습니다"));
 
         if (dto.getName() != null)
@@ -45,6 +46,24 @@ public class UserService {
             profile.setResidence(dto.getResidence());
         if (dto.getPostalCode() != null)
             profile.setPostalCode(dto.getPostalCode());
+    }
+
+    @Transactional
+    public void updateSetting(Long userId, SettingDTO dto) {
+        Users users = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("프로필이 없습니다"));
+
+        if (dto.getEmail() != null)
+            users.setEmail(dto.getEmail());
+        if (dto.getTotalMileage() != null)
+            users.setTotalMileage(dto.getTotalMileage());
+        if (dto.getAccessibilityMode() != null)
+            users.setAccessibilityMode(dto.getAccessibilityMode());
+        if (dto.getNotificationEnabled() != null)
+            users.setNotificationEnabled(dto.getNotificationEnabled());
+        if (dto.getIsDeleted() != null)
+            users.setIsDeleted(dto.getIsDeleted());
+        users.setUpdatedAt(dto.getUpdatedAt());
     }
 
     @Transactional
