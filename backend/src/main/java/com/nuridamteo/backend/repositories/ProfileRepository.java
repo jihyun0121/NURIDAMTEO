@@ -9,5 +9,5 @@ import com.nuridamteo.backend.entities.Profile;
 
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
-    Optional<Profile> findByUsers_UserId(Long userId);
+    Optional<Profile> findByUser_UserId(Long userId);
 }

@@ -37,7 +37,7 @@ public class UserService {
 
     @Transactional
     public void updateProfile(Long userId, ProfileDTO dto) {
-        Profile profile = profileRepository.findByUsers_UserId(userId)
+        Profile profile = profileRepository.findByUser_UserId(userId)
                 .orElseThrow(() -> new IllegalArgumentException("프로필이 없습니다"));
 
         if (dto.getName() != null)
