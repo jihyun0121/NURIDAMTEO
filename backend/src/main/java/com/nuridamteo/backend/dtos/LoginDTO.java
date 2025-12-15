@@ -1,0 +1,21 @@
+package com.nuridamteo.backend.dtos;
+
+import com.fasterxml.jackson.annotation.*;
+
+import lombok.*;
+
+@Getter
+@AllArgsConstructor
+@Builder
+public class LoginDTO {
+    private String token;
+
+    @JsonProperty("user_id")
+    private Long userId;
+
+    private String password;
+
+    private String email;
+
+    private String name;
+}
