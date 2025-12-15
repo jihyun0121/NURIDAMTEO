@@ -5,6 +5,7 @@ import java.util.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import com.nuridamteo.backend.dtos.LoginDTO;
 import com.nuridamteo.backend.dtos.SignupDTO;
 import com.nuridamteo.backend.services.AuthService;
 
@@ -20,5 +21,10 @@ public class AuthController {
     public ResponseEntity<?> signUp(@RequestBody SignupDTO dto) {
         authService.signUp(dto);
         return ResponseEntity.ok(Map.of("message", "회원가입 성공"));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginDTO dto) {
+        return ResponseEntity.ok(authService.login(dto));
     }
 }
