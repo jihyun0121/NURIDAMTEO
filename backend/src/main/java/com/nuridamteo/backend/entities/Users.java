@@ -21,17 +21,11 @@ public class Users {
     @JsonProperty("user_id")
     private Long userId;
 
-    @Column(name = "email", nullable = false, unique = true, length = 100)
-    @JsonProperty("email")
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    @Column(name = "password", nullable = false, length = 255)
-    @JsonProperty("password")
+    @Column(nullable = false, length = 255)
     private String password;
-
-    @Column(name = "name", nullable = false, length = 50)
-    @JsonProperty("name")
-    private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "level_id")
