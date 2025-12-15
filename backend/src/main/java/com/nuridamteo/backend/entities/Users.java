@@ -17,7 +17,7 @@ import lombok.*;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "user_id")
     @JsonProperty("user_id")
     private Long userId;
 
