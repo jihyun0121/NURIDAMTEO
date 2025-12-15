@@ -12,6 +12,9 @@ import lombok.*;
 public class SignupDTO {
     private String email;
 
+    @Builder.Default
+    private Long level = 1L;
+
     private String password;
 
     private String name;
