@@ -3,7 +3,6 @@ package com.nuridamteo.backend.dtos.user;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.*;
-import com.nuridamteo.backend.entities.Users;
 
 import jakarta.persistence.Column;
 import lombok.*;
@@ -14,7 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class ProfileDTO {
-    private Users user;
+    private Long user;
 
     private String name;
 
