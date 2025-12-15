@@ -5,8 +5,8 @@ import java.util.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import com.nuridamteo.backend.dtos.LoginDTO;
-import com.nuridamteo.backend.dtos.SignupDTO;
+import com.nuridamteo.backend.dtos.user.LoginDTO;
+import com.nuridamteo.backend.dtos.user.SignupDTO;
 import com.nuridamteo.backend.services.AuthService;
 
 import lombok.RequiredArgsConstructor;
