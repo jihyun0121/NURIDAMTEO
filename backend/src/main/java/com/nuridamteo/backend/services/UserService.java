@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nuridamteo.backend.dtos.PasswordDTO;
 import com.nuridamteo.backend.dtos.user.ProfileDTO;
 import com.nuridamteo.backend.dtos.user.SettingDTO;
-import com.nuridamteo.backend.dtos.user.UsersDTO;
+import com.nuridamteo.backend.dtos.user.UserProfileDTO;
 import com.nuridamteo.backend.entities.Profile;
 import com.nuridamteo.backend.entities.Users;
 import com.nuridamteo.backend.repositories.ProfileRepository;
@@ -23,15 +23,27 @@ public class UserService {
     private final ProfileRepository profileRepository;
 
     @Transactional(readOnly = true)
-    public UsersDTO getUser(Long userId) {
+    public UserProfileDTO getUser(Long userId) {
         Users user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다"));
 
-        return UsersDTO.builder()
+        Profile profile = profileRepository.findByUser_UserId(userId)
+                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다"));
+
+        return UserProfileDTO.builder()
                 .userId(user.getUserId())
                 .email(user.getEmail())
+                .name(profile.getName())
+                .gender(profile.getGender())
+                .birthday(profile.getBirthday())
+                .residence(profile.getResidence())
+                .postalCode(profile.getPostalCode())
                 .totalMileage(user.getTotalMileage())
+                .accessibilityMode(user.getAccessibilityMode())
+                .notificationEnabled(user.getNotificationEnabled())
+                .isDeleted(user.getIsDeleted())
                 .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
                 .build();
     }
 
