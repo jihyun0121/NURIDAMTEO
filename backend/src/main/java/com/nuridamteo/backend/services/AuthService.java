@@ -27,7 +27,7 @@ public class AuthService {
     @Transactional
     public void signUp(SignupDTO dto) {
         if (userRepository.existsByEmail(dto.getEmail())) {
-            throw new IllegalArgumentException("이미 가입된 이메일입니다.");
+            throw new IllegalArgumentException("이미 가입된 이메일입니다");
         }
 
         Users user = Users.builder()

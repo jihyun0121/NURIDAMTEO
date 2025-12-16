@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class InterestDTO {
+public class Interest {
     @EmbeddedId
     private InterestId id;
 
