@@ -41,6 +41,21 @@ public class AttendanceService {
         return attendanceDTO(attendanceRepository.save(attendance));
     }
 
+    public AttendanceDTO getTodayAttendance(Long userId) {
+        Users user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다"));
+
+        LocalDate today = LocalDate.now();
+
+        return attendanceRepository
+                .findByUserAndAttendanceDateBetween(
+                        user,
+                        today.atStartOfDay(),
+                        today.atTime(LocalTime.MAX))
+                .map(this::attendanceDTO)
+                .orElse(null);
+    }
+
     private AttendanceDTO attendanceDTO(Attendance attendance) {
         return AttendanceDTO.builder()
                 .attendanceId(attendance.getAttendanceId())

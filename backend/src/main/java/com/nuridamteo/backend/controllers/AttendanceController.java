@@ -19,4 +19,10 @@ public class AttendanceController {
         return ResponseEntity.ok(
                 attendanceService.checkAttendance(userId));
     }
+
+    @GetMapping("/today/{userId}")
+    public ResponseEntity<AttendanceDTO> getTodayAttendance(@PathVariable Long userId) {
+        return ResponseEntity.ok(
+                attendanceService.getTodayAttendance(userId));
+    }
 }
