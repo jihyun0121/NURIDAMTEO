@@ -9,9 +9,9 @@ export default function LoginPage() {
         <>
             <div className="login-container">
                 <Header />
-                <div className="Login-box">
+                <div className="login-box">
                     <Logo />
-                    <h1> 로그인 </h1>
+                    <div className="login-title"> 로그인 </div>
                     <TextInputBox content="아이디" />
                     <TextInputBox content="비밀번호" />
 
