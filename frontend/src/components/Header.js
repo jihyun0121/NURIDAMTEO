@@ -18,9 +18,9 @@ export default function Header() {
             </div>
 
             <div className="header-menu">
-                <HeaderButton content={"참여하기"} active={activeTab === "join"} onClick={() => (window.location.href = "/participate")} type="white" />
-                <HeaderButton content={"시민제안"} active={activeTab === "prop"} onClick={() => (window.location.href = "/proposal")} type="white" />
-                <HeaderButton content={"누리소담"} active={activeTab === "nuri"} onClick={() => (window.location.href = "/nurisodam")} type="white" />
+                <HeaderButton content={"참여하기"} active={activeTab === "join"} onClick={() => (window.location.href = "/participate")} />
+                <HeaderButton content={"시민제안"} active={activeTab === "prop"} onClick={() => (window.location.href = "/proposal")} />
+                <HeaderButton content={"누리소담"} active={activeTab === "nuri"} onClick={() => (window.location.href = "/nurisodam")} />
             </div>
 
             <div className="header-icons">

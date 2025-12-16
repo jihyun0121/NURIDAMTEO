@@ -11,7 +11,7 @@ export default function HomePage() {
     return (
         <>
             <div className="home-container">
-                <Header type="none" />
+                <Header />
                 <img src={banner} width="100%" alt="" />
                 <div className="home-content ">
                     <ShortcutButton />
