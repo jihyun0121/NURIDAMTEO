@@ -28,7 +28,10 @@ public class UserProfileDTO {
     private LocalDate birthday;
 
     @Column(nullable = false, length = 50)
-    private String residence;
+    private String address;
+
+    @JsonProperty("address_detail")
+    private String addressDetail;
 
     @JsonProperty("postal_code")
     private String postalCode;

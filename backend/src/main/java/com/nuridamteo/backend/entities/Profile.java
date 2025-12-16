@@ -37,7 +37,11 @@ public class Profile {
     private LocalDate birthday;
 
     @Column(nullable = false, length = 50)
-    private String residence;
+    private String address;
+
+    @Column(name = "address_detail", length = 50)
+    @JsonProperty("address_detail")
+    private String addressDetail;
 
     @Column(name = "postal_code", nullable = false, length = 20)
     @JsonProperty("postal_code")
