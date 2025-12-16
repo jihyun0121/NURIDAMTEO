@@ -35,7 +35,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         try {
             if (jwToken.isExpired(token)) {
-                log.warn("만료된 토큰입니다.");
+                log.warn("만료된 토큰입니다");
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
             }
