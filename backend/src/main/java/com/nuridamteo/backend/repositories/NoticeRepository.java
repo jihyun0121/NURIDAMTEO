@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.nuridamteo.backend.entities.Notice;
+import com.nuridamteo.backend.enums.NoticeType;
 
 @Repository
 public interface NoticeRepository extends JpaRepository<Notice, Long> {
-    List<Notice> findByNoticeTypeOrderByIsPinnedDescCreatedAtDesc(String noticeType);
+    List<Notice> findByNoticeTypeOrderByIsPinnedDescCreatedAtDesc(NoticeType noticeType);
 }

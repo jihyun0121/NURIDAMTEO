@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nuridamteo.backend.dtos.NoticeDTO;
 import com.nuridamteo.backend.entities.Notice;
+import com.nuridamteo.backend.enums.NoticeType;
 import com.nuridamteo.backend.repositories.NoticeRepository;
 
 import lombok.*;
@@ -19,14 +20,14 @@ public class NoticeService {
 
     @Transactional(readOnly = true)
     public List<NoticeDTO> getNotice() {
-        return noticeRepository.findByNoticeTypeOrderByIsPinnedDescCreatedAtDesc("NOTICE").stream()
+        return noticeRepository.findByNoticeTypeOrderByIsPinnedDescCreatedAtDesc(NoticeType.NOTICE).stream()
                 .map(this::noticeDTO)
                 .toList();
     }
 
     @Transactional(readOnly = true)
     public List<NoticeDTO> getNews() {
-        return noticeRepository.findByNoticeTypeOrderByIsPinnedDescCreatedAtDesc("NEWS").stream()
+        return noticeRepository.findByNoticeTypeOrderByIsPinnedDescCreatedAtDesc(NoticeType.NEWS).stream()
                 .map(this::noticeDTO)
                 .toList();
     }
