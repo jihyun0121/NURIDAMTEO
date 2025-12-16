@@ -44,7 +44,8 @@ public class AuthService {
                 .name(dto.getName())
                 .gender(dto.getGender())
                 .birthday(dto.getBirthday())
-                .residence(dto.getResidence())
+                .address(dto.getAddress())
+                .addressDetail(dto.getAddressDetail())
                 .postalCode(dto.getPostalCode())
                 .build();
 

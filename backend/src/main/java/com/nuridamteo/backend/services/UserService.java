@@ -37,7 +37,8 @@ public class UserService {
                 .name(profile.getName())
                 .gender(profile.getGender())
                 .birthday(profile.getBirthday())
-                .residence(profile.getResidence())
+                .address(profile.getAddress())
+                .addressDetail(profile.getAddressDetail())
                 .postalCode(profile.getPostalCode())
                 .totalMileage(user.getTotalMileage())
                 .accessibilityMode(user.getAccessibilityMode())
@@ -55,8 +56,10 @@ public class UserService {
 
         if (dto.getName() != null)
             profile.setName(dto.getName());
-        if (dto.getResidence() != null)
-            profile.setResidence(dto.getResidence());
+        if (dto.getAddress() != null)
+            profile.setAddress(dto.getAddress());
+        if (dto.getAddressDetail() != null)
+            profile.setAddressDetail(dto.getAddressDetail());
         if (dto.getPostalCode() != null)
             profile.setPostalCode(dto.getPostalCode());
     }

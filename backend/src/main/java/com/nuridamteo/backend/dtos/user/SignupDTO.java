@@ -2,6 +2,8 @@ package com.nuridamteo.backend.dtos.user;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.*;
+
 import lombok.*;
 
 @Getter
@@ -23,7 +25,11 @@ public class SignupDTO {
 
     private LocalDate birthday;
 
-    private String residence;
+    private String address;
 
+    @JsonProperty("address_detail")
+    private String addressDetail;
+
+    @JsonProperty("postal_code")
     private String postalCode;
 }
