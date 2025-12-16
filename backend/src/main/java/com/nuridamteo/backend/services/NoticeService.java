@@ -5,7 +5,7 @@ import java.util.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nuridamteo.backend.dtos.notice.NoticeDTO;
+import com.nuridamteo.backend.dtos.NoticeDTO;
 import com.nuridamteo.backend.entities.Notice;
 import com.nuridamteo.backend.repositories.NoticeRepository;
 
