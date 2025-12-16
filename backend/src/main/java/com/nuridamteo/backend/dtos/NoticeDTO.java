@@ -3,6 +3,7 @@ package com.nuridamteo.backend.dtos;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.*;
+import com.nuridamteo.backend.enums.NoticeType;
 
 import lombok.*;
 
@@ -16,7 +17,8 @@ public class NoticeDTO {
     private Long noticeId;
 
     @JsonProperty("notice_type")
-    private Long noticeType;
+    @Builder.Default
+    private NoticeType noticeType = NoticeType.NOTICE;
 
     @JsonProperty("title")
     private String title;

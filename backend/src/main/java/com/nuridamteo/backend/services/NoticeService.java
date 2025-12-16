@@ -18,25 +18,36 @@ public class NoticeService {
     private final NoticeRepository noticeRepository;
 
     @Transactional(readOnly = true)
-    public List<NoticeDTO> getNotices() {
+    public List<NoticeDTO> getNotice() {
         return noticeRepository.findByTypeOrderByIsPinnedDescCreatedAtDesc("NOTICE").stream()
-                .map(this::dto)
+                .map(this::noticeDTO)
                 .toList();
     }
 
     @Transactional(readOnly = true)
     public List<NoticeDTO> getNews() {
         return noticeRepository.findByTypeOrderByIsPinnedDescCreatedAtDesc("NEWS").stream()
-                .map(this::dto)
+                .map(this::noticeDTO)
                 .toList();
     }
 
-    private NoticeDTO dto(Notice notice) {
+    @Transactional(readOnly = true)
+    public NoticeDTO getDetail(Long noticeId) {
+        Notice notice = noticeRepository.findById(noticeId)
+                .orElseThrow(() -> new IllegalArgumentException("공지를 찾을 수 없습니다"));
+
+        return noticeDTO(notice);
+    }
+
+    private NoticeDTO noticeDTO(Notice notice) {
         return NoticeDTO.builder()
                 .noticeId(notice.getNoticeId())
+                .noticeType(notice.getNoticeType())
                 .title(notice.getTitle())
                 .content(notice.getContent())
+                .isPinned(notice.getIsPinned())
                 .createdAt(notice.getCreatedAt())
                 .build();
     }
+
 }

@@ -14,13 +14,18 @@ import org.springframework.http.*;
 public class NoticeController {
     private final NoticeService noticeService;
 
-    @GetMapping("news")
-    public ResponseEntity<?> getNotices() {
-        return ResponseEntity.ok(noticeService.getNotices());
+    @GetMapping("/notice")
+    public ResponseEntity<?> getNotice() {
+        return ResponseEntity.ok(noticeService.getNotice());
     }
 
-    @GetMapping("news")
+    @GetMapping("/news")
     public ResponseEntity<?> getNews() {
         return ResponseEntity.ok(noticeService.getNews());
+    }
+
+    @GetMapping("/{noticeId}")
+    public ResponseEntity<?> getDetail(@PathVariable Long noticeId) {
+        return ResponseEntity.ok(noticeService.getDetail(noticeId));
     }
 }
