@@ -1,4 +1,4 @@
-package com.nuridamteo.backend.dtos;
+package com.nuridamteo.backend.dtos.notice;
 
 import java.time.LocalDateTime;
 
@@ -30,7 +30,4 @@ public class NoticeDTO {
 
     @JsonProperty("created_at")
     private LocalDateTime createdAt;
-
-    @JsonProperty("updated_at")
-    private LocalDateTime updatedAt;
 }

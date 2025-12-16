@@ -44,8 +44,4 @@ public class Notice {
     @Column(name = "created_at", nullable = false)
     @JsonProperty("created_at")
     private LocalDateTime createdAt;
-
-    @Column(name = "updated_at", nullable = false)
-    @JsonProperty("updated_at")
-    private LocalDateTime updatedAt;
 }
