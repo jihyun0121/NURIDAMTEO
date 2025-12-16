@@ -15,6 +15,9 @@ public class NoticeDTO {
     @JsonProperty("notice_id")
     private Long noticeId;
 
+    @JsonProperty("notice_type")
+    private Long noticeType;
+
     @JsonProperty("title")
     private String title;
 

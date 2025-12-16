@@ -3,6 +3,7 @@ package com.nuridamteo.backend.entities;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.*;
+import com.nuridamteo.backend.enums.NoticeType;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,6 +21,12 @@ public class Notice {
     @Column(name = "notice_id")
     @JsonProperty("notice_id")
     private Long noticeId;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "notice_type", nullable = false, length = 200)
+    @JsonProperty("notice_type")
+    @Builder.Default
+    private NoticeType noticeType = NoticeType.NOTICE;
 
     @Column(name = "title", nullable = false, length = 200)
     @JsonProperty("title")
