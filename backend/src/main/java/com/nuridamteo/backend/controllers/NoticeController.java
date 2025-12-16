@@ -18,4 +18,9 @@ public class NoticeController {
     public ResponseEntity<?> getNotices() {
         return ResponseEntity.ok(noticeService.getNotices());
     }
+
+    @GetMapping("news")
+    public ResponseEntity<?> getNews() {
+        return ResponseEntity.ok(noticeService.getNews());
+    }
 }

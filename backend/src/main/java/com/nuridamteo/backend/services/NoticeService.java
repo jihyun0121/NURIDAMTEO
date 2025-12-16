@@ -24,6 +24,13 @@ public class NoticeService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
+    public List<NoticeDTO> getNews() {
+        return noticeRepository.findByTypeOrderByIsPinnedDescCreatedAtDesc("NEWS").stream()
+                .map(this::dto)
+                .toList();
+    }
+
     private NoticeDTO dto(Notice notice) {
         return NoticeDTO.builder()
                 .noticeId(notice.getNoticeId())
