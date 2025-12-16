@@ -5,7 +5,7 @@ import java.util.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nuridamteo.backend.dtos.InterestDTO;
+import com.nuridamteo.backend.dtos.CategoryDTO;
 import com.nuridamteo.backend.entities.Category;
 import com.nuridamteo.backend.entities.Interest;
 import com.nuridamteo.backend.entities.InterestId;
@@ -24,36 +24,39 @@ public class InterestService {
     private final CategoryRepository categoryRepository;
 
     @Transactional
-    public void selectInterests(InterestDTO dto) {
-        Users user = userRepository.findById(dto.getUser())
+    public void selectInterests(Long userId, List<Long> categoryIds) {
+        Users user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다"));
-        Category category = categoryRepository.findById(dto.getCategory())
-                .orElseThrow(() -> new IllegalArgumentException("카테고리를 찾을 수 없습니다"));
 
-        if (interestRepository.existsByUser_UserIdAndCategory_CategoryId(dto.getUser(), dto.getCategory())) {
-            throw new IllegalArgumentException("이미 선택한 관심사입니다");
+        for (Long categoryId : categoryIds) {
+            Category category = categoryRepository.findById(categoryId)
+                    .orElseThrow(() -> new IllegalArgumentException("카테고리를 찾을 수 없습니다"));
+
+            if (interestRepository.existsByUser_UserIdAndCategory_CategoryId(userId, categoryId))
+                continue;
+
+            Interest interest = Interest.builder()
+                    .id(new InterestId(userId, categoryId))
+                    .user(user)
+                    .category(category)
+                    .build();
+
+            interestRepository.save(interest);
         }
-
-        InterestId interestId = new InterestId(
-                dto.getUser(),
-                dto.getCategory());
-
-        Interest interest = Interest.builder()
-                .id(interestId)
-                .user(user)
-                .category(category)
-                .build();
-
-        interestRepository.save(interest);
     }
 
     @Transactional(readOnly = true)
-    public List<Category> getInterests(Long userId) {
+    public List<CategoryDTO> getInterests(Long userId) {
         userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다"));
 
         return interestRepository.findAllByUser_UserId(userId).stream()
-                .map(Interest::getCategory)
+                .map(interest -> {
+                    Category c = interest.getCategory();
+                    return new CategoryDTO(
+                            c.getCategoryId(),
+                            c.getCategoryName());
+                })
                 .toList();
     }
 
