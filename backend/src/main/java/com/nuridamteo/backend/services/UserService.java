@@ -1,5 +1,7 @@
 package com.nuridamteo.backend.services;
 
+import java.time.LocalDateTime;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,6 +58,10 @@ public class UserService {
 
         if (dto.getName() != null)
             profile.setName(dto.getName());
+        if (dto.getGender() != null)
+            profile.setGender(dto.getGender());
+        if (dto.getBirthday() != null)
+            profile.setBirthday(dto.getBirthday());
         if (dto.getAddress() != null)
             profile.setAddress(dto.getAddress());
         if (dto.getAddressDetail() != null)
@@ -79,7 +85,7 @@ public class UserService {
             users.setNotificationEnabled(dto.getNotificationEnabled());
         if (dto.getIsDeleted() != null)
             users.setIsDeleted(dto.getIsDeleted());
-        users.setUpdatedAt(dto.getUpdatedAt());
+        users.setUpdatedAt(LocalDateTime.now());
     }
 
     @Transactional

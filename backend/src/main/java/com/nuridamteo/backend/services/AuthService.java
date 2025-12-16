@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nuridamteo.backend.configs.jwt.JWToken;
 import com.nuridamteo.backend.dtos.user.LoginDTO;
 import com.nuridamteo.backend.dtos.user.SignupDTO;
+import com.nuridamteo.backend.entities.Level;
 import com.nuridamteo.backend.entities.Profile;
 import com.nuridamteo.backend.entities.Users;
+import com.nuridamteo.backend.repositories.LevelRepository;
 import com.nuridamteo.backend.repositories.ProfileRepository;
 import com.nuridamteo.backend.repositories.UserRepository;
 
@@ -22,6 +24,7 @@ public class AuthService {
     private final UserRepository userRepository;
     private final ProfileRepository profileRepository;
     private final PasswordEncoder passwordEncoder;
+    private final LevelRepository levelRepository;
     private final JWToken jwToken;
 
     @Transactional
@@ -30,8 +33,12 @@ public class AuthService {
             throw new IllegalArgumentException("이미 가입된 이메일입니다");
         }
 
+        Level defaultLevel = levelRepository.findById(1L)
+                .orElseThrow();
+
         Users user = Users.builder()
                 .email(dto.getEmail())
+                .level(defaultLevel)
                 .password(passwordEncoder.encode(dto.getPassword()))
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
