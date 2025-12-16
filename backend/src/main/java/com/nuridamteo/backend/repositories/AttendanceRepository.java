@@ -10,4 +10,6 @@ import com.nuridamteo.backend.entities.Users;
 
 public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
     Optional<Attendance> findByUserAndAttendanceDateBetween(Users user, LocalDateTime start, LocalDateTime end);
+
+    List<Attendance> findAllByUserAndAttendanceDateBetween(Users user, LocalDateTime start, LocalDateTime end);
 }

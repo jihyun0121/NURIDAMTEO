@@ -1,6 +1,8 @@
 package com.nuridamteo.backend.services;
 
 import java.time.*;
+import java.util.*;
+import java.util.stream.*;
 
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
@@ -54,6 +56,21 @@ public class AttendanceService {
                         today.atTime(LocalTime.MAX))
                 .map(this::attendanceDTO)
                 .orElse(null);
+    }
+
+    public List<AttendanceDTO> getMonthlyAttendance(Long userId, int year, int month) {
+        Users user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다"));
+
+        YearMonth yearMonth = YearMonth.of(year, month);
+        LocalDateTime start = yearMonth.atDay(1).atStartOfDay();
+        LocalDateTime end = yearMonth.atEndOfMonth().atTime(LocalTime.MAX);
+
+        return attendanceRepository
+                .findAllByUserAndAttendanceDateBetween(user, start, end)
+                .stream()
+                .map(this::attendanceDTO)
+                .collect(Collectors.toList());
     }
 
     private AttendanceDTO attendanceDTO(Attendance attendance) {
