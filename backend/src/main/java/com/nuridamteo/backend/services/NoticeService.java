@@ -19,14 +19,14 @@ public class NoticeService {
 
     @Transactional(readOnly = true)
     public List<NoticeDTO> getNotice() {
-        return noticeRepository.findByTypeOrderByIsPinnedDescCreatedAtDesc("NOTICE").stream()
+        return noticeRepository.findByNoticeTypeOrderByIsPinnedDescCreatedAtDesc("NOTICE").stream()
                 .map(this::noticeDTO)
                 .toList();
     }
 
     @Transactional(readOnly = true)
     public List<NoticeDTO> getNews() {
-        return noticeRepository.findByTypeOrderByIsPinnedDescCreatedAtDesc("NEWS").stream()
+        return noticeRepository.findByNoticeTypeOrderByIsPinnedDescCreatedAtDesc("NEWS").stream()
                 .map(this::noticeDTO)
                 .toList();
     }

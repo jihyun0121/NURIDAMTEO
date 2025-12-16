@@ -9,5 +9,5 @@ import com.nuridamteo.backend.entities.Notice;
 
 @Repository
 public interface NoticeRepository extends JpaRepository<Notice, Long> {
-    List<Notice> findByTypeOrderByIsPinnedDescCreatedAtDesc(String type);
+    List<Notice> findByNoticeTypeOrderByIsPinnedDescCreatedAtDesc(String noticeType);
 }
