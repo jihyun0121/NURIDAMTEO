@@ -49,7 +49,6 @@ public class InterestService {
 
     @Transactional(readOnly = true)
     public List<Category> getInterests(Long userId) {
-
         userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다"));
 
@@ -58,4 +57,27 @@ public class InterestService {
                 .toList();
     }
 
+    @Transactional
+    public void updateInterests(Long userId, List<Long> categoryIds) {
+        Users user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다"));
+
+        List<Interest> existing = interestRepository.findAllByUser_UserId(userId);
+        interestRepository.deleteAll(existing);
+
+        for (Long categoryId : categoryIds) {
+            Category category = categoryRepository.findById(categoryId)
+                    .orElseThrow(() -> new IllegalArgumentException("카테고리를 찾을 수 없습니다"));
+
+            InterestId id = new InterestId(userId, categoryId);
+
+            Interest interest = Interest.builder()
+                    .id(id)
+                    .user(user)
+                    .category(category)
+                    .build();
+
+            interestRepository.save(interest);
+        }
+    }
 }

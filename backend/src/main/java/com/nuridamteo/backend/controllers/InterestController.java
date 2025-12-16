@@ -27,4 +27,10 @@ public class InterestController {
     public ResponseEntity<List<Category>> getInterests(@PathVariable Long userId) {
         return ResponseEntity.ok(interestService.getInterests(userId));
     }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<?> updateInterests(@PathVariable Long userId, @RequestBody List<Long> categoryIds) {
+        interestService.updateInterests(userId, categoryIds);
+        return ResponseEntity.ok(Map.of("message", "관심사 수정 성공"));
+    }
 }
