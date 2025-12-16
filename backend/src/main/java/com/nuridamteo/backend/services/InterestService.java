@@ -1,5 +1,7 @@
 package com.nuridamteo.backend.services;
 
+import java.util.*;
+
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +27,6 @@ public class InterestService {
     public void selectInterests(InterestDTO dto) {
         Users user = userRepository.findById(dto.getUser())
                 .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다"));
-
         Category category = categoryRepository.findById(dto.getCategory())
                 .orElseThrow(() -> new IllegalArgumentException("카테고리를 찾을 수 없습니다"));
 
@@ -45,4 +46,16 @@ public class InterestService {
 
         interestRepository.save(interest);
     }
+
+    @Transactional(readOnly = true)
+    public List<Category> getInterests(Long userId) {
+
+        userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다"));
+
+        return interestRepository.findAllByUser_UserId(userId).stream()
+                .map(Interest::getCategory)
+                .toList();
+    }
+
 }
