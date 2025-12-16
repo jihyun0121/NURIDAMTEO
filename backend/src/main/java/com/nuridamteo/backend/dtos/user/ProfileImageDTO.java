@@ -1,7 +1,5 @@
 package com.nuridamteo.backend.dtos.user;
 
-import java.time.LocalDate;
-
 import com.fasterxml.jackson.annotation.*;
 
 import lombok.*;
@@ -11,17 +9,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProfileDTO {
+public class ProfileImageDTO {
     private Long user;
 
+    @JsonProperty("image_name")
     private String name;
 
-    private String gender;
-
-    private LocalDate birthday;
-
-    private String residence;
-
-    @JsonProperty("postal_code")
-    private String postalCode;
+    private String path;
 }
