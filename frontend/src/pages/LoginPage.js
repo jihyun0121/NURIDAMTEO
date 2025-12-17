@@ -9,14 +9,19 @@ export default function LoginPage() {
         <>
             <div className="login-container">
                 <Header />
-                <div className="login-box">
-                    <Logo />
-                    <div className="login-title"> 로그인 </div>
-                    <TextInputBox content="아이디" />
-                    <TextInputBox content="비밀번호" />
 
-                    <TextButtonS content="로그인" type="Fill" />
-                    <TextButtonS content="회원가입" type="None" />
+                <div className="login-box">
+                    <Logo size="l" />
+
+                    <div className="login-card">
+                        <div className="login-title">로그인</div>
+
+                        <TextInputBox content="아이디" />
+                        <TextInputBox content="비밀번호" />
+
+                        <TextButtonS content="로그인" type="Fill" />
+                        <TextButtonS content="회원가입" type="None" />
+                    </div>
                 </div>
             </div>
         </>

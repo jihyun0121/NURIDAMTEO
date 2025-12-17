@@ -1,0 +1,34 @@
+.login-title {
+    font-size: var(--Title-title-xlarge);
+    color: var(--Gray-Normal, #555);
+    text-align: center;
+}
+
+.login-container {
+    display: flex;
+    width: 120rem;
+    height: 67.5rem;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-box {
+    display: flex;
+    width: 46.5rem;
+    padding: 3rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 13.75rem;
+}
+
+.login-card {
+    display: flex;
+    width: 46.5rem;
+    padding: 3rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    border-radius: 1.5rem;
+    border: 1px solid #cacaca;
+}
