@@ -24,24 +24,16 @@ public class Survey {
     @JsonProperty("survey_id")
     private Long surveyId;
 
-    @Column(name = "title", nullable = false, length = 200)
-    @JsonProperty("title")
+    @Column(nullable = false, length = 200)
     private String title;
 
-    @Column(name = "author", nullable = false, length = 20)
-    @JsonProperty("author")
+    @Column(nullable = false, length = 20)
     private String author;
 
-    @Column(name = "description")
-    @JsonProperty("description")
     private String description;
 
-    @Column(name = "result")
-    @JsonProperty("result")
     private String result;
 
-    @Column(name = "recruit")
-    @JsonProperty("recruit")
     private Long recruit;
 
     @Enumerated(EnumType.STRING)
@@ -57,8 +49,7 @@ public class Survey {
     private Category category;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, length = 20)
-    @JsonProperty("status")
+    @Column(nullable = false, length = 20)
     @Builder.Default
     private Status status = Status.OPEN;
 
@@ -70,8 +61,7 @@ public class Survey {
     @JsonProperty("end_at")
     private LocalDate endAt;
 
-    @Column(name = "rewarded", nullable = false)
-    @JsonProperty("rewarded")
+    @Column(nullable = false)
     @Builder.Default
     private Long rewarded = 0L;
 
