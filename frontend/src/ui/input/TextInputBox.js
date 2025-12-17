@@ -2,7 +2,8 @@ export default function TextInputBox({
     children,
     type = "short",
     onClick,
-    placeholder,
+    placeholder = "",
+    inputType = "text",
 }) {
     const styles = {
         width: type === "short" ? "19.75rem" : "40.5rem",
@@ -10,7 +11,11 @@ export default function TextInputBox({
 
     return (
         <div className="text-input-box" style={styles} onClick={onClick}>
-            <input className="text-input" placeholder={placeholder}></input>
+            <input
+                className="text-input"
+                placeholder={placeholder}
+                type={inputType}
+            ></input>
             {children}
         </div>
     );
