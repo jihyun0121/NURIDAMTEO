@@ -15,7 +15,6 @@ import lombok.*;
 @Service
 @RequiredArgsConstructor
 public class NoticeService {
-
     private final NoticeRepository noticeRepository;
 
     @Transactional(readOnly = true)
@@ -50,5 +49,4 @@ public class NoticeService {
                 .createdAt(notice.getCreatedAt())
                 .build();
     }
-
 }

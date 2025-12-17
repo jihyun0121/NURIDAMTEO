@@ -48,10 +48,15 @@ public class Suggestion {
     @Builder.Default
     private Status status = Status.OPEN;
 
-    @Column(name = "is_published", nullable = false)
-    @JsonProperty("is_published")
+    @Column(name = "view_count", nullable = false)
+    @JsonProperty("view_count")
     @Builder.Default
-    private Boolean isPublishe = true;
+    private Long viewCount = 0L;
+
+    @Column(name = "participation_count", nullable = false)
+    @JsonProperty("participation_count")
+    @Builder.Default
+    private Long participationCount = 0L;
 
     @Column(name = "created_at", nullable = false)
     @JsonProperty("created_at")
