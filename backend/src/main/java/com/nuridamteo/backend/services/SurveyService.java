@@ -19,7 +19,7 @@ public class SurveyService {
 
     @Transactional(readOnly = true)
     public List<SurveyDTO> getSurvey() {
-        return surveyRepository.findAllById().stream()
+        return surveyRepository.findAllByOrderBySurveyIdDesc().stream()
                 .map(this::surveyDTO).toList();
     }
 
@@ -44,7 +44,7 @@ public class SurveyService {
                 .result(survey.getResult())
                 .recruit(survey.getRecruit())
                 .surveyType(survey.getSurveyType())
-                .category(survey.getCategory())
+                .category(survey.getCategory().getCategoryId())
                 .status(survey.getStatus())
                 .startAt(survey.getStartAt())
                 .endAt(survey.getEndAt())

@@ -8,7 +8,7 @@ import com.nuridamteo.backend.entities.*;
 import com.nuridamteo.backend.enums.SurveyType;
 
 public interface SurveyRepository extends JpaRepository<Survey, Long> {
-    List<Survey> findAllById();
+    List<Survey> findAllByOrderBySurveyIdDesc();
 
     List<Survey> findBySurveyTypeOrderBySurveyIdDesc(SurveyType surveyType);
 
