@@ -50,6 +50,14 @@ public class SuggestionService {
                 .map(this::suggestionDTO).toList();
     }
 
+    @Transactional(readOnly = true)
+    public SuggestionDTO getSuggestion(Long suggestionId) {
+        Suggestion suggestion = suggestionRepository.findById(suggestionId)
+                .orElseThrow(() -> new IllegalArgumentException("질문을 찾을 수 없습니다"));
+
+        return suggestionDTO(suggestion);
+    }
+
     private SuggestionDTO suggestionDTO(Suggestion s) {
         return SuggestionDTO.builder()
                 .suggestionId(s.getSuggestionId())

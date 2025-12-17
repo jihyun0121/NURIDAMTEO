@@ -27,4 +27,10 @@ public class SuggestionController {
         List<SuggestionDTO> suggestion = suggestionService.getSuggestions();
         return ResponseEntity.ok(suggestion);
     }
+
+    @GetMapping("/{suggestionId}")
+    public ResponseEntity<?> getSuggestion(@PathVariable Long suggestionId) {
+        SuggestionDTO suggestion = suggestionService.getSuggestion(suggestionId);
+        return ResponseEntity.ok(suggestion);
+    }
 }
