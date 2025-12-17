@@ -21,4 +21,10 @@ public class SuggestionController {
         suggestionService.createSuggestion(userId, dto);
         return ResponseEntity.ok(Map.of("message", "제안 생성 성공"));
     }
+
+    @GetMapping
+    public ResponseEntity<?> getSuggestions() {
+        List<SuggestionDTO> suggestion = suggestionService.getSuggestions();
+        return ResponseEntity.ok(suggestion);
+    }
 }

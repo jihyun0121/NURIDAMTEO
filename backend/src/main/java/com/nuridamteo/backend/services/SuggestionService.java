@@ -1,8 +1,10 @@
 package com.nuridamteo.backend.services;
 
 import java.time.LocalDateTime;
+import java.util.*;
 
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
 import com.nuridamteo.backend.dtos.SuggestionDTO;
 import com.nuridamteo.backend.entities.Category;
@@ -39,6 +41,13 @@ public class SuggestionService {
 
         Suggestion saved = suggestionRepository.save(suggestion);
         return suggestionDTO(saved);
+    }
+
+    @Transactional(readOnly = true)
+    public List<SuggestionDTO> getSuggestions() {
+        return suggestionRepository
+                .findAllByOrderBySuggestionIdDesc().stream()
+                .map(this::suggestionDTO).toList();
     }
 
     private SuggestionDTO suggestionDTO(Suggestion s) {
