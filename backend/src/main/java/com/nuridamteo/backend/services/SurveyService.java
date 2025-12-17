@@ -6,11 +6,14 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
+import com.nuridamteo.backend.dtos.survey.OptionsDTO;
 import com.nuridamteo.backend.dtos.survey.QuestionDTO;
 import com.nuridamteo.backend.dtos.survey.SurveyDTO;
+import com.nuridamteo.backend.entities.Options;
 import com.nuridamteo.backend.entities.Question;
 import com.nuridamteo.backend.entities.Survey;
 import com.nuridamteo.backend.enums.SurveyType;
+import com.nuridamteo.backend.repositories.OptionsRepository;
 import com.nuridamteo.backend.repositories.QuestionRepository;
 import com.nuridamteo.backend.repositories.SurveyRepository;
 
@@ -21,6 +24,7 @@ import lombok.*;
 public class SurveyService {
     private final SurveyRepository surveyRepository;
     private final QuestionRepository questionRepository;
+    private final OptionsRepository optionRepository;
 
     @Transactional(readOnly = true)
     public List<SurveyDTO> getSurvey() {
@@ -55,6 +59,13 @@ public class SurveyService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public List<OptionsDTO> getOptionsByQuestion(Long questionId) {
+        return optionRepository.findByQuestion_QuestionIdOrderByOptionOrderAsc(questionId).stream()
+                .map(this::optionDto)
+                .collect(Collectors.toList());
+    }
+
     private SurveyDTO surveyDTO(Survey s) {
         return SurveyDTO.builder()
                 .surveyId(s.getSurveyId())
@@ -81,6 +92,15 @@ public class SurveyService {
                 .questionContent(q.getQuestionContent())
                 .questionType(q.getQuestionType())
                 .questionOrder(q.getQuestionOrder())
+                .build();
+    }
+
+    private OptionsDTO optionDto(Options o) {
+        return OptionsDTO.builder()
+                .optionId(o.getOptionId())
+                .question(o.getQuestion().getQuestionId())
+                .optionContent(o.getOptionContent())
+                .optionOrder(o.getOptionOrder())
                 .build();
     }
 }

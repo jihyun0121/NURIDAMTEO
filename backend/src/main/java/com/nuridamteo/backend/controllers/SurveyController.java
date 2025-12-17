@@ -5,6 +5,7 @@ import java.util.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.nuridamteo.backend.dtos.survey.OptionsDTO;
 import com.nuridamteo.backend.dtos.survey.QuestionDTO;
 import com.nuridamteo.backend.services.SurveyService;
 
@@ -36,4 +37,11 @@ public class SurveyController {
         List<QuestionDTO> question = surveyService.getQuestionsByForm(surveyId);
         return ResponseEntity.ok(question);
     }
+
+    @GetMapping("/{questionId}/options")
+    public ResponseEntity<?> getOptionsByQuestion(@PathVariable Long questionId) {
+        List<OptionsDTO> question = surveyService.getOptionsByQuestion(questionId);
+        return ResponseEntity.ok(question);
+    }
+
 }
