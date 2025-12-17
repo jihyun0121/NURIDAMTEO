@@ -3,6 +3,7 @@ package com.nuridamteo.backend.entities;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.*;
+import com.nuridamteo.backend.enums.ParticipationType;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,11 +28,18 @@ public class Participation {
     @JsonIgnore
     private Users user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "survey_id", nullable = false, unique = true)
-    @JsonProperty("survey_id")
-    @JsonIgnore
-    private Survey survey;
+    @Column(name = "target_type")
+    @JsonProperty("target_type")
+    private String targetType;
+
+    @Column(name = "target_id")
+    @JsonProperty("target_id")
+    private Long targetId;
+
+    @Column(name = "participation_type")
+    @JsonProperty("participation_type")
+    @Builder.Default
+    private ParticipationType participationType = ParticipationType.JOIN;
 
     @Column(name = "created_at", nullable = false)
     @JsonProperty("created_at")

@@ -15,19 +15,18 @@ import lombok.*;
 @Service
 @RequiredArgsConstructor
 public class NoticeService {
-
     private final NoticeRepository noticeRepository;
 
     @Transactional(readOnly = true)
     public List<NoticeDTO> getNotice() {
-        return noticeRepository.findByNoticeTypeOrderByIsPinnedDescCreatedAtDesc(NoticeType.NOTICE).stream()
+        return noticeRepository.findByNoticeTypeOrderByIsPinnedDescNoticeId(NoticeType.NOTICE).stream()
                 .map(this::noticeDTO)
                 .toList();
     }
 
     @Transactional(readOnly = true)
     public List<NoticeDTO> getNews() {
-        return noticeRepository.findByNoticeTypeOrderByIsPinnedDescCreatedAtDesc(NoticeType.NEWS).stream()
+        return noticeRepository.findByNoticeTypeOrderByIsPinnedDescNoticeId(NoticeType.NEWS).stream()
                 .map(this::noticeDTO)
                 .toList();
     }
@@ -50,5 +49,4 @@ public class NoticeService {
                 .createdAt(notice.getCreatedAt())
                 .build();
     }
-
 }

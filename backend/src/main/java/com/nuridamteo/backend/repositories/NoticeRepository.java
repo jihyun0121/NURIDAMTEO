@@ -10,5 +10,5 @@ import com.nuridamteo.backend.enums.NoticeType;
 
 @Repository
 public interface NoticeRepository extends JpaRepository<Notice, Long> {
-    List<Notice> findByNoticeTypeOrderByIsPinnedDescCreatedAtDesc(NoticeType noticeType);
+    List<Notice> findByNoticeTypeOrderByIsPinnedDescNoticeId(NoticeType noticeType);
 }
