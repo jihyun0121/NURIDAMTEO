@@ -1,4 +1,4 @@
-package com.nuridamteo.backend.dtos;
+package com.nuridamteo.backend.dtos.survey;
 
 import com.fasterxml.jackson.annotation.*;
 import com.nuridamteo.backend.enums.QuestionType;
