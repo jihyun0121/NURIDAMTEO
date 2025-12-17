@@ -38,7 +38,7 @@ public class Suggestion {
     @JsonProperty("title")
     private String title;
 
-    @Column(name = "content", nullable = false)
+    @Column(columnDefinition = "TEXT", name = "content", nullable = false)
     @JsonProperty("content")
     private String content;
 

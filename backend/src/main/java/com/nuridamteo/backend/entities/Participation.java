@@ -1,6 +1,6 @@
 package com.nuridamteo.backend.entities;
 
-import java.time.LocalDateTime;
+import java.time.*;
 
 import com.fasterxml.jackson.annotation.*;
 import com.nuridamteo.backend.enums.ParticipationType;
@@ -28,7 +28,7 @@ public class Participation {
     @JsonIgnore
     private Users user;
 
-    @Column(name = "target_type")
+    @Column(name = "target_type", length = 20)
     @JsonProperty("target_type")
     private String targetType;
 
@@ -36,7 +36,8 @@ public class Participation {
     @JsonProperty("target_id")
     private Long targetId;
 
-    @Column(name = "participation_type")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "participation_type", length = 20)
     @JsonProperty("participation_type")
     @Builder.Default
     private ParticipationType participationType = ParticipationType.JOIN;

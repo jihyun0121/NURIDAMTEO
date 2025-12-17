@@ -1,7 +1,6 @@
 package com.nuridamteo.backend.entities;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 
 import com.fasterxml.jackson.annotation.*;
 import com.nuridamteo.backend.enums.Status;
@@ -30,8 +29,10 @@ public class Survey {
     @Column(nullable = false, length = 20)
     private String author;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(columnDefinition = "TEXT")
     private String result;
 
     private Long recruit;

@@ -27,7 +27,7 @@ public class Notification {
     @JsonIgnore
     private Users user;
 
-    @Column(name = "title", nullable = false)
+    @Column(columnDefinition = "TEXT", name = "title", nullable = false)
     @JsonProperty("title")
     private String title;
 

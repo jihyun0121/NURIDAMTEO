@@ -39,7 +39,7 @@ public class Comments {
     @JsonIgnore
     private Users user;
 
-    @Column(name = "content", nullable = false)
+    @Column(columnDefinition = "TEXT", name = "content", nullable = false)
     @JsonProperty("content")
     private String content;
 

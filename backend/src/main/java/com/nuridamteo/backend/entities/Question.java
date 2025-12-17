@@ -26,7 +26,7 @@ public class Question {
     @JsonIgnore
     private Survey survey;
 
-    @Column(name = "question_content", nullable = false)
+    @Column(columnDefinition = "TEXT", name = "question_content", nullable = false)
     @JsonProperty("question_content")
     private String questionContent;
 

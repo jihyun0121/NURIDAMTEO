@@ -37,7 +37,7 @@ public class Answer {
     @JsonIgnore
     private Options option;
 
-    @Column(name = "answer_text")
+    @Column(columnDefinition = "TEXT", name = "answer_text")
     @JsonProperty("answer_text")
     private String answerText;
 }
