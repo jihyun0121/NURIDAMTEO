@@ -161,10 +161,16 @@ export default function HomePage() {
                             <CheckIcon type="active" size="44" />
                         </div>
                         <div className="icons">
-                            <VoteIcon size="44" />
-                            <VoteIcon type="fill" size="44" />
-                            <VoteIcon type="hover" size="44" />
-                            <VoteIcon type="active" size="44" />
+                            <VoteIcon variant="line" size="44" />
+                            <VoteIcon variant="line" type="fill" size="44" />
+                            <VoteIcon variant="line" type="hover" size="44" />
+                            <VoteIcon variant="line" type="active" size="44" />
+                        </div>
+                        <div className="icons">
+                            <VoteIcon variant="fill" size="44" />
+                            <VoteIcon variant="fill" type="fill" size="44" />
+                            <VoteIcon variant="fill" type="hover" size="44" />
+                            <VoteIcon variant="fill" type="active" size="44" />
                         </div>
                         <div className="icons">
                             <CoinIcon size="44" />
