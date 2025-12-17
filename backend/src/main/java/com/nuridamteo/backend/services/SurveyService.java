@@ -29,6 +29,12 @@ public class SurveyService {
                 .map(this::surveyDTO).toList();
     }
 
+    public List<SurveyDTO> getPanelList() {
+        return surveyRepository
+                .findBySurveyTypeInOrderBySurveyIdDesc(List.of(SurveyType.SELECT, SurveyType.PANEL)).stream()
+                .map(this::surveyDTO).toList();
+    }
+
     private SurveyDTO surveyDTO(Survey survey) {
         return SurveyDTO.builder()
                 .surveyId(survey.getSurveyId())

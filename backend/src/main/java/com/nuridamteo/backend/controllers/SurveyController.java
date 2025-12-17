@@ -22,4 +22,9 @@ public class SurveyController {
     public ResponseEntity<?> getSurveyList() {
         return ResponseEntity.ok(surveyService.getSurveyList());
     }
+
+    @GetMapping("/survey")
+    public ResponseEntity<?> getPanelList() {
+        return ResponseEntity.ok(surveyService.getPanelList());
+    }
 }
