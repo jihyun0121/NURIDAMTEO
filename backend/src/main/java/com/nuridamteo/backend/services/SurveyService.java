@@ -1,13 +1,17 @@
 package com.nuridamteo.backend.services;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
-import com.nuridamteo.backend.dtos.SurveyDTO;
+import com.nuridamteo.backend.dtos.survey.QuestionDTO;
+import com.nuridamteo.backend.dtos.survey.SurveyDTO;
+import com.nuridamteo.backend.entities.Question;
 import com.nuridamteo.backend.entities.Survey;
 import com.nuridamteo.backend.enums.SurveyType;
+import com.nuridamteo.backend.repositories.QuestionRepository;
 import com.nuridamteo.backend.repositories.SurveyRepository;
 
 import lombok.*;
@@ -16,6 +20,7 @@ import lombok.*;
 @RequiredArgsConstructor
 public class SurveyService {
     private final SurveyRepository surveyRepository;
+    private final QuestionRepository questionRepository;
 
     @Transactional(readOnly = true)
     public List<SurveyDTO> getSurvey() {
@@ -23,34 +28,59 @@ public class SurveyService {
                 .map(this::surveyDTO).toList();
     }
 
+    @Transactional(readOnly = true)
     public List<SurveyDTO> getSurveyList() {
         return surveyRepository
                 .findBySurveyTypeOrderBySurveyIdDesc(SurveyType.SURVEY).stream()
                 .map(this::surveyDTO).toList();
     }
 
+    @Transactional(readOnly = true)
     public List<SurveyDTO> getPanelList() {
         return surveyRepository
                 .findBySurveyTypeInOrderBySurveyIdDesc(List.of(SurveyType.SELECT, SurveyType.PANEL)).stream()
                 .map(this::surveyDTO).toList();
     }
 
-    private SurveyDTO surveyDTO(Survey survey) {
+    @Transactional(readOnly = true)
+    public List<SurveyDTO> getSurveyFrom(Long surveyId) {
+        return surveyRepository.findById(surveyId).stream()
+                .map(this::surveyDTO).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<QuestionDTO> getQuestionsByForm(Long surveyId) {
+        return questionRepository.findBySurvey_SurveyIdOrderByQuestionOrderAsc(surveyId).stream()
+                .map(this::qustionDto)
+                .collect(Collectors.toList());
+    }
+
+    private SurveyDTO surveyDTO(Survey s) {
         return SurveyDTO.builder()
-                .surveyId(survey.getSurveyId())
-                .title(survey.getTitle())
-                .author(survey.getAuthor())
-                .description(survey.getDescription())
-                .result(survey.getResult())
-                .recruit(survey.getRecruit())
-                .surveyType(survey.getSurveyType())
-                .category(survey.getCategory().getCategoryId())
-                .status(survey.getStatus())
-                .startAt(survey.getStartAt())
-                .endAt(survey.getEndAt())
-                .rewarded(survey.getRewarded())
-                .viewCount(survey.getViewCount())
-                .participationCount(survey.getParticipationCount())
+                .surveyId(s.getSurveyId())
+                .title(s.getTitle())
+                .author(s.getAuthor())
+                .description(s.getDescription())
+                .result(s.getResult())
+                .recruit(s.getRecruit())
+                .surveyType(s.getSurveyType())
+                .category(s.getCategory().getCategoryId())
+                .status(s.getStatus())
+                .startAt(s.getStartAt())
+                .endAt(s.getEndAt())
+                .rewarded(s.getRewarded())
+                .viewCount(s.getViewCount())
+                .participationCount(s.getParticipationCount())
+                .build();
+    }
+
+    private QuestionDTO qustionDto(Question q) {
+        return QuestionDTO.builder()
+                .questionId(q.getQuestionId())
+                .survey(q.getSurvey().getSurveyId())
+                .questionContent(q.getQuestionContent())
+                .questionType(q.getQuestionType())
+                .questionOrder(q.getQuestionOrder())
                 .build();
     }
 }

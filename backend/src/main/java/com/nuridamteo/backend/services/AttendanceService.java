@@ -73,11 +73,11 @@ public class AttendanceService {
                 .collect(Collectors.toList());
     }
 
-    private AttendanceDTO attendanceDTO(Attendance attendance) {
+    private AttendanceDTO attendanceDTO(Attendance a) {
         return AttendanceDTO.builder()
-                .attendanceId(attendance.getAttendanceId())
-                .user(attendance.getUser().getUserId())
-                .attendanceDate(attendance.getAttendanceDate())
+                .attendanceId(a.getAttendanceId())
+                .user(a.getUser().getUserId())
+                .attendanceDate(a.getAttendanceDate())
                 .build();
     }
 }

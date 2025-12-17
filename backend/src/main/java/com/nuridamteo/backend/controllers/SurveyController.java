@@ -1,8 +1,11 @@
 package com.nuridamteo.backend.controllers;
 
+import java.util.*;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.nuridamteo.backend.dtos.survey.QuestionDTO;
 import com.nuridamteo.backend.services.SurveyService;
 
 import lombok.*;
@@ -26,5 +29,11 @@ public class SurveyController {
     @GetMapping("/panel")
     public ResponseEntity<?> getPanelList() {
         return ResponseEntity.ok(surveyService.getPanelList());
+    }
+
+    @GetMapping("/{surveyId}/questions")
+    public ResponseEntity<?> getQuestionsBySurvey(@PathVariable Long surveyId) {
+        List<QuestionDTO> question = surveyService.getQuestionsByForm(surveyId);
+        return ResponseEntity.ok(question);
     }
 }
