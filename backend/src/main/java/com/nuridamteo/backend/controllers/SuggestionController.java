@@ -33,4 +33,10 @@ public class SuggestionController {
         SuggestionDTO suggestion = suggestionService.getSuggestion(suggestionId);
         return ResponseEntity.ok(suggestion);
     }
+
+    @PatchMapping("/{suggestionId}/state")
+    public ResponseEntity<?> setState(@PathVariable Long suggestionId, @RequestBody SuggestionDTO dto) {
+        SuggestionDTO suggestion = suggestionService.setState(suggestionId, dto);
+        return ResponseEntity.ok(suggestion);
+    }
 }

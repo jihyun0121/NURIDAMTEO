@@ -58,6 +58,16 @@ public class SuggestionService {
         return suggestionDTO(suggestion);
     }
 
+    @Transactional
+    public SuggestionDTO setState(Long suggestionId, SuggestionDTO dto) {
+        Suggestion suggestion = suggestionRepository.findById(suggestionId)
+                .orElseThrow(() -> new IllegalArgumentException("제안을 찾을 수 없습니다"));
+
+        suggestion.setStatus(dto.getStatus());
+
+        return suggestionDTO(suggestion);
+    }
+
     private SuggestionDTO suggestionDTO(Suggestion s) {
         return SuggestionDTO.builder()
                 .suggestionId(s.getSuggestionId())
