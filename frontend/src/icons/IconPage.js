@@ -16,6 +16,8 @@ import VoteIcon from "../ui/icons/VoteIcon";
 import CoinIcon from "../ui/icons/CoinIcon";
 import SettingIcon from "../ui/icons/SettingIcon";
 import HomeIcon from "../ui/icons/HomeIcon";
+import MegaphoneIcon from "../ui/icons/MegaphoneIcon";
+import DownIcon from "../ui/icons/DownIcon";
 import SquareArrowIcon from "../ui/icons/SquareArrowIcon";
 import SquareNumber from "../ui/icons/SquareNumber";
 import NuridamIcon from "../ui/icons/NuridamIcon";
@@ -189,6 +191,18 @@ export default function HomePage() {
                             <HomeIcon type="fill" size="44" />
                             <HomeIcon type="hover" size="44" />
                             <HomeIcon type="active" size="44" />
+                        </div>
+                        <div className="icons">
+                            <MegaphoneIcon size="44" />
+                            <MegaphoneIcon type="fill" size="44" />
+                            <MegaphoneIcon type="hover" size="44" />
+                            <MegaphoneIcon type="active" size="44" />
+                        </div>
+                        <div className="icons">
+                            <DownIcon size="44" />
+                            <DownIcon type="fill" size="44" />
+                            <DownIcon type="hover" size="44" />
+                            <DownIcon type="active" size="44" />
                         </div>
 
                         <div className="icons">
