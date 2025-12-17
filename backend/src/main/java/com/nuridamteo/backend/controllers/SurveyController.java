@@ -17,4 +17,9 @@ public class SurveyController {
     public ResponseEntity<?> getSurvey() {
         return ResponseEntity.ok(surveyService.getSurvey());
     }
+
+    @GetMapping("/survey")
+    public ResponseEntity<?> getSurveyList() {
+        return ResponseEntity.ok(surveyService.getSurveyList());
+    }
 }

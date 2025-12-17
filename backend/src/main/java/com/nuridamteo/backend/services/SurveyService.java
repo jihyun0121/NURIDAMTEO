@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.*;
 
 import com.nuridamteo.backend.dtos.SurveyDTO;
 import com.nuridamteo.backend.entities.Survey;
+import com.nuridamteo.backend.enums.SurveyType;
 import com.nuridamteo.backend.repositories.SurveyRepository;
 
 import lombok.*;
@@ -19,6 +20,12 @@ public class SurveyService {
     @Transactional(readOnly = true)
     public List<SurveyDTO> getSurvey() {
         return surveyRepository.findAllById().stream()
+                .map(this::surveyDTO).toList();
+    }
+
+    public List<SurveyDTO> getSurveyList() {
+        return surveyRepository
+                .findBySurveyTypeOrderBySurveyIdDesc(SurveyType.SURVEY).stream()
                 .map(this::surveyDTO).toList();
     }
 
