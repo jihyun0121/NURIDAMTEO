@@ -31,7 +31,7 @@ export default function FormDropdown({ size = "short", optionData = [] }) {
             <ArrowIcon direction={showOptions ? "up" : "down"} size={44} color="inherit" />
 
             {showOptions && (
-                <div className="dropdown-option">
+                <div className="dropdown-option" style={{ width: width }}>
                     {optionData.map((data) => (
                         <div className="dropdown-text" key={data.key} onClick={() => handleSelect(data.value)}>
                             {data.value}
