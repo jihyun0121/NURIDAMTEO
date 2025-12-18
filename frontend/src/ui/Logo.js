@@ -1,6 +1,6 @@
 import { colors } from "../assets/style/tokens/colors";
 
-export default function Logo({ size, color = colors.orange.normal.base }) {
+export default function Logo({ size = "m", color = colors.orange.normal.base }) {
     if (size === "L" || size === "l") {
         return (
             <svg xmlns="http://www.w3.org/2000/svg" width="195" height="40" viewBox="0 0 195 40" fill="none">
