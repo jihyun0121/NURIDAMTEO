@@ -68,3 +68,9 @@
     line-height: var(--body-small-line);
     color: var(--gray-normal, #555);
 }
+
+.signup-warning {
+    color: #ff4d4f;
+    font-size: 14px;
+    margin-top: 8px;
+}
