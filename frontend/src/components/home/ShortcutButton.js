@@ -8,7 +8,7 @@ export default function ShortcutButton() {
     return (
         <>
             <div style={{ display: "flex" }}>
-                <div className="shortcut-btn-left">
+                <div className="shortcut-btn-left" onClick={() => (window.location.href = "/participate")}>
                     <div className="shortcut-title">
                         <Logo size="s" color={colors.orange.dark.base} />
                         빠른 설문조사
@@ -19,7 +19,7 @@ export default function ShortcutButton() {
                         <ArrowIcon direction="right" size={44} color={colors.white} />
                     </button>
                 </div>
-                <div className="shortcut-btn-right">
+                <div className="shortcut-btn-right" onClick={() => (window.location.href = "/propsal")}>
                     <div className="shortcut-title">
                         <Logo size="s" color={colors.yellow.dark.base} />
                         제안하기

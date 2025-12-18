@@ -1,0 +1,31 @@
+.propsal-list-container {
+    display: flex;
+    padding: 7.5rem 12.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    align-self: stretch;
+
+    background: var(--orange-light-hover);
+}
+
+.propsal-list-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+
+    color: var(--gray-normal-base);
+
+    font-size: var(--headline-large-size);
+    font-weight: var(--headline-large-weight);
+    line-height: var(--headline-large-line);
+}
+
+.propsal-list-card {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+}
