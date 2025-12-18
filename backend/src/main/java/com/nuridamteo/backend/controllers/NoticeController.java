@@ -24,6 +24,11 @@ public class NoticeController {
         return ResponseEntity.ok(noticeService.getNews());
     }
 
+    @GetMapping("/newses")
+    public ResponseEntity<?> getNewses() {
+        return ResponseEntity.ok(noticeService.getNewses());
+    }
+
     @GetMapping("/{noticeId}")
     public ResponseEntity<?> getDetail(@PathVariable Long noticeId) {
         return ResponseEntity.ok(noticeService.getDetail(noticeId));

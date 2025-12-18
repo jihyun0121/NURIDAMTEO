@@ -6,8 +6,6 @@ import NewsList from "../components/home/NewsList";
 import ProfileCard from "../components/home/ProfileCard";
 import PropsalList from "../components/home/Propsalist";
 
-<img src={banner} width="100%" alt="" />;
-
 export default function HomePage() {
     const token = sessionStorage.getItem("token");
     const login = !!token;

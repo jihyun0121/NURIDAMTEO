@@ -2,7 +2,7 @@ import AuthButton from "../../ui/button/AuthButton";
 import SurveyList from "./SurveyList";
 import { colors } from "../../assets/style/tokens/colors";
 
-export default function ProfileDetail({ mileage, type = "coin" }) {
+export default function ProfileDetail({ mileage = 0, type = "coin" }) {
     let content = null;
     let style = null;
 
