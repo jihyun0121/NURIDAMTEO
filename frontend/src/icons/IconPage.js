@@ -322,6 +322,7 @@ export default function IconPage() {
 
                         <div className="icons">
                             <TextButtonL content="Text" />
+                            <TextButtonL content="Text" type="hover" />
                         </div>
 
                         <div className="icons">
