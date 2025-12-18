@@ -61,20 +61,48 @@ export default function IconPage() {
                         <div className="icons">
                             <ArrowIcon direction="left" size="44" />
                             <ArrowIcon direction="left" type="fill" size="44" />
-                            <ArrowIcon direction="left" type="hover" size="44" />
-                            <ArrowIcon direction="left" type="active" size="44" />
+                            <ArrowIcon
+                                direction="left"
+                                type="hover"
+                                size="44"
+                            />
+                            <ArrowIcon
+                                direction="left"
+                                type="active"
+                                size="44"
+                            />
                         </div>
                         <div className="icons">
                             <ArrowIcon direction="right" size="44" />
-                            <ArrowIcon direction="right" type="fill" size="44" />
-                            <ArrowIcon direction="right" type="hover" size="44" />
-                            <ArrowIcon direction="right" type="active" size="44" />
+                            <ArrowIcon
+                                direction="right"
+                                type="fill"
+                                size="44"
+                            />
+                            <ArrowIcon
+                                direction="right"
+                                type="hover"
+                                size="44"
+                            />
+                            <ArrowIcon
+                                direction="right"
+                                type="active"
+                                size="44"
+                            />
                         </div>
                         <div className="icons">
                             <ArrowIcon direction="down" size="44" />
                             <ArrowIcon direction="down" type="fill" size="44" />
-                            <ArrowIcon direction="down" type="hover" size="44" />
-                            <ArrowIcon direction="down" type="active" size="44" />
+                            <ArrowIcon
+                                direction="down"
+                                type="hover"
+                                size="44"
+                            />
+                            <ArrowIcon
+                                direction="down"
+                                type="active"
+                                size="44"
+                            />
                         </div>
                         <div className="icons">
                             <ArrowIcon direction="up" size="44" />
@@ -144,15 +172,39 @@ export default function IconPage() {
                         </div>
                         <div className="icons">
                             <BookmarkIcon variant="line" size="44" />
-                            <BookmarkIcon variant="line" type="fill" size="44" />
-                            <BookmarkIcon variant="line" type="hover" size="44" />
-                            <BookmarkIcon variant="line" type="active" size="44" />
+                            <BookmarkIcon
+                                variant="line"
+                                type="fill"
+                                size="44"
+                            />
+                            <BookmarkIcon
+                                variant="line"
+                                type="hover"
+                                size="44"
+                            />
+                            <BookmarkIcon
+                                variant="line"
+                                type="active"
+                                size="44"
+                            />
                         </div>
                         <div className="icons">
                             <BookmarkIcon variant="fill" size="44" />
-                            <BookmarkIcon variant="fill" type="fill" size="44" />
-                            <BookmarkIcon variant="fill" type="hover" size="44" />
-                            <BookmarkIcon variant="fill" type="active" size="44" />
+                            <BookmarkIcon
+                                variant="fill"
+                                type="fill"
+                                size="44"
+                            />
+                            <BookmarkIcon
+                                variant="fill"
+                                type="hover"
+                                size="44"
+                            />
+                            <BookmarkIcon
+                                variant="fill"
+                                type="active"
+                                size="44"
+                            />
                         </div>
                         <div className="icons">
                             <MenuIcon size="44" />
@@ -217,27 +269,89 @@ export default function IconPage() {
                         </div>
                         <div className="icons">
                             <SquareArrowIcon direction="left" size="44" />
-                            <SquareArrowIcon direction="left" type="fill" size="44" />
-                            <SquareArrowIcon direction="left" type="hover" size="44" />
-                            <SquareArrowIcon direction="left" type="active" size="44" />
+                            <SquareArrowIcon
+                                direction="left"
+                                type="fill"
+                                size="44"
+                            />
+                            <SquareArrowIcon
+                                direction="left"
+                                type="hover"
+                                size="44"
+                            />
+                            <SquareArrowIcon
+                                direction="left"
+                                type="active"
+                                size="44"
+                            />
                         </div>
                         <div className="icons">
                             <SquareArrowIcon direction="right" size="44" />
-                            <SquareArrowIcon direction="right" type="fill" size="44" />
-                            <SquareArrowIcon direction="right" type="hover" size="44" />
-                            <SquareArrowIcon direction="right" type="active" size="44" />
+                            <SquareArrowIcon
+                                direction="right"
+                                type="fill"
+                                size="44"
+                            />
+                            <SquareArrowIcon
+                                direction="right"
+                                type="hover"
+                                size="44"
+                            />
+                            <SquareArrowIcon
+                                direction="right"
+                                type="active"
+                                size="44"
+                            />
                         </div>
                         <div className="icons">
-                            <SquareArrowIcon direction="left" variant="double" size="44" />
-                            <SquareArrowIcon direction="left" variant="double" type="fill" size="44" />
-                            <SquareArrowIcon direction="left" variant="double" type="hover" size="44" />
-                            <SquareArrowIcon direction="left" variant="double" type="active" size="44" />
+                            <SquareArrowIcon
+                                direction="left"
+                                variant="double"
+                                size="44"
+                            />
+                            <SquareArrowIcon
+                                direction="left"
+                                variant="double"
+                                type="fill"
+                                size="44"
+                            />
+                            <SquareArrowIcon
+                                direction="left"
+                                variant="double"
+                                type="hover"
+                                size="44"
+                            />
+                            <SquareArrowIcon
+                                direction="left"
+                                variant="double"
+                                type="active"
+                                size="44"
+                            />
                         </div>
                         <div className="icons">
-                            <SquareArrowIcon direction="right" variant="double" size="44" />
-                            <SquareArrowIcon direction="right" variant="double" type="fill" size="44" />
-                            <SquareArrowIcon direction="right" variant="double" type="hover" size="44" />
-                            <SquareArrowIcon direction="right" variant="double" type="active" size="44" />
+                            <SquareArrowIcon
+                                direction="right"
+                                variant="double"
+                                size="44"
+                            />
+                            <SquareArrowIcon
+                                direction="right"
+                                variant="double"
+                                type="fill"
+                                size="44"
+                            />
+                            <SquareArrowIcon
+                                direction="right"
+                                variant="double"
+                                type="hover"
+                                size="44"
+                            />
+                            <SquareArrowIcon
+                                direction="right"
+                                variant="double"
+                                type="active"
+                                size="44"
+                            />
                         </div>
 
                         <div className="icons">
@@ -301,13 +415,29 @@ export default function IconPage() {
                         </div>
 
                         <div className="icons">
-                            <input className="check-box" type="checkbox"></input>
-                            <input className="check-box" type="checkbox" checked></input>
+                            <input
+                                className="check-box"
+                                type="checkbox"
+                            ></input>
+                            <input
+                                className="check-box"
+                                type="checkbox"
+                                checked
+                            ></input>
                         </div>
 
                         <div className="icons">
-                            <input className="radio-box" name="radio" type="radio"></input>
-                            <input className="radio-box" name="radio" type="radio" checked></input>
+                            <input
+                                className="radio-box"
+                                name="radio"
+                                type="radio"
+                            ></input>
+                            <input
+                                className="radio-box"
+                                name="radio"
+                                type="radio"
+                                checked
+                            ></input>
                         </div>
 
                         <div className="icons">
@@ -329,7 +459,16 @@ export default function IconPage() {
                             <SearchBar type="long" />
                         </div>
 
-                        <div className="icons" style={{ width: "1520px", display: "inline-flex", alignItems: "center", gap: "32px", flexDirection: "row" }}>
+                        <div
+                            className="icons"
+                            style={{
+                                width: "1520px",
+                                display: "inline-flex",
+                                alignItems: "center",
+                                gap: "32px",
+                                flexDirection: "row",
+                            }}
+                        >
                             <DropdownBox />
                             <SearchBar type="short" />
                         </div>
@@ -340,13 +479,21 @@ export default function IconPage() {
                                 <SearchIcon size={44} color="inherit" />
                             </TextInputBox>
                             <TextInputBox type="large">
-                                <ArrowIcon direction="down" size={44} color="inherit" />
+                                <ArrowIcon
+                                    direction="down"
+                                    size={44}
+                                    color="inherit"
+                                />
                             </TextInputBox>
                             <TextInputBox type="large">
                                 <EyeIcon size={44} color="inherit" />
                             </TextInputBox>
                             <TextInputBox type="large">
-                                <EyeIcon variant="line" size={44} color="inherit" />
+                                <EyeIcon
+                                    variant="line"
+                                    size={44}
+                                    color="inherit"
+                                />
                             </TextInputBox>
                         </div>
 
@@ -356,13 +503,21 @@ export default function IconPage() {
                                 <SearchIcon size={44} color="inherit" />
                             </TextInputBox>
                             <TextInputBox type="long">
-                                <ArrowIcon direction="down" size={44} color="inherit" />
+                                <ArrowIcon
+                                    direction="down"
+                                    size={44}
+                                    color="inherit"
+                                />
                             </TextInputBox>
                             <TextInputBox type="long">
                                 <EyeIcon size={44} color="inherit" />
                             </TextInputBox>
                             <TextInputBox type="long">
-                                <EyeIcon variant="line" size={44} color="inherit" />
+                                <EyeIcon
+                                    variant="line"
+                                    size={44}
+                                    color="inherit"
+                                />
                             </TextInputBox>
                         </div>
 
@@ -372,13 +527,21 @@ export default function IconPage() {
                                 <SearchIcon size={44} color="inherit" />
                             </TextInputBox>
                             <TextInputBox>
-                                <ArrowIcon direction="down" size={44} color="inherit" />
+                                <ArrowIcon
+                                    direction="down"
+                                    size={44}
+                                    color="inherit"
+                                />
                             </TextInputBox>
                             <TextInputBox>
                                 <EyeIcon size={44} color="inherit" />
                             </TextInputBox>
                             <TextInputBox>
-                                <EyeIcon variant="line" size={44} color="inherit" />
+                                <EyeIcon
+                                    variant="line"
+                                    size={44}
+                                    color="inherit"
+                                />
                             </TextInputBox>
                         </div>
 

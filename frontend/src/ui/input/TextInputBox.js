@@ -1,4 +1,12 @@
-export default function TextInputBox({ children, type = "short", onClick }) {
+import React from "react";
+
+export default function TextInputBox({
+    children,
+    type = "short",
+    onClick,
+    placeholder = "",
+    inputType = "text",
+}) {
     let width;
 
     if (type === "short") width = "19.75rem";
@@ -11,7 +19,11 @@ export default function TextInputBox({ children, type = "short", onClick }) {
 
     return (
         <div className="text-input-box" style={styles} onClick={onClick}>
-            <input className="text-input" placeholder="Text"></input>
+            <input
+                className="text-input"
+                placeholder={placeholder}
+                type={inputType}
+            ></input>
             {children}
         </div>
     );
