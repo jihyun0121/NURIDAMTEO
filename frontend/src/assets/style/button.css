@@ -182,6 +182,8 @@
     font-size: var(--title-medium-size);
     font-weight: var(--title-medium-weight);
     line-height: var(--title-medium-line);
+
+    cursor: pointer;
 }
 
 .mileage-btn {
