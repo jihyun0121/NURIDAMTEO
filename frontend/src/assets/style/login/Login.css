@@ -1,9 +1,3 @@
-.login-title {
-    font-size: var(--Title-title-xlarg-size);
-    color: var(--Gray-Normal, #555);
-    text-align: center;
-}
-
 .login-container {
     display: flex;
     width: 120rem;
@@ -12,17 +6,30 @@
     align-items: center;
 }
 
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 13.75rem;
+    gap: 3.69rem;
+    align-items: center;
+}
+
 .login-box {
     display: flex;
     width: 46.5rem;
     padding-top: 3rem;
-    padding-bottom: rem;
     flex-direction: column;
     align-items: center;
     gap: 3rem;
-    margin-top: 13.75rem;
     border-radius: 1.5rem;
     border: 1px solid var(--gray-light-active, #cacaca);
+}
+
+.login-title {
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    line-height: var(--title-xlarge-line);
+    color: var(--gray-dark, #333333);
 }
 
 .login-buttons {
@@ -35,7 +42,7 @@
 
 .login-options {
     display: flex;
-    justify-content: space-between; /* 양쪽 끝으로 */
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     margin-top: 12px;
@@ -44,7 +51,7 @@
 .remember-id {
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* 체크박스 - 텍스트 간격 */
+    gap: 0.5rem;
 }
 
 .find-account {
@@ -56,6 +63,7 @@
     display: flex;
     width: 46.5rem;
     padding: 3rem;
+    padding-top: 0;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
