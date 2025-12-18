@@ -40,27 +40,27 @@ export const UserAPI = {
     updatePassword: (userId, dto) => api.put(`/users/${userId}/password`, userId, dto),
 };
 
-export const Interest = {
+export const InterestAPI = {
     selectInterests: (userId, categoryIds) => api.post(`/interests/${userId}`, userId, categoryIds),
     getInterest: (userId) => api.post(`/interests/${userId}`, userId),
     updateInterests: (userId, categoryIds) => api.post(`/interests/${userId}`, userId, categoryIds),
 };
 
-export const Notice = {
+export const NoticeAPI = {
     getNotice: () => api.get(`/notices/notice`),
     getNews: () => api.get(`/notices/news`),
     getDetail: (noticeId) => api.get(`/notices/${noticeId}`, noticeId),
     getResults: () => api.get(`/result`),
 };
 
-export const Suggestion = {
+export const SuggestionAPI = {
     createSuggestion: (userId, dto) => api.post(`/suggestions/${userId}`, userId, dto),
     getSuggestions: () => api.get(`/suggestions`),
     getSuggestion: (suggestionId) => api.get(`/suggestions/${suggestionId}`, suggestionId),
     setState: (suggestionId, dto) => api.patch(`/suggestions/${suggestionId}/state`, suggestionId, dto),
 };
 
-export const Attendance = {
+export const AttendanceAPI = {
     checkAttendance: (userId) => api.post(`/attendance/check/${userId}`, userId),
     getTodayAttendance: (userId) => api.get(`/attendance/today/${userId}`, userId),
     getMonthlyAttendance(userId, year, month) {
