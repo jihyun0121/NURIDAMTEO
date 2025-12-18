@@ -38,6 +38,7 @@ import DropdownBox from "../ui/input/FormDropdown";
 import ProfileCard from "../components/home/ProfileCard";
 import Toggle from "../ui/input/Toggle";
 import MileageButton from "../ui/button/MileageButton";
+import MileageStatus from "../components/my/MileageStatus";
 
 export default function IconPage() {
     return (
@@ -378,6 +379,10 @@ export default function IconPage() {
 
                         <div className="icons">
                             <ProfileCard />
+                        </div>
+
+                        <div className="icons">
+                            <MileageStatus />
                         </div>
                     </div>
                 </div>
