@@ -335,6 +335,7 @@ export default function IconPage() {
                         </div>
 
                         <div className="icons">
+                            <TextInputBox type="large" />
                             <TextInputBox type="large">
                                 <SearchIcon size={44} color="inherit" />
                             </TextInputBox>
@@ -350,6 +351,7 @@ export default function IconPage() {
                         </div>
 
                         <div className="icons">
+                            <TextInputBox type="long" />
                             <TextInputBox type="long">
                                 <SearchIcon size={44} color="inherit" />
                             </TextInputBox>
@@ -365,6 +367,7 @@ export default function IconPage() {
                         </div>
 
                         <div className="icons">
+                            <TextInputBox />
                             <TextInputBox>
                                 <SearchIcon size={44} color="inherit" />
                             </TextInputBox>
