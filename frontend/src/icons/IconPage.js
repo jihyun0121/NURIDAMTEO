@@ -39,6 +39,7 @@ import ProfileCard from "../components/home/ProfileCard";
 import Toggle from "../ui/input/Toggle";
 import MileageButton from "../ui/button/MileageButton";
 import MileageStatus from "../components/my/MileageStatus";
+import SurveyList from "../components/home/SurveyList";
 
 export default function IconPage() {
     return (
@@ -383,6 +384,8 @@ export default function IconPage() {
 
                         <div className="icons">
                             <MileageStatus />
+                            <SurveyList type="default" size="long" />
+                            <SurveyList type="default" />
                         </div>
                     </div>
                 </div>
