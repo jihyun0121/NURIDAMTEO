@@ -49,6 +49,7 @@ export const InterestAPI = {
 export const NoticeAPI = {
     getNotice: () => api.get(`/notices/notice`),
     getNews: () => api.get(`/notices/news`),
+    getNewses: () => api.get(`/notices/newses`),
     getDetail: (noticeId) => api.get(`/notices/${noticeId}`, noticeId),
     getResults: () => api.get(`/result`),
 };
