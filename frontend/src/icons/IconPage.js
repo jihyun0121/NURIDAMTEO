@@ -37,6 +37,7 @@ import SearchBar from "../ui/input/SearchBar";
 import DropdownBox from "../ui/input/FormDropdown";
 import ProfileCard from "../components/home/ProfileCard";
 import Toggle from "../ui/input/Toggle";
+import MileageButton from "../ui/button/MileageButton";
 
 export default function IconPage() {
     return (
@@ -268,6 +269,7 @@ export default function IconPage() {
                         <div className="icons">
                             <AuthButton content="Text" type="nuri" />
                             <AuthButton content="페이 전환" type="line" />
+                            <MileageButton content="Text" />
                         </div>
 
                         <div className="icons">
