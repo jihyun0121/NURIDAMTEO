@@ -47,24 +47,24 @@ export const Interest = {
 };
 
 export const Notice = {
-    createUser: (dto) => api.post(`/auth/signup`, dto),
-    createUser: (dto) => api.post(`/auth/signup`, dto),
-    createUser: (dto) => api.post(`/auth/signup`, dto),
-    createUser: (dto) => api.post(`/auth/signup`, dto),
+    getNotice: () => api.get(`/notices/notice`),
+    getNews: () => api.get(`/notices/news`),
+    getDetail: (noticeId) => api.get(`/notices/${noticeId}`, noticeId),
+    getResults: () => api.get(`/result`),
 };
 
 export const Suggestion = {
-    createUser: (dto) => api.post(`/auth/signup`, dto),
-    createUser: (dto) => api.post(`/auth/signup`, dto),
-    createUser: (dto) => api.post(`/auth/signup`, dto),
-    createUser: (dto) => api.post(`/auth/signup`, dto),
+    createSuggestion: (userId, dto) => api.post(`/suggestions/${userId}`, userId, dto),
+    getSuggestions: () => api.get(`/suggestions`),
+    getSuggestion: (suggestionId) => api.get(`/suggestions/${suggestionId}`, suggestionId),
+    setState: (suggestionId, dto) => api.patch(`/suggestions/${suggestionId}/state`, suggestionId, dto),
 };
 
 export const Attendance = {
-    createUser: (dto) => api.post(`/auth/signup`, dto),
-    createUser: (dto) => api.post(`/auth/signup`, dto),
-    setRequired(questionId, isRequired) {
-        return api.patch(`/questions/${questionId}/required?isRequired=${isRequired}`);
+    checkAttendance: (userId) => api.post(`/attendance/check/${userId}`, userId),
+    getTodayAttendance: (userId) => api.get(`/attendance/today/${userId}`, userId),
+    getMonthlyAttendance(userId, year, month) {
+        return api.get(`/attendance/month/${userId}/?year=${year}&month=${month}`);
     },
 };
 
