@@ -1,5 +1,6 @@
 package com.nuridamteo.backend.dtos;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.*;
@@ -22,19 +23,26 @@ public class SuggestionDTO {
     @JsonProperty("category_id")
     private Long category;
 
-    @JsonProperty("title")
     private String title;
 
-    @JsonProperty("content")
     private String content;
 
-    @JsonProperty("status")
     @Builder.Default
     private Status status = Status.OPEN;
 
-    @JsonProperty("is_published")
+    @JsonProperty("start_at")
+    private LocalDate startAt;
+
+    @JsonProperty("end_at")
+    private LocalDate endAt;
+
+    @JsonProperty("view_count")
     @Builder.Default
-    private Boolean isPublishe = true;
+    private Long viewCount = 0L;
+
+    @JsonProperty("participation_count")
+    @Builder.Default
+    private Long participationCount = 0L;
 
     @JsonProperty("created_at")
     private LocalDateTime createdAt;

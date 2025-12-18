@@ -1,10 +1,8 @@
-package com.nuridamteo.backend.dtos;
+package com.nuridamteo.backend.dtos.survey;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 
 import com.fasterxml.jackson.annotation.*;
-import com.nuridamteo.backend.entities.Category;
 import com.nuridamteo.backend.enums.Status;
 import com.nuridamteo.backend.enums.SurveyType;
 
@@ -15,7 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SurveyDTO {
+public class SurveyFormDTO {
     @JsonProperty("survey_id")
     private Long surveyId;
 
@@ -35,7 +33,7 @@ public class SurveyDTO {
 
     @JsonProperty("category_id")
     @JsonIgnore
-    private Category category;
+    private Long category;
 
     @Builder.Default
     private Status status = Status.OPEN;

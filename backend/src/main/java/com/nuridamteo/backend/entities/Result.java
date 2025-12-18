@@ -19,15 +19,15 @@ public class Result {
     @JsonProperty("result_id")
     private Long resultId;
 
-    @Column(name = "result_title", nullable = false)
+    @Column(columnDefinition = "TEXT", name = "result_title", nullable = false)
     @JsonProperty("result_title")
     private String resultTitle;
 
-    @Column(name = "result_content", nullable = false)
+    @Column(columnDefinition = "TEXT", name = "result_content", nullable = false)
     @JsonProperty("result_content")
     private String resultContent;
 
-    @Column(name = "author", nullable = false)
+    @Column(name = "author", nullable = false, length = 10)
     @JsonProperty("author")
     private String author;
 }

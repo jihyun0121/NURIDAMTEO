@@ -1,0 +1,73 @@
+.mileage-status-container {
+    display: flex;
+    width: 70.75rem;
+    height: 7.5rem;
+    padding: 1.25rem;
+    align-items: center;
+    gap: 1.5rem;
+
+    border-radius: 0.75rem;
+    border: 1px solid var(--gray-light-active);
+    background: var(--white);
+}
+
+.mileage-status-num {
+    display: flex;
+    width: 2.75rem;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    align-self: stretch;
+
+    color: var(--orange-normal-base);
+    text-align: center;
+
+    font-size: var(--headline-medium-size);
+    font-weight: var(--headline-medium-weight);
+    line-height: var(--headline-medium-line);
+}
+
+.mileage-status-content {
+    display: flex;
+    width: 63.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    flex-shrink: 0;
+}
+
+.mileage-status-text {
+    align-self: stretch;
+    color: var(--Grey-Darker, #2A2A2A);
+
+    font-size: var(--title-small-size);
+    font-weight: var(--title-small-weight);
+    line-height: var(--title-small-line);
+}
+
+.mileage-status-payment {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    align-self: stretch;
+}
+
+.mileage-payment {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    color: var(--Grey-Normal, #777);
+
+    font-size: var(--body-small-size);
+    font-weight: var(--body-small-weight);
+    line-height: var(--body-small-line);
+}
+
+.payment {
+    color: var(--orange-normal-base)
+}
+
+.cumulative {
+    color: var(--Grey-Darker, #2A2A2A);
+}

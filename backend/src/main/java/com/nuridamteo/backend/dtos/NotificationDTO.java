@@ -24,6 +24,9 @@ public class NotificationDTO {
     @JsonProperty("message")
     private String message;
 
+    @JsonProperty("notification_type")
+    private String notificationType;
+
     @JsonProperty("is_read")
     @Builder.Default
     private Boolean isRead = false;

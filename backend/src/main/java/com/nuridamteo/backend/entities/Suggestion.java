@@ -1,6 +1,6 @@
 package com.nuridamteo.backend.entities;
 
-import java.time.LocalDateTime;
+import java.time.*;
 
 import com.fasterxml.jackson.annotation.*;
 import com.nuridamteo.backend.enums.Status;
@@ -34,19 +34,24 @@ public class Suggestion {
     @JsonIgnore
     private Category category;
 
-    @Column(name = "title", nullable = false, length = 100)
-    @JsonProperty("title")
+    @Column(nullable = false, length = 100)
     private String title;
 
-    @Column(name = "content", nullable = false)
-    @JsonProperty("content")
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, length = 10)
-    @JsonProperty("status")
+    @Column(nullable = false, length = 10)
     @Builder.Default
     private Status status = Status.OPEN;
+
+    @Column(name = "start_at", nullable = false)
+    @JsonProperty("start_at")
+    private LocalDate startAt;
+
+    @Column(name = "end_at", nullable = false)
+    @JsonProperty("end_at")
+    private LocalDate endAt;
 
     @Column(name = "view_count", nullable = false)
     @JsonProperty("view_count")

@@ -39,14 +39,14 @@ public class NoticeService {
         return noticeDTO(notice);
     }
 
-    private NoticeDTO noticeDTO(Notice notice) {
+    private NoticeDTO noticeDTO(Notice n) {
         return NoticeDTO.builder()
-                .noticeId(notice.getNoticeId())
-                .noticeType(notice.getNoticeType())
-                .title(notice.getTitle())
-                .content(notice.getContent())
-                .isPinned(notice.getIsPinned())
-                .createdAt(notice.getCreatedAt())
+                .noticeId(n.getNoticeId())
+                .noticeType(n.getNoticeType())
+                .title(n.getTitle())
+                .content(n.getContent())
+                .isPinned(n.getIsPinned())
+                .createdAt(n.getCreatedAt())
                 .build();
     }
 }

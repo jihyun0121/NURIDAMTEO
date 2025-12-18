@@ -69,7 +69,7 @@ export default function SearchIcon({ type = "default", size, color = "default" }
         );
     }
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ color: color === "default" ? colors.gray.normal.base : "inherit", cursor: type === "fill" ? "pointer" : "none" }} onMouseEnter={() => type === "fill" && setState("hover")} onMouseLeave={() => type === "fill" && setState("default")} onMouseDown={() => type === "fill" && setState("action")} onMouseUp={() => type === "fill" && setState("hover")}>
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ color: color === "default" ? colors.gray.normal.base : "inherit", cursor: type === "fill" ? "pointer" : "" }} onMouseEnter={() => type === "fill" && setState("hover")} onMouseLeave={() => type === "fill" && setState("default")} onMouseDown={() => type === "fill" && setState("action")} onMouseUp={() => type === "fill" && setState("hover")}>
             {icon}
         </svg>
     );

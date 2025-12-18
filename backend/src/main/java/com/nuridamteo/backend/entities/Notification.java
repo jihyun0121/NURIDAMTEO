@@ -27,13 +27,17 @@ public class Notification {
     @JsonIgnore
     private Users user;
 
-    @Column(name = "title", nullable = false)
+    @Column(columnDefinition = "TEXT", name = "title", nullable = false)
     @JsonProperty("title")
     private String title;
 
     @Column(name = "message", nullable = false, length = 200)
     @JsonProperty("message")
     private String message;
+
+    @Column(name = "notification_type", nullable = false, length = 10)
+    @JsonProperty("notification_type")
+    private String notificationType;
 
     @Column(name = "is_read", nullable = false)
     @JsonProperty("is_read")

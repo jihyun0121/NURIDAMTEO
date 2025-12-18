@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function TextInputBox({
     children,
     type = "short",
@@ -5,8 +7,14 @@ export default function TextInputBox({
     placeholder = "",
     inputType = "text",
 }) {
+    let width;
+
+    if (type === "short") width = "19.75rem";
+    else if (type === "long") width = "40.5rem";
+    else if (type === "large") width = "70.75rem";
+
     const styles = {
-        width: type === "short" ? "19.75rem" : "40.5rem",
+        width,
     };
 
     return (
