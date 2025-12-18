@@ -18,7 +18,7 @@ import "./assets/style/home/home.css";
 import "./assets/style/home/news.css";
 import "./assets/style/home/propsalList.css";
 import "./assets/style/login/Login.css";
-import "./assets/style/Signin/Signin.css";
+import "./assets/style/Signup/Signup.css";
 import "./assets/style/my/mileage.css";
 import "./icons/iconPage.css";
 

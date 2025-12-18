@@ -6,7 +6,7 @@ import PropsalPage from "./pages/PropsalPage";
 import NurisodamPage from "./pages/NurisodamPage";
 import IconPage from "./icons/IconPage";
 import LoginPage from "./pages/LoginPage";
-import SigninPage from "./pages/SigninPage";
+import SignupPage from "./pages/SignupPage";
 
 function App() {
     return (
@@ -18,7 +18,7 @@ function App() {
                 <Route path="/nurisodam" element={<NurisodamPage />} />
                 <Route path="/icons" element={<IconPage />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/signin" element={<SigninPage />} />
+                <Route path="/signup" element={<SignupPage />} />
             </Routes>
         </Router>
     );
