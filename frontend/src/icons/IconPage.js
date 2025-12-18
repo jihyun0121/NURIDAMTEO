@@ -346,12 +346,15 @@ export default function IconPage() {
                         </div>
 
                         <div className="icons">
+                            <DropdownBox />
+                            <DropdownBox type="long" />
+                            <DropdownBox type="large" />
+                        </div>
+
+                        <div className="icons">
                             <TextInputBox type="large" />
                             <TextInputBox type="large">
                                 <SearchIcon size={44} color="inherit" />
-                            </TextInputBox>
-                            <TextInputBox type="large">
-                                <ArrowIcon direction="down" size={44} color="inherit" />
                             </TextInputBox>
                             <TextInputBox type="large">
                                 <EyeIcon size={44} color="inherit" />
@@ -367,9 +370,6 @@ export default function IconPage() {
                                 <SearchIcon size={44} color="inherit" />
                             </TextInputBox>
                             <TextInputBox type="long">
-                                <ArrowIcon direction="down" size={44} color="inherit" />
-                            </TextInputBox>
-                            <TextInputBox type="long">
                                 <EyeIcon size={44} color="inherit" />
                             </TextInputBox>
                             <TextInputBox type="long">
@@ -381,9 +381,6 @@ export default function IconPage() {
                             <TextInputBox />
                             <TextInputBox>
                                 <SearchIcon size={44} color="inherit" />
-                            </TextInputBox>
-                            <TextInputBox>
-                                <ArrowIcon direction="down" size={44} color="inherit" />
                             </TextInputBox>
                             <TextInputBox>
                                 <EyeIcon size={44} color="inherit" />

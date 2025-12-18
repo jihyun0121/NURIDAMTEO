@@ -1,9 +1,18 @@
 import { useState } from "react";
 import ArrowIcon from "../icons/ArrowIcon";
 
-export default function FormDropdown({ optionData = [] }) {
+export default function FormDropdown({ type = "short", optionData = [] }) {
     const [currentValue, setCurrentValue] = useState("Text");
     const [showOptions, setShowOptions] = useState(false);
+    let width;
+
+    if (type === "short") {
+        width = "14.1875rem";
+    } else if (type === "long") {
+        width = "40.5rem";
+    } else if (type === "large") {
+        width = "70.75rem";
+    }
 
     const handleSelect = (value, e) => {
         e.stopPropagation();
@@ -17,7 +26,7 @@ export default function FormDropdown({ optionData = [] }) {
     };
 
     return (
-        <div className="dropdown-box" onClick={toggleDropdown}>
+        <div className="dropdown-box" onClick={toggleDropdown} style={{ width: width }}>
             <div className="dropdown-label">{currentValue}</div>
             <ArrowIcon direction={showOptions ? "up" : "down"} size={44} color="inherit" />
 
