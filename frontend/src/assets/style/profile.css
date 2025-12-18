@@ -182,10 +182,6 @@
 
     color: var(--orange-normal-base);
     text-align: center;
-
-    font-size: var(--title-small-size);
-    font-weight: var(--title-small-weight);
-    line-height: var(--title-small-line);
 }
 
 .survey-list-title {
@@ -196,4 +192,17 @@
     font-size: var(--title-medium-size);
     font-weight: var(--title-medium-weight);
     line-height: var(--title-medium-line);
+}
+
+.survey-list-day {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    align-self: stretch;
+
+    color: var(--gray-light-active);
+
+    font-size: var(--body-small-size);
+    font-weight: var(--body-small-weight);
+    line-height: var(--body-small-line);
 }
