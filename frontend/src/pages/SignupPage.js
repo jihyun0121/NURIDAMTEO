@@ -7,10 +7,9 @@ import SearchIcon from "../ui/icons/SearchIcon";
 import FormDropdown from "../ui/input/FormDropdown";
 
 export default function SignupPage() {
-    const optionData = [
-        { key: 1, value: "남성" },
-        { key: 2, value: "여성" },
-    ];
+    const [password, setPassword] = useState("");
+    const [passwordCheck, setPasswordCheck] = useState("");
+    const [passwordError, setPasswordError] = useState(false);
     const [agree, setAgree] = useState(false);
     const [showWarning, setShowWarning] = useState(false);
     const handleSignup = () => {
@@ -19,8 +18,17 @@ export default function SignupPage() {
             return;
         }
         setShowWarning(false);
-        alert("회원가입이 완료되었습니다."); // 나중에 API 연결
+        if (password !== passwordCheck) {
+            setPasswordError(true);
+            return;
+        }
+        setPasswordError(false);
+        alert("회원가입이 완료되었습니다.");
     };
+    const optionData = [
+        { key: 1, value: "남성" },
+        { key: 2, value: "여성" },
+    ];
     return (
         <div className="Signup-container">
             <Header />
@@ -30,8 +38,9 @@ export default function SignupPage() {
                     <span className="Signup-title"> 회원가입 </span>
                     <div className="Signup-buttons">
                         <TextInputBox content="아이디" type="long" placeholder="이메일" />
-                        <TextInputBox content="비밀번호" type="long" placeholder="비밀번호" inputType="password" />
-                        <TextInputBox content="비밀번호 확인" type="long" placeholder="비밀번호 확인" inputType="password" />
+                        <TextInputBox content="비밀번호" type="long" placeholder="비밀번호" inputType="password" onChange={(e) => setPassword(e.target.value)} />
+                        <TextInputBox content="비밀번호 확인" type="long" placeholder="비밀번호 확인" inputType="password" onChange={(e) => setPasswordCheck(e.target.value)} />
+                        {passwordError && <span className="signup-warning">비밀번호가 일치하지 않습니다.</span>}
                         <div className="Signup-profile">
                             <TextInputBox content="이름" type="long" placeholder="이름" />
                             <FormDropdown content="성별" size="long" placeholder="성별" optionData={optionData} />
