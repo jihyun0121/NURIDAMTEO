@@ -31,14 +31,14 @@ export default function FormDropdown({ size = "short", optionData = [] }) {
             <ArrowIcon direction={showOptions ? "up" : "down"} size={44} color="inherit" />
 
             {showOptions && (
-                <div className="dropdown-option">
-                    {/* {optionData.map((data) => (
+                <div className="dropdown-option" style={{ width: width }}>
+                    {optionData.map((data) => (
                         <div className="dropdown-text" key={data.key} onClick={() => handleSelect(data.value)}>
                             {data.value}
                         </div>
-                    ))} */}
+                    ))}
 
-                    <div className="dropdown-text" onClick={(e) => handleSelect("Text1", e)}>
+                    {/* <div className="dropdown-text" onClick={(e) => handleSelect("Text1", e)}>
                         Text1
                     </div>
                     <div className="dropdown-text" onClick={(e) => handleSelect("Text2", e)}>
@@ -46,7 +46,7 @@ export default function FormDropdown({ size = "short", optionData = [] }) {
                     </div>
                     <div className="dropdown-text" onClick={(e) => handleSelect("Text3", e)}>
                         Text3
-                    </div>
+                    </div> */}
                 </div>
             )}
         </div>

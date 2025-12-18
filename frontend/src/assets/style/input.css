@@ -121,6 +121,7 @@
     display: flex;
     width: 14.1875rem;
     top: 2.75rem;
+    left: 0;
     padding: 1rem 1.5rem;
     flex-direction: column;
     justify-content: center;
@@ -134,7 +135,7 @@
         inset -1px 0 0 0 var(--gray-light-active);
     background: var(--white);
 
-    z-index: 10;
+    z-index: 100;
 }
 
 .dropdown-text {
