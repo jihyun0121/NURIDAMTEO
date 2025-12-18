@@ -36,8 +36,9 @@ import TextInputBox from "../ui/input/TextInputBox";
 import SearchBar from "../ui/input/SearchBar";
 import DropdownBox from "../ui/input/FormDropdown";
 import ProfileCard from "../components/home/ProfileCard";
+import Toggle from "../ui/input/Toggle";
 
-export default function HomePage() {
+export default function IconPage() {
     return (
         <>
             <div className="bg">
@@ -306,7 +307,7 @@ export default function HomePage() {
                         </div>
 
                         <div className="icons">
-                            <DropdownBox />
+                            <Toggle />
                         </div>
 
                         <div className="icons">

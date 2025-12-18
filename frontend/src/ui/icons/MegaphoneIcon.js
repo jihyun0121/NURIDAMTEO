@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
 
-export default function BellIcon({ type = "default", size, color = "default" }) {
+export default function MegaphoneIcon({ type = "default", size, color = "default" }) {
     const [state, setState] = useState("default");
     let icon = null;
 
