@@ -29,8 +29,8 @@ export default function ProfileCard() {
                     <div className="profile-card-desc">로그인/ 회원가입 하고 더 많은 소식을 받아보세요!</div>
 
                     <div className="profile-card-none-btn">
-                        <AuthButton content="로그인" type="nuri" color="hover" />
-                        <AuthButton content="회원가입" type="nuri" color="hover" />
+                        <AuthButton content="로그인" type="nuri" color="hover" onClick={() => (window.location.href = "/login")} />
+                        <AuthButton content="회원가입" type="nuri" color="hover" onClick={() => (window.location.href = "/signup")} />
                     </div>
                 </div>
             </>
