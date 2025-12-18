@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TextInputBox({ children, type = "short", onClick, placeholder = "Text", inputType = "text" }) {
+export default function TextInputBox({ children, type = "short", onClick, onChange, value, placeholder = "Text", inputType = "text" }) {
     let width;
 
     if (type === "short") width = "19.75rem";
@@ -13,7 +13,7 @@ export default function TextInputBox({ children, type = "short", onClick, placeh
 
     return (
         <div className="text-input-box" style={styles} onClick={onClick}>
-            <input className="text-input" placeholder={placeholder} type={inputType}></input>
+            <input className="text-input" placeholder={placeholder} type={inputType} value={value} onChange={onChange} />
             {children}
         </div>
     );
