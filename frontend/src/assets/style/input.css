@@ -13,9 +13,9 @@
     width: 100%;
     color: var(--gray-normal-base);
 
-    font-size: var(--title-xlarge-size);
-    font-weight: var(--title-xlarge-weight);
-    line-height: var(--title-xlarge-line);
+    font-size: var(--title-medium-size);
+    font-weight: var(--title-medium-weight);
+    line-height: var(--title-medium-line);
 }
 
 .text-input::placeholder {

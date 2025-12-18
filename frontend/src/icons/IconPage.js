@@ -332,6 +332,21 @@ export default function IconPage() {
                         </div>
 
                         <div className="icons">
+                            <TextInputBox type="large">
+                                <SearchIcon size={44} color="inherit" />
+                            </TextInputBox>
+                            <TextInputBox type="large">
+                                <ArrowIcon direction="down" size={44} color="inherit" />
+                            </TextInputBox>
+                            <TextInputBox type="large">
+                                <EyeIcon size={44} color="inherit" />
+                            </TextInputBox>
+                            <TextInputBox type="large">
+                                <EyeIcon variant="line" size={44} color="inherit" />
+                            </TextInputBox>
+                        </div>
+
+                        <div className="icons">
                             <TextInputBox type="long">
                                 <SearchIcon size={44} color="inherit" />
                             </TextInputBox>
