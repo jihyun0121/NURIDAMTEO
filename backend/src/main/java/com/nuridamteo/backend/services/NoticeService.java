@@ -32,6 +32,13 @@ public class NoticeService {
     }
 
     @Transactional(readOnly = true)
+    public List<NoticeDTO> getNewses() {
+        return noticeRepository.findByNoticeTypeOrderByNoticeIdDesc(NoticeType.NEWS).stream()
+                .map(this::noticeDTO)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
     public NoticeDTO getDetail(Long noticeId) {
         Notice notice = noticeRepository.findById(noticeId)
                 .orElseThrow(() -> new IllegalArgumentException("공지를 찾을 수 없습니다"));
