@@ -1,0 +1,42 @@
+.Signup-container {
+    display: flex;
+    width: 120rem;
+    padding-bottom: 12.5rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 7.5rem;
+}
+
+.Signup-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 13.75rem;
+    gap: 3.69rem;
+    align-items: center;
+}
+
+.Signup-box {
+    display: flex;
+    width: 46.5rem;
+    padding-top: 3rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    border-radius: 1.5rem;
+    border: 1px solid var(--gray-light-active, #cacaca);
+}
+
+.Signup-title {
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    line-height: var(--title-xlarge-line);
+    color: var(--gray-dark, #333333);
+}
+
+.Signup-buttons {
+    display: flex;
+    width: 40.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
