@@ -8,11 +8,8 @@ import VoteIcon from "../../ui/icons/VoteIcon";
 import BookmarkIcon from "../../ui/icons/BookmarkIcon";
 import ProfileDetail from "./ProfileDetail";
 
-export default function ProfileCard() {
-    const login = false;
+export default function ProfileCard({ login, userId }) {
     let content = null;
-
-    const userId = 1;
     const mileage = 6420;
 
     const [activeTab, setActiveTab] = useState("none");
@@ -21,7 +18,7 @@ export default function ProfileCard() {
         setActiveTab((prev) => (prev === tab ? "none" : tab));
     };
 
-    if (login === false) {
+    if (!login) {
         content = (
             <>
                 <div className="profile-card-none">
@@ -35,13 +32,21 @@ export default function ProfileCard() {
                 </div>
             </>
         );
-    } else if (login === true) {
+    } else {
         content = (
             <>
                 <div className="profile-card-container">
                     <div className="profile-card-header">
                         <Profile userId={userId} />
-                        <AuthButton content="로그아웃" type="guruem" color="hover" />
+                        <AuthButton
+                            content="로그아웃"
+                            type="guruem"
+                            color="hover"
+                            onClick={() => {
+                                sessionStorage.clear();
+                                window.location.href = "/";
+                            }}
+                        />
                     </div>
 
                     <div className="profile-card-menu">
@@ -50,7 +55,7 @@ export default function ProfileCard() {
                         </ProfileButton>
 
                         <ProfileButton content="제안" active={activeTab === "vote"} onClick={() => handleTabClick("vote")}>
-                            <VoteIcon size={44} color="inherit" />
+                            <VoteIcon variant="line" size={44} color="inherit" />
                         </ProfileButton>
 
                         <ProfileButton content="북마크" active={activeTab === "bookmark"} onClick={() => handleTabClick("bookmark")}>
@@ -61,7 +66,7 @@ export default function ProfileCard() {
                     <ProfileDetail mileage={mileage} type={activeTab} />
 
                     <div className="profile-card-footer">
-                        <AuthButton content="로그아웃" type="nuri" />
+                        <AuthButton content="마이페이지" type="nuri" />
                     </div>
                 </div>
             </>

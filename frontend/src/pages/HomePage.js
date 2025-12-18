@@ -9,14 +9,19 @@ import PropsalList from "../components/home/Propsalist";
 <img src={banner} width="100%" alt="" />;
 
 export default function HomePage() {
+    const token = sessionStorage.getItem("token");
+    const login = !!token;
+
+    const userId = sessionStorage.getItem("user_id");
+
     return (
         <div className="home-container">
             <Header />
             <img src={banner} width="100%" alt="" />
-            <div className="home-content ">
+            <div className="home-content">
                 <ShortcutButton />
                 <NewsList />
-                <ProfileCard />
+                <ProfileCard login={login} userId={userId} />
             </div>
             <PropsalList />
             <div className="home-footer"></div>
