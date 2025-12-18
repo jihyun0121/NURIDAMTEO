@@ -10,12 +10,12 @@ export default function TextButtonL({ content, onClick, type = "default" }) {
             backgroundColor: type === "default" ? colors.white : colors.orange.normal.base,
         },
         hover: {
-            color: colors.gray.normal.base,
-            backgroundColor: colors.orange.light.hover,
+            color: type === "default" ? colors.gray.normal.base : colors.white,
+            backgroundColor: type === "default" ? colors.orange.light.hover : colors.orange.normal.hover,
         },
         action: {
-            color: type === "default" ? colors.white : colors.gray.normal.base,
-            backgroundColor: type === "default" ? colors.orange.normal.base : colors.white,
+            color: colors.white,
+            backgroundColor: type === "default" ? colors.orange.normal.base : colors.orange.normal.active,
         },
     };
 
