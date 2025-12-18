@@ -87,7 +87,7 @@
     display: flex;
     width: 14.1875rem;
     padding: 0.5rem 1.5rem;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
 
