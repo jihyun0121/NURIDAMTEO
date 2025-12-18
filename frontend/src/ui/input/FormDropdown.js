@@ -1,16 +1,16 @@
 import { useState } from "react";
 import ArrowIcon from "../icons/ArrowIcon";
 
-export default function FormDropdown({ type = "short", optionData = [] }) {
+export default function FormDropdown({ size = "short", optionData = [] }) {
     const [currentValue, setCurrentValue] = useState("Text");
     const [showOptions, setShowOptions] = useState(false);
     let width;
 
-    if (type === "short") {
+    if (size === "short") {
         width = "14.1875rem";
-    } else if (type === "long") {
+    } else if (size === "long") {
         width = "40.5rem";
-    } else if (type === "large") {
+    } else if (size === "large") {
         width = "70.75rem";
     }
 

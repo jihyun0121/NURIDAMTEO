@@ -347,8 +347,8 @@ export default function IconPage() {
 
                         <div className="icons">
                             <DropdownBox />
-                            <DropdownBox type="long" />
-                            <DropdownBox type="large" />
+                            <DropdownBox size="long" />
+                            <DropdownBox size="large" />
                         </div>
 
                         <div className="icons">
