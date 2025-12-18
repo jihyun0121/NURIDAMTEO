@@ -2,7 +2,7 @@ import { useState } from "react";
 import ArrowIcon from "../icons/ArrowIcon";
 
 export default function FormDropdown({ size = "short", optionData = [] }) {
-    const [currentValue, setCurrentValue] = useState("Text");
+    const [currentValue, setCurrentValue] = useState(optionData.length > 0 ? optionData[0].value : "");
     const [showOptions, setShowOptions] = useState(false);
     let width;
 
@@ -32,13 +32,13 @@ export default function FormDropdown({ size = "short", optionData = [] }) {
 
             {showOptions && (
                 <div className="dropdown-option">
-                    {/* {optionData.map((data) => (
+                    {optionData.map((data) => (
                         <div className="dropdown-text" key={data.key} onClick={() => handleSelect(data.value)}>
                             {data.value}
                         </div>
-                    ))} */}
+                    ))}
 
-                    <div className="dropdown-text" onClick={(e) => handleSelect("Text1", e)}>
+                    {/* <div className="dropdown-text" onClick={(e) => handleSelect("Text1", e)}>
                         Text1
                     </div>
                     <div className="dropdown-text" onClick={(e) => handleSelect("Text2", e)}>
@@ -46,7 +46,7 @@ export default function FormDropdown({ size = "short", optionData = [] }) {
                     </div>
                     <div className="dropdown-text" onClick={(e) => handleSelect("Text3", e)}>
                         Text3
-                    </div>
+                    </div> */}
                 </div>
             )}
         </div>
