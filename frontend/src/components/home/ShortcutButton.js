@@ -7,7 +7,7 @@ import ArrowIcon from "../../ui/icons/ArrowIcon";
 export default function ShortcutButton() {
     return (
         <>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", boxShadow: "2px 2px 10px 0 rgba(0, 0, 0, 0.10)", borderRadius: "1.5rem" }}>
                 <div className="shortcut-btn-left" onClick={() => (window.location.href = "/participate")}>
                     <div className="shortcut-title">
                         <Logo size="s" color={colors.orange.dark.base} />
@@ -25,7 +25,7 @@ export default function ShortcutButton() {
                         제안하기
                     </div>
                     <Sodam />
-                    <button className="shortcut-button">
+                    <button className="shortcut-button" style={{ backgroundColor: colors.yellow.dark.base }}>
                         바로가기
                         <ArrowIcon direction="right" size={44} color={colors.white} />
                     </button>
