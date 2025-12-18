@@ -35,8 +35,21 @@
 
 .login-options {
     display: flex;
+    justify-content: space-between; /* 양쪽 끝으로 */
     align-items: center;
-    gap: 26rem;
+    width: 100%;
+    margin-top: 12px;
+}
+
+.remember-id {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* 체크박스 - 텍스트 간격 */
+}
+
+.find-account {
+    cursor: pointer;
+    white-space: nowrap; /* 줄바꿈 방지 */
 }
 
 .login-card {
