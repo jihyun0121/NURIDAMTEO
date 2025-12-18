@@ -41,6 +41,7 @@ import MileageButton from "../ui/button/MileageButton";
 import MileageStatus from "../components/my/MileageStatus";
 import SurveyList from "../components/home/SurveyList";
 import TextInputToggle from "../ui/input/TextInputToggle";
+import PropsalCard from "../components/home/PropsalCard";
 
 export default function IconPage() {
     return (
@@ -393,14 +394,18 @@ export default function IconPage() {
                         </div>
 
                         <div className="icons">
-                            <ProfileCard />
-                        </div>
-
-                        <div className="icons">
                             <TextInputToggle />
                             <MileageStatus />
                             <SurveyList type="default" size="long" />
                             <SurveyList type="default" />
+                        </div>
+
+                        <div className="icons">
+                            <ProfileCard />
+                        </div>
+
+                        <div className="icons">
+                            <PropsalCard />
                         </div>
                     </div>
                 </div>
