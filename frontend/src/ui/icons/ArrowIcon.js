@@ -10,6 +10,11 @@ const ARROW_PATHS = {
 export default function ArrowIcon({ direction, type = "default", size, color = "default" }) {
     const pathD = ARROW_PATHS[direction] || ARROW_PATHS.left;
     let icon = null;
+    let iconColor;
+
+    if (color === "default") iconColor = colors.gray.normal.base;
+    else if (color === "inherit") iconColor = colors.gray.normal.base;
+    else iconColor = color;
 
     if (type === "default") {
         icon = (
@@ -41,7 +46,7 @@ export default function ArrowIcon({ direction, type = "default", size, color = "
     }
 
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ color: color === "default" ? colors.gray.normal.base : "inherit" }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ color: iconColor }}>
             {icon}
         </svg>
     );
