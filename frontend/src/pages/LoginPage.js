@@ -26,8 +26,17 @@ export default function LoginPage() {
                         inputType="password"
                     />
                     <div className="login-options">
-                        <span className="login-option-text">아이디 찾기</span>
-                        <span className="login-option-text">비밀번호 찾기</span>
+                        <label className="remember-id">
+                            <input type="checkbox" className="check-box" />
+                            <span className="login-option-text">
+                                아이디 기억하기
+                            </span>
+                        </label>
+                        <div className="login-option">
+                            <span className="find-account">
+                                아이디/비밀번호 찾기
+                            </span>
+                        </div>
                     </div>
                 </div>
 
