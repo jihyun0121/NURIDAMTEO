@@ -23,7 +23,7 @@ export default function NewsList() {
         <div className="news-list-container">
             <div className="news-list-title">
                 <div className="news-list-label">오늘의 누리소담 소식</div>
-                <div className="news-list-btn" onClick={() => (window.location.href = "/news")}>
+                <div className="news-list-btn" onClick={() => (window.location.href = "/nurisodam?category=동네소식")}>
                     모든 소식
                     <ArrowIcon direction="right" size={44} />
                 </div>

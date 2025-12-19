@@ -1,7 +1,7 @@
 import { colors } from "../../assets/style/tokens/colors";
 import { typography } from "../../assets/style/tokens/typography";
 
-export default function SquareNumber({ value, type = "default", size, color = "default" }) {
+export default function SquareNumber({ value, type = "default", size, color = "default", onClick }) {
     let style = {};
 
     if (type === "default") {
@@ -44,8 +44,11 @@ export default function SquareNumber({ value, type = "default", size, color = "d
 
                 color: color === "default" ? colors.gray.normal.base : "inherit",
 
+                cursor: "pointer",
+
                 ...style,
             }}
+            onClick={onClick}
         >
             {value}
         </div>

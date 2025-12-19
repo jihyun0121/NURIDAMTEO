@@ -21,6 +21,8 @@ import "./assets/style/auth/Login.css";
 import "./assets/style/auth/Signup.css";
 import "./assets/style/my/mileage.css";
 import "./assets/style/proposal/proposal.css";
+import "./assets/style/nurisodam/nurisodam.css";
+import "./assets/style/nurisodam/list.css";
 import "./icons/iconPage.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

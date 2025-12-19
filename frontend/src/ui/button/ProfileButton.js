@@ -17,7 +17,7 @@ export default function ProfileButton({ children, content, active = false, onCli
               borderRadius: "0.75rem 0.75rem 0 0",
           }
         : {
-              backgroundColor: "var(--white)",
+              backgroundColor: colors.white,
               borderRadius: "0.75rem",
           };
 

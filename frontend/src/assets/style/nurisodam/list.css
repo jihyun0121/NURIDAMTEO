@@ -1,0 +1,33 @@
+.nurisodam-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nurisodam-lists {
+    display: flex;
+    width: 95rem;
+    padding: 1.5rem;
+    align-items: center;
+    gap: 1rem;
+
+    border-radius: 0.75rem;
+    border: 1px solid var(--gray-light-active, #CACACA);
+}
+
+.nurisodam-list-text {
+    flex: 1 0 0;
+
+    color: var(--Gray-Normal, #555);
+
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    line-height: var(--title-xlarge-line);
+}
+
+.nurisodam-list-view {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

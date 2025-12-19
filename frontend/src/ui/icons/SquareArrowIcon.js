@@ -11,7 +11,7 @@ const ARROW_PATHS = {
     },
 };
 
-export default function SquareArroIcon({ direction, variant = "single", type = "default", size, color = "default" }) {
+export default function SquareArroIcon({ direction, variant = "single", type = "default", size, color = "default", style, onClick }) {
     const paths = ARROW_PATHS[direction][variant];
     let icon = null;
 
@@ -56,7 +56,7 @@ export default function SquareArroIcon({ direction, variant = "single", type = "
     }
 
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ color: color === "default" ? colors.gray.normal.base : "inherit" }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ color: color === "default" ? colors.gray.normal.base : "inherit", ...style }} onClick={onClick}>
             {icon}
         </svg>
     );
