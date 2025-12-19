@@ -1,26 +1,21 @@
 import { useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
 
-export default function TextButtonS({ children, content, onClick }) {
+export default function TextButtonS({ children, content, onClick, type = "default" }) {
     const [state, setState] = useState("default");
 
     const styles = {
         default: {
-            color: colors.gray.normal.base,
-            fontstyle: { color: "var(--Gray-White, #FFF)" },
-            fontFaceSize: "var(--Font-Tittle-xlarge)",
+            color: type === "default" ? colors.gray.normal.base : colors.white,
+            backgroundColor: type === "default" ? colors.white : colors.orange.normal.base,
         },
         hover: {
-            color: colors.gray.normal.base,
-            backgroundColor: colors.orange.light.hover,
-            fontstyle: { color: "var(--Gray-Normal, #555)" },
-            fontFaceSize: "var(--Font-Tittle-xlarge)",
+            color: type === "default" ? colors.gray.normal.base : colors.white,
+            backgroundColor: type === "default" ? colors.orange.light.hover : colors.orange.normal.hover,
         },
         action: {
             color: colors.white,
-            backgroundColor: colors.orange.normal.base,
-            fontstyle: { color: "var(--Gray-Normal, #555)" },
-            fontFaceSize: "var(--Font-Tittle-xlarge)",
+            backgroundColor: type === "default" ? colors.orange.normal.base : colors.orange.normal.active,
         },
     };
 

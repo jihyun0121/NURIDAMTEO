@@ -19,10 +19,12 @@ import "./assets/style/home/news.css";
 import "./assets/style/home/proposalList.css";
 import "./assets/style/auth/Login.css";
 import "./assets/style/auth/Signup.css";
+import "./assets/style/onboarding/onboarding.css";
 import "./assets/style/my/mileage.css";
 import "./assets/style/proposal/proposal.css";
 import "./assets/style/nurisodam/nurisodam.css";
 import "./assets/style/nurisodam/list.css";
+import "./assets/style/onboarding/label.css";
 import "./icons/iconPage.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

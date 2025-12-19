@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
-import banner from "../assets/image/home/banner.png";
+import banner from "../assets/image/home/banner.svg";
 import ShortcutButton from "../components/home/ShortcutButton";
 import NewsList from "../components/home/NewsList";
 import ProfileCard from "../components/home/ProfileCard";
