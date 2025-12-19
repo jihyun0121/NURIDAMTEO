@@ -42,7 +42,7 @@ import MileageButton from "../ui/button/MileageButton";
 import MileageStatus from "../components/my/MileageStatus";
 import SurveyList from "../components/home/SurveyList";
 import TextInputToggle from "../ui/input/TextInputToggle";
-import PropsalCard from "../components/home/PropsalCard";
+import ProposalCard from "../components/home/ProposalCard";
 
 export default function IconPage() {
     const [proposal, setProposal] = useState([]);
@@ -426,7 +426,7 @@ export default function IconPage() {
                         </div>
 
                         <div className="icons">
-                            <PropsalCard type="light" proposal={proposal} />
+                            <ProposalCard type="light" proposal={proposal} />
                         </div>
                     </div>
                 </div>
