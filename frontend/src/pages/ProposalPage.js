@@ -4,8 +4,6 @@ import Header from "../components/Header";
 import banner from "../assets/image/proposal/proposalbanner.svg";
 import SearchBar from "../ui/input/SearchBar";
 import ProposalCard from "../components/home/ProposalCard";
-import SquareArroIcon from "../ui/icons/SquareArrowIcon";
-import SquareNumber from "../ui/icons/SquareNumber";
 import NoticeLabel from "../ui/NoticeLabel";
 import NoticeIcon from "../ui/icons/NoticeIcon";
 import TextButtonS from "../ui/button/TextButtonS";
@@ -50,9 +48,9 @@ export default function ProposalPage() {
                 </div>
                 <div className="proposal-notice-wrapper">
                     <div className="proposal-notice-texts">
-                        <p>누리소담시의 정책과 행정운영에 대해 제안해주세요.</p>
-                        <p>좋은 정책으로 이어질 수 있도록 댓글로 토론하고 공감해주세요.</p>
-                        <p>30일 내 100개의 공감을 얻은 제안은 관련부서의 검토를 통해 정책에 반영합니다.</p>
+                        <p>· 누리소담시의 정책과 행정운영에 대해 제안해주세요.</p>
+                        <p>· 좋은 정책으로 이어질 수 있도록 댓글로 토론하고 공감해주세요.</p>
+                        <p>· 30일 내 100개의 공감을 얻은 제안은 관련부서의 검토를 통해 정책에 반영합니다.</p>
                     </div>
                     <TextButtonS content="제안 작성하기" type="yellow" style={{ boxShadow: "none" }} />
                 </div>

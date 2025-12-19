@@ -1,12 +1,16 @@
 .proposal-container {
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .proposal-wrapper {
     display: flex;
     flex-direction: column;
-    padding: 12.5rem;
+    padding: 12.5rem 0;
     gap: 5rem;
+    width: 95rem;
 }
 
 .proposal-notice {
@@ -23,15 +27,18 @@
 
 .proposal-notice-wrapper {
     display: flex;
-    justify-content: space-between; /* 텍스트 왼쪽 / 버튼 오른쪽 */
+    justify-content: space-between;
     align-items: center;
 }
 
 .proposal-notice-texts {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    font-size: var(--Font-body-medium);
+    gap: 0.2rem;
+
+    font-size: var(--body-medium-size);
+    font-weight: var(--body-medium-weight);
+    line-height: var(--body-medium-line);
 }
 
 .proposal-notice-texts p {
