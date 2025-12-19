@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "../components/Header";
-import Logo from "../ui/Logo";
-import ChatLabel from "../components/onboarding/ChatLabel";
+import onboardingLogo from "../assets/image/onboarding/onboardingLogo.svg";
 import nuri from "../assets/image/onboarding/Nuri.svg";
+import ChatLabel from "../components/onboarding/ChatLabel";
 import TextButtonS from "../ui/button/TextButtonS";
 
 export default function OnboardingPage() {
@@ -10,10 +10,7 @@ export default function OnboardingPage() {
         <div className="onboarding-container">
             <Header />
             <div className="onboarding-wrapper">
-                <div className="onboarding-content" style={{ gap: "2.5rem" }}>
-                    <span>모두의 이야기를 담은 시민 소통 통합 서비스</span>
-                    <Logo size="l" />
-                </div>
+                <img src={onboardingLogo} alt="" />
                 <div className="onboarding-content" style={{ gap: "3rem" }}>
                     <span>기존 시민 소통 플랫폼의 문제점</span>
                     <ChatLabel content="적응이 어려운 디지털 UI" type="white-l" />
