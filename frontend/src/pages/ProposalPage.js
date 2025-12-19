@@ -67,13 +67,7 @@ export default function ProposalPage() {
                     <ProposalCard proposal={proposal} />
                     <ProposalCard proposal={proposal} />
                     <ProposalCard proposal={proposal} />
-                </div>
-                <div className="proposal-numbering">
-                    <SquareArroIcon direction="left" size={44} type="defalt" />
-                    <SquareNumber number={1} size={44} type="defalt" />
-                    <SquareNumber number={3} size={44} type="defalt" />
-                    <SquareNumber number={2} size={44} type="defalt" />
-                    <SquareArroIcon direction="right" size={44} type="defalt" />
+                    <ProposalCard proposal={proposal} />
                 </div>
             </div>
         </div>
