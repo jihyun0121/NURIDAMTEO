@@ -14,26 +14,20 @@ import io.jsonwebtoken.Jwts;
 @Component
 public class JWToken {
     private final SecretKey secretKey;
-    private final long expirationMs;
 
-    public JWToken(
-            @Value("${jwt.secret}") String secret,
-            @Value("${jwt.expiration:3600000}") long expirationMs) {
+    public JWToken(@Value("${jwt.secret}") String secret) {
         this.secretKey = new SecretKeySpec(
                 secret.getBytes(StandardCharsets.UTF_8),
                 Jwts.SIG.HS256.key().build().getAlgorithm());
-        this.expirationMs = expirationMs;
     }
 
     public String createToken(Long userId, String email) {
         Date now = new Date();
-        Date expiry = new Date(now.getTime() + expirationMs);
 
         return Jwts.builder()
                 .claim("user_id", userId)
                 .claim("user_email", email)
                 .issuedAt(now)
-                .expiration(expiry)
                 .signWith(secretKey)
                 .compact();
     }
