@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { UserAPI } from "../api/api";
-import { typography } from "../assets/style/tokens/typography";
-import { colors } from "../assets/style/tokens/colors";
 import Header from "../components/Header";
 import Logo from "../ui/Logo";
 import TextInputBox from "../ui/input/TextInputBox";
@@ -33,8 +31,7 @@ export default function LoginPage() {
         }
 
         if (!email || !password) {
-            const msg = "아이디 또는 비밀번호를 입력해주세요.";
-            setError(msg);
+            setError("아이디 또는 비밀번호를 입력해주세요.");
             return;
         }
         try {
@@ -67,17 +64,7 @@ export default function LoginPage() {
                             <EyeIcon isHide={visible} size={44} color="inherit" onClick={() => setVisible((v) => !v)} />
                         </TextInputBox>
 
-                        <div
-                            style={{
-                                color: colors.red,
-                                fontSize: typography.body.small.size,
-                                fontWeight: typography.headline.medium.size,
-                                lineHeight: typography.body.small.size,
-                                display: error ? "block" : "none",
-                            }}
-                        >
-                            {error}
-                        </div>
+                        {error && <div className="signup-warning">{error}</div>}
 
                         <div className="login-options">
                             <label className="remember-id">
