@@ -1,0 +1,7 @@
+.proposal-container {
+    display: flex;
+    width: 120rem;
+    height: 67.5rem;
+    flex-direction: column;
+    align-items: center;
+}

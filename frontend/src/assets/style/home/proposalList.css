@@ -1,4 +1,4 @@
-.propsal-list-container {
+.proposal-list-container {
     display: flex;
     padding: 7.5rem 12.5rem;
     flex-direction: column;
@@ -10,7 +10,7 @@
     background: var(--orange-light-hover);
 }
 
-.propsal-list-title {
+.proposal-list-title {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,7 +23,7 @@
     line-height: var(--headline-large-line);
 }
 
-.propsal-list-cards {
+.proposal-list-cards {
     display: flex;
     width: 19.25rem;
     justify-content: center;
@@ -31,17 +31,17 @@
     gap: 2rem;
 }
 
-.propsal-list-card {
+.proposal-list-card {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 1.5rem;
 
     border-radius: 1.5rem;
-    box-shadow: 0 0 15px 0 rgba(255, 155, 67, 0.20);
+    box-shadow: 0 0 15px 0 rgba(255, 155, 67, 0.2);
 }
 
-.propsal-card-container {
+.proposal-card-container {
     display: flex;
     width: 22.25rem;
     padding: 1.5rem;
@@ -56,20 +56,20 @@
     cursor: pointer;
 }
 
-.propsal-card-header {
+.proposal-card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
 }
 
-.propsal-card-state {
+.proposal-card-state {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-.propsal-card-date {
+.proposal-card-date {
     flex: 1 0 0;
 
     color: var(--Gray-Normal, #555);
@@ -80,7 +80,7 @@
     line-height: var(--body-small-line);
 }
 
-.propsal-card-content {
+.proposal-card-content {
     display: flex;
     padding-bottom: 1.5rem;
     flex-direction: column;
@@ -88,10 +88,10 @@
     gap: 0.75rem;
     align-self: stretch;
 
-    border-bottom: 1px solid #D5D5D5;
+    border-bottom: 1px solid #d5d5d5;
 }
 
-.propsal-card-title {
+.proposal-card-title {
     align-self: stretch;
 
     color: var(--Gray-Normal, #555);
@@ -101,7 +101,7 @@
     line-height: var(--title-xlarge-line);
 }
 
-.propsal-card-text {
+.proposal-card-text {
     height: 3.5rem;
     align-self: stretch;
 
@@ -116,10 +116,9 @@
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-
 }
 
-.propsal-card-footer {
+.proposal-card-footer {
     display: flex;
     align-items: center;
     gap: 1.125rem;

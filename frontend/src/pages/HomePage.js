@@ -4,7 +4,7 @@ import banner from "../assets/image/home/banner.png";
 import ShortcutButton from "../components/home/ShortcutButton";
 import NewsList from "../components/home/NewsList";
 import ProfileCard from "../components/home/ProfileCard";
-import PropsalList from "../components/home/Propsalist";
+import ProposalList from "../components/home/Proposalist";
 
 export default function HomePage() {
     const token = sessionStorage.getItem("token");
@@ -21,7 +21,7 @@ export default function HomePage() {
                 <NewsList />
                 <ProfileCard login={login} userId={userId} />
             </div>
-            <PropsalList />
+            <ProposalList />
             <div className="home-footer"></div>
         </div>
     );

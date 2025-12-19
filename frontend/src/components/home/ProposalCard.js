@@ -3,7 +3,7 @@ import LabelButton from "../../ui/button/LabelButton";
 import HeartIcon from "../../ui/icons/HeartIcon";
 import ChatIcon from "../../ui/icons/ChatIcon";
 
-export default function PropsalCard({ type = "default", proposal }) {
+export default function ProposalCard({ type = "default", proposal }) {
     let state = proposal.status;
     let content;
     let color;
@@ -35,21 +35,21 @@ export default function PropsalCard({ type = "default", proposal }) {
         color = "gray";
     }
     return (
-        <div className="propsal-card-container" style={{ borderColor: `${type === "light" ? colors.orange.normal.base : colors.gray.light.active}` }}>
-            <div className="propsal-card-header">
-                <div className="propsal-card-state">
+        <div className="proposal-card-container" style={{ borderColor: `${type === "light" ? colors.orange.normal.base : colors.gray.light.active}` }}>
+            <div className="proposal-card-header">
+                <div className="proposal-card-state">
                     <LabelButton content={content} type={color} />
                     {proposal.isBest && <LabelButton content="BEST 공감" type="fill" />}
                 </div>
-                <div className="propsal-card-date">종료 {getRemainDays(proposal.end_at)}일 전</div>
+                <div className="proposal-card-date">종료 {getRemainDays(proposal.end_at)}일 전</div>
             </div>
 
-            <div className="propsal-card-content">
-                <div className="propsal-card-title">{proposal.title}</div>
-                <div className="propsal-card-text">{stripHtml(proposal.content)}</div>
+            <div className="proposal-card-content">
+                <div className="proposal-card-title">{proposal.title}</div>
+                <div className="proposal-card-text">{stripHtml(proposal.content)}</div>
             </div>
 
-            <div className="propsal-card-footer">
+            <div className="proposal-card-footer">
                 <HeartIcon size={44} type={type === "light" ? "hover" : "fill"} /> {proposal.view_count}
                 <ChatIcon size={44} type={type === "light" ? "hover" : "fill"} /> {proposal.participation_count}
             </div>

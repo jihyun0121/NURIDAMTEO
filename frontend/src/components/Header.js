@@ -9,7 +9,7 @@ export default function Header() {
     const location = useLocation();
     const pathname = location.pathname;
 
-    const activeTab = pathname.startsWith("/participate") ? "join" : pathname.startsWith("/propsal") ? "prop" : pathname.startsWith("/nurisodam") ? "nuri" : "none";
+    const activeTab = pathname.startsWith("/participate") ? "join" : pathname.startsWith("/proposal") ? "prop" : pathname.startsWith("/nurisodam") ? "nuri" : "none";
 
     return (
         <div className="header-container">
@@ -19,7 +19,7 @@ export default function Header() {
 
             <div className="header-menu">
                 <HeaderButton content={"참여하기"} active={activeTab === "join"} onClick={() => (window.location.href = "/participate")} />
-                <HeaderButton content={"시민제안"} active={activeTab === "prop"} onClick={() => (window.location.href = "/propsal")} />
+                <HeaderButton content={"시민제안"} active={activeTab === "prop"} onClick={() => (window.location.href = "/proposal")} />
                 <HeaderButton content={"누리소담"} active={activeTab === "nuri"} onClick={() => (window.location.href = "/nurisodam")} />
             </div>
 

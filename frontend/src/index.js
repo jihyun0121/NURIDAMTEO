@@ -16,10 +16,11 @@ import "./assets/style/tokens/colors.css";
 import "./assets/style/tokens/typography.css";
 import "./assets/style/home/home.css";
 import "./assets/style/home/news.css";
-import "./assets/style/home/propsalList.css";
+import "./assets/style/home/proposalList.css";
 import "./assets/style/auth/Login.css";
 import "./assets/style/auth/Signup.css";
 import "./assets/style/my/mileage.css";
+import "./assets/style/proposal/proposal.css";
 import "./icons/iconPage.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
