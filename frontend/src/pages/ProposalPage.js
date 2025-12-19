@@ -7,13 +7,31 @@ import SquareArroIcon from "../ui/icons/SquareArrowIcon";
 import SquareNumber from "../ui/icons/SquareNumber";
 import NoticeLabel from "../ui/NoticeLabel";
 import NoticeIcon from "../ui/icons/NoticeIcon";
+import TextButtonS from "../ui/button/TextButtonS";
+import { colors } from "../assets/style/tokens/colors";
 
 export default function proposalPage() {
     return (
         <div className="proposal-container">
             <Header />
             <img src={banner} width="100%" alt="" style={{ marginTop: "6.25rem" }} />
-            <div className="proposal-wrapper"></div>
+            <div className="proposal-notice">
+                <NoticeLabel children={<NoticeIcon type="pen" size="44" />} text="시민의견 제시" />
+                <div className="notice-line" />
+                <NoticeLabel children={<NoticeIcon type="pen" size="44" />} text="댓글토론 및 공감" subText="1개월" />
+                <div className="notice-line" />
+                <NoticeLabel children={<NoticeIcon type="list" size="44" />} text="심사 후 결과 회신" subText="1개월" />
+                <div className="notice-line" />
+                <NoticeLabel children={<NoticeIcon type="news" size="44" />} text="채택 시 정책 반영" />
+            </div>
+            <div className="proposal-notice-wrapper">
+                <div className="proposal-notice-texts">
+                    <p>누리소담시의 정책과 행정운영에 대해 제안해주세요.</p>
+                    <p>좋은 정책으로 이어질 수 있도록 댓글로 토론하고 공감해주세요.</p>
+                    <p>30일 내 100개의 공감을 얻은 제안은 관련부서의 검토를 통해 정책에 반영합니다.</p>
+                </div>
+                <TextButtonS text="제안 작성하기" style={{ color: "var(--Yellow-Normal, #FFBC38)" }} />
+            </div>
         </div>
     );
 }
