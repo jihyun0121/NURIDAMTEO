@@ -19,7 +19,7 @@ export default function ShortcutButton() {
                         <ArrowIcon direction="right" size={44} color={colors.white} />
                     </button>
                 </div>
-                <div className="shortcut-btn-right" onClick={() => (window.location.href = "/propsal")}>
+                <div className="shortcut-btn-right" onClick={() => (window.location.href = "/proposal")}>
                     <div className="shortcut-title">
                         <Logo size="s" color={colors.yellow.dark.base} />
                         제안하기

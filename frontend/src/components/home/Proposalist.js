@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { SuggestionAPI } from "../../api/api";
 import NuridamIcon from "../../ui/icons/NuridamIcon";
 import { colors } from "../../assets/style/tokens/colors";
-import PropsalCard from "./PropsalCard";
+import ProposalCard from "./ProposalCard";
 
-export default function PropsalList() {
+export default function ProposalList() {
     const [suggestion, setSuggestion] = useState([]);
 
     useEffect(() => {
@@ -32,18 +32,18 @@ export default function PropsalList() {
     }, []);
 
     return (
-        <div className="propsal-list-container">
-            <div className="propsal-list-title">
+        <div className="proposal-list-container">
+            <div className="proposal-list-title">
                 <NuridamIcon type="sodam" size={64} />
                 <div>
                     <span style={{ color: colors.orange.normal.hover }}>토론에 참여</span>하고 누리소담시에게<span style={{ color: colors.orange.normal.hover }}>의견을 들려주세요!</span>
                 </div>
             </div>
 
-            <div className="propsal-list-cards">
+            <div className="proposal-list-cards">
                 {suggestion.map((suggestion, index) => (
-                    <div key={index} className="propsal-list-card">
-                        <PropsalCard type="light" suggestion={suggestion} />
+                    <div key={index} className="proposal-list-card">
+                        <ProposalCard type="light" suggestion={suggestion} />
                     </div>
                 ))}
             </div>
