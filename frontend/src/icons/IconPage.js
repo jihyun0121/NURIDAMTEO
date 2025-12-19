@@ -1,4 +1,5 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { SuggestionAPI } from "../api/api";
 import Logo from "../ui/Logo";
 import UserIcon from "../ui/icons/UserIcon";
 import ArrowIcon from "../ui/icons/ArrowIcon";
@@ -44,6 +45,29 @@ import TextInputToggle from "../ui/input/TextInputToggle";
 import PropsalCard from "../components/home/PropsalCard";
 
 export default function IconPage() {
+    const [suggestion, setSuggestion] = useState([]);
+
+    useEffect(() => {
+        async function loadSuggestion() {
+            try {
+                const res = await SuggestionAPI.getSuggestions(0);
+
+                const first = res.data?.[0];
+
+                if (!first) return;
+
+                setSuggestion({
+                    ...first,
+                    isBest: true,
+                });
+            } catch (err) {
+                console.log("제안 로딩 실패", err);
+            }
+        }
+
+        loadSuggestion();
+    }, []);
+
     return (
         <>
             <div className="bg">
@@ -304,12 +328,12 @@ export default function IconPage() {
 
                         <div className="icons">
                             <input className="check-box" type="checkbox"></input>
-                            <input className="check-box" type="checkbox" checked></input>
+                            <input className="check-box" type="checkbox"></input>
                         </div>
 
                         <div className="icons">
                             <input className="radio-box" name="radio" type="radio"></input>
-                            <input className="radio-box" name="radio" type="radio" checked></input>
+                            <input className="radio-box" name="radio" type="radio"></input>
                         </div>
 
                         <div className="icons">
@@ -402,7 +426,7 @@ export default function IconPage() {
                         </div>
 
                         <div className="icons">
-                            <PropsalCard />
+                            <PropsalCard type="light" suggestion={suggestion} />
                         </div>
                     </div>
                 </div>
