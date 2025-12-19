@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ProposalAPI } from "../api/api";
 import Header from "../components/Header";
-import banner from "../assets/image/participate/participatebanner.svg";
+// import banner from "../assets/image/participate/participatebanner.svg";
 import SearchBar from "../ui/input/SearchBar";
 import ProposalCard from "../components/home/ProposalCard";
 import NoticeLabel from "../ui/NoticeLabel";
@@ -35,7 +35,7 @@ export default function ParticipatePage() {
     return (
         <div className="participate-container">
             <Header />
-            <img src={banner} width="100%" alt="" style={{ marginTop: "6.25rem" }} />
+            {/* <img src={banner} width="100%" alt="" style={{ marginTop: "6.25rem" }} /> */}
             <div className="participate-wrapper">
                 <div className="participate-notice">
                     <NoticeLabel children={<NoticeIcon type="pen" size="44" />} text="시민의견 제시" />
