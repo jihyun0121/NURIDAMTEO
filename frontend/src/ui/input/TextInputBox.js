@@ -12,8 +12,8 @@ export default function TextInputBox({ children, type = "short", onClick, onChan
     };
 
     return (
-        <div className="text-input-box" style={styles} onClick={onClick}>
-            <input className="text-input" placeholder={placeholder} type={inputType} value={value} onChange={onChange} />
+        <div className="text-input-box" style={styles}>
+            <input className="text-input" onClick={onClick} placeholder={placeholder} type={inputType} value={value} onChange={onChange} />
             {children}
         </div>
     );
