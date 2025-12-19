@@ -69,7 +69,9 @@
 }
 
 .signup-warning {
-    color: #ff4d4f;
+    color: var(--red);
+
     font-size: var(--body-small-size);
-    margin-top: 1rem;
+    font-weight: var(--body-small-size);
+    line-height: var(--body-small-size);
 }
