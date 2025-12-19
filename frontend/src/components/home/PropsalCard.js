@@ -3,8 +3,8 @@ import LabelButton from "../../ui/button/LabelButton";
 import HeartIcon from "../../ui/icons/HeartIcon";
 import ChatIcon from "../../ui/icons/ChatIcon";
 
-export default function PropsalCard({ type = "default", suggestion }) {
-    let state = suggestion.status;
+export default function PropsalCard({ type = "default", proposal }) {
+    let state = proposal.status;
     let content;
     let color;
 
@@ -39,19 +39,19 @@ export default function PropsalCard({ type = "default", suggestion }) {
             <div className="propsal-card-header">
                 <div className="propsal-card-state">
                     <LabelButton content={content} type={color} />
-                    {suggestion.isBest && <LabelButton content="BEST 공감" type="fill" />}
+                    {proposal.isBest && <LabelButton content="BEST 공감" type="fill" />}
                 </div>
-                <div className="propsal-card-date">종료 {getRemainDays(suggestion.end_at)}일 전</div>
+                <div className="propsal-card-date">종료 {getRemainDays(proposal.end_at)}일 전</div>
             </div>
 
             <div className="propsal-card-content">
-                <div className="propsal-card-title">{suggestion.title}</div>
-                <div className="propsal-card-text">{stripHtml(suggestion.content)}</div>
+                <div className="propsal-card-title">{proposal.title}</div>
+                <div className="propsal-card-text">{stripHtml(proposal.content)}</div>
             </div>
 
             <div className="propsal-card-footer">
-                <HeartIcon size={44} type={type === "light" ? "hover" : "fill"} /> {suggestion.view_count}
-                <ChatIcon size={44} type={type === "light" ? "hover" : "fill"} /> {suggestion.participation_count}
+                <HeartIcon size={44} type={type === "light" ? "hover" : "fill"} /> {proposal.view_count}
+                <ChatIcon size={44} type={type === "light" ? "hover" : "fill"} /> {proposal.participation_count}
             </div>
         </div>
     );

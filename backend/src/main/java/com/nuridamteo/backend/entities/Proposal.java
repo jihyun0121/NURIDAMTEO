@@ -14,13 +14,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "suggestion")
-public class Suggestion {
+@Table(name = "proposal")
+public class Proposal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "suggestion_id")
-    @JsonProperty("suggestion_id")
-    private Long suggestionId;
+    @Column(name = "proposal_id")
+    @JsonProperty("proposal_id")
+    private Long proposalId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

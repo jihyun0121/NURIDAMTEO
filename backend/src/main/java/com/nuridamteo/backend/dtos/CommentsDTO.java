@@ -18,8 +18,8 @@ public class CommentsDTO {
     @JsonProperty("participation_id")
     private Long participation;
 
-    @JsonProperty("suggestion_id")
-    private Long suggestion;
+    @JsonProperty("proposal_id")
+    private Long proposal;
 
     @JsonProperty("user_id")
     private Long user;

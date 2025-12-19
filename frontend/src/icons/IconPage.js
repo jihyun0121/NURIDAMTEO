@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SuggestionAPI } from "../api/api";
+import { ProposalAPI } from "../api/api";
 import Logo from "../ui/Logo";
 import UserIcon from "../ui/icons/UserIcon";
 import ArrowIcon from "../ui/icons/ArrowIcon";
@@ -45,18 +45,18 @@ import TextInputToggle from "../ui/input/TextInputToggle";
 import PropsalCard from "../components/home/PropsalCard";
 
 export default function IconPage() {
-    const [suggestion, setSuggestion] = useState([]);
+    const [proposal, setProposal] = useState([]);
 
     useEffect(() => {
-        async function loadSuggestion() {
+        async function loadProposal() {
             try {
-                const res = await SuggestionAPI.getSuggestions(0);
+                const res = await ProposalAPI.getProposals(0);
 
                 const first = res.data?.[0];
 
                 if (!first) return;
 
-                setSuggestion({
+                setProposal({
                     ...first,
                     isBest: true,
                 });
@@ -65,7 +65,7 @@ export default function IconPage() {
             }
         }
 
-        loadSuggestion();
+        loadProposal();
     }, []);
 
     return (
@@ -426,7 +426,7 @@ export default function IconPage() {
                         </div>
 
                         <div className="icons">
-                            <PropsalCard type="light" suggestion={suggestion} />
+                            <PropsalCard type="light" proposal={proposal} />
                         </div>
                     </div>
                 </div>

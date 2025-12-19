@@ -54,11 +54,11 @@ export const NoticeAPI = {
     getResults: () => api.get(`/result`),
 };
 
-export const SuggestionAPI = {
-    createSuggestion: (userId, dto) => api.post(`/suggestions/${userId}`, userId, dto),
-    getSuggestions: () => api.get(`/suggestions`),
-    getSuggestion: (suggestionId) => api.get(`/suggestions/${suggestionId}`, suggestionId),
-    setState: (suggestionId, dto) => api.patch(`/suggestions/${suggestionId}/state`, suggestionId, dto),
+export const ProposalAPI = {
+    createProposal: (userId, dto) => api.post(`/proposals/${userId}`, userId, dto),
+    getProposals: () => api.get(`/proposals`),
+    getProposal: (proposalId) => api.get(`/proposals/${proposalId}`, proposalId),
+    setState: (proposalId, dto) => api.patch(`/proposals/${proposalId}/state`, proposalId, dto),
 };
 
 export const AttendanceAPI = {

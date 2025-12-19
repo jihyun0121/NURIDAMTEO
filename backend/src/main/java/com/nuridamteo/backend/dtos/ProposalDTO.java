@@ -13,9 +13,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SuggestionDTO {
-    @JsonProperty("suggestion_id")
-    private Long suggestionId;
+public class ProposalDTO {
+    @JsonProperty("proposal_id")
+    private Long proposalId;
 
     @JsonProperty("user_id")
     private Long user;

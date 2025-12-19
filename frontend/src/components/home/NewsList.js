@@ -30,7 +30,7 @@ export default function NewsList() {
             </div>
 
             {news.map((news, index) => (
-                <div key={index} className="news-lists">
+                <div key={index} className="news-lists" style={{ cursor: "pointer" }} onClick={() => (window.location.href = `/nurisodam/news/${news.notice_id}`)}>
                     <span className="news-list-text">{news?.title ?? "제목 없음"}</span>
                 </div>
             ))}

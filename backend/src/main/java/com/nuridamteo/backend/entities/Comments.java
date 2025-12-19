@@ -28,10 +28,10 @@ public class Comments {
     private Participation participation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "suggestion_id")
-    @JsonProperty("suggestion_id")
+    @JoinColumn(name = "proposal_id")
+    @JsonProperty("proposal_id")
     @JsonIgnore
-    private Suggestion suggestion;
+    private Proposal proposal;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

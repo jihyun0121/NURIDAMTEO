@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { SuggestionAPI } from "../../api/api";
+import { ProposalAPI } from "../../api/api";
 import NuridamIcon from "../../ui/icons/NuridamIcon";
 import { colors } from "../../assets/style/tokens/colors";
 import PropsalCard from "./PropsalCard";
 
 export default function PropsalList() {
-    const [suggestion, setSuggestion] = useState([]);
+    const [proposal, setProposal] = useState([]);
 
     useEffect(() => {
-        async function loadSuggestion() {
+        async function loadProposal() {
             try {
-                const res = await SuggestionAPI.getSuggestions(0);
+                const res = await ProposalAPI.getProposals(0);
 
                 const filtered = res.data
                     .filter((item) => item.status === "OPEN")
@@ -22,13 +22,13 @@ export default function PropsalList() {
                         isBest: index === 0,
                     }));
 
-                setSuggestion(filtered);
+                setProposal(filtered);
             } catch (err) {
                 console.log("제안 로딩 실패", err);
             }
         }
 
-        loadSuggestion();
+        loadProposal();
     }, []);
 
     return (
@@ -41,9 +41,9 @@ export default function PropsalList() {
             </div>
 
             <div className="propsal-list-cards">
-                {suggestion.map((suggestion, index) => (
+                {proposal.map((proposal, index) => (
                     <div key={index} className="propsal-list-card">
-                        <PropsalCard type="light" suggestion={suggestion} />
+                        <PropsalCard type="light" proposal={proposal} />
                     </div>
                 ))}
             </div>
