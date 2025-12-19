@@ -8,6 +8,7 @@ import IconPage from "./icons/IconPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import NurisodamDetail from "./components/nurisodam/NurisodamDetail";
+import OnboardingPage from "./pages/OnboardingPage";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
+                <Route path="/onboarding" element={<OnboardingPage />} />
                 <Route path="/participate" element={<ParticipatePage />} />
                 <Route path="/proposal" element={<ProposalPage />} />
                 <Route path="/nurisodam" element={<NurisodamPage />} />

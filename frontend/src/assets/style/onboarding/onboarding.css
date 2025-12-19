@@ -1,0 +1,25 @@
+.onboarding-container {
+    overflow-y: auto;
+}
+
+.onboarding-wrapper {
+    display: flex;
+    padding: 15rem 12.5rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 12.5rem;
+
+    background: var(--orange-light-hover);
+}
+
+.onboarding-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: var(--Gray-Dark, #404040);
+
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    line-height: var(--title-xlarge-line);
+}
