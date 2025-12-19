@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ArrowIcon from "../icons/ArrowIcon";
 
-export default function FormDropdown({ size = "short", optionData = [] }) {
+export default function FormDropdown({ size = "short", optionData = [], onChange }) {
     const [currentValue, setCurrentValue] = useState(optionData.length > 0 ? optionData[0].value : "Text");
     const [showOptions, setShowOptions] = useState(false);
     let width;
@@ -17,6 +17,7 @@ export default function FormDropdown({ size = "short", optionData = [] }) {
     const handleSelect = (value, e) => {
         e.stopPropagation();
         setCurrentValue(value);
+        onChange?.(value);
         setShowOptions(false);
     };
 
