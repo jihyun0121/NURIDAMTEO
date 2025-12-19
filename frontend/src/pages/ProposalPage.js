@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
-import banner from "../assets/image/proposal/proposalbanner.png";
+import banner from "../assets/image/proposal/proposalbanner.svg";
 import SearchBar from "../ui/input/SearchBar";
 import ProposalCard from "../components/home/ProposalCard";
 import SquareArroIcon from "../ui/icons/SquareArrowIcon";

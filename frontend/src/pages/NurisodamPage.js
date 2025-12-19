@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
-import banner from "../assets/image/nurisodam/banner.png";
+import banner from "../assets/image/nurisodam/banner.svg";
 import FormDropdown from "../ui/input/FormDropdown";
 import NurisodamContent from "../components/nurisodam/NurisodamContent";
 
