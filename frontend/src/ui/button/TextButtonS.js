@@ -1,20 +1,21 @@
 import { useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
 
-export default function TextButtonS({ children, content, onClick }) {
+export default function TextButtonS({ children, content, onClick, type = "default" }) {
     const [state, setState] = useState("default");
 
     const styles = {
         default: {
-            color: colors.gray.normal.base,
+            color: type === "default" ? colors.gray.normal.base : colors.white,
+            backgroundColor: type === "default" ? colors.white : colors.orange.normal.base,
         },
         hover: {
-            color: colors.gray.normal.base,
-            backgroundColor: colors.orange.light.hover,
+            color: type === "default" ? colors.gray.normal.base : colors.white,
+            backgroundColor: type === "default" ? colors.orange.light.hover : colors.orange.normal.hover,
         },
         action: {
             color: colors.white,
-            backgroundColor: colors.orange.normal.base,
+            backgroundColor: type === "default" ? colors.orange.normal.base : colors.orange.normal.active,
         },
     };
 
