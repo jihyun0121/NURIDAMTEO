@@ -4,7 +4,7 @@ import MegaphoneIcon from "../../ui/icons/MegaphoneIcon";
 import EyeIcon from "../../ui/icons/EyeIcon";
 import Pagination from "../Pagination";
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 10;
 
 export default function NoticeList() {
     const [notice, setNotice] = useState([]);
