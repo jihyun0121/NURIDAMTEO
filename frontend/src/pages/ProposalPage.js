@@ -3,27 +3,23 @@ import { ProposalAPI } from "../api/api";
 import Header from "../components/Header";
 import banner from "../assets/image/proposal/proposalbanner.svg";
 import SearchBar from "../ui/input/SearchBar";
-import ProposalCard from "../components/home/ProposalCard";
+import ProposalCard from "../components/proposal/ProposalCard";
 import NoticeLabel from "../ui/NoticeLabel";
 import NoticeIcon from "../ui/icons/NoticeIcon";
 import TextButtonS from "../ui/button/TextButtonS";
+import Pagination from "../components/Pagination";
+
+const PAGE_SIZE = 8;
 
 export default function ProposalPage() {
     const [proposal, setProposal] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         async function loadProposal() {
             try {
                 const res = await ProposalAPI.getProposals(0);
-
-                const first = res.data?.[0];
-
-                if (!first) return;
-
-                setProposal({
-                    ...first,
-                    isBest: true,
-                });
+                setProposal(res.data);
             } catch (err) {
                 console.log("제안 로딩 실패", err);
             }
@@ -31,6 +27,11 @@ export default function ProposalPage() {
 
         loadProposal();
     }, []);
+
+    const totalPages = Math.ceil(proposal.length / PAGE_SIZE);
+
+    const startIndex = (currentPage - 1) * PAGE_SIZE;
+    const currentProposal = proposal.slice(startIndex, startIndex + PAGE_SIZE);
 
     return (
         <div className="proposal-container">
@@ -58,15 +59,13 @@ export default function ProposalPage() {
                     <SearchBar type="long" />
                 </div>
                 <div className="proposal-list">
-                    <ProposalCard proposal={proposal} />
-                    <ProposalCard proposal={proposal} />
-                    <ProposalCard proposal={proposal} />
-                    <ProposalCard proposal={proposal} />
-                    <ProposalCard proposal={proposal} />
-                    <ProposalCard proposal={proposal} />
-                    <ProposalCard proposal={proposal} />
-                    <ProposalCard proposal={proposal} />
+                    {currentProposal.map((proposal) => (
+                        <div key={proposal.proposal_id}>
+                            <ProposalCard proposal={proposal} />
+                        </div>
+                    ))}
                 </div>
+                <Pagination currentPage={currentPage} totalPages={totalPages} onChange={setCurrentPage} />
             </div>
         </div>
     );

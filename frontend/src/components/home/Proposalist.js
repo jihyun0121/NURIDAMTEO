@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ProposalAPI } from "../../api/api";
 import NuridamIcon from "../../ui/icons/NuridamIcon";
 import { colors } from "../../assets/style/tokens/colors";
-import ProposalCard from "./ProposalCard";
+import ProposalCard from "../proposal/ProposalCard";
 
 export default function ProposalList() {
     const [proposal, setProposal] = useState([]);
