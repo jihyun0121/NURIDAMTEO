@@ -69,4 +69,34 @@ export const AttendanceAPI = {
     },
 };
 
+export const SurveyAPI = {
+    getSurvey: () => api.get(`/surveys`),
+    getSurveyList: () => api.get(`/surveys/survey`),
+    getPanelList: () => api.get(`/surveys/panel`),
+    getQuestionsBySurvey: (surveyId) => api.get(`/surveys/${surveyId}/questions`, surveyId),
+    getOptionsByQuestion: (questionId) => api.get(`/surveys/${questionId}/options`, questionId),
+    checkSurveySelection: (surveyId, userId) => api.get(`/surveys/${surveyId}/selection`, surveyId, userId),
+};
+
+export const AnswerAPI = {
+    createAnswer: (dto) => api.post(`/answers`, dto),
+    getAnswer: (answerId) => api.get(`/answers/${answerId}`, answerId),
+    getAnswersBySurvey: (surveyId) => api.get(`/answers/survey/${surveyId}`, surveyId),
+    getAnswersByQuestion: (questionId) => api.get(`/answers/question/${questionId}`, questionId),
+    getAnswersByParticipation: (participationId) => api.get(`/answers/participations/${participationId}`, participationId),
+    getOptionStats: (questionId) => api.get(`/statistics/questions/${questionId}/options`, questionId),
+};
+
+export const ParticipationAPI = {
+    createParticipaiton: (dto) => api.post(`/participations`, dto),
+    getParticipaiton: (targetId) => api.get(`/participations/${targetId}`, targetId),
+    deleteParticipaiton: (participationId) => api.delete(`/participations/${participationId}`, participationId),
+};
+
+export const CommentAPI = {
+    createComment: (dto) => api.post(`/comments`, dto),
+    getComments: (targetId) => api.get(`/comments/${targetId}`, targetId),
+    deleteComment: (commentId) => api.delete(`/comments/${commentId}`, commentId),
+};
+
 export default api;
