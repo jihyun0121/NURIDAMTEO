@@ -4,6 +4,7 @@ import java.time.*;
 
 import com.fasterxml.jackson.annotation.*;
 import com.nuridamteo.backend.enums.ParticipationType;
+import com.nuridamteo.backend.enums.TargetType;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,9 +29,11 @@ public class Participation {
     @JsonIgnore
     private Users user;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "target_type", length = 20)
     @JsonProperty("target_type")
-    private String targetType;
+    @Builder.Default
+    private TargetType targetType = TargetType.SURVEY;
 
     @Column(name = "target_id")
     @JsonProperty("target_id")
