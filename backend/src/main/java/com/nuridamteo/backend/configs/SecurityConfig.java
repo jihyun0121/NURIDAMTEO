@@ -38,8 +38,8 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/auth/signup", "/auth/login", "/notices", "/notices/**",
-                                "/search", "/surveys", "/surveys/type/{surveyType}", "/surveys/{surveyId}",
+                        .requestMatchers("/auth/signup", "/auth/login", "/notices", "/notices/**", "/search",
+                                "/surveys", "/surveys/survey", "/surveys/type/{surveyType}", "/surveys/{surveyId}",
                                 "/proposals", "/proposals/{proposalId}", "/comments", "/result")
                         .permitAll()
                         .anyRequest().authenticated())
