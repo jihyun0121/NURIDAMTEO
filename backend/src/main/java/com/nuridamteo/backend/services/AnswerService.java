@@ -1,5 +1,7 @@
 package com.nuridamteo.backend.services;
 
+import java.util.*;
+
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
@@ -44,6 +46,11 @@ public class AnswerService {
                 .build();
 
         return toDTO(answerRepository.save(answer));
+    }
+
+    @Transactional(readOnly = true)
+    public List<AnswerDTO> getAnswers(Long answerId) {
+        return answerRepository.findById(answerId).stream().map(this::toDTO).toList();
     }
 
     private AnswerDTO toDTO(Answer a) {
