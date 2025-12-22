@@ -25,7 +25,9 @@ public class Panel {
     @JsonIgnore
     private Survey survey;
 
-    @Column(name = "user_id", nullable = false, length = 100)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     @JsonProperty("user_id")
+    @JsonIgnore
     private Users user;
 }

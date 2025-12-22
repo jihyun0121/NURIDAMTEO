@@ -44,4 +44,9 @@ public class SurveyController {
         return ResponseEntity.ok(question);
     }
 
+    @GetMapping("/{surveyId}/selection")
+    public ResponseEntity<Boolean> checkSurveySelection(@PathVariable Long surveyId, @RequestParam Long userId) {
+        return ResponseEntity.ok(surveyService.checkSurveySelection(surveyId, userId));
+    }
+
 }

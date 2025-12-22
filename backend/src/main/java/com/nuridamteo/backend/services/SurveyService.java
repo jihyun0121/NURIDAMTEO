@@ -14,8 +14,10 @@ import com.nuridamteo.backend.entities.Question;
 import com.nuridamteo.backend.entities.Survey;
 import com.nuridamteo.backend.enums.SurveyType;
 import com.nuridamteo.backend.repositories.OptionsRepository;
+import com.nuridamteo.backend.repositories.PanelRepository;
 import com.nuridamteo.backend.repositories.QuestionRepository;
 import com.nuridamteo.backend.repositories.SurveyRepository;
+import com.nuridamteo.backend.repositories.UserRepository;
 
 import lombok.*;
 
@@ -23,8 +25,10 @@ import lombok.*;
 @RequiredArgsConstructor
 public class SurveyService {
     private final SurveyRepository surveyRepository;
+    private final UserRepository userRepository;
     private final QuestionRepository questionRepository;
     private final OptionsRepository optionRepository;
+    private final PanelRepository panelRepository;
 
     @Transactional(readOnly = true)
     public List<SurveyDTO> getSurvey() {
@@ -55,15 +59,26 @@ public class SurveyService {
     @Transactional(readOnly = true)
     public List<QuestionDTO> getQuestionsByForm(Long surveyId) {
         return questionRepository.findBySurvey_SurveyIdOrderByQuestionOrderAsc(surveyId).stream()
-                .map(this::qustionDto)
+                .map(this::qustionDTO)
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public List<OptionsDTO> getOptionsByQuestion(Long questionId) {
         return optionRepository.findByQuestion_QuestionIdOrderByOptionOrderAsc(questionId).stream()
-                .map(this::optionDto)
+                .map(this::optionDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public boolean checkSurveySelection(Long surveyId, Long userId) {
+        userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+        surveyRepository.findById(surveyId)
+                .orElseThrow(() -> new IllegalArgumentException("설문을 찾을 수 없습니다."));
+
+        return panelRepository
+                .existsBySurvey_SurveyIdAndUser_UserId(surveyId, userId);
     }
 
     private SurveyDTO surveyDTO(Survey s) {
@@ -85,7 +100,7 @@ public class SurveyService {
                 .build();
     }
 
-    private QuestionDTO qustionDto(Question q) {
+    private QuestionDTO qustionDTO(Question q) {
         return QuestionDTO.builder()
                 .questionId(q.getQuestionId())
                 .survey(q.getSurvey().getSurveyId())
@@ -95,7 +110,7 @@ public class SurveyService {
                 .build();
     }
 
-    private OptionsDTO optionDto(Options o) {
+    private OptionsDTO optionDTO(Options o) {
         return OptionsDTO.builder()
                 .optionId(o.getOptionId())
                 .question(o.getQuestion().getQuestionId())
