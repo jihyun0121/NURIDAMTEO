@@ -58,6 +58,11 @@ public class AnswerService {
         return answerRepository.findByParticipation_TargetId(surveyId).stream().map(this::toDTO).toList();
     }
 
+    @Transactional(readOnly = true)
+    public List<AnswerDTO> getAnswersByQuestion(Long questionId) {
+        return answerRepository.findByQuestion_QuestionId(questionId).stream().map(this::toDTO).toList();
+    }
+
     private AnswerDTO toDTO(Answer a) {
         return AnswerDTO.builder()
                 .answerId(a.getAnswerId())
