@@ -1,8 +1,10 @@
 package com.nuridamteo.backend.services;
 
 import java.time.LocalDateTime;
+import java.util.*;
 
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
 import com.nuridamteo.backend.dtos.ParticipationDTO;
 import com.nuridamteo.backend.entities.Participation;
@@ -48,6 +50,13 @@ public class ParticipationService {
 
         Participation saved = participationRepository.save(participation);
         return participationDTO(saved);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ParticipationDTO> getParticipation(Long targetId) {
+        return participationRepository
+                .findByTargetIdOrderByParticipationIdDesc(targetId).stream()
+                .map(this::participationDTO).toList();
     }
 
     private ParticipationDTO participationDTO(Participation p) {

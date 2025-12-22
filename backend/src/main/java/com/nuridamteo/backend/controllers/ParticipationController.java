@@ -21,4 +21,9 @@ public class ParticipationController {
         participationService.createParticipation(dto);
         return ResponseEntity.ok(Map.of("message", "참여 생성 성공"));
     }
+
+    @GetMapping("/{targetId}")
+    public ResponseEntity<?> getParticipation(@PathVariable Long targetId) {
+        return ResponseEntity.ok(participationService.getParticipation(targetId));
+    }
 }
