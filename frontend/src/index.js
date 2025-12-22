@@ -26,6 +26,7 @@ import "./assets/style/nurisodam/nurisodam.css";
 import "./assets/style/nurisodam/list.css";
 import "./assets/style/onboarding/label.css";
 import "./icons/iconPage.css";
+import "./assets/style/participate/participate.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
