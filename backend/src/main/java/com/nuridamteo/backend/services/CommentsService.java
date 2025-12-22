@@ -54,6 +54,14 @@ public class CommentsService {
         return commentsRepository.findByTargetIdOrderByCommentIdDesc(targetId).stream().map(this::commentsDTO).toList();
     }
 
+    @Transactional
+    public void deleteComment(Long commentId) {
+        if (!commentsRepository.existsById(commentId)) {
+            throw new IllegalArgumentException("댓글을 찾을 수 없습니다");
+        }
+        commentsRepository.deleteById(commentId);
+    }
+
     private CommentsDTO commentsDTO(Comments p) {
         return CommentsDTO.builder()
                 .commentId(p.getCommentId())
