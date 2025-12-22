@@ -14,7 +14,7 @@ public class AnswerDTO {
     private Long answerId;
 
     @JsonProperty("participation_id")
-    private String participation;
+    private Long participation;
 
     @JsonProperty("question_id")
     private Long question;
