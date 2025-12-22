@@ -32,7 +32,6 @@ public class SurveyFormDTO {
     private SurveyType surveyType = SurveyType.SURVEY;
 
     @JsonProperty("category_id")
-    @JsonIgnore
     private Long category;
 
     @Builder.Default
