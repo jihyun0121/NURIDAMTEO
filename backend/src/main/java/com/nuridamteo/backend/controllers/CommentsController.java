@@ -21,4 +21,9 @@ public class CommentsController {
         commentsService.createComment(dto);
         return ResponseEntity.ok(Map.of("message", "댓글 생성 성공"));
     }
+
+    @GetMapping("/{targetId}")
+    public ResponseEntity<?> getComments(@PathVariable Long targetId) {
+        return ResponseEntity.ok(commentsService.getComments(targetId));
+    }
 }

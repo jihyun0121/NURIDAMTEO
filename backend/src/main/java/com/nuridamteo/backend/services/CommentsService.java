@@ -1,8 +1,10 @@
 package com.nuridamteo.backend.services;
 
 import java.time.*;
+import java.util.*;
 
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
 import com.nuridamteo.backend.dtos.CommentsDTO;
 import com.nuridamteo.backend.entities.Comments;
@@ -45,6 +47,11 @@ public class CommentsService {
 
         Comments saved = commentsRepository.save(comments);
         return commentsDTO(saved);
+    }
+
+    @Transactional(readOnly = true)
+    public List<CommentsDTO> getComments(Long targetId) {
+        return commentsRepository.findByTargetIdOrderByCommentIdDesc(targetId).stream().map(this::commentsDTO).toList();
     }
 
     private CommentsDTO commentsDTO(Comments p) {
