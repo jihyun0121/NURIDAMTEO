@@ -13,26 +13,24 @@ import lombok.*;
 @Service
 @RequiredArgsConstructor
 public class StatisticService {
-        private final StatisticRepository statisticRepository;
+	private final StatisticRepository statisticRepository;
 
-        public Map<Long, Double> getOptionStats(Long questionId) {
-                List<Answer> answers = statisticRepository.findByQuestion_QuestionId(questionId);
+	public Map<Long, Double> getOptionStats(Long questionId) {
+		List<Answer> answers = statisticRepository.findByQuestion_QuestionId(questionId);
+		List<Answer> optionAnswers = answers.stream()
+				.filter(a -> a.getOption() != null)
+				.toList();
 
-                List<Answer> optionAnswers = answers.stream()
-                                .filter(a -> a.getOption() != null)
-                                .toList();
+		long totalOptionAnswers = optionAnswers.size();
 
-                long totalOptionAnswers = optionAnswers.size();
+		if (totalOptionAnswers == 0)
+			return Collections.emptyMap();
 
-                if (totalOptionAnswers == 0) {
-                        return Collections.emptyMap();
-                }
-
-                return optionAnswers.stream()
-                                .collect(Collectors.groupingBy(
-                                                a -> a.getOption().getOptionId(),
-                                                Collectors.collectingAndThen(
-                                                                Collectors.counting(),
-                                                                cnt -> (cnt * 100.0) / totalOptionAnswers)));
-        }
+		return optionAnswers.stream()
+				.collect(Collectors.groupingBy(
+						a -> a.getOption().getOptionId(),
+						Collectors.collectingAndThen(
+								Collectors.counting(),
+								cnt -> (cnt * 100.0) / totalOptionAnswers)));
+	}
 }

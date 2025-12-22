@@ -54,8 +54,7 @@ public class ParticipationService {
 
     @Transactional(readOnly = true)
     public List<ParticipationDTO> getParticipation(Long targetId) {
-        return participationRepository
-                .findByTargetIdOrderByParticipationIdDesc(targetId).stream()
+        return participationRepository.findByTargetIdOrderByParticipationIdDesc(targetId).stream()
                 .map(this::participationDTO).toList();
     }
 
