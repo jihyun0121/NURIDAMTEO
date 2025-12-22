@@ -15,28 +15,23 @@ export default function SearchDropdown({ onChange }) {
         { key: 7, value: "청년·일자리" },
     ];
 
-    const handleSelect = (val, e) => {
+    const handleSelect = (option, e) => {
         e.stopPropagation();
-        setCurrentValue(val);
-        onChange?.(val);
+        setCurrentValue(option.value);
+        onChange(option);
         setShowOptions(false);
     };
 
-    const toggleDropdown = (e) => {
-        e.stopPropagation();
-        setShowOptions((prev) => !prev);
-    };
-
     return (
-        <div className="search-dropdown" onClick={toggleDropdown}>
+        <div className="search-dropdown" onClick={() => setShowOptions(!showOptions)}>
             <div className="search-dropdown-label">{currentValue}</div>
             <ArrowIcon direction={showOptions ? "up" : "down"} size={44} color="inherit" />
 
             {showOptions && (
                 <div className="search-dropdown-option">
-                    {optionData.map((data) => (
-                        <div className="dropdown-text" key={data.key} onClick={(e) => handleSelect(data.value, e)}>
-                            {data.value}
+                    {optionData.map((opt) => (
+                        <div key={opt.key} className="dropdown-text" onClick={(e) => handleSelect(opt, e)}>
+                            {opt.value}
                         </div>
                     ))}
                 </div>

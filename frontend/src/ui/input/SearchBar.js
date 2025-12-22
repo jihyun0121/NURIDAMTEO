@@ -1,16 +1,15 @@
 import SearchIcon from "../icons/SearchIcon";
 import SearchDropdown from "../input/SearchDropdown";
 
-export default function SearchBar({ type = "short", onClick }) {
+export default function SearchBar({ type = "short", onCategoryChange, onClick }) {
     const styles = {
         width: type === "long" ? "95rem" : "78.8125rem",
     };
-
     return (
         <div className="search-container" style={styles} onClick={onClick}>
-            <SearchDropdown />
+            <SearchDropdown onChange={onCategoryChange} />
             <div className="search-content" style={styles} onClick={onClick}>
-                <input className="search-input" placeholder="검색어를 입력해주세요"></input>
+                <input className="search-input" placeholder="검색어를 입력해주세요" />
                 <SearchIcon size={44} />
             </div>
         </div>

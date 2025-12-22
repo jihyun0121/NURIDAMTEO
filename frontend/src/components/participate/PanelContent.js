@@ -1,41 +1,46 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { SurveyAPI } from "../../api/api";
 import Pagination from "../Pagination";
 import ParticipateCard from "./ParticipateCard";
 
 const PAGE_SIZE = 8;
 
-export default function PanelContent() {
+export default function PanelContent({ filterCategory }) {
     const [participate, setParticipate] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         async function loadParticipate() {
-            try {
-                const res = await SurveyAPI.getPanelList(0);
-                setParticipate(res.data);
-            } catch (err) {
-                console.log("설문 로딩 실패", err);
-            }
+            const res = await SurveyAPI.getPanelList(0);
+            setParticipate(res.data);
         }
-
         loadParticipate();
     }, []);
 
-    const totalPages = Math.ceil(participate.length / PAGE_SIZE);
+    const filteredParticipate = useMemo(() => {
+        if (!filterCategory) return participate;
+        return participate.filter((p) => p.category_id === filterCategory.key);
+    }, [participate, filterCategory]);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [filterCategory]);
+
+    const totalPages = Math.ceil(filteredParticipate.length / PAGE_SIZE);
 
     const startIndex = (currentPage - 1) * PAGE_SIZE;
-    const currentParticipate = participate.slice(startIndex, startIndex + PAGE_SIZE);
+    const currentParticipate = filteredParticipate.slice(startIndex, startIndex + PAGE_SIZE);
 
     return (
         <div className="participate-list-wrapper">
             <div className="participate-list">
-                {currentParticipate.map((participate) => (
-                    <div key={participate.participate_id}>
-                        <ParticipateCard participate={participate} />
+                {currentParticipate.map((item) => (
+                    <div key={item.survey_id}>
+                        <ParticipateCard participate={item} />
                     </div>
                 ))}
             </div>
+
             <Pagination currentPage={currentPage} totalPages={totalPages} onChange={setCurrentPage} />
         </div>
     );
