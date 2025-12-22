@@ -1,13 +1,24 @@
 import { useState } from "react";
 import ArrowIcon from "../icons/ArrowIcon";
 
-export default function SearchDropdown({ optionData = [] }) {
+export default function SearchDropdown({ onChange }) {
     const [currentValue, setCurrentValue] = useState("주제 선택");
     const [showOptions, setShowOptions] = useState(false);
 
-    const handleSelect = (value, e) => {
+    const optionData = [
+        { key: 1, value: "복지·교육" },
+        { key: 2, value: "교통·환경" },
+        { key: 3, value: "행정·민원" },
+        { key: 4, value: "안전·재난" },
+        { key: 5, value: "경제·상권" },
+        { key: 6, value: "문화·관광" },
+        { key: 7, value: "청년·일자리" },
+    ];
+
+    const handleSelect = (val, e) => {
         e.stopPropagation();
-        setCurrentValue(value);
+        setCurrentValue(val);
+        onChange?.(val);
         setShowOptions(false);
     };
 
@@ -23,21 +34,11 @@ export default function SearchDropdown({ optionData = [] }) {
 
             {showOptions && (
                 <div className="search-dropdown-option">
-                    {/* {optionData.map((data) => (
-                        <div className="dropdown-text" key={data.key} onClick={() => handleSelect(data.value)}>
+                    {optionData.map((data) => (
+                        <div className="dropdown-text" key={data.key} onClick={(e) => handleSelect(data.value, e)}>
                             {data.value}
                         </div>
-                    ))} */}
-
-                    <div className="search-dropdown-text" onClick={(e) => handleSelect("Text1", e)}>
-                        Text1
-                    </div>
-                    <div className="search-dropdown-text" onClick={(e) => handleSelect("Text2", e)}>
-                        Text2
-                    </div>
-                    <div className="search-dropdown-text" onClick={(e) => handleSelect("Text3", e)}>
-                        Text3
-                    </div>
+                    ))}
                 </div>
             )}
         </div>

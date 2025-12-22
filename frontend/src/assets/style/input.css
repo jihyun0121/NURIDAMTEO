@@ -139,7 +139,7 @@
 .dropdown-text {
     width: 100%;
 
-    padding: 1rem 0 0 0;
+    padding: 0.5rem 0;
     cursor: pointer;
 
     font-size: var(--body-medium-size);

@@ -29,7 +29,7 @@ export default function FormDropdown({ size = "short", optionData = [], value, o
             {showOptions && (
                 <div className="dropdown-option" style={{ width }}>
                     {optionData.map((data) => (
-                        <div key={data.key} className="dropdown-text" onClick={(e) => handleSelect(data.value, e)}>
+                        <div key={data.key} className="dropdown-text" style={{ padding: "1rem 0 0 0" }} onClick={(e) => handleSelect(data.value, e)}>
                             {data.value}
                         </div>
                     ))}
