@@ -53,6 +53,11 @@ public class AnswerService {
         return answerRepository.findById(answerId).stream().map(this::toDTO).toList();
     }
 
+    @Transactional(readOnly = true)
+    public List<AnswerDTO> getAnswersBySurvey(Long surveyId) {
+        return answerRepository.findByParticipation_TargetId(surveyId).stream().map(this::toDTO).toList();
+    }
+
     private AnswerDTO toDTO(Answer a) {
         return AnswerDTO.builder()
                 .answerId(a.getAnswerId())

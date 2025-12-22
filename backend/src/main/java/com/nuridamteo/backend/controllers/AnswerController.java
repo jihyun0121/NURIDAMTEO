@@ -25,4 +25,9 @@ public class AnswerController {
     public ResponseEntity<List<AnswerDTO>> getAnswers(@PathVariable Long answerId) {
         return ResponseEntity.ok(answerService.getAnswers(answerId));
     }
+
+    @GetMapping("/survey/{surveyId}")
+    public ResponseEntity<List<AnswerDTO>> getAnswersBySurvey(@PathVariable Long surveyId) {
+        return ResponseEntity.ok(answerService.getAnswersBySurvey(surveyId));
+    }
 }
