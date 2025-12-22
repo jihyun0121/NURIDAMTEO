@@ -59,6 +59,14 @@ public class ParticipationService {
                 .map(this::participationDTO).toList();
     }
 
+    @Transactional
+    public void deleteParticipation(Long participationId) {
+        if (!participationRepository.existsById(participationId)) {
+            throw new IllegalArgumentException("설문을 찾을 수 없습니다");
+        }
+        participationRepository.deleteById(participationId);
+    }
+
     private ParticipationDTO participationDTO(Participation p) {
         return ParticipationDTO.builder()
                 .participationId(p.getParticipationId())

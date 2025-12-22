@@ -26,4 +26,10 @@ public class ParticipationController {
     public ResponseEntity<?> getParticipation(@PathVariable Long targetId) {
         return ResponseEntity.ok(participationService.getParticipation(targetId));
     }
+
+    @DeleteMapping("/{participationId}")
+    public ResponseEntity<?> deleteParticipation(@PathVariable Long participationId) {
+        participationService.deleteParticipation(participationId);
+        return ResponseEntity.ok(Map.of("message", "참여 삭제 성공"));
+    }
 }
