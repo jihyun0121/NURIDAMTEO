@@ -3,6 +3,7 @@ package com.nuridamteo.backend.entities;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.*;
+import com.nuridamteo.backend.enums.TargetType;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,17 +22,15 @@ public class Comments {
     @JsonProperty("comment_id")
     private Long commentId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "participation_id")
-    @JsonProperty("participation_id")
-    @JsonIgnore
-    private Participation participation;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "target_type", length = 20)
+    @JsonProperty("target_type")
+    @Builder.Default
+    private TargetType targetType = TargetType.SURVEY;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "proposal_id")
-    @JsonProperty("proposal_id")
-    @JsonIgnore
-    private Proposal proposal;
+    @Column(name = "target_id")
+    @JsonProperty("target_id")
+    private Long targetId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
