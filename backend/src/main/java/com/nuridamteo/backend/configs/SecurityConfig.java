@@ -40,7 +40,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/auth/signup", "/auth/login", "/users/{userId}",
                                 "/notices", "/notices/**", "/search", "/comments", "/result",
-
                                 "/surveys", "/surveys/survey", "/surveys/type/{surveyType}", "/surveys/{surveyId}",
                                 "/surveys/{surveyId}/view", "/proposals", "/proposals/{proposalId}",
                                 "/result/{resultId}", "/result/{resultId}/view")

@@ -49,4 +49,13 @@ public class SurveyController {
         return ResponseEntity.ok(surveyService.checkSurveySelection(surveyId, userId));
     }
 
+    @PutMapping("/{surveyId}/view")
+    public ResponseEntity<?> updateView(@PathVariable Long surveyId) {
+        return ResponseEntity.ok(surveyService.updateView(surveyId));
+    }
+
+    @PutMapping("/{surveyId}/participate")
+    public ResponseEntity<?> updateParticipate(@PathVariable Long surveyId) {
+        return ResponseEntity.ok(surveyService.updateParticipate(surveyId));
+    }
 }
