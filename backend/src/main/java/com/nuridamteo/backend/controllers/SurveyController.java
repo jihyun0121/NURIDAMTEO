@@ -17,9 +17,9 @@ import lombok.*;
 public class SurveyController {
     private final SurveyService surveyService;
 
-    @GetMapping
-    public ResponseEntity<?> getSurvey() {
-        return ResponseEntity.ok(surveyService.getSurvey());
+    @GetMapping("/{surveyId}")
+    public ResponseEntity<?> getSurvey(@PathVariable Long surveyId) {
+        return ResponseEntity.ok(surveyService.getSurvey(surveyId));
     }
 
     @GetMapping("/survey")

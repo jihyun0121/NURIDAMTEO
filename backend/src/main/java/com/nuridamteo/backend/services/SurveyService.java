@@ -31,9 +31,11 @@ public class SurveyService {
 	private final PanelRepository panelRepository;
 
 	@Transactional(readOnly = true)
-	public List<SurveyDTO> getSurvey() {
-		return surveyRepository.findAllByOrderBySurveyIdDesc().stream()
-				.map(this::surveyDTO).toList();
+	public SurveyDTO getSurvey(Long surveyId) {
+		Survey survey = surveyRepository.findById(surveyId)
+				.orElseThrow(() -> new IllegalArgumentException("결과를 찾을 수 없습니다"));
+
+		return surveyDTO(survey);
 	}
 
 	@Transactional(readOnly = true)
