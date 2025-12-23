@@ -22,7 +22,14 @@ export default function NurisodamDetail() {
     return (
         <div className="nurisodam-list-container">
             {notice.map((notice, index) => (
-                <div key={index} className="nurisodam-lists" style={{ cursor: "pointer" }} onClick={() => (window.location.href = `/nurisodam/result/${notice.result_id}`)}>
+                <div
+                    key={index}
+                    className="nurisodam-lists"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                        window.location.href = `/nurisodam/result/${notice.result_id}`;
+                    }}
+                >
                     <MegaphoneIcon size="44" type={notice?.is_pinned ? "hover" : "default"} />
                     <span className="nurisodam-list-text">{notice?.title ?? "제목 없음"}</span>
                     <div className="nurisodam-list-view">
