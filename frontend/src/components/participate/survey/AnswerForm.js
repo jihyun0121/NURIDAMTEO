@@ -13,7 +13,7 @@ export default function AnswerForm({ survey }) {
         const userId = sessionStorage.getItem("user_id");
         if (!userId) {
             alert("로그인이 필요합니다.");
-            navigate("/auth");
+            navigate("/login");
             return;
         }
 
@@ -73,7 +73,7 @@ export default function AnswerForm({ survey }) {
                 ))}
             </div>
             <div className="answer-buttons">
-                <TextButtonS content="목록으로" />
+                <TextButtonS content="목록으로" onClick={() => navigate(-1)} />
                 <TextButtonS content="제출하기" type="hover" onClick={submit} />
             </div>
         </div>

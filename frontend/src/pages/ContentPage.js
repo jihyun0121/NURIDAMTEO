@@ -19,6 +19,11 @@ export default function ContentPage() {
     const [loading, setLoading] = useState(false);
     const [state, setState] = useState(false);
 
+    const hasParticipated = useMemo(() => {
+        if (!contents?.survey_id) return false;
+        return user.some((u) => u.target_id === contents.survey_id);
+    }, [user, contents?.survey_id]);
+
     const location = useLocation();
     const pathname = location.pathname;
     const params = useParams();
@@ -99,10 +104,15 @@ export default function ContentPage() {
             text = "대기중";
             color = "gray";
         } else if (state === "OPEN") {
-            text = "진행중";
-            color = "red";
+            if (contents?.survey_type === "PANEL") {
+                text = "선정조사";
+                color = "red";
+            } else {
+                text = "진행중";
+                color = "red";
+            }
         } else if (state === "CLOSE") {
-            text = "조사 종료";
+            text = "조사종료";
             color = "gray";
         }
         banner = participateBanner;
@@ -116,7 +126,7 @@ export default function ContentPage() {
                 <div className="content-data-container">
                     <div className="content-data-text">
                         <LabelButton content={text} type={color} />
-                        {contents?.survey_type === "PANEL" && <LabelButton content="선정조사" type="red" />}
+                        {hasParticipated && <LabelButton content="참여완료" type="green" />}
                     </div>
                     <div className="content-data-text">
                         <EyeIcon size={44} />

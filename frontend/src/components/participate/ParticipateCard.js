@@ -37,7 +37,7 @@ export default function ParticipateCard({ type = "default", survey, participate 
             color = "red";
         }
     } else if (state === "CLOSE") {
-        content = "조사 종료";
+        content = "조사종료";
         color = "gray";
     }
 
