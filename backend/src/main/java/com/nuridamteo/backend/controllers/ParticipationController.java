@@ -27,6 +27,11 @@ public class ParticipationController {
         return ResponseEntity.ok(participationService.getParticipation(targetId));
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getUserParticipation(@PathVariable Long userId) {
+        return ResponseEntity.ok(participationService.getUserParticipation(userId));
+    }
+
     @DeleteMapping("/{participationId}")
     public ResponseEntity<?> deleteParticipation(@PathVariable Long participationId) {
         participationService.deleteParticipation(participationId);

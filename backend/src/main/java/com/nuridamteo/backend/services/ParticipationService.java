@@ -58,6 +58,12 @@ public class ParticipationService {
                 .map(this::participationDTO).toList();
     }
 
+    @Transactional(readOnly = true)
+    public List<ParticipationDTO> getUserParticipation(Long userId) {
+        return participationRepository.findByUser_UserIdOrderByParticipationIdDesc(userId).stream()
+                .map(this::participationDTO).toList();
+    }
+
     @Transactional
     public void deleteParticipation(Long participationId) {
         if (!participationRepository.existsById(participationId)) {

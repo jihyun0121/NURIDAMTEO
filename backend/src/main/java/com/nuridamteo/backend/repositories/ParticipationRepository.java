@@ -10,4 +10,6 @@ import com.nuridamteo.backend.entities.Participation;
 @Repository
 public interface ParticipationRepository extends JpaRepository<Participation, Long> {
     List<Participation> findByTargetIdOrderByParticipationIdDesc(Long targetId);
+
+    List<Participation> findByUser_UserIdOrderByParticipationIdDesc(Long userId);
 }
