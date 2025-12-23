@@ -1,39 +1,44 @@
 import { useEffect, useState } from "react";
-import { SurveyAPI } from "../../api/api";
+import { ParticipationAPI, SurveyAPI } from "../../api/api";
 import Pagination from "../Pagination";
 import ParticipateCard from "./ParticipateCard";
 
 const PAGE_SIZE = 8;
 
 export default function SurveyContent() {
+    const [survey, setSurvey] = useState([]);
     const [participate, setParticipate] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         async function loadParticipate() {
-            try {
-                const res = await SurveyAPI.getSurveyList(0);
-                setParticipate(res.data);
-            } catch (err) {
-                console.log("설문 로딩 실패", err);
-            }
+            const res = await SurveyAPI.getSurveyList();
+            setSurvey(res.data);
         }
 
         loadParticipate();
     }, []);
 
-    const totalPages = Math.ceil(participate.length / PAGE_SIZE);
+    useEffect(() => {
+        async function loadMyParticipation() {
+            const userId = sessionStorage.getItem("user_id");
+            if (!userId) return;
+            const res = await ParticipationAPI.getUserParticipaiton(userId);
+            setParticipate(res.data);
+        }
+        loadMyParticipation();
+    }, []);
+
+    const totalPages = Math.ceil(survey.length / PAGE_SIZE);
 
     const startIndex = (currentPage - 1) * PAGE_SIZE;
-    const currentParticipate = participate.slice(startIndex, startIndex + PAGE_SIZE);
+    const currentParticipate = survey.slice(startIndex, startIndex + PAGE_SIZE);
 
     return (
         <div className="participate-list-wrapper">
             <div className="participate-list">
-                {currentParticipate.map((participate) => (
-                    <div key={participate.participate_id}>
-                        <ParticipateCard participate={participate} />
-                    </div>
+                {currentParticipate.map((survey) => (
+                    <ParticipateCard key={survey.survey_id} survey={survey} participate={participate} />
                 ))}
             </div>
             <Pagination currentPage={currentPage} totalPages={totalPages} onChange={setCurrentPage} />
