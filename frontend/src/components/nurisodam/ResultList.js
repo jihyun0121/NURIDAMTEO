@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NoticeAPI } from "../../api/api";
+import { ResultAPI } from "../../api/api";
 import MegaphoneIcon from "../../ui/icons/MegaphoneIcon";
 import EyeIcon from "../../ui/icons/EyeIcon";
 import Pagination from "../Pagination";
@@ -13,7 +13,7 @@ export default function ResultList() {
     useEffect(() => {
         async function loadResult() {
             try {
-                const res = await NoticeAPI.getResults(0);
+                const res = await ResultAPI.getResults(0);
                 setResult(res.data || []);
             } catch (err) {
                 console.log("뉴스 로딩 실패", err);
@@ -28,10 +28,23 @@ export default function ResultList() {
     const startIndex = (currentPage - 1) * PAGE_SIZE;
     const currentResults = result.slice(startIndex, startIndex + PAGE_SIZE);
 
+    const addViewCount = (r) => {
+        const res = ResultAPI.updateView(r);
+        console.log(res);
+    };
+
     return (
         <div className="nurisodam-list-container">
             {currentResults.map((result) => (
-                <div key={result.result_id} className="nurisodam-lists" style={{ cursor: "pointer" }} onClick={() => (window.location.href = `/nurisodam/result/${result.result_id}`)}>
+                <div
+                    key={result.result_id}
+                    className="nurisodam-lists"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                        addViewCount(result.result_id);
+                        window.location.href = `/nurisodam/result/${result.result_id}`;
+                    }}
+                >
                     <MegaphoneIcon size="44" />
                     <span className="nurisodam-list-text">{result?.result_title ?? "제목 없음"}</span>
 
