@@ -46,12 +46,22 @@ public class NoticeService {
         return noticeDTO(notice);
     }
 
+    @Transactional
+    public NoticeDTO updateView(Long noticeId) {
+        Notice notice = noticeRepository.findById(noticeId)
+                .orElseThrow(() -> new IllegalArgumentException("공지를 찾을 수 없습니다."));
+
+        notice.setViewCount(notice.getViewCount() + 1);
+        return noticeDTO(notice);
+    }
+
     private NoticeDTO noticeDTO(Notice n) {
         return NoticeDTO.builder()
                 .noticeId(n.getNoticeId())
                 .noticeType(n.getNoticeType())
                 .title(n.getTitle())
                 .content(n.getContent())
+                .viewCount(n.getViewCount())
                 .isPinned(n.getIsPinned())
                 .createdAt(n.getCreatedAt())
                 .build();

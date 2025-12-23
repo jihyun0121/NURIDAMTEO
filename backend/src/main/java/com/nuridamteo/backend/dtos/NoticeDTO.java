@@ -26,6 +26,9 @@ public class NoticeDTO {
     @JsonProperty("content")
     private String content;
 
+    @JsonProperty("view_count")
+    private Long viewCount;
+
     @JsonProperty("is_pinned")
     @Builder.Default
     private Boolean isPinned = false;

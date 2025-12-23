@@ -36,6 +36,10 @@ public class Notice {
     @JsonProperty("content")
     private String content;
 
+    @Column(name = "view_count", nullable = false)
+    @JsonProperty("view_count")
+    private Long viewCount;
+
     @Column(name = "is_pinned", nullable = false)
     @JsonProperty("is_pinned")
     @Builder.Default

@@ -33,4 +33,9 @@ public class NoticeController {
     public ResponseEntity<?> getDetail(@PathVariable Long noticeId) {
         return ResponseEntity.ok(noticeService.getDetail(noticeId));
     }
+
+    @PutMapping("/{noticeId}/view")
+    public ResponseEntity<?> updateView(@PathVariable Long noticeId) {
+        return ResponseEntity.ok(noticeService.updateView(noticeId));
+    }
 }

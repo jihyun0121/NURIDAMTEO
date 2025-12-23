@@ -38,9 +38,12 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/auth/signup", "/auth/login", "/notices", "/notices/**", "/search",
+                        .requestMatchers("/auth/signup", "/auth/login", "/users/{userId}",
+                                "/notices", "/notices/**", "/search", "/comments", "/result",
+
                                 "/surveys", "/surveys/survey", "/surveys/type/{surveyType}", "/surveys/{surveyId}",
-                                "/proposals", "/proposals/{proposalId}", "/comments", "/result", "/result/{resultId}")
+                                "/surveys/{surveyId}/view", "/proposals", "/proposals/{proposalId}",
+                                "/result/{resultId}", "/result/{resultId}/view")
                         .permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
