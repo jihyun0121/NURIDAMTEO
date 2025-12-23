@@ -40,7 +40,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/auth/signup", "/auth/login", "/notices", "/notices/**", "/search",
                                 "/surveys", "/surveys/survey", "/surveys/type/{surveyType}", "/surveys/{surveyId}",
-                                "/proposals", "/proposals/{proposalId}", "/comments", "/result")
+                                "/proposals", "/proposals/{proposalId}", "/comments", "/result", "/result/{resultId}")
                         .permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

@@ -18,4 +18,9 @@ public class ResultController {
     public ResponseEntity<?> getResults() {
         return ResponseEntity.ok(resultService.getResults());
     }
+
+    @GetMapping("/{resultId}")
+    public ResponseEntity<?> getResult(@PathVariable Long resultId) {
+        return ResponseEntity.ok(resultService.getResult(resultId));
+    }
 }

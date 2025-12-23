@@ -18,9 +18,15 @@ public class ResultService {
 
     @Transactional(readOnly = true)
     public List<ResultDTO> getResults() {
-        return resultRepository.findAllByOrderByResultIdDesc().stream()
-                .map(this::resultDTO)
-                .toList();
+        return resultRepository.findAllByOrderByResultIdDesc().stream().map(this::resultDTO).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public ResultDTO getResult(Long resultId) {
+        Result result = resultRepository.findById(resultId)
+                .orElseThrow(() -> new IllegalArgumentException("결과를 찾을 수 없습니다"));
+
+        return resultDTO(result);
     }
 
     private ResultDTO resultDTO(Result r) {
