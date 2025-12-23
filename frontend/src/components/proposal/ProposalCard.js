@@ -35,7 +35,13 @@ export default function ProposalCard({ type = "default", proposal }) {
         color = "gray";
     }
     return (
-        <div className="proposal-card-container" style={{ borderColor: `${type === "light" ? colors.orange.normal.base : colors.gray.light.active}` }} onClick={() => (window.location.href = `/nurisodam/result/${proposal.proposal_id}`)}>
+        <div
+            className="proposal-card-container"
+            style={{ borderColor: `${type === "light" ? colors.orange.normal.base : colors.gray.light.active}` }}
+            onClick={() => {
+                window.location.href = `/proposal/${proposal.proposal_id}`;
+            }}
+        >
             <div className="proposal-card-header">
                 <div className="proposal-card-state">
                     <LabelButton content={content} type={color} />
