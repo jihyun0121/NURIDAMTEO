@@ -19,6 +19,8 @@ public class ResultDTO {
     @JsonProperty("result_content")
     private String resultContent;
 
-    @JsonProperty("author")
     private String author;
+
+    @JsonProperty("view_count")
+    private Long viewCount;
 }

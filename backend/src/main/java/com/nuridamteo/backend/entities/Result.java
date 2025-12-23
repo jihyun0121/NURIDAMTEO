@@ -30,4 +30,8 @@ public class Result {
     @Column(name = "author", nullable = false, length = 10)
     @JsonProperty("author")
     private String author;
+
+    @Column(name = "view_count", nullable = false)
+    @JsonProperty("view_count")
+    private Long viewCount;
 }

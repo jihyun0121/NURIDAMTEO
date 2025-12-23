@@ -23,4 +23,9 @@ public class ResultController {
     public ResponseEntity<?> getResult(@PathVariable Long resultId) {
         return ResponseEntity.ok(resultService.getResult(resultId));
     }
+
+    @PutMapping("/{resultId}/view")
+    public ResponseEntity<?> updateView(@PathVariable Long resultId) {
+        return ResponseEntity.ok(resultService.updateView(resultId));
+    }
 }
