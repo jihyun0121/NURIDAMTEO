@@ -51,14 +51,13 @@ export const NoticeAPI = {
     getNews: () => api.get(`/notices/news`),
     getNewses: () => api.get(`/notices/newses`),
     getDetail: (noticeId) => api.get(`/notices/${noticeId}`, noticeId),
-    getResults: () => api.get(`/result`),
+    updateView: (noticeId) => api.put(`/notices/${noticeId}/view`, noticeId),
 };
 
-export const ProposalAPI = {
-    createProposal: (userId, dto) => api.post(`/proposals/${userId}`, userId, dto),
-    getProposals: () => api.get(`/proposals`),
-    getProposal: (proposalId) => api.get(`/proposals/${proposalId}`, proposalId),
-    setState: (proposalId, dto) => api.patch(`/proposals/${proposalId}/state`, proposalId, dto),
+export const ResultAPI = {
+    getResults: () => api.get(`/result`),
+    getResult: (resultId) => api.get(`/result/${resultId}`),
+    updateView: (resultId) => api.put(`/result/${resultId}/view`, resultId),
 };
 
 export const AttendanceAPI = {
@@ -69,13 +68,21 @@ export const AttendanceAPI = {
     },
 };
 
+export const ProposalAPI = {
+    createProposal: (userId, dto) => api.post(`/proposals/${userId}`, userId, dto),
+    getProposals: () => api.get(`/proposals`),
+    getProposal: (proposalId) => api.get(`/proposals/${proposalId}`, proposalId),
+    setState: (proposalId, dto) => api.patch(`/proposals/${proposalId}/state`, proposalId, dto),
+};
+
 export const SurveyAPI = {
-    getSurvey: () => api.get(`/surveys`),
+    getSurvey: (surveyId) => api.get(`/surveys/${surveyId}`, surveyId),
     getSurveyList: () => api.get(`/surveys/survey`),
     getPanelList: () => api.get(`/surveys/panel`),
     getQuestionsBySurvey: (surveyId) => api.get(`/surveys/${surveyId}/questions`, surveyId),
     getOptionsByQuestion: (questionId) => api.get(`/surveys/${questionId}/options`, questionId),
     checkSurveySelection: (surveyId, userId) => api.get(`/surveys/${surveyId}/selection`, surveyId, userId),
+    updateView: (surveyId) => api.put(`/surveys/${surveyId}/view`, surveyId),
 };
 
 export const AnswerAPI = {
@@ -90,6 +97,7 @@ export const AnswerAPI = {
 export const ParticipationAPI = {
     createParticipaiton: (dto) => api.post(`/participations`, dto),
     getParticipaiton: (targetId) => api.get(`/participations/${targetId}`, targetId),
+    getUserParticipaiton: (userId) => api.get(`/participations/user/${userId}`, userId),
     deleteParticipaiton: (participationId) => api.delete(`/participations/${participationId}`, participationId),
 };
 

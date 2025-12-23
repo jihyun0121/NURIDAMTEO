@@ -12,6 +12,7 @@ import "./assets/style/label.css";
 import "./assets/style/profile.css";
 import "./assets/style/input.css";
 import "./assets/style/header.css";
+import "./assets/style/content.css";
 import "./assets/style/tokens/colors.css";
 import "./assets/style/tokens/typography.css";
 import "./assets/style/home/home.css";

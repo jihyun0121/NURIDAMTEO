@@ -7,8 +7,8 @@ import NurisodamPage from "./pages/NurisodamPage";
 import IconPage from "./icons/IconPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-import NurisodamDetail from "./components/nurisodam/NurisodamDetail";
 import OnboardingPage from "./pages/OnboardingPage";
+import ContentPage from "./pages/ContentPage";
 
 function App() {
     return (
@@ -19,12 +19,13 @@ function App() {
                 <Route path="/signup" element={<SignupPage />} />
                 <Route path="/onboarding" element={<OnboardingPage />} />
                 <Route path="/participate" element={<ParticipatePage />} />
+                <Route path="/participate/:surveyId" element={<ContentPage />} />
                 <Route path="/proposal" element={<ProposalPage />} />
+                <Route path="/proposal/:proposalId" element={<ContentPage />} />
                 <Route path="/nurisodam" element={<NurisodamPage />} />
-                <Route path="/nurisodam/news/:noticeId" element={<NurisodamDetail />} />
-                <Route path="/nurisodam/notice/:noticeId" element={<NurisodamDetail />} />
-                <Route path="/nurisodam/faq" element={<NurisodamDetail />} />
-                <Route path="/nurisodam/result/:resultId" element={<NurisodamDetail />} />
+                <Route path="/nurisodam/news/:noticeId" element={<ContentPage />} />
+                <Route path="/nurisodam/notice/:noticeId" element={<ContentPage />} />
+                <Route path="/nurisodam/result/:resultId" element={<ContentPage />} />
                 <Route path="/icons" element={<IconPage />} />
             </Routes>
         </Router>
