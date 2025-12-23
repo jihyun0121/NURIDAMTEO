@@ -31,7 +31,14 @@ export default function NoticeList() {
     return (
         <div className="nurisodam-list-container">
             {currentNotices.map((notice) => (
-                <div key={notice.notice_id} className="nurisodam-lists" style={{ cursor: "pointer" }} onClick={() => (window.location.href = `/nurisodam/notice/${notice.notice_id}`)}>
+                <div
+                    key={notice.notice_id}
+                    className="nurisodam-lists"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                        window.location.href = `/nurisodam/notice/${notice.notice_id}`;
+                    }}
+                >
                     <MegaphoneIcon size="44" type={notice?.is_pinned ? "hover" : "default"} />
                     <span className="nurisodam-list-text">{notice?.title ?? "제목 없음"}</span>
 
