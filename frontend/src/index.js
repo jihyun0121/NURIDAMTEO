@@ -28,6 +28,7 @@ import "./assets/style/nurisodam/list.css";
 import "./assets/style/onboarding/label.css";
 import "./assets/style/participate/participate.css";
 import "./assets/style/participate/card.css";
+import "./assets/style/participate/answer.css";
 import "./icons/iconPage.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
