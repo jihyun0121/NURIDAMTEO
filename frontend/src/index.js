@@ -23,6 +23,7 @@ import "./assets/style/auth/Signup.css";
 import "./assets/style/onboarding/onboarding.css";
 import "./assets/style/my/mileage.css";
 import "./assets/style/proposal/proposal.css";
+import "./assets/style/proposal/writeproposal.css";
 import "./assets/style/nurisodam/nurisodam.css";
 import "./assets/style/nurisodam/list.css";
 import "./assets/style/onboarding/label.css";
