@@ -53,7 +53,7 @@ export default function ProposalPage() {
                         <p>· 좋은 정책으로 이어질 수 있도록 댓글로 토론하고 공감해주세요.</p>
                         <p>· 30일 내 100개의 공감을 얻은 제안은 관련부서의 검토를 통해 정책에 반영합니다.</p>
                     </div>
-                    <TextButtonS content="제안 작성하기" type="yellow" style={{ boxShadow: "none" }} />
+                    <TextButtonS content="제안 작성하기" type="yellow" style={{ boxShadow: "none" }} onClick={() => (window.location.href = "/writeproposal")} />
                 </div>
                 <div className="proposal-searchbar">
                     <SearchBar type="long" />
