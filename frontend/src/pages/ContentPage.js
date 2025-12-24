@@ -139,19 +139,31 @@ export default function ContentPage() {
         return name.charAt(0) + "*".repeat(name.length - 2) + name.charAt(name.length - 1);
     };
 
-    const handleLike = () => {
-        const like = participations.find((p) => p.target_id === contents.proposal_id);
+    const handleLike = async () => {
+        if (!contents) return;
+
+        const like = participations.find((p) => p.target_id === contents.proposal_id && p.target_type === "PROPOSAL" && p.participation_type === "LIKE");
 
         if (!hasParticipated) {
+            setHasParticipated(true);
             const dto = {
-                user_id: loginUser,
+                user_id: Number(loginUser),
                 target_type: "PROPOSAL",
                 target_id: contents.proposal_id,
                 participation_type: "LIKE",
             };
-            ParticipationAPI.createParticipaiton(dto);
-        } else if (hasParticipated) {
-            ParticipationAPI.deleteParticipaiton(like.participation_id);
+            const res = await ParticipationAPI.createParticipaiton(dto);
+            if (res?.data) {
+                setParticipations((prev) => [...prev, res.data]);
+            } else {
+                const fresh = await ParticipationAPI.getUserParticipaiton(loginUser);
+                setParticipations(fresh.data || []);
+            }
+        } else {
+            if (!like) return;
+            setHasParticipated(false);
+            await ParticipationAPI.deleteParticipaiton(like.participation_id);
+            setParticipations((prev) => prev.filter((p) => p.participation_id !== like.participation_id));
         }
     };
 
@@ -245,7 +257,7 @@ export default function ContentPage() {
         form = (
             <div className="content-buttons">
                 <TextButtonS content="공감" type={hasParticipated ? "hover" : "default"} onClick={handleLike} />
-                {/* <TextButtonS content="즐겨찾기" onClick={{}} /> */}
+                <TextButtonS content="즐겨찾기" />
                 <TextButtonS content="목록" onClick={() => navigate(-1)} />
             </div>
         );
