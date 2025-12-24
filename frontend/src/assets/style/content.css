@@ -30,9 +30,7 @@
         inset 0 -0.0625rem 0 0 #D5D5D5,
         inset 0 0 0 0 #D5D5D5,
         inset 0 0 0 0 #D5D5D5;
-}
 
-.content-title {
     color: var(--Gray-Dark, #404040);
 
     font-size: var(--headline-xlarge-size);

@@ -34,34 +34,34 @@ api.interceptors.response.use(
 export const UserAPI = {
     createUser: (dto) => api.post(`/auth/signup`, dto),
     login: (dto) => api.post(`/auth/login`, dto),
-    getUser: (userId) => api.get(`/users/${userId}`, userId),
-    updateProfile: (userId, dto) => api.put(`/users/${userId}`, userId, dto),
-    updateSetting: (userId, dto) => api.put(`/users/${userId}/setting`, userId, dto),
-    updatePassword: (userId, dto) => api.put(`/users/${userId}/password`, userId, dto),
+    getUser: (userId) => api.get(`/users/${userId}`),
+    updateProfile: (userId, dto) => api.put(`/users/${userId}`, dto),
+    updateSetting: (userId, dto) => api.put(`/users/${userId}/setting`, dto),
+    updatePassword: (userId, dto) => api.put(`/users/${userId}/password`, dto),
 };
 
 export const InterestAPI = {
-    selectInterests: (userId, categoryIds) => api.post(`/interests/${userId}`, userId, categoryIds),
-    getInterest: (userId) => api.post(`/interests/${userId}`, userId),
-    updateInterests: (userId, categoryIds) => api.post(`/interests/${userId}`, userId, categoryIds),
+    selectInterests: (userId, categoryIds) => api.post(`/interests/${userId}`, categoryIds),
+    getInterest: (userId) => api.post(`/interests/${userId}`),
+    updateInterests: (userId, categoryIds) => api.post(`/interests/${userId}`, categoryIds),
 };
 
 export const NoticeAPI = {
     getNotice: () => api.get(`/notices/notice`),
     getNews: () => api.get(`/notices/news`),
     getNewses: () => api.get(`/notices/newses`),
-    getDetail: (noticeId) => api.get(`/notices/${noticeId}`, noticeId),
-    updateView: (noticeId) => api.put(`/notices/${noticeId}/view`, noticeId),
+    getDetail: (noticeId) => api.get(`/notices/${noticeId}`),
+    updateView: (noticeId) => api.put(`/notices/${noticeId}/view`),
 };
 
 export const ResultAPI = {
     getResults: () => api.get(`/result`),
     getResult: (resultId) => api.get(`/result/${resultId}`),
-    updateView: (resultId) => api.put(`/result/${resultId}/view`, resultId),
+    updateView: (resultId) => api.put(`/result/${resultId}/view`),
 };
 
 export const AttendanceAPI = {
-    checkAttendance: (userId) => api.post(`/attendance/check/${userId}`, userId),
+    checkAttendance: (userId) => api.post(`/attendance/check/${userId}`),
     getTodayAttendance: (userId) => api.get(`/attendance/today/${userId}`, userId),
     getMonthlyAttendance(userId, year, month) {
         return api.get(`/attendance/month/${userId}/?year=${year}&month=${month}`);
@@ -69,42 +69,42 @@ export const AttendanceAPI = {
 };
 
 export const ProposalAPI = {
-    createProposal: (userId, dto) => api.post(`/proposals/${userId}`, userId, dto),
+    createProposal: (userId, dto) => api.post(`/proposals/${userId}`, dto),
     getProposals: () => api.get(`/proposals`),
-    getProposal: (proposalId) => api.get(`/proposals/${proposalId}`, proposalId),
-    setState: (proposalId, dto) => api.patch(`/proposals/${proposalId}/state`, proposalId, dto),
+    getProposal: (proposalId) => api.get(`/proposals/${proposalId}`),
+    setState: (proposalId, dto) => api.patch(`/proposals/${proposalId}/state`, dto),
 };
 
 export const SurveyAPI = {
-    getSurvey: (surveyId) => api.get(`/surveys/${surveyId}`, surveyId),
+    getSurvey: (surveyId) => api.get(`/surveys/${surveyId}`),
     getSurveyList: () => api.get(`/surveys/survey`),
     getPanelList: () => api.get(`/surveys/panel`),
-    getQuestionsBySurvey: (surveyId) => api.get(`/surveys/${surveyId}/questions`, surveyId),
-    getOptionsByQuestion: (questionId) => api.get(`/surveys/${questionId}/options`, questionId),
-    checkSurveySelection: (surveyId, userId) => api.get(`/surveys/${surveyId}/selection`, surveyId, userId),
-    updateView: (surveyId) => api.put(`/surveys/${surveyId}/view`, surveyId),
+    getQuestionsBySurvey: (surveyId) => api.get(`/surveys/${surveyId}/questions`),
+    getOptionsByQuestion: (questionId) => api.get(`/surveys/${questionId}/options`),
+    checkSurveySelection: (surveyId, userId) => api.get(`/surveys/${surveyId}/selection`, userId),
+    updateView: (surveyId) => api.put(`/surveys/${surveyId}/view`),
 };
 
 export const AnswerAPI = {
     createAnswer: (dto) => api.post(`/answers`, dto),
-    getAnswer: (answerId) => api.get(`/answers/${answerId}`, answerId),
-    getAnswersBySurvey: (surveyId) => api.get(`/answers/survey/${surveyId}`, surveyId),
-    getAnswersByQuestion: (questionId) => api.get(`/answers/question/${questionId}`, questionId),
-    getAnswersByParticipation: (participationId) => api.get(`/answers/participations/${participationId}`, participationId),
-    getOptionStats: (questionId) => api.get(`/statistics/questions/${questionId}/options`, questionId),
+    getAnswer: (answerId) => api.get(`/answers/${answerId}`),
+    getAnswersBySurvey: (surveyId) => api.get(`/answers/survey/${surveyId}`),
+    getAnswersByQuestion: (questionId) => api.get(`/answers/question/${questionId}`),
+    getAnswersByParticipation: (participationId) => api.get(`/answers/participations/${participationId}`),
+    getOptionStats: (questionId) => api.get(`/statistics/questions/${questionId}/options`),
 };
 
 export const ParticipationAPI = {
     createParticipaiton: (dto) => api.post(`/participations`, dto),
-    getParticipaiton: (targetId) => api.get(`/participations/${targetId}`, targetId),
-    getUserParticipaiton: (userId) => api.get(`/participations/user/${userId}`, userId),
-    deleteParticipaiton: (participationId) => api.delete(`/participations/${participationId}`, participationId),
+    getParticipaiton: (targetId) => api.get(`/participations/${targetId}`),
+    getUserParticipaiton: (userId) => api.get(`/participations/user/${userId}`),
+    deleteParticipaiton: (participationId) => api.delete(`/participations/${participationId}`),
 };
 
 export const CommentAPI = {
     createComment: (dto) => api.post(`/comments`, dto),
-    getComments: (targetId) => api.get(`/comments/${targetId}`, targetId),
-    deleteComment: (commentId) => api.delete(`/comments/${commentId}`, commentId),
+    getComments: (targetId) => api.get(`/comments/${targetId}`),
+    deleteComment: (commentId) => api.delete(`/comments/${commentId}`),
 };
 
 export default api;
