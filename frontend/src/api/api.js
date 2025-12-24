@@ -74,7 +74,7 @@ export const ProposalAPI = {
     getProposal: (proposalId) => api.get(`/proposals/${proposalId}`),
     setState: (proposalId, dto) => api.patch(`/proposals/${proposalId}/state`, dto),
     updateView: (proposalId) => api.put(`/proposals/${proposalId}/view`),
-    updateParticipate: (proposalId) => api.put(`/proposals/${proposalId}/view`),
+    updateParticipate: (proposalId, type) => api.put(`/proposals/${proposalId}/participate?type=${type}`),
 };
 
 export const SurveyAPI = {
@@ -85,7 +85,7 @@ export const SurveyAPI = {
     getOptionsByQuestion: (questionId) => api.get(`/surveys/${questionId}/options`),
     checkSurveySelection: (surveyId, userId) => api.get(`/surveys/${surveyId}/selection`, userId),
     updateView: (surveyId) => api.put(`/surveys/${surveyId}/view`),
-    updateParticipate: (surveyId) => api.put(`/surveys/${surveyId}/view`),
+    updateParticipate: (surveyId, type) => api.put(`/surveys/${surveyId}/participate?type=${type}`),
 };
 
 export const AnswerAPI = {

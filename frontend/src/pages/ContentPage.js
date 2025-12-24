@@ -11,6 +11,7 @@ import EyeIcon from "../ui/icons/EyeIcon";
 import HeartIcon from "../ui/icons/HeartIcon";
 import TextButtonS from "../ui/button/TextButtonS";
 import LabelButton from "../ui/button/LabelButton";
+import Comment from "../components/Comment";
 
 export default function ContentPage() {
     const navigate = useNavigate();
@@ -127,7 +128,19 @@ export default function ContentPage() {
     let title = null;
     let content = null;
     let form = null;
-    let comments = null;
+    let comments = (
+        <div>
+            <div>
+                <div></div>
+                <div></div>
+                <></>
+                <div></div>
+            </div>
+            <div>
+                <Comment />
+            </div>
+        </div>
+    );
     let color = null;
     let text = null;
 
@@ -137,6 +150,20 @@ export default function ContentPage() {
         if (len <= 1) return name;
         if (len === 2) return name.charAt(0) + "*";
         return name.charAt(0) + "*".repeat(name.length - 2) + name.charAt(name.length - 1);
+    };
+
+    const normalizeDay = (input) => {
+        if (!input) return "";
+
+        const digits = input.replace(/\D/g, "");
+
+        if (digits.length !== 8) return "";
+
+        const year = digits.slice(0, 4);
+        const month = digits.slice(4, 6);
+        const day = digits.slice(6, 8);
+
+        return `${year}.${month}.${day}`;
     };
 
     const handleLike = async () => {
@@ -153,6 +180,7 @@ export default function ContentPage() {
                 participation_type: "LIKE",
             };
             const res = await ParticipationAPI.createParticipaiton(dto);
+            ProposalAPI.updateParticipate(contents.proposal_id, "plus");
             if (res?.data) {
                 setParticipations((prev) => [...prev, res.data]);
             } else {
@@ -163,6 +191,7 @@ export default function ContentPage() {
             if (!like) return;
             setHasParticipated(false);
             await ParticipationAPI.deleteParticipaiton(like.participation_id);
+            ProposalAPI.updateParticipate(contents.proposal_id, "minus");
             setParticipations((prev) => prev.filter((p) => p.participation_id !== like.participation_id));
         }
     };
@@ -190,7 +219,7 @@ export default function ContentPage() {
                 {contents?.title}
                 <div className="content-author-text">
                     <p>{contents?.author}</p>
-                    {contents?.start_at} ~ {contents?.end_at}
+                    {normalizeDay(contents?.start_at)} ~ {normalizeDay(contents?.end_at)}
                 </div>
                 <div className="content-data-container">
                     <div className="content-data-text">
@@ -235,7 +264,7 @@ export default function ContentPage() {
                 {contents?.title}
                 <div className="content-author-text">
                     <p>{maskName(user?.name)}</p>
-                    {contents?.start_at} ~ {contents?.end_at}
+                    {normalizeDay(contents?.start_at)} ~ {normalizeDay(contents?.end_at)}
                 </div>
                 <div className="content-data-container">
                     <div className="content-data-text">
@@ -296,7 +325,7 @@ export default function ContentPage() {
                 <div>{title}</div>
                 <div>{content}</div>
                 <div>{form}</div>
-                <div>{comments}</div>
+                <div>{pageType === "participate" || pageType === "proposal" ? comments : null}</div>
             </div>
         </div>
     );
