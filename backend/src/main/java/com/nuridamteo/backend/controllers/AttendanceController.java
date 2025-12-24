@@ -31,8 +31,8 @@ public class AttendanceController {
     @GetMapping("/month/{userId}")
     public ResponseEntity<List<AttendanceDTO>> getMonthlyAttendance(
             @PathVariable("userId") Long userId,
-            @RequestParam int year,
-            @RequestParam int month) {
+            @RequestParam("year") int year,
+            @RequestParam("month") int month) {
         return ResponseEntity.ok(
                 attendanceService.getMonthlyAttendance(userId, year, month));
     }

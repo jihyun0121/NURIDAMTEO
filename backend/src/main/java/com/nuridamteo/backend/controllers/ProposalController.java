@@ -46,7 +46,9 @@ public class ProposalController {
     }
 
     @PutMapping("/{proposalId}/participate")
-    public ResponseEntity<?> updateParticipate(@PathVariable("proposalId") Long proposalId) {
-        return ResponseEntity.ok(proposalService.updateParticipate(proposalId));
+    public ResponseEntity<?> updateParticipate(
+            @PathVariable("proposalId") Long proposalId,
+            @RequestParam("type") String type) {
+        return ResponseEntity.ok(proposalService.updateParticipate(proposalId, type));
     }
 }

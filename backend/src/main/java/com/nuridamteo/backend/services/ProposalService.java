@@ -78,11 +78,13 @@ public class ProposalService {
         }
 
         @Transactional
-        public ProposalDTO updateParticipate(Long proposalId) {
+        public ProposalDTO updateParticipate(Long proposalId, String type) {
                 Proposal proposal = proposalRepository.findById(proposalId)
                                 .orElseThrow(() -> new IllegalArgumentException("제안을 찾을 수 없습니다."));
-
-                proposal.setParticipationCount(proposal.getParticipationCount() + 1);
+                if (type.equals("plus"))
+                        proposal.setParticipationCount(proposal.getParticipationCount() + 1);
+                if (type.equals("minus"))
+                        proposal.setParticipationCount(proposal.getParticipationCount() - 1);
                 return proposalDTO(proposal);
         }
 

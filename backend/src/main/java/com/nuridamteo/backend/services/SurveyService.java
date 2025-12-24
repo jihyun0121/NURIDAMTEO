@@ -94,11 +94,14 @@ public class SurveyService {
 	}
 
 	@Transactional
-	public SurveyDTO updateParticipate(Long surveyId) {
+	public SurveyDTO updateParticipate(Long surveyId, String type) {
 		Survey survey = surveyRepository.findById(surveyId)
 				.orElseThrow(() -> new IllegalArgumentException("설문을 찾을 수 없습니다."));
 
-		survey.setParticipationCount(survey.getParticipationCount() + 1);
+		if (type.equals("plus"))
+			survey.setParticipationCount(survey.getParticipationCount() + 1);
+		if (type.equals("minus"))
+			survey.setParticipationCount(survey.getParticipationCount() - 1);
 		return surveyDTO(survey);
 	}
 
