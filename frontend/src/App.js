@@ -22,7 +22,7 @@ function App() {
                 <Route path="/participate" element={<ParticipatePage />} />
                 <Route path="/participate/:surveyId" element={<ContentPage />} />
                 <Route path="/proposal" element={<ProposalPage />} />
-                <Route path="/proposal/write" element={<WriteProposalPage />} />
+                <Route path="/writeproposal" element={<WriteProposalPage />} />
                 <Route path="/proposal/:proposalId" element={<ContentPage />} />
                 <Route path="/nurisodam" element={<NurisodamPage />} />
                 <Route path="/nurisodam/news/:noticeId" element={<ContentPage />} />
