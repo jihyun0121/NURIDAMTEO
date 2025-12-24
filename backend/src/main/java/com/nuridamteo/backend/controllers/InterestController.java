@@ -17,18 +17,18 @@ public class InterestController {
     private final InterestService interestService;
 
     @PostMapping("/{userId}")
-    public ResponseEntity<?> selectInterests(@PathVariable Long userId, @RequestBody List<Long> categoryIds) {
+    public ResponseEntity<?> selectInterests(@PathVariable("userId") Long userId, @RequestBody List<Long> categoryIds) {
         interestService.selectInterests(userId, categoryIds);
         return ResponseEntity.ok(Map.of("message", "관심사 설정 완료"));
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<List<CategoryDTO>> getInterests(@PathVariable Long userId) {
+    public ResponseEntity<List<CategoryDTO>> getInterests(@PathVariable("userId") Long userId) {
         return ResponseEntity.ok(interestService.getInterests(userId));
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<?> updateInterests(@PathVariable Long userId, @RequestBody List<Long> categoryIds) {
+    public ResponseEntity<?> updateInterests(@PathVariable("userId") Long userId, @RequestBody List<Long> categoryIds) {
         interestService.updateInterests(userId, categoryIds);
         return ResponseEntity.ok(Map.of("message", "관심사 수정 성공"));
     }

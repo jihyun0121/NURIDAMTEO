@@ -18,22 +18,22 @@ public class ParticipationController {
 
     @PostMapping
     public ResponseEntity<?> createParticipation(@RequestBody ParticipationDTO dto) {
-        participationService.createParticipation(dto);
-        return ResponseEntity.ok(Map.of("message", "참여 생성 성공"));
+        ParticipationDTO saved = participationService.createParticipation(dto);
+        return ResponseEntity.ok(saved);
     }
 
     @GetMapping("/{targetId}")
-    public ResponseEntity<?> getParticipation(@PathVariable Long targetId) {
+    public ResponseEntity<?> getParticipation(@PathVariable("targetId") Long targetId) {
         return ResponseEntity.ok(participationService.getParticipation(targetId));
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<?> getUserParticipation(@PathVariable Long userId) {
+    public ResponseEntity<?> getUserParticipation(@PathVariable("userId") Long userId) {
         return ResponseEntity.ok(participationService.getUserParticipation(userId));
     }
 
     @DeleteMapping("/{participationId}")
-    public ResponseEntity<?> deleteParticipation(@PathVariable Long participationId) {
+    public ResponseEntity<?> deleteParticipation(@PathVariable("participationId") Long participationId) {
         participationService.deleteParticipation(participationId);
         return ResponseEntity.ok(Map.of("message", "참여 삭제 성공"));
     }

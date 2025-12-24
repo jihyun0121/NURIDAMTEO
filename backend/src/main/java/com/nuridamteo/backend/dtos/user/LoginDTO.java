@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class LoginDTO {

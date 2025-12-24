@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { NoticeAPI, ProposalAPI, UserAPI, ResultAPI, SurveyAPI } from "../api/api";
+import { NoticeAPI, ProposalAPI, UserAPI, ResultAPI, SurveyAPI, ParticipationAPI } from "../api/api";
 import Header from "../components/Header";
 
 import participateBanner from "../assets/image/participate/participatebanner.svg";
@@ -18,15 +18,13 @@ export default function ContentPage() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const [state, setState] = useState(false);
-
-    const hasParticipated = useMemo(() => {
-        if (!contents?.survey_id) return false;
-        return user.some((u) => u.target_id === contents.survey_id);
-    }, [user, contents?.survey_id]);
+    const [participations, setParticipations] = useState([]);
+    const [hasParticipated, setHasParticipated] = useState(false);
 
     const location = useLocation();
     const pathname = location.pathname;
     const params = useParams();
+    const loginUser = sessionStorage.getItem("user_id");
 
     const pageType = useMemo(() => {
         if (pathname.startsWith("/participate")) return "participate";
@@ -50,6 +48,42 @@ export default function ContentPage() {
     }, [contents?.category_id]);
 
     useEffect(() => {
+        const fetchMyParticipations = async () => {
+            if (!loginUser) return;
+
+            try {
+                const res = await ParticipationAPI.getUserParticipaiton(loginUser);
+                setParticipations(res.data || []);
+            } catch (err) {
+                console.log("유저 참여 목록 로딩 실패", err);
+                setParticipations([]);
+            }
+        };
+
+        fetchMyParticipations();
+    }, [loginUser]);
+
+    useEffect(() => {
+        if (!contents) return;
+
+        let targetId = null;
+        let targetType = null;
+
+        if (pageType === "participate") {
+            targetId = contents?.survey_id;
+            targetType = "SURVEY";
+        } else if (pageType === "proposal") {
+            targetId = contents?.proposal_id;
+            targetType = "PROPOSAL";
+        }
+
+        if (!targetId || !targetType) return;
+
+        const participated = participations.some((p) => p.target_id === targetId && p.target_type === targetType);
+        setHasParticipated(participated);
+    }, [contents, participations, pageType]);
+
+    useEffect(() => {
         const fetchData = async () => {
             setContents(null);
             setUser(null);
@@ -58,21 +92,19 @@ export default function ContentPage() {
             try {
                 setLoading(true);
                 if (pageType === "participate") {
-                    console.log(params);
                     const surveyRes = await SurveyAPI.getSurvey(params.surveyId);
                     const survey = surveyRes.data;
-                    console.log(survey);
+
                     setContents(survey);
                     setState(survey.status);
                 } else if (pageType === "proposal") {
                     const proposalRes = await ProposalAPI.getProposal(params.proposalId);
                     const proposal = proposalRes.data;
                     setContents(proposal);
+                    setState(proposal.status);
 
-                    if (proposal?.user_id) {
-                        const userRes = await UserAPI.getUser(proposal.user_id);
-                        setUser(userRes.data);
-                    }
+                    const userRes = await UserAPI.getUser(proposal.user_id);
+                    setUser(userRes.data);
                 } else if (pageType === "notice") {
                     const res = await NoticeAPI.getDetail(params.noticeId);
                     setContents(res.data);
@@ -99,6 +131,42 @@ export default function ContentPage() {
     let color = null;
     let text = null;
 
+    const maskName = (name) => {
+        if (!name) return "";
+        const len = name.length;
+        if (len <= 1) return name;
+        if (len === 2) return name.charAt(0) + "*";
+        return name.charAt(0) + "*".repeat(name.length - 2) + name.charAt(name.length - 1);
+    };
+
+    const handleLike = async () => {
+        if (!contents) return;
+
+        const like = participations.find((p) => p.target_id === contents.proposal_id && p.target_type === "PROPOSAL" && p.participation_type === "LIKE");
+
+        if (!hasParticipated) {
+            setHasParticipated(true);
+            const dto = {
+                user_id: Number(loginUser),
+                target_type: "PROPOSAL",
+                target_id: contents.proposal_id,
+                participation_type: "LIKE",
+            };
+            const res = await ParticipationAPI.createParticipaiton(dto);
+            if (res?.data) {
+                setParticipations((prev) => [...prev, res.data]);
+            } else {
+                const fresh = await ParticipationAPI.getUserParticipaiton(loginUser);
+                setParticipations(fresh.data || []);
+            }
+        } else {
+            if (!like) return;
+            setHasParticipated(false);
+            await ParticipationAPI.deleteParticipaiton(like.participation_id);
+            setParticipations((prev) => prev.filter((p) => p.participation_id !== like.participation_id));
+        }
+    };
+
     if (pageType === "participate") {
         if (state === "WAIT") {
             text = "대기중";
@@ -115,10 +183,11 @@ export default function ContentPage() {
             text = "조사종료";
             color = "gray";
         }
+
         banner = participateBanner;
         title = (
             <div className="content-title-container">
-                <div className="content-title">{contents?.title}</div>
+                {contents?.title}
                 <div className="content-author-text">
                     <p>{contents?.author}</p>
                     {contents?.start_at} ~ {contents?.end_at}
@@ -142,18 +211,36 @@ export default function ContentPage() {
         );
         content = <div dangerouslySetInnerHTML={{ __html: contents?.description }} />;
         form = <AnswerForm survey={contents} />;
-    }
+    } else if (pageType === "proposal") {
+        if (state === "WAIT") {
+            text = "대기중";
+            color = "gray";
+        } else if (state === "OPEN") {
+            text = "토론중";
+            color = "red";
+        } else if (state === "ANSWER") {
+            text = "답변대기";
+            color = "gray";
+        } else if (state === "ADOPTED") {
+            text = "채택";
+            color = "primary";
+        } else if (state === "REFUSAL") {
+            text = "미채택";
+            color = "gray";
+        }
 
-    if (pageType === "proposal") {
         banner = proposalBanner;
         title = (
             <div className="content-title-container">
-                <div className="content-title">{contents?.title}</div>
+                {contents?.title}
                 <div className="content-author-text">
-                    <p>{user?.name}</p>
+                    <p>{maskName(user?.name)}</p>
                     {contents?.start_at} ~ {contents?.end_at}
                 </div>
                 <div className="content-data-container">
+                    <div className="content-data-text">
+                        <LabelButton content={text} type={color} />
+                    </div>
                     <div className="content-data-text">
                         <EyeIcon size={44} />
                         {contents?.view_count}
@@ -169,14 +256,12 @@ export default function ContentPage() {
         content = loading ? <div>불러오는 중...</div> : <div dangerouslySetInnerHTML={{ __html: contents?.content }} />;
         form = (
             <div className="content-buttons">
-                <TextButtonS content="공감" onClick={{}} />
-                <TextButtonS content="즐겨찾기" onClick={{}} />
+                <TextButtonS content="공감" type={hasParticipated ? "hover" : "default"} onClick={handleLike} />
+                <TextButtonS content="즐겨찾기" />
                 <TextButtonS content="목록" onClick={() => navigate(-1)} />
             </div>
         );
-    }
-
-    if (pageType === "notice") {
+    } else if (pageType === "notice") {
         banner = noticeBanner;
         title = contents?.title ?? "undefinded";
         content = loading ? (
@@ -187,9 +272,7 @@ export default function ContentPage() {
                 <div dangerouslySetInnerHTML={{ __html: contents?.content }} />
             </div>
         );
-    }
-
-    if (pageType === "result") {
+    } else if (pageType === "result") {
         banner = noticeBanner;
         title = contents?.result_title ?? "undefinded";
         content = loading ? (

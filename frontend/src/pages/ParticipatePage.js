@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { ParticipationAPI } from "../api/api";
 import Header from "../components/Header";
 import banner from "../assets/image/participate/participatebanner.svg";
 import SearchBar from "../ui/input/SearchBar";
@@ -10,21 +9,6 @@ import NoticeLabel from "../ui/NoticeLabel";
 import NoticeIcon from "../ui/icons/NoticeIcon";
 
 export default function ParticipatePage() {
-    const [, setParticipate] = useState([]);
-
-    useEffect(() => {
-        async function loadParticipate() {
-            try {
-                const res = await ParticipationAPI.getParticipaiton(0);
-                setParticipate(res.data);
-            } catch (err) {
-                console.log("설문 로딩 실패", err);
-            }
-        }
-        loadParticipate();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     const optionData = [
         { key: 1, value: "설문조사" },
         { key: 2, value: "패널조사" },

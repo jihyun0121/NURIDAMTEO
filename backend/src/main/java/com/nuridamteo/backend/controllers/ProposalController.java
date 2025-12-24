@@ -17,7 +17,7 @@ public class ProposalController {
     private final ProposalService proposalService;
 
     @PostMapping("/{userId}")
-    public ResponseEntity<?> createProposal(@PathVariable Long userId, @RequestBody ProposalDTO dto) {
+    public ResponseEntity<?> createProposal(@PathVariable("userId") Long userId, @RequestBody ProposalDTO dto) {
         proposalService.createProposal(userId, dto);
         return ResponseEntity.ok(Map.of("message", "제안 생성 성공"));
     }
@@ -29,14 +29,24 @@ public class ProposalController {
     }
 
     @GetMapping("/{proposalId}")
-    public ResponseEntity<?> getProposal(@PathVariable Long proposalId) {
+    public ResponseEntity<?> getProposal(@PathVariable("proposalId") Long proposalId) {
         ProposalDTO proposal = proposalService.getProposal(proposalId);
         return ResponseEntity.ok(proposal);
     }
 
     @PatchMapping("/{proposalId}/state")
-    public ResponseEntity<?> setState(@PathVariable Long proposalId, @RequestBody ProposalDTO dto) {
+    public ResponseEntity<?> setState(@PathVariable("proposalId") Long proposalId, @RequestBody ProposalDTO dto) {
         ProposalDTO proposal = proposalService.setState(proposalId, dto);
         return ResponseEntity.ok(proposal);
+    }
+
+    @PutMapping("/{proposalId}/view")
+    public ResponseEntity<?> updateView(@PathVariable("proposalId") Long proposalId) {
+        return ResponseEntity.ok(proposalService.updateView(proposalId));
+    }
+
+    @PutMapping("/{proposalId}/participate")
+    public ResponseEntity<?> updateParticipate(@PathVariable("proposalId") Long proposalId) {
+        return ResponseEntity.ok(proposalService.updateParticipate(proposalId));
     }
 }

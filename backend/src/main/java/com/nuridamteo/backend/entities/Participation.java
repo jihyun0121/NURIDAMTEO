@@ -24,7 +24,7 @@ public class Participation {
     private Long participationId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    @JoinColumn(name = "user_id", nullable = false)
     @JsonProperty("user_id")
     @JsonIgnore
     private Users user;

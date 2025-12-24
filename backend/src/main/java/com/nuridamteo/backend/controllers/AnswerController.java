@@ -22,22 +22,23 @@ public class AnswerController {
     }
 
     @GetMapping("/{answerId}")
-    public ResponseEntity<List<AnswerDTO>> getAnswers(@PathVariable Long answerId) {
+    public ResponseEntity<List<AnswerDTO>> getAnswers(@PathVariable("answerId") Long answerId) {
         return ResponseEntity.ok(answerService.getAnswers(answerId));
     }
 
     @GetMapping("/survey/{surveyId}")
-    public ResponseEntity<List<AnswerDTO>> getAnswersBySurvey(@PathVariable Long surveyId) {
+    public ResponseEntity<List<AnswerDTO>> getAnswersBySurvey(@PathVariable("surveyId") Long surveyId) {
         return ResponseEntity.ok(answerService.getAnswersBySurvey(surveyId));
     }
 
     @GetMapping("/question/{questionId}")
-    public ResponseEntity<List<AnswerDTO>> getAnswersByQuestion(@PathVariable Long questionId) {
+    public ResponseEntity<List<AnswerDTO>> getAnswersByQuestion(@PathVariable("questionId") Long questionId) {
         return ResponseEntity.ok(answerService.getAnswersByQuestion(questionId));
     }
 
     @GetMapping("/participations/{participationId}")
-    public ResponseEntity<List<AnswerDTO>> getAnswersByParticipation(@PathVariable Long participationId) {
+    public ResponseEntity<List<AnswerDTO>> getAnswersByParticipation(
+            @PathVariable("participationId") Long participationId) {
         return ResponseEntity.ok(answerService.getAnswersByParticipation(participationId));
     }
 }
