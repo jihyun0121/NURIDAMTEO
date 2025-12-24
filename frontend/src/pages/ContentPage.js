@@ -140,6 +140,8 @@ export default function ContentPage() {
     };
 
     const handleLike = () => {
+        const like = participations.find((p) => p.target_id === contents.proposal_id);
+
         if (!hasParticipated) {
             const dto = {
                 user_id: loginUser,
@@ -149,11 +151,7 @@ export default function ContentPage() {
             };
             ParticipationAPI.createParticipaiton(dto);
         } else if (hasParticipated) {
-            // ParticipationAPI.deleteParticipaiton();
-
-            console.log(contents);
-            console.log(participations);
-            console.log(contents.proposal_id === participations.target_id);
+            ParticipationAPI.deleteParticipaiton(like.participation_id);
         }
     };
 
@@ -246,7 +244,7 @@ export default function ContentPage() {
         content = loading ? <div>불러오는 중...</div> : <div dangerouslySetInnerHTML={{ __html: contents?.content }} />;
         form = (
             <div className="content-buttons">
-                <TextButtonS content={hasParticipated ? "공감 취소" : "공감"} type={hasParticipated ? "hover" : "default"} onClick={handleLike} />
+                <TextButtonS content="공감" type={hasParticipated ? "hover" : "default"} onClick={handleLike} />
                 {/* <TextButtonS content="즐겨찾기" onClick={{}} /> */}
                 <TextButtonS content="목록" onClick={() => navigate(-1)} />
             </div>
