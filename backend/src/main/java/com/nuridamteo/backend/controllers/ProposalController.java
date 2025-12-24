@@ -39,4 +39,14 @@ public class ProposalController {
         ProposalDTO proposal = proposalService.setState(proposalId, dto);
         return ResponseEntity.ok(proposal);
     }
+
+    @PutMapping("/{proposalId}/view")
+    public ResponseEntity<?> updateView(@PathVariable("proposalId") Long proposalId) {
+        return ResponseEntity.ok(proposalService.updateView(proposalId));
+    }
+
+    @PutMapping("/{proposalId}/participate")
+    public ResponseEntity<?> updateParticipate(@PathVariable("proposalId") Long proposalId) {
+        return ResponseEntity.ok(proposalService.updateParticipate(proposalId));
+    }
 }

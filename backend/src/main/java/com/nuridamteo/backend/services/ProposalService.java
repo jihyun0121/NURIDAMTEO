@@ -68,6 +68,24 @@ public class ProposalService {
                 return proposalDTO(proposal);
         }
 
+        @Transactional
+        public ProposalDTO updateView(Long proposalId) {
+                Proposal proposal = proposalRepository.findById(proposalId)
+                                .orElseThrow(() -> new IllegalArgumentException("제안을 찾을 수 없습니다."));
+
+                proposal.setViewCount(proposal.getViewCount() + 1);
+                return proposalDTO(proposal);
+        }
+
+        @Transactional
+        public ProposalDTO updateParticipate(Long proposalId) {
+                Proposal proposal = proposalRepository.findById(proposalId)
+                                .orElseThrow(() -> new IllegalArgumentException("제안을 찾을 수 없습니다."));
+
+                proposal.setParticipationCount(proposal.getParticipationCount() + 1);
+                return proposalDTO(proposal);
+        }
+
         private ProposalDTO proposalDTO(Proposal s) {
                 return ProposalDTO.builder()
                                 .proposalId(s.getProposalId())
