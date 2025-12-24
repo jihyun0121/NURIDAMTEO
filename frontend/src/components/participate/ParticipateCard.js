@@ -70,7 +70,11 @@ export default function ParticipateCard({ type = "default", survey, participate 
 
             <div className="participate-card-footer">
                 <VoteIcon size={44} variant="line" type={type === "light" ? "hover" : "fill"} /> {survey.participation_count}
-                <ChatIcon size={44} type={type === "light" ? "hover" : "fill"} /> {survey.participation_count}
+                {survey.survey_type === "SURVEY" && (
+                    <>
+                        <ChatIcon size={44} type={type === "light" ? "hover" : "fill"} /> {survey.participation_count}
+                    </>
+                )}
             </div>
         </div>
     );

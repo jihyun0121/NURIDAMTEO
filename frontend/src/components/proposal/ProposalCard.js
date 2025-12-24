@@ -64,8 +64,8 @@ export default function ProposalCard({ type = "default", proposal }) {
             </div>
 
             <div className="proposal-card-footer">
-                <HeartIcon size={44} type={type === "light" ? "hover" : "fill"} /> {proposal.view_count}
-                <ChatIcon size={44} type={type === "light" ? "hover" : "fill"} /> {proposal.participation_count}
+                <HeartIcon size={44} type={type === "light" ? "hover" : "fill"} /> {proposal.participation_count}
+                <ChatIcon size={44} type={type === "light" ? "hover" : "fill"} /> {proposal.view_count}
             </div>
         </div>
     );
