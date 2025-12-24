@@ -73,8 +73,8 @@ export const ProposalAPI = {
     getProposals: () => api.get(`/proposals`),
     getProposal: (proposalId) => api.get(`/proposals/${proposalId}`),
     setState: (proposalId, dto) => api.patch(`/proposals/${proposalId}/state`, dto),
-    updateView: (proposalId) => api.put(`/surveys/${proposalId}/view`),
-    updateParticipate: (proposalId) => api.put(`/surveys/${proposalId}/view`),
+    updateView: (proposalId) => api.put(`/proposals/${proposalId}/view`),
+    updateParticipate: (proposalId) => api.put(`/proposals/${proposalId}/view`),
 };
 
 export const SurveyAPI = {
