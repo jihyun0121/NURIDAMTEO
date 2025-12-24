@@ -23,12 +23,12 @@ public class CommentsController {
     }
 
     @GetMapping("/{targetId}")
-    public ResponseEntity<?> getComments(@PathVariable Long targetId) {
+    public ResponseEntity<?> getComments(@PathVariable("targetId") Long targetId) {
         return ResponseEntity.ok(commentsService.getComments(targetId));
     }
 
     @DeleteMapping("/{commentId}")
-    public ResponseEntity<?> deleteComment(@PathVariable Long commentId) {
+    public ResponseEntity<?> deleteComment(@PathVariable("commentId") Long commentId) {
         commentsService.deleteComment(commentId);
         return ResponseEntity.ok(Map.of("message", "댓글 삭제 성공"));
     }

@@ -19,24 +19,24 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{userId}")
-    public ResponseEntity<?> getUser(@PathVariable Long userId) {
+    public ResponseEntity<?> getUser(@PathVariable("userId") Long userId) {
         return ResponseEntity.ok(userService.getUser(userId));
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<?> updateProfile(@PathVariable Long userId, @RequestBody ProfileDTO dto) {
+    public ResponseEntity<?> updateProfile(@PathVariable("userId") Long userId, @RequestBody ProfileDTO dto) {
         userService.updateProfile(userId, dto);
         return ResponseEntity.ok(Map.of("message", "회원정보 수정 완료"));
     }
 
     @PutMapping("/{userId}/setting")
-    public ResponseEntity<?> updateSetting(@PathVariable Long userId, @RequestBody SettingDTO dto) {
+    public ResponseEntity<?> updateSetting(@PathVariable("userId") Long userId, @RequestBody SettingDTO dto) {
         userService.updateSetting(userId, dto);
         return ResponseEntity.ok(Map.of("message", "회원설정 수정 완료"));
     }
 
     @PutMapping("/{userId}/password")
-    public ResponseEntity<?> updatePassword(@PathVariable Long userId, @RequestBody PasswordDTO dto) {
+    public ResponseEntity<?> updatePassword(@PathVariable("userId") Long userId, @RequestBody PasswordDTO dto) {
         userService.updatePassword(userId, dto);
         return ResponseEntity.ok(Map.of("message", "비밀번호 변경 완료"));
     }

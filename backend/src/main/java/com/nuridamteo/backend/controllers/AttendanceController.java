@@ -17,20 +17,20 @@ public class AttendanceController {
     private final AttendanceService attendanceService;
 
     @PostMapping("/check/{userId}")
-    public ResponseEntity<AttendanceDTO> checkAttendance(@PathVariable Long userId) {
+    public ResponseEntity<AttendanceDTO> checkAttendance(@PathVariable("userId") Long userId) {
         return ResponseEntity.ok(
                 attendanceService.checkAttendance(userId));
     }
 
     @GetMapping("/today/{userId}")
-    public ResponseEntity<AttendanceDTO> getTodayAttendance(@PathVariable Long userId) {
+    public ResponseEntity<AttendanceDTO> getTodayAttendance(@PathVariable("userId") Long userId) {
         return ResponseEntity.ok(
                 attendanceService.getTodayAttendance(userId));
     }
 
     @GetMapping("/month/{userId}")
     public ResponseEntity<List<AttendanceDTO>> getMonthlyAttendance(
-            @PathVariable Long userId,
+            @PathVariable("userId") Long userId,
             @RequestParam int year,
             @RequestParam int month) {
         return ResponseEntity.ok(

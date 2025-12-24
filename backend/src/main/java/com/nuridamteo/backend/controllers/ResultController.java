@@ -20,12 +20,12 @@ public class ResultController {
     }
 
     @GetMapping("/{resultId}")
-    public ResponseEntity<?> getResult(@PathVariable Long resultId) {
+    public ResponseEntity<?> getResult(@PathVariable("resultId") Long resultId) {
         return ResponseEntity.ok(resultService.getResult(resultId));
     }
 
     @PutMapping("/{resultId}/view")
-    public ResponseEntity<?> updateView(@PathVariable Long resultId) {
+    public ResponseEntity<?> updateView(@PathVariable("resultId") Long resultId) {
         return ResponseEntity.ok(resultService.updateView(resultId));
     }
 }

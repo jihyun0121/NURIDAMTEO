@@ -14,7 +14,7 @@ public class StatisticController {
     private final StatisticService statisticService;
 
     @GetMapping("/questions/{questionId}/options")
-    public ResponseEntity<?> getOptionStats(@PathVariable Long questionId) {
+    public ResponseEntity<?> getOptionStats(@PathVariable("questionId") Long questionId) {
         return ResponseEntity.ok(statisticService.getOptionStats(questionId));
     }
 }
