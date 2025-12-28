@@ -4,9 +4,9 @@ import Logo from "../../ui/Logo";
 import TextButtonS from "../../ui/button/TextButtonS";
 import MileageStatus from "./MileageStatus";
 
-export default function MyList({ title, asc, desc }) {
+export default function MyList({ title, asc, desc, type = "mileage", userId }) {
     return (
-        <>
+        <div className="my-list-container">
             <div className="my-list-title">
                 <p>{title}</p>
                 <div className="my-list-sort-btn">
@@ -23,6 +23,6 @@ export default function MyList({ title, asc, desc }) {
                 <MileageStatus />
                 <MileageStatus />
             </div>
-        </>
+        </div>
     );
 }

@@ -68,41 +68,20 @@ export default function MyPage() {
                         <MileageButton content="기부 신청" />
                     </div>
                 </div>
-                <MyList title={"보상 내역"} asc={"지급순"} desc={"최신순"} />
+                <MyList title={"보상 내역"} asc={"지급순"} desc={"최신순"} userId={userId} />
             </div >
         );
     } else if (type === "propsal") {
         content = (
-            <div>
-                <div>
-                    <p>나의 제안 현황</p>
-                    <p>오래된순</p>
-                    <p>최신순</p>
-                </div>
-                <div></div>
-            </div>
+            <MyList title={"나의 제안 현황"} asc={"오래된순"} desc={"최신순"} type={"propsal"} userId={userId} />
         );
     } else if (type === "participate") {
         content = (
-            <div>
-                <div>
-                    <p>나의 참여내역</p>
-                    <p>오래된순</p>
-                    <p>최신순</p>
-                </div>
-                <div></div>
-            </div>
+            <MyList title={"나의 참여내역"} asc={"오래된순"} desc={"최신순"} type={"participate"} userId={userId} />
         );
     } else if (type === "bookmark") {
         content = (
-            <div>
-                <div>
-                    <p>즐겨찾기</p>
-                    <p>오래된순</p>
-                    <p>최신순</p>
-                </div>
-                <div></div>
-            </div>
+            <MyList title={"즐겨찾기"} asc={"오래된순"} desc={"최신순"} type={"bookmark"} userId={userId} />
         );
     } else if (type === "setting") {
         content = (

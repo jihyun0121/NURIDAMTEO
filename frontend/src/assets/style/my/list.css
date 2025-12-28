@@ -1,3 +1,11 @@
+.my-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    align-self: stretch;
+}
+
 .my-list-title {
     display: flex;
     justify-content: space-between;
