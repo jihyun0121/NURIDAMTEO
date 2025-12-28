@@ -6,9 +6,13 @@ import TextButtonS from "../../ui/button/TextButtonS";
 export default function Choice({ userId }) {
     const [selectedIds, setSelectedIds] = useState([]);
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+    const [saved, setSaved] = useState(false);
 
     const toggleCategory = (id) => {
         setError("");
+        setSuccess("");
+        setSaved(false);
 
         setSelectedIds((prev) => {
             if (prev.includes(id)) return prev.filter((v) => v !== id);
@@ -23,15 +27,19 @@ export default function Choice({ userId }) {
     };
 
     const isSelected = (id) => selectedIds.includes(id);
-    const isDisabled = selectedIds.length === 0;
+
+    const isDisabled = selectedIds.length === 0 || saved;
 
     const handleSubmit = async () => {
         if (isDisabled) return;
-        console.log(selectedIds);
+
+        setError("");
+        setSuccess("");
 
         try {
             await InterestAPI.selectInterests(userId, selectedIds);
-            console.log("관심 주제 저장 성공");
+            setSuccess("관심 주제 선택이 완료되었습니다.");
+            setSaved(true);
         } catch (e) {
             setError(e?.response?.data?.error || "관심 주제 저장 실패");
         }
@@ -77,10 +85,16 @@ export default function Choice({ userId }) {
 
             <TextButtonS
                 content="선택 완료"
-                type={isDisabled ? "default" : "hover"}
+                type={isDisabled ? "none" : "hover"}
                 readOnly={isDisabled}
                 onClick={handleSubmit}
             />
+
+            {success && (
+                <div style={{ marginTop: "0.75rem", color: "#595959", fontSize: "1rem" }}>
+                    {success}
+                </div>
+            )}
         </div>
     );
 }
