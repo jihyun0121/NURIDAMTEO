@@ -5,14 +5,14 @@ import BellIcon from "../ui/icons/BellIcon";
 import Icon from "../ui/icons/TextIcon";
 import HeaderButton from "../components/HeaderButton";
 
-export default function Header() {
+export default function Header({ style }) {
     const location = useLocation();
     const pathname = location.pathname;
 
     const activeTab = pathname.startsWith("/participate") ? "join" : pathname.startsWith("/proposal") ? "prop" : pathname.startsWith("/nurisodam") ? "nuri" : "none";
 
     return (
-        <div className="header-container">
+        <div className="header-container" style={{ ...style }}>
             <div style={{ cursor: "pointer" }} onClick={() => (window.location.href = "/")}>
                 <Logo size="m" />
             </div>
