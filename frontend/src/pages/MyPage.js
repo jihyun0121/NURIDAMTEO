@@ -11,9 +11,8 @@ import VoteIcon from "../ui/icons/VoteIcon";
 import BookmarkIcon from "../ui/icons/BookmarkIcon";
 import SettingIcon from "../ui/icons/SettingIcon";
 import SettingForm from "../components/my/SettingForm";
-import MileageStatus from "../components/my/MileageStatus";
 import MileageButton from "../ui/button/MileageButton";
-import { typography } from "../assets/style/tokens/typography";
+import MyList from "../components/my/MyList";
 
 export default function MyPage() {
     const [user, setUser] = useState(null);
@@ -49,7 +48,7 @@ export default function MyPage() {
         );
     } else if (type === "mileage") {
         content = (
-            <div>
+            <div className="my-mileage">
                 <div>
                     <span className="my-titles">마일리지</span>
                     <div className="my-description">
@@ -69,12 +68,7 @@ export default function MyPage() {
                         <MileageButton content="기부 신청" />
                     </div>
                 </div>
-                <div>
-                    <p>보상 내역</p>
-                    <p>지급순</p>
-                    <p>최신순</p>
-                </div>
-                <div><MileageStatus /></div>
+                <MyList title={"보상 내역"} asc={"지급순"} desc={"최신순"} />
             </div >
         );
     } else if (type === "propsal") {

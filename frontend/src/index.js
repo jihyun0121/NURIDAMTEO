@@ -32,6 +32,7 @@ import "./assets/style/participate/card.css";
 import "./assets/style/participate/answer.css";
 import "./assets/style/my/my.css";
 import "./assets/style/my/popup.css";
+import "./assets/style/my/list.css";
 import "./icons/iconPage.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
