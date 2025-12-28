@@ -78,3 +78,52 @@
     font-weight: var(--title-medium-weight);
     line-height: var(--title-medium-line);
 }
+
+.my-setting {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    align-self: stretch;
+}
+
+.my-terms-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.my-terms-question {
+    display: flex;
+    width: 70.75rem;
+    height: 3.75rem;
+    padding: 0.5rem 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 0.75rem;
+    border: 1px solid var(--grey-light-active, #d5d5d5);
+    background: #fff;
+
+    color: var(--Gray-Normal, #555);
+
+    font-size: var(--title-medium-size);
+    font-weight: var(--title-medium-weight);
+    line-height: var(--title-medium-line);
+}
+.my-terms-anwer {
+    display: flex;
+    width: 70.75rem;
+    height: 3.75rem;
+    padding: 0.5rem 1.5rem;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    border: 1px solid var(--grey-light-active, #d5d5d5);
+    background: #fff;
+
+    color: var(--Gray-Normal, #555);
+
+    font-size: var(--title-medium-size);
+    font-weight: var(--title-medium-weight);
+    line-height: var(--title-medium-line);
+}

@@ -9,6 +9,8 @@ import CheckIcon from "../ui/icons/CheckIcon";
 import CoinIcon from "../ui/icons/CoinIcon";
 import VoteIcon from "../ui/icons/VoteIcon";
 import BookmarkIcon from "../ui/icons/BookmarkIcon";
+import SettingIcon from "../ui/icons/SettingIcon";
+import SettingForm from "../components/my/SettingForm";
 
 export default function MyPage() {
     const [user, setUser] = useState(null);
@@ -100,13 +102,9 @@ export default function MyPage() {
         );
     } else if (type === "setting") {
         content = (
-            <div>
-                <p>설정</p>
-                <div>알림 끄기</div>
-                <div>접근성 모드</div>
-                <div>이용약관 및 개인정보 처리 안내</div>
-                <div>로그아웃</div>
-                <div>회원 탈퇴</div>
+            <div className="my-setting">
+                <p className="Signup-title">설정</p>
+                <SettingForm user={user} userId={userId} />
             </div>
         );
     }
@@ -143,12 +141,20 @@ export default function MyPage() {
                             </MyPageButton>
                         </div>
                         <div className="my-menu-content" style={{ boxShadow: "none", paddingBottom: 0 }}>
-                            <div>설정</div>
-                            <div>로그아웃</div>
+                            <MyPageButton type={type === "setting" ? "hover" : "default"} content="설정" arrow={false} onClick={() => setType("setting")}>
+                                <SettingIcon size={44} color="inherit" />
+                            </MyPageButton>
+                            <MyPageButton content="로그아웃" arrow={false}
+                                onClick={() => {
+                                    sessionStorage.clear();
+                                    window.location.href = "/";
+                                }}
+                            >
+                                <CheckIcon size={44} color="inherit" />
+                            </MyPageButton>
                         </div>
                     </div>
                     <div>{content}</div>
-                    {/* <PopUp /> */}
                 </div>
             </div>
         </div >
