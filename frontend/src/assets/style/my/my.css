@@ -101,7 +101,7 @@
     align-items: center;
 
     border-radius: 0.75rem;
-    border: 1px solid var(--grey-light-active, #d5d5d5);
+    box-shadow: 0 0 0 1px var(--gray-light-active) inset;
     background: #fff;
 
     color: var(--Gray-Normal, #555);
@@ -118,7 +118,7 @@
     justify-content: flex-start;
     flex-direction: column;
 
-    border: 1px solid var(--grey-light-active, #d5d5d5);
+    box-shadow: 1px 0 0 0 var(--gray-light-active) inset, -1px 0 0 0 var(--gray-light-active) inset, 0 -1px 0 0 var(--gray-light-active) inset;
     background: #fff;
 
     color: var(--Gray-Normal, #555);
