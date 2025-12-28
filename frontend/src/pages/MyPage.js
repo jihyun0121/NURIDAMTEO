@@ -5,9 +5,15 @@ import Header from "../components/Header";
 import Profile from "../ui/Profile";
 import MyPageButton from "../ui/button/MyPageButton";
 import UpdateForm from "../components/my/UpdateForm";
+import CheckIcon from "../ui/icons/CheckIcon";
+import CoinIcon from "../ui/icons/CoinIcon";
+import VoteIcon from "../ui/icons/VoteIcon";
+import BookmarkIcon from "../ui/icons/BookmarkIcon";
 
 export default function MyPage() {
     const [user, setUser] = useState(null);
+    const [type, setType] = useState("update");
+
     const token = sessionStorage.getItem("token");
     const login = !!token;
     const userId = sessionStorage.getItem("user_id");
@@ -28,7 +34,6 @@ export default function MyPage() {
 
 
     let content = null;
-    let type = "update";
 
     if (type === "update") {
         content = (
@@ -116,17 +121,26 @@ export default function MyPage() {
                     <div className="my-menu">
                         <div className="my-menu-content">
                             <Profile user={user} />
-                            <MyPageButton />
-                            <div>회원정보 수정</div>
+                            <MyPageButton content="회원정보 수정" onClick={() => setType("update")} />
                         </div>
                         <div className="my-menu-content">
-                            <div>출석체크</div>
+                            <MyPageButton type="line" content="출석체크" arrow={false}>
+                                <CheckIcon size={44} color="inherit" />
+                            </MyPageButton>
                         </div>
                         <div className="my-menu-content">
-                            <div>마일리지</div>
-                            <div>제안현황</div>
-                            <div>참여내역</div>
-                            <div>북마크</div>
+                            <MyPageButton type={type === "mileage" ? "hover" : "default"} content="마일리지" arrow={false} onClick={() => setType("mileage")}>
+                                <CoinIcon size={44} color="inherit" />
+                            </MyPageButton>
+                            <MyPageButton type={type === "propsal" ? "hover" : "default"} content="제안현황" arrow={false} onClick={() => setType("propsal")}>
+                                <VoteIcon variant="line" size={44} color="inherit" />
+                            </MyPageButton>
+                            <MyPageButton type={type === "participate" ? "hover" : "default"} content="참여내역" arrow={false} onClick={() => setType("participate")}>
+                                <VoteIcon size={44} color="inherit" />
+                            </MyPageButton>
+                            <MyPageButton type={type === "bookmark" ? "hover" : "default"} content="북마크" arrow={false} onClick={() => setType("bookmark")}>
+                                <BookmarkIcon size={44} color="inherit" />
+                            </MyPageButton>
                         </div>
                         <div className="my-menu-content" style={{ boxShadow: "none", paddingBottom: 0 }}>
                             <div>설정</div>
