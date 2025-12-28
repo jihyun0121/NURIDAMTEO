@@ -22,6 +22,14 @@
     align-self: stretch;
     justify-content: center;
 }
+.my-titles {
+    align-self: stretch;
+    color: var(--Gray-Darker, #1e1e1e);
+
+    font-size: var(--title-large-size);
+    font-weight: var(--title-large-weight);
+    line-height: var(--title-large-line);
+}
 
 .my-title {
     width: 95rem;
@@ -30,6 +38,16 @@
     font-size: var(--headline-medium-size);
     font-weight: var(--headline-medium-weight);
     line-height: var(--headline-medium-line);
+}
+
+.my-description {
+    align-self: stretch;
+    width: 95rem;
+    color: var(--Gray-Dark, #404040);
+
+    font-size: var(--body-medium-size);
+    font-weight: var(--body-medium-weight);
+    line-height: var(--body-medium-line);
 }
 
 .my-menu {
@@ -41,7 +59,7 @@
     gap: 1.25rem;
 
     border-radius: 1.5rem;
-    border: 1px solid var(--grey-light-active);
+    border: 1px solid var(--gray-light-active);
     background: var(--white);
     box-shadow: inset 0 -1px 0 0 var(--gray-light-active), inset 0 1px 0 0 var(--gray-light-active), inset 1px 0 0 0 var(--gray-light-active), inset -1px 0 0 0 var(--gray-light-active), 2px 2px 8px 0 rgba(0, 0, 0, 0.06);
 }

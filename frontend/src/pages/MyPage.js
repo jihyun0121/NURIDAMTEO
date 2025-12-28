@@ -11,6 +11,9 @@ import VoteIcon from "../ui/icons/VoteIcon";
 import BookmarkIcon from "../ui/icons/BookmarkIcon";
 import SettingIcon from "../ui/icons/SettingIcon";
 import SettingForm from "../components/my/SettingForm";
+import MileageStatus from "../components/my/MileageStatus";
+import MileageButton from "../ui/button/MileageButton";
+import { typography } from "../assets/style/tokens/typography";
 
 export default function MyPage() {
     const [user, setUser] = useState(null);
@@ -40,32 +43,39 @@ export default function MyPage() {
     if (type === "update") {
         content = (
             <div className="my-update">
-                <span className="Signup-title">회원정보 수정</span>
+                <span className="my-titles">회원정보 수정</span>
                 <UpdateForm user={user} userId={userId} />
             </div>
         );
     } else if (type === "mileage") {
         content = (
             <div>
-                <p>마일리지</p>
                 <div>
-                    <p>매월 1일 오전 9시 부터 선착순 전환신청</p>
-                    <p>1일 월 1만원, 신청 기간일로부터 30일내 지급</p>
-                    <p>마일리지 유효기간 : 지급일로부터 1년</p>
+                    <span className="my-titles">마일리지</span>
+                    <div className="my-description">
+                        <p>매월 1일 오전 9시 부터 선착순 전환신청</p>
+                        <p>1일 월 1만원, 신청 기간일로부터 30일내 지급</p>
+                        <p>마일리지 유효기간 : 지급일로부터 1년</p>
+                    </div>
                 </div>
-                <div>보유 마일리지</div>
                 <div>
-                    <div>누리담페이 전환</div>
-                    <div>온누리상품권 전환</div>
-                    <div>기부 신청</div>
+                    <div>
+                        <p>보유 마일리지</p>
+                        <p>{user.total_mileage}</p>
+                    </div>
+                    <div>
+                        <MileageButton content="누리담페이 전환" />
+                        <MileageButton content="온누리상품권 전환" />
+                        <MileageButton content="기부 신청" />
+                    </div>
                 </div>
                 <div>
                     <p>보상 내역</p>
                     <p>지급순</p>
                     <p>최신순</p>
                 </div>
-                <div></div>
-            </div>
+                <div><MileageStatus /></div>
+            </div >
         );
     } else if (type === "propsal") {
         content = (
@@ -103,7 +113,7 @@ export default function MyPage() {
     } else if (type === "setting") {
         content = (
             <div className="my-setting">
-                <p className="Signup-title">설정</p>
+                <p className="my-titles">설정</p>
                 <SettingForm user={user} userId={userId} />
             </div>
         );
