@@ -49,7 +49,7 @@ export default function MyPage() {
     } else if (type === "mileage") {
         content = (
             <div className="my-mileage">
-                <div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                     <span className="my-titles">마일리지</span>
                     <div className="my-description">
                         <p>매월 1일 오전 9시 부터 선착순 전환신청</p>
@@ -57,12 +57,12 @@ export default function MyPage() {
                         <p>마일리지 유효기간 : 지급일로부터 1년</p>
                     </div>
                 </div>
-                <div>
-                    <div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                    <div className="my-mileage-total">
                         <p>보유 마일리지</p>
-                        <p>{user.total_mileage}</p>
+                        <p className="my-mileage-mileages">{user.total_mileage}</p>
                     </div>
-                    <div>
+                    <div className="my-mileage-buttons">
                         <MileageButton content="누리담페이 전환" />
                         <MileageButton content="온누리상품권 전환" />
                         <MileageButton content="기부 신청" />
