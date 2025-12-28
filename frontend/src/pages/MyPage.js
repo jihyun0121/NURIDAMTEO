@@ -114,7 +114,6 @@ export default function MyPage() {
             <Header style={{ backgroundColor: colors.orange.light.base }} />
             <div className="my-content">
                 <p className="my-title">마이페이지</p>
-
                 <div className="my-contents">
                     <div className="my-menu">
                         <div className="my-menu-content">
