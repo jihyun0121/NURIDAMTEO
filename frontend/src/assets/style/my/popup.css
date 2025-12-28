@@ -1,0 +1,28 @@
+.popup-button-container {
+    display: inline-flex;
+    padding: 3rem 1.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    border-radius: 1.5rem;
+    background: var(--white);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.popup-button-text {
+    width: 22.5625rem;
+    color: var(--Gray-Dark, #404040);
+    text-align: center;
+
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    line-height: var(--title-xlarge-line);
+}
+
+.popup-button-button {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
