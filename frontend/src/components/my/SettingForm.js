@@ -4,6 +4,7 @@ import { colors } from "../../assets/style/tokens/colors";
 import TextInputBox from "../../ui/input/TextInputBox";
 import TextInputToggle from "../../ui/input/TextInputToggle";
 import ArrowIcon from "../../ui/icons/ArrowIcon";
+import PopUpButton from "../my/PopUpButton";
 
 const initialForm = {
     accessibility_mode: false,
@@ -14,7 +15,7 @@ const initialForm = {
 export default function SettingForm({ user, userId }) {
     const [notiError, setNotiError] = useState("");
     const [accessError, setAccessError] = useState("");
-    const [visible, setVisible] = useState(false);
+    const [isPopUpOpen, setIsPopUpOpen] = useState(false);
     const [form, setForm] = useState(initialForm);
     const [error, setError] = useState("");
     const [active, setActive] = useState(false);
@@ -75,8 +76,23 @@ export default function SettingForm({ user, userId }) {
         }
     };
 
+    const hadleDelete = async (checked) => {
+        setAccessError("");
+
+        try {
+            await UserAPI.updateSetting(userId, {
+                is_deleted: true,
+            });
+            sessionStorage.clear();
+            window.location.href = "/";
+        } catch (e) {
+            setAccessError(e?.response?.data?.error || "접근성 모드 변경 실패");
+        }
+    };
+
     return (
         <>
+            {isPopUpOpen && (<PopUpButton onCancel={() => setIsPopUpOpen(false)} onConfirm={hadleDelete} />)}
             <div className="my-update-content">
                 <TextInputToggle value="알림 끄기" checked={!form.notification_enabled} onChange={handleNotification} />
                 {accessError && <div className="signup-warning">{accessError}</div>}
@@ -117,7 +133,7 @@ export default function SettingForm({ user, userId }) {
                     }}
                 />
                 <span className="my-update-text"></span>
-                <TextInputBox type="large" value="회원 탈퇴" readOnly={true} style={{ color: colors.red, cursor: "pointer" }} />
+                <TextInputBox type="large" value="회원 탈퇴" onClick={() => setIsPopUpOpen(true)} readOnly={true} style={{ color: colors.red, cursor: "pointer" }} />
             </div>
         </>
     );

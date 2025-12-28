@@ -1,4 +1,17 @@
 .popup-button-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(64, 64, 64, 0.2);
+
+    display: flex;
+    justify-content: center;
+
+    z-index: 1000;
+}
+.popup-button-content {
     display: inline-flex;
     padding: 3rem 1.5rem;
     flex-direction: column;
@@ -9,8 +22,10 @@
     border-radius: 1.5rem;
     background: var(--white);
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-}
 
+    width: 32.875rem;
+    height: 22.25rem;
+}
 .popup-button-text {
     width: 22.5625rem;
     color: var(--Gray-Dark, #404040);
