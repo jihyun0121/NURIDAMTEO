@@ -4,6 +4,13 @@ import onboardingLogo from "../assets/image/onboarding/onboardingLogo.svg";
 import nuri from "../assets/image/onboarding/Nuri.svg";
 import ChatLabel from "../components/onboarding/ChatLabel";
 import TextButtonS from "../ui/button/TextButtonS";
+import OnboardingLabel from "../components/onboarding/OnboardingLabel";
+import ShareIcon from "../ui/icons/ShareIcon";
+import CoinIcon from "../ui/icons/CoinIcon";
+import BellIcon from "../ui/icons/BellIcon";
+import DownIcon from "../ui/icons/DownIcon";
+import TextIcon from "../ui/icons/TextIcon";
+import Choice from "../components/onboarding/Choice";
 
 export default function OnboardingPage() {
     return (
@@ -20,17 +27,27 @@ export default function OnboardingPage() {
                 </div>
                 <div className="onboarding-content" style={{ gap: "1.5rem" }}>
                     <span>누리담터만의 방법으로 문제 해결!</span>
-                    <></>
-                    <></>
-                    <></>
-                    <></>
-                    <></>
+                    <OnboardingLabel content="제안, 설문하기 바로가기 버튼">
+                        <ShareIcon size={44} type="hover" />
+                    </OnboardingLabel>
+                    <OnboardingLabel content="레벨별 뱃지 및 리워드 차등 지급">
+                        <CoinIcon size={44} type="hover" />
+                    </OnboardingLabel>
+                    <OnboardingLabel content="정책 반영 흐름을 단계적으로 시각화">
+                        <BellIcon size={44} type="hover" />
+                    </OnboardingLabel>
+                    <OnboardingLabel content="채택된 제안, 종료된 설문의 결과는 게시판 공개">
+                        <DownIcon size={44} type="hover" />
+                    </OnboardingLabel>
+                    <OnboardingLabel content="큰 글씨, 큰 버튼 등의 접근성 모드 제공">
+                        <TextIcon size={44} type="hover" />
+                    </OnboardingLabel>
                 </div>
                 <img src={nuri} alt="" />
-                <></>
+                <Choice userId={sessionStorage.getItem("user_id")} />
                 <div className="onboarding-content" style={{ gap: "5rem", flexDirection: "row" }}>
-                    <TextButtonS content="누리담터 둘러보기" />
-                    <TextButtonS content="제안 시작하기" type="action" />
+                    <TextButtonS content="누리담터 둘러보기" onClick={() => window.location.href = "/nurisodam"} />
+                    <TextButtonS content="제안 시작하기" type="action" onClick={() => window.location.href = "/writeproposal"} />
                 </div>
             </div>
         </div>

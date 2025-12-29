@@ -1,0 +1,131 @@
+.popup-button-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(64, 64, 64, 0.2);
+
+    display: flex;
+    justify-content: center;
+
+    z-index: 1000;
+}
+.popup-button-content {
+    display: inline-flex;
+    padding: 3rem 1.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    border-radius: 1.5rem;
+    background: var(--white);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
+    width: 32.875rem;
+    height: 22.25rem;
+}
+.popup-button-text {
+    width: 22.5625rem;
+    color: var(--Gray-Dark, #404040);
+    text-align: center;
+
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    line-height: var(--title-xlarge-line);
+}
+
+.popup-button-button {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.notification-popup-container {
+    width: 31.3125rem;
+    height: 45rem;
+
+    display: flex;
+    padding: 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+
+    position: absolute;
+    right: 12.5rem;
+    top: 6rem;
+
+    border-radius: 1.5rem;
+    border: 1px solid var(--gray-light-active);
+    background: var(--orange-light-base);
+    box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.06);
+
+    z-index: 1000;
+}
+
+.notification-popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+
+    overflow: scroll;
+}
+
+.notification-popup-text {
+    width: 22.5625rem;
+    color: var(--Gray-Dark, #404040);
+    text-align: center;
+
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    line-height: var(--title-xlarge-line);
+}
+
+.notification-popup-title {
+    align-self: stretch;
+
+    color: var(--Gray-Normal, #555);
+
+    font-size: var(--headline-xsmall-size);
+    font-weight: var(--headline-xsmall-weight);
+    line-height: var(--headline-xsmall-line);
+}
+
+.alarm-container {
+    display: flex;
+    width: 27.3125rem;
+    padding: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.75rem;
+
+    border-radius: 0.75rem;
+    border: 1px solid var(--gray-light-active, #cacaca);
+    background: var(--Gray-White, #fff);
+}
+
+.alarm-text {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    align-self: stretch;
+
+    color: var(--Gray-Normal, #555);
+
+    font-size: var(--title-medium-size);
+    font-weight: var(--title-medium-weight);
+    line-height: var(--title-medium-line);
+}
+
+.alarm-time {
+    align-self: stretch;
+    color: var(--gray-light-active, #cacaca);
+    text-align: right;
+
+    font-size: var(--body-small-size);
+    font-weight: var(--body-small-weight);
+    line-height: var(--body-small-line);
+}

@@ -9,6 +9,8 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import OnboardingPage from "./pages/OnboardingPage";
 import ContentPage from "./pages/ContentPage";
+import WriteProposalPage from "./pages/WriteProposalPage";
+import MyPage from "./pages/MyPage";
 
 function App() {
     return (
@@ -21,11 +23,13 @@ function App() {
                 <Route path="/participate" element={<ParticipatePage />} />
                 <Route path="/participate/:surveyId" element={<ContentPage />} />
                 <Route path="/proposal" element={<ProposalPage />} />
+                <Route path="/writeproposal" element={<WriteProposalPage />} />
                 <Route path="/proposal/:proposalId" element={<ContentPage />} />
                 <Route path="/nurisodam" element={<NurisodamPage />} />
                 <Route path="/nurisodam/news/:noticeId" element={<ContentPage />} />
                 <Route path="/nurisodam/notice/:noticeId" element={<ContentPage />} />
                 <Route path="/nurisodam/result/:resultId" element={<ContentPage />} />
+                <Route path="/my" element={<MyPage />} />
                 <Route path="/icons" element={<IconPage />} />
             </Routes>
         </Router>

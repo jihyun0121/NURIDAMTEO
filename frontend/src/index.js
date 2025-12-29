@@ -23,12 +23,16 @@ import "./assets/style/auth/Signup.css";
 import "./assets/style/onboarding/onboarding.css";
 import "./assets/style/my/mileage.css";
 import "./assets/style/proposal/proposal.css";
+import "./assets/style/proposal/writeproposal.css";
 import "./assets/style/nurisodam/nurisodam.css";
 import "./assets/style/nurisodam/list.css";
 import "./assets/style/onboarding/label.css";
 import "./assets/style/participate/participate.css";
 import "./assets/style/participate/card.css";
 import "./assets/style/participate/answer.css";
+import "./assets/style/my/my.css";
+import "./assets/style/my/popup.css";
+import "./assets/style/my/list.css";
 import "./icons/iconPage.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
