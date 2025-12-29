@@ -16,9 +16,9 @@ export default function Comment({ user, comment, onClick, active = false }) {
         <div>
             <div>
                 {user}
-                <p>{comment.created_at}</p>
+                {/* <p>{comment.created_at}</p> */}
             </div>
-            <div>{comment.content}</div>
+            {/* <div>{comment.content}</div> */}
         </div>
     );
 }

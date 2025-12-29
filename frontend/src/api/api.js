@@ -72,7 +72,7 @@ export const ProposalAPI = {
     createProposal: (userId, dto) => api.post(`/proposals/${userId}`, dto),
     getProposals: () => api.get(`/proposals`),
     getProposal: (proposalId) => api.get(`/proposals/${proposalId}`),
-    UserProposal: (userId) => api.get(`/proposals/user/${userId}`),
+    getUserProposal: (userId) => api.get(`/proposals/user/${userId}`),
     setState: (proposalId, dto) => api.patch(`/proposals/${proposalId}/state`, dto),
     updateView: (proposalId) => api.put(`/proposals/${proposalId}/view`),
     updateParticipate: (proposalId, type) => api.put(`/proposals/${proposalId}/participate?type=${type}`),
@@ -109,6 +109,13 @@ export const CommentAPI = {
     createComment: (dto) => api.post(`/comments`, dto),
     getComments: (targetId) => api.get(`/comments/${targetId}`),
     deleteComment: (commentId) => api.delete(`/comments/${commentId}`),
+};
+
+export const BookmarkAPI = {
+    createBookmark: (dto) => api.post(`/bookmarks`, dto),
+    getBookmarkProposal: (userId) => api.get(`/bookmarks/${userId}/proposal`),
+    getBookmarkResult: (userId) => api.get(`/bookmarks/${userId}/result`),
+    deleteBookmark: (bookmarkId) => api.delete(`/bookmarks/${bookmarkId}`),
 };
 
 export default api;

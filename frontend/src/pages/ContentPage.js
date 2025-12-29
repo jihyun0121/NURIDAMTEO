@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { NoticeAPI, ProposalAPI, UserAPI, ResultAPI, SurveyAPI, ParticipationAPI } from "../api/api";
+import { NoticeAPI, ProposalAPI, UserAPI, ResultAPI, SurveyAPI, ParticipationAPI, BookmarkAPI } from "../api/api";
 import Header from "../components/Header";
 
 import participateBanner from "../assets/image/participate/participatebanner.svg";
@@ -21,6 +21,8 @@ export default function ContentPage() {
     const [state, setState] = useState(false);
     const [participations, setParticipations] = useState([]);
     const [hasParticipated, setHasParticipated] = useState(false);
+    const [isBookmarked, setIsBookmarked] = useState(false);
+    const [bookmarks, setBookmarks] = useState([]);
 
     const location = useLocation();
     const pathname = location.pathname;
@@ -124,6 +126,36 @@ export default function ContentPage() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pageType, params.surveyId, params.proposalId, params.noticeId, params.resultId]);
 
+    useEffect(() => {
+        const fetchMyBookmarks = async () => {
+            if (!loginUser) return;
+
+            try {
+                if (pageType === "proposal" && contents?.proposal_id) {
+                    const res = await BookmarkAPI.getBookmarkProposal(loginUser);
+                    const list = res.data || [];
+                    setBookmarks(list);
+
+                    const bookmarked = list.some((b) => b.proposal_id === contents.proposal_id);
+                    setIsBookmarked(bookmarked);
+                } else if (pageType === "result" && contents?.result_id) {
+                    const res = await BookmarkAPI.getBookmarkResult(loginUser);
+                    const list = res.data || [];
+                    setBookmarks(list);
+
+                    const bookmarked = list.some((b) => b.result_id === contents.result_id);
+                    setIsBookmarked(bookmarked);
+                }
+            } catch (e) {
+                console.log("북마크 목록 불러오기 실패", e);
+                setBookmarks([]);
+                setIsBookmarked(false);
+            }
+        };
+
+        fetchMyBookmarks();
+    }, [loginUser, pageType, contents?.proposal_id, contents?.result_id]);
+
     let banner = null;
     let title = null;
     let content = null;
@@ -194,6 +226,44 @@ export default function ContentPage() {
             ProposalAPI.updateParticipate(contents.proposal_id, "minus");
             setParticipations((prev) => prev.filter((p) => p.participation_id !== like.participation_id));
         }
+    };
+
+    const handleBookmark = async () => {
+        if (!contents) return;
+        if (!loginUser) return;
+
+        const isProposal = pageType === "proposal";
+        const isResult = pageType === "result";
+
+        if (!isProposal && !isResult) return;
+
+        const targetId = isProposal ? contents?.proposal_id : contents?.result_id;
+        if (!targetId) return;
+
+        if (isBookmarked) {
+            const target = bookmarks.find((b) => (isProposal ? b.proposal_id === targetId : b.result_id === targetId));
+            if (!target) return;
+
+            await BookmarkAPI.deleteBookmark(target.bookmark_id);
+
+            setBookmarks((prev) => prev.filter((b) => b.bookmark_id !== target.bookmark_id));
+            setIsBookmarked(false);
+            return;
+        }
+
+        const dto = {
+            user_id: Number(loginUser),
+            proposal_id: isProposal ? targetId : null,
+            result_id: isResult ? targetId : null,
+        };
+
+        await BookmarkAPI.createBookmark(dto);
+
+        const fresh = isProposal ? await BookmarkAPI.getBookmarkProposal(loginUser) : await BookmarkAPI.getBookmarkResult(loginUser);
+
+        const list = fresh.data || [];
+        setBookmarks(list);
+        setIsBookmarked(true);
     };
 
     if (pageType === "participate") {
@@ -286,7 +356,7 @@ export default function ContentPage() {
         form = (
             <div className="content-buttons">
                 <TextButtonS content="공감" type={hasParticipated ? "hover" : "default"} onClick={handleLike} />
-                <TextButtonS content="즐겨찾기" />
+                <TextButtonS content="즐겨찾기" type={isBookmarked ? "hover" : "default"} onClick={handleBookmark} />
                 <TextButtonS content="목록" onClick={() => navigate(-1)} />
             </div>
         );
@@ -312,6 +382,12 @@ export default function ContentPage() {
                 <div>{contents?.author}</div>
 
                 <div dangerouslySetInnerHTML={{ __html: contents?.result_content }} />
+            </div>
+        );
+        form = (
+            <div className="content-buttons">
+                <TextButtonS content="즐겨찾기" type={isBookmarked ? "hover" : "default"} onClick={handleBookmark} />
+                <TextButtonS content="목록" onClick={() => navigate(-1)} />
             </div>
         );
     }

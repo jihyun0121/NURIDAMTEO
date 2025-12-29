@@ -22,7 +22,6 @@ const initialForm = {
 export default function UpdateForm({ user, userId }) {
     const [passwordError, setPasswordError] = useState("");
     const [agreeError, setAgreeError] = useState("");
-    const [agree, setAgree] = useState(false);
     const [visible, setVisible] = useState(false);
     const [form, setForm] = useState(initialForm);
     const [error, setError] = useState("");
