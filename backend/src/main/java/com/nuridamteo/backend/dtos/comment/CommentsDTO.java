@@ -1,4 +1,4 @@
-package com.nuridamteo.backend.dtos;
+package com.nuridamteo.backend.dtos.comment;
 
 import java.time.LocalDateTime;
 
@@ -27,9 +27,6 @@ public class CommentsDTO {
 
     @JsonProperty("user_id")
     private Long user;
-
-    @JsonProperty("user_name")
-    private String userName;
 
     @JsonProperty("content")
     private String content;

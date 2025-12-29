@@ -6,11 +6,14 @@ import java.util.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
-import com.nuridamteo.backend.dtos.CommentsDTO;
+import com.nuridamteo.backend.dtos.comment.CommentsDTO;
+import com.nuridamteo.backend.dtos.comment.GetCommentDTO;
 import com.nuridamteo.backend.entities.Comments;
+import com.nuridamteo.backend.entities.Profile;
 import com.nuridamteo.backend.entities.Users;
 import com.nuridamteo.backend.enums.TargetType;
 import com.nuridamteo.backend.repositories.CommentsRepository;
+import com.nuridamteo.backend.repositories.ProfileRepository;
 import com.nuridamteo.backend.repositories.ProposalRepository;
 import com.nuridamteo.backend.repositories.SurveyRepository;
 import com.nuridamteo.backend.repositories.UserRepository;
@@ -24,6 +27,7 @@ public class CommentsService {
     private final UserRepository userRepository;
     private final SurveyRepository surveyRepository;
     private final ProposalRepository proposalRepository;
+    private final ProfileRepository profileRepository;
 
     public CommentsDTO createComment(CommentsDTO dto) {
         Users user = userRepository.findById(dto.getUser())
@@ -50,15 +54,31 @@ public class CommentsService {
     }
 
     @Transactional(readOnly = true)
-    public List<CommentsDTO> getComments(Long targetId) {
-        return commentsRepository.findByTargetIdOrderByCommentIdDesc(targetId).stream().map(this::commentsDTO).toList();
+    public List<GetCommentDTO> getComments(Long targetId) {
+        return commentsRepository.findByTargetIdOrderByCommentIdDesc(targetId).stream().map(this::getCommentDTO)
+                .toList();
+    }
+
+    private GetCommentDTO getCommentDTO(Comments p) {
+        String name = profileRepository.findByUser_UserId(p.getUser().getUserId())
+                .map(Profile::getName)
+                .orElse("알수없음");
+
+        return GetCommentDTO.builder()
+                .commentId(p.getCommentId())
+                .user(p.getUser().getUserId())
+                .name(name)
+                .targetType(p.getTargetType())
+                .targetId(p.getTargetId())
+                .content(p.getContent())
+                .createdAt(p.getCreatedAt())
+                .build();
     }
 
     private CommentsDTO commentsDTO(Comments p) {
         return CommentsDTO.builder()
                 .commentId(p.getCommentId())
                 .user(p.getUser().getUserId())
-                .userName(p.getUser().getProfile().getName())
                 .targetType(p.getTargetType())
                 .targetId(p.getTargetId())
                 .content(p.getContent())

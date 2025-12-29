@@ -1,0 +1,38 @@
+package com.nuridamteo.backend.dtos.comment;
+
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.*;
+import com.nuridamteo.backend.enums.TargetType;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class GetCommentDTO {
+    @JsonProperty("comment_id")
+    private Long commentId;
+
+    @Enumerated(EnumType.STRING)
+    @JsonProperty("target_type")
+    @Builder.Default
+    private TargetType targetType = TargetType.SURVEY;
+
+    @JsonProperty("target_id")
+    private Long targetId;
+
+    @JsonProperty("user_id")
+    private Long user;
+
+    private String name;
+
+    @JsonProperty("content")
+    private String content;
+
+    @JsonProperty("created_at")
+    private LocalDateTime createdAt;
+}

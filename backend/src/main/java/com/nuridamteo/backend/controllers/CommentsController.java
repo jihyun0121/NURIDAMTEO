@@ -5,7 +5,7 @@ import java.util.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import com.nuridamteo.backend.dtos.CommentsDTO;
+import com.nuridamteo.backend.dtos.comment.CommentsDTO;
 import com.nuridamteo.backend.services.CommentsService;
 
 import lombok.*;

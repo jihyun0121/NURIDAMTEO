@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { NoticeAPI, ProposalAPI, UserAPI, ResultAPI, SurveyAPI, ParticipationAPI, BookmarkAPI } from "../api/api";
+import { NoticeAPI, ProposalAPI, UserAPI, ResultAPI, SurveyAPI, ParticipationAPI, BookmarkAPI, CommentAPI } from "../api/api";
 import Header from "../components/Header";
 
 import participateBanner from "../assets/image/participate/participatebanner.svg";
@@ -23,6 +23,10 @@ export default function ContentPage() {
     const [hasParticipated, setHasParticipated] = useState(false);
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [bookmarks, setBookmarks] = useState([]);
+    const [isLiking, setIsLiking] = useState(false);
+    const [comments, setComments] = useState([]);
+    const [commentInput, setCommentInput] = useState("");
+    const [commentLoading, setCommentLoading] = useState(false);
 
     const location = useLocation();
     const pathname = location.pathname;
@@ -156,11 +160,28 @@ export default function ContentPage() {
         fetchMyBookmarks();
     }, [loginUser, pageType, contents?.proposal_id, contents?.result_id]);
 
+    useEffect(() => {
+        const fetchComments = async () => {
+            const { targetId } = getCommentTarget();
+            if (!targetId) return;
+
+            try {
+                const res = await CommentAPI.getComments(targetId);
+                setComments(res.data || []);
+            } catch (e) {
+                console.log("댓글 불러오기 실패", e);
+                setComments([]);
+            }
+        };
+
+        fetchComments();
+    }, [pageType, contents?.proposal_id, contents?.survey_id]);
+
     let banner = null;
     let title = null;
     let content = null;
     let form = null;
-    let comments = null;
+    let comment = null;
     let color = null;
     let text = null;
 
@@ -186,16 +207,11 @@ export default function ContentPage() {
         return `${year}.${month}.${day}`;
     };
 
-    const [isLiking, setIsLiking] = useState(false);
-
     const handleLike = async () => {
         if (!contents) return;
         if (!loginUser) return;
 
-        // ✅ 이미 공감했으면 다시 못 누르게
         if (hasParticipated) return;
-
-        // ✅ 연타 방지
         if (isLiking) return;
 
         try {
@@ -210,10 +226,7 @@ export default function ContentPage() {
 
             const res = await ParticipationAPI.createParticipaiton(dto);
 
-            // ✅ 서버 카운트 증가
             await ProposalAPI.updateParticipate(contents.proposal_id, "plus");
-
-            // ✅ 상태 반영
             setHasParticipated(true);
 
             if (res?.data) {
@@ -267,6 +280,46 @@ export default function ContentPage() {
         setIsBookmarked(true);
     };
 
+    const getCommentTarget = () => {
+        if (pageType === "proposal" && contents?.proposal_id) {
+            return { targetType: "PROPOSAL", targetId: contents.proposal_id };
+        }
+        if (pageType === "participate" && contents?.survey_id) {
+            return { targetType: "SURVEY", targetId: contents.survey_id };
+        }
+        return { targetType: null, targetId: null };
+    };
+
+    const handleCreateComment = async () => {
+        if (!loginUser) return alert("로그인이 필요합니다.");
+        if (!commentInput.trim()) return;
+
+        const { targetType, targetId } = getCommentTarget();
+        if (!targetType || !targetId) return;
+
+        try {
+            setCommentLoading(true);
+
+            const dto = {
+                user_id: Number(loginUser),
+                target_type: targetType,
+                target_id: targetId,
+                content: commentInput,
+            };
+
+            await CommentAPI.createComment(dto);
+
+            setCommentInput("");
+
+            const fresh = await CommentAPI.getComments(targetId);
+            setComments(fresh.data || []);
+        } catch (e) {
+            console.log("댓글 등록 실패", e);
+        } finally {
+            setCommentLoading(false);
+        }
+    };
+
     if (pageType === "participate") {
         if (state === "WAIT") {
             text = "대기중";
@@ -311,20 +364,20 @@ export default function ContentPage() {
         );
         content = <div dangerouslySetInnerHTML={{ __html: contents?.description }} />;
         form = <AnswerForm survey={contents} />;
-        comments = (
+        comment = (
             <div className="comments-container">
                 <div className="comments-titles">
                     <div className="comments-title">댓글의견</div>
                     <div className="comments-description">위 제안에 공감하신다면 공감버튼을 누르고 제안을 발전시킬 수 있는 구체적인 댓글을 달아주세요.</div>
-                    <textarea className="comments-input" />
+
+                    <textarea className="comments-input" value={commentInput} onChange={(e) => setCommentInput(e.target.value)} placeholder="댓글을 입력하세요" />
 
                     <div style={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
-                        <TextButtonS content="의견 등록" />
+                        <TextButtonS content={commentLoading ? "등록 중..." : "의견 등록"} onClick={handleCreateComment} type={commentLoading ? "none" : "default"} disabled={commentLoading} />
                     </div>
                 </div>
-                <div className="comments-list">
-                    <Comment />
-                </div>
+
+                <div className="comments-list">{comments.length === 0 ? null : comments.map((c) => <Comment key={c.comment_id} user={c.name} createdAt={c.created_at} content={c.content} />)}</div>
             </div>
         );
     } else if (pageType === "proposal") {
@@ -377,20 +430,20 @@ export default function ContentPage() {
                 <TextButtonS content="목록" onClick={() => navigate(-1)} />
             </div>
         );
-        comments = (
+        comment = (
             <div className="comments-container" style={{ boxShadow: "inset 0 1px 0 0 var(--gray-light-active)", padding: "5rem 0" }}>
                 <div className="comments-titles">
                     <div className="comments-title">댓글의견</div>
                     <div className="comments-description">위 제안에 공감하신다면 공감버튼을 누르고 제안을 발전시킬 수 있는 구체적인 댓글을 달아주세요.</div>
-                    <textarea className="comments-input" />
+
+                    <textarea className="comments-input" value={commentInput} onChange={(e) => setCommentInput(e.target.value)} />
 
                     <div style={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
-                        <TextButtonS content="의견 등록" />
+                        <TextButtonS content={commentLoading ? "등록 중..." : "의견 등록"} onClick={handleCreateComment} type={commentLoading ? "none" : "default"} disabled={commentLoading} />
                     </div>
                 </div>
-                <div className="comments-list">
-                    <Comment />
-                </div>
+
+                <div className="comments-list">{comments.length === 0 ? null : comments.map((c) => <Comment key={c.comment_id} user={c.name} createdAt={c.created_at} content={c.content} />)}</div>
             </div>
         );
     } else if (pageType === "notice") {
@@ -434,7 +487,7 @@ export default function ContentPage() {
                 <div>{title}</div>
                 <div>{content}</div>
                 <div>{form}</div>
-                <div>{pageType === "participate" || pageType === "proposal" ? comments : null}</div>
+                <div>{pageType === "participate" || pageType === "proposal" ? comment : null}</div>
             </div>
         </div>
     );
