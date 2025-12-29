@@ -1,32 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ResultAPI } from "../../api/api";
 import MegaphoneIcon from "../../ui/icons/MegaphoneIcon";
 import EyeIcon from "../../ui/icons/EyeIcon";
 import Pagination from "../Pagination";
+import useResults from "./hook/useResults";
 
 const PAGE_SIZE = 10;
 
 export default function ResultList() {
-    const [result, setResult] = useState([]);
+    const { results } = useResults();
     const [currentPage, setCurrentPage] = useState(1);
 
-    useEffect(() => {
-        async function loadResult() {
-            try {
-                const res = await ResultAPI.getResults(0);
-                setResult(res.data || []);
-            } catch (err) {
-                console.log("뉴스 로딩 실패", err);
-            }
-        }
-
-        loadResult();
-    }, []);
-
-    const totalPages = Math.ceil(result.length / PAGE_SIZE);
+    const totalPages = Math.ceil(results.length / PAGE_SIZE);
 
     const startIndex = (currentPage - 1) * PAGE_SIZE;
-    const currentResults = result.slice(startIndex, startIndex + PAGE_SIZE);
+    const currentResults = results.slice(startIndex, startIndex + PAGE_SIZE);
 
     const addViewCount = (r) => {
         const res = ResultAPI.updateView(r);

@@ -12,12 +12,15 @@ import HeartIcon from "../ui/icons/HeartIcon";
 import TextButtonS from "../ui/button/TextButtonS";
 import LabelButton from "../ui/button/LabelButton";
 import Comment from "../components/Comment";
+import MegaphoneIcon from "../ui/icons/MegaphoneIcon";
+import useResults from "../components/nurisodam/hook/useResults";
+import useNotices from "../components/nurisodam/hook/useNotice";
+import useNews from "../components/nurisodam/hook/useNews";
 
 export default function ContentPage() {
     const navigate = useNavigate();
     const [contents, setContents] = useState(null);
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(false);
     const [state, setState] = useState(false);
     const [participations, setParticipations] = useState([]);
     const [hasParticipated, setHasParticipated] = useState(false);
@@ -27,6 +30,12 @@ export default function ContentPage() {
     const [comments, setComments] = useState([]);
     const [commentInput, setCommentInput] = useState("");
     const [commentLoading, setCommentLoading] = useState(false);
+    const { results } = useResults();
+    const { notices } = useNotices();
+    const { news } = useNews();
+    const [nextResult, setNextResult] = useState(null);
+    const [nextNotice, setNextNotice] = useState(null);
+    const [nextNews, setNextNews] = useState(null);
 
     const location = useLocation();
     const pathname = location.pathname;
@@ -97,7 +106,6 @@ export default function ContentPage() {
 
             if (pageType === "unknown") return;
             try {
-                setLoading(true);
                 if (pageType === "participate") {
                     const surveyRes = await SurveyAPI.getSurvey(params.surveyId);
                     const survey = surveyRes.data;
@@ -121,8 +129,6 @@ export default function ContentPage() {
                 }
             } catch (err) {
                 console.log("콘텐츠 로딩 실패", err);
-            } finally {
-                setLoading(false);
             }
         };
 
@@ -177,6 +183,39 @@ export default function ContentPage() {
         fetchComments();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pageType, contents?.proposal_id, contents?.survey_id]);
+
+    useEffect(() => {
+        if (pageType !== "result") return;
+        if (!contents?.result_id) return;
+        if (!results.length) return;
+
+        const idx = results.findIndex((r) => Number(r.result_id) === Number(contents.result_id));
+        if (idx === -1) return;
+
+        setNextResult(results[idx + 1] || null);
+    }, [pageType, contents?.result_id, results]);
+
+    useEffect(() => {
+        if (pageType !== "notice") return;
+        if (!contents?.notice_id) return;
+        if (!notices.length) return;
+
+        const idx = notices.findIndex((n) => Number(n.notice_id) === Number(contents.notice_id));
+        if (idx === -1) return;
+
+        setNextNotice(notices[idx + 1] || null);
+    }, [pageType, contents?.notice_id, notices]);
+
+    useEffect(() => {
+        if (pageType !== "news") return;
+        if (!contents?.notice_id) return;
+        if (!news.length) return;
+
+        const idx = news.findIndex((n) => Number(n.notice_id) === Number(contents.notice_id));
+        if (idx === -1) return;
+
+        setNextNews(news[idx + 1] || null);
+    }, [pageType, contents?.notice_id, news]);
 
     let banner = null;
     let title = null;
@@ -321,6 +360,18 @@ export default function ContentPage() {
         }
     };
 
+    const addViewCount = (r) => {
+        if (pageType === "participate") {
+        } else if (pageType === "proposal") {
+        } else if (pageType === "notice") {
+            NoticeAPI.updateView(r);
+        } else if (pageType === "news") {
+            NoticeAPI.updateView(r);
+        } else if (pageType === "result") {
+            ResultAPI.updateView(r);
+        }
+    };
+
     if (pageType === "participate") {
         if (state === "WAIT") {
             text = "대기중";
@@ -449,32 +500,152 @@ export default function ContentPage() {
         );
     } else if (pageType === "notice") {
         banner = noticeBanner;
-        title = contents?.title ?? "undefinded";
-        content = loading ? (
-            <div>불러오는 중...</div>
-        ) : (
-            <div>
-                {contents?.notice_id}
-                <div dangerouslySetInnerHTML={{ __html: contents?.content }} />
+        title = (
+            <div className="content-title-container">
+                {contents?.title}
+                <div className="content-author-text">
+                    <p>{contents?.author}</p>
+                </div>
             </div>
         );
-    } else if (pageType === "result") {
-        banner = noticeBanner;
-        title = contents?.result_title ?? "undefinded";
-        content = loading ? (
-            <div>불러오는 중...</div>
-        ) : (
-            <div>
-                <div>{contents?.result_id}</div>
-                <div>{contents?.author}</div>
-
-                <div dangerouslySetInnerHTML={{ __html: contents?.result_content }} />
-            </div>
-        );
+        content = <div dangerouslySetInnerHTML={{ __html: contents?.content }} />;
         form = (
             <div className="content-buttons">
                 <TextButtonS content="즐겨찾기" type={isBookmarked ? "hover" : "default"} onClick={handleBookmark} />
                 <TextButtonS content="목록" onClick={() => navigate(-1)} />
+            </div>
+        );
+        comment = (
+            <div className="comments-container" style={{ boxShadow: "inset 0 1px 0 0 var(--gray-light-active), inset 0 -1px 0 0 var(--gray-light-active)", padding: "5rem 0" }}>
+                <div className="comments-titles">
+                    <div className="comments-next">다음글</div>
+
+                    <div className="nurisodam-list-container">
+                        {nextNotice ? (
+                            <div
+                                key={nextNotice.notice_id}
+                                className="nurisodam-lists"
+                                style={{ cursor: "pointer" }}
+                                onClick={() => {
+                                    addViewCount(nextNotice.notice_id);
+                                    window.location.href = `/nurisodam/notice/${nextNotice.notice_id}`;
+                                }}
+                            >
+                                <MegaphoneIcon size="44" />
+                                <span className="nurisodam-list-text">{nextNotice.title ?? "제목 없음"}</span>
+
+                                <div className="nurisodam-list-view">
+                                    <EyeIcon size="44" />
+                                    {nextNotice.view_count ?? 0}
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="nurisodam-lists">
+                                <span className="nurisodam-list-text">다음 글이 없습니다.</span>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+        );
+    } else if (pageType === "news") {
+        banner = noticeBanner;
+        title = (
+            <div className="content-title-container">
+                {contents?.title}
+                <div className="content-author-text">
+                    <p>{contents?.author}</p>
+                </div>
+            </div>
+        );
+        content = <div dangerouslySetInnerHTML={{ __html: contents?.content }} />;
+        form = (
+            <div className="content-buttons">
+                <TextButtonS content="즐겨찾기" type={isBookmarked ? "hover" : "default"} onClick={handleBookmark} />
+                <TextButtonS content="목록" onClick={() => navigate(-1)} />
+            </div>
+        );
+        comment = (
+            <div className="comments-container" style={{ boxShadow: "inset 0 1px 0 0 var(--gray-light-active), inset 0 -1px 0 0 var(--gray-light-active)", padding: "5rem 0" }}>
+                <div className="comments-titles">
+                    <div className="comments-next">다음글</div>
+
+                    <div className="nurisodam-list-container">
+                        {nextNews ? (
+                            <div
+                                key={nextNews.notice_id}
+                                className="nurisodam-lists"
+                                style={{ cursor: "pointer" }}
+                                onClick={() => {
+                                    addViewCount(nextNews.notice_id);
+                                    window.location.href = `/nurisodam/news/${nextNews.notice_id}`;
+                                }}
+                            >
+                                <MegaphoneIcon size="44" />
+                                <span className="nurisodam-list-text">{nextNews.title ?? "제목 없음"}</span>
+
+                                <div className="nurisodam-list-view">
+                                    <EyeIcon size="44" />
+                                    {nextNews.view_count ?? 0}
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="nurisodam-lists">
+                                <span className="nurisodam-list-text">다음 글이 없습니다.</span>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+        );
+    } else if (pageType === "result") {
+        banner = noticeBanner;
+        title = (
+            <div className="content-title-container">
+                {contents?.result_title}
+                <div className="content-author-text">
+                    <p>{contents?.author}</p>
+                </div>
+            </div>
+        );
+        content = <div dangerouslySetInnerHTML={{ __html: contents?.result_content }} />;
+        form = (
+            <div className="content-buttons">
+                <TextButtonS content="즐겨찾기" type={isBookmarked ? "hover" : "default"} onClick={handleBookmark} />
+                <TextButtonS content="목록" onClick={() => navigate(-1)} />
+            </div>
+        );
+        comment = (
+            <div className="comments-container" style={{ boxShadow: "inset 0 1px 0 0 var(--gray-light-active), inset 0 -1px 0 0 var(--gray-light-active)", padding: "5rem 0" }}>
+                <div className="comments-titles">
+                    <div className="comments-next">다음글</div>
+
+                    <div className="nurisodam-list-container">
+                        {nextResult ? (
+                            <div
+                                key={nextResult.result_id}
+                                className="nurisodam-lists"
+                                style={{ cursor: "pointer" }}
+                                onClick={() => {
+                                    addViewCount(nextResult.result_id);
+                                    window.location.href = `/nurisodam/result/${nextResult.result_id}`;
+                                }}
+                            >
+                                <MegaphoneIcon size="44" />
+                                <span className="nurisodam-list-text">{nextResult.result_title ?? "제목 없음"}</span>
+
+                                <div className="nurisodam-list-view">
+                                    <EyeIcon size="44" />
+                                    {nextResult.view_count ?? 0}
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="nurisodam-lists">
+                                <span className="nurisodam-list-text">다음 글이 없습니다.</span>
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
         );
     }
@@ -488,7 +659,7 @@ export default function ContentPage() {
                 <div>{title}</div>
                 <div>{content}</div>
                 <div>{form}</div>
-                <div>{pageType === "participate" || pageType === "proposal" ? comment : null}</div>
+                <div>{comment}</div>
             </div>
         </div>
     );

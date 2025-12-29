@@ -75,6 +75,15 @@
     line-height: var(--headline-large-line);
 }
 
+.comments-next {
+    align-self: stretch;
+    color: var(--Grey-Darker, #2A2A2A);
+
+    font-size: var(--body-large-size);
+    font-weight: var(--body-large-weight);
+    line-height: var(--body-large-line);
+}
+
 .comments-description {
     align-self: stretch;
     color: var(--Grey-Normal, #777);
