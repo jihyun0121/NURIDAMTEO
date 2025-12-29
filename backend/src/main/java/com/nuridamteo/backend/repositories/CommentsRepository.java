@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.*;
 
 import com.nuridamteo.backend.entities.Comments;
+import com.nuridamteo.backend.enums.TargetType;
 
 @Repository
 public interface CommentsRepository extends JpaRepository<Comments, Long> {
-    List<Comments> findByTargetIdOrderByCommentIdDesc(Long targetId);
+    List<Comments> findByTargetTypeAndTargetIdOrderByCommentIdDesc(TargetType targetType, Long targetId);
 }

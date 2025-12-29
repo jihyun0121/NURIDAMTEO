@@ -54,9 +54,9 @@ public class CommentsService {
     }
 
     @Transactional(readOnly = true)
-    public List<GetCommentDTO> getComments(Long targetId) {
-        return commentsRepository.findByTargetIdOrderByCommentIdDesc(targetId).stream().map(this::getCommentDTO)
-                .toList();
+    public List<GetCommentDTO> getComments(TargetType targetType, Long targetId) {
+        return commentsRepository.findByTargetTypeAndTargetIdOrderByCommentIdDesc(targetType, targetId)
+                .stream().map(this::getCommentDTO).toList();
     }
 
     private GetCommentDTO getCommentDTO(Comments p) {
