@@ -28,6 +28,9 @@ public class CommentsDTO {
     @JsonProperty("user_id")
     private Long user;
 
+    @JsonProperty("user_name")
+    private String userName;
+
     @JsonProperty("content")
     private String content;
 
