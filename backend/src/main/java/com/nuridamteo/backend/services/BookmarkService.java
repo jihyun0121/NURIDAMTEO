@@ -68,6 +68,14 @@ public class BookmarkService {
                 .toList();
     }
 
+    @Transactional
+    public void deleteBookmark(Long bookmarkId) {
+        if (!bookmarkRepository.existsById(bookmarkId)) {
+            throw new IllegalArgumentException("즐겨찾기를 찾을 수 없습니다");
+        }
+        bookmarkRepository.deleteById(bookmarkId);
+    }
+
     private BookmarkDTO bookmarkDTO(Bookmark p) {
         return BookmarkDTO.builder()
                 .bookmarkId(p.getBookmarkId())

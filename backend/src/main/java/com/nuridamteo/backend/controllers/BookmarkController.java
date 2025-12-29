@@ -31,4 +31,10 @@ public class BookmarkController {
     public ResponseEntity<?> getBookmarkResult(@PathVariable("userId") Long userId) {
         return ResponseEntity.ok(bookmarkService.getBookmarkResult(userId));
     }
+
+    @DeleteMapping("/{bookmarkId}")
+    public ResponseEntity<?> deleteBookmark(@PathVariable("bookmarkId") Long bookmarkId) {
+        bookmarkService.deleteBookmark(bookmarkId);
+        return ResponseEntity.ok(Map.of("message", "즐겨찾기 해제 성공"));
+    }
 }
