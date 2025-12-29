@@ -25,7 +25,6 @@ export default function WriteProposalPage() {
                     <textarea className="content-input" style={{ width: "95rem", height: "37.5rem" }} placeholder="내용을 입력해주세요." />
                 </div>
                 <div className="writeproposal-button">
-                    <TextButtonS content="사진첨부" />
                     <TextButtonS content="제안하기" onClick={() => (window.location.href = "/proposal")} />
                 </div>
             </div>
