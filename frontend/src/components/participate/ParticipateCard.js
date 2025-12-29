@@ -1,4 +1,5 @@
-import { SurveyAPI } from "../../api/api";
+import { useEffect, useState } from "react";
+import { CommentAPI, SurveyAPI } from "../../api/api";
 import { colors } from "../../assets/style/tokens/colors";
 import LabelButton from "../../ui/button/LabelButton";
 import ChatIcon from "../../ui/icons/ChatIcon";
@@ -8,6 +9,24 @@ export default function ParticipateCard({ type = "default", survey, participate 
     let state = survey.status;
     let content;
     let color;
+
+    const [commentCount, setCommentCount] = useState(0);
+
+    useEffect(() => {
+        const fetchCommentCount = async () => {
+            if (!survey?.survey_id) return;
+
+            try {
+                const res = await CommentAPI.getComments("SURVEY", survey.survey_id);
+                setCommentCount(res?.data?.length || 0);
+            } catch (e) {
+                console.log("댓글 개수 불러오기 실패", e);
+                setCommentCount(0);
+            }
+        };
+
+        fetchCommentCount();
+    }, [survey?.survey_id, survey?.survey_type]);
 
     const hasParticipated = participate.some((p) => p.target_id === survey.survey_id);
 
@@ -72,7 +91,7 @@ export default function ParticipateCard({ type = "default", survey, participate 
                 <VoteIcon size={44} variant="line" type={type === "light" || hasParticipated ? "hover" : "fill"} /> {survey.participation_count}
                 {survey.survey_type === "SURVEY" && (
                     <>
-                        <ChatIcon size={44} type={type === "light" || hasParticipated ? "hover" : "fill"} /> {survey.participation_count}
+                        <ChatIcon size={44} type={type === "light" || hasParticipated ? "hover" : "fill"} /> {commentCount}
                     </>
                 )}
             </div>

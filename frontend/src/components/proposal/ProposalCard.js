@@ -1,4 +1,4 @@
-import { ParticipationAPI, ProposalAPI } from "../../api/api";
+import { CommentAPI, ParticipationAPI, ProposalAPI } from "../../api/api";
 import { useEffect, useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
 import ChatIcon from "../../ui/icons/ChatIcon";
@@ -13,6 +13,23 @@ export default function ProposalCard({ type = "default", proposal }) {
     let content;
     let color;
     const loginUser = sessionStorage.getItem("user_id");
+
+    const [commentCount, setCommentCount] = useState(0);
+
+    useEffect(() => {
+        const fetchCommentCount = async () => {
+            if (!proposal?.proposal_id) return;
+
+            try {
+                const res = await CommentAPI.getComments("PROPOSAL", proposal.proposal_id);
+                setCommentCount(res.data?.length || 0);
+            } catch {
+                setCommentCount(0);
+            }
+        };
+
+        fetchCommentCount();
+    }, [proposal?.proposal_id]);
 
     useEffect(() => {
         const fetchMyParticipations = async () => {
@@ -101,7 +118,7 @@ export default function ProposalCard({ type = "default", proposal }) {
 
             <div className="proposal-card-footer">
                 <HeartIcon size={44} type={type === "light" || hasParticipated ? "hover" : "fill"} /> {proposal.participation_count}
-                <ChatIcon size={44} type={type === "light" || hasParticipated ? "hover" : "fill"} /> {proposal.view_count}
+                <ChatIcon size={44} type={type === "light" || hasParticipated ? "hover" : "fill"} /> {commentCount}
             </div>
         </div>
     );

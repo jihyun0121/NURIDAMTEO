@@ -140,14 +140,14 @@ export default function ContentPage() {
                     const list = res.data || [];
                     setBookmarks(list);
 
-                    const bookmarked = list.some((b) => b.proposal_id === contents.proposal_id);
+                    const bookmarked = list.some((b) => b.proposal_id === contents?.proposal_id);
                     setIsBookmarked(bookmarked);
                 } else if (pageType === "result" && contents?.result_id) {
                     const res = await BookmarkAPI.getBookmarkResult(loginUser);
                     const list = res.data || [];
                     setBookmarks(list);
 
-                    const bookmarked = list.some((b) => b.result_id === contents.result_id);
+                    const bookmarked = list.some((b) => b.result_id === contents?.result_id);
                     setIsBookmarked(bookmarked);
                 }
             } catch (e) {
@@ -162,11 +162,11 @@ export default function ContentPage() {
 
     useEffect(() => {
         const fetchComments = async () => {
-            const { targetId } = getCommentTarget();
-            if (!targetId) return;
+            const { targetType, targetId } = getCommentTarget();
+            if (!targetType || !targetId) return;
 
             try {
-                const res = await CommentAPI.getComments(targetId);
+                const res = await CommentAPI.getComments(targetType, targetId);
                 setComments(res.data || []);
             } catch (e) {
                 console.log("댓글 불러오기 실패", e);
@@ -175,6 +175,7 @@ export default function ContentPage() {
         };
 
         fetchComments();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pageType, contents?.proposal_id, contents?.survey_id]);
 
     let banner = null;
@@ -311,7 +312,7 @@ export default function ContentPage() {
 
             setCommentInput("");
 
-            const fresh = await CommentAPI.getComments(targetId);
+            const fresh = await CommentAPI.getComments(targetType, targetId);
             setComments(fresh.data || []);
         } catch (e) {
             console.log("댓글 등록 실패", e);

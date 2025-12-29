@@ -107,7 +107,7 @@ export const ParticipationAPI = {
 
 export const CommentAPI = {
     createComment: (dto) => api.post(`/comments`, dto),
-    getComments: (targetId) => api.get(`/comments/${targetId}`),
+    getComments: (targetType, targetId) => api.get(`/comments?targetType=${targetType}&targetId=${targetId}`),
     deleteComment: (commentId) => api.delete(`/comments/${commentId}`),
 };
 
