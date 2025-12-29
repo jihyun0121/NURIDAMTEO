@@ -18,8 +18,6 @@ export default function MyPage() {
     const [user, setUser] = useState(null);
     const [type, setType] = useState("update");
 
-    const token = sessionStorage.getItem("token");
-    const login = !!token;
     const userId = sessionStorage.getItem("user_id");
 
     useEffect(() => {
@@ -29,13 +27,12 @@ export default function MyPage() {
             try {
                 const res = await UserAPI.getUser(userId);
                 setUser(res.data);
-                console.log(res.data);
             } catch (e) {
                 console.log("유저 정보 불러오기 실패", e);
             }
-        } fetchUser();
+        }
+        fetchUser();
     }, [userId]);
-
 
     let content = null;
 
@@ -69,20 +66,14 @@ export default function MyPage() {
                     </div>
                 </div>
                 <MyList title={"보상 내역"} asc={"지급순"} desc={"최신순"} userId={userId} />
-            </div >
+            </div>
         );
     } else if (type === "propsal") {
-        content = (
-            <MyList title={"나의 제안 현황"} asc={"오래된순"} desc={"최신순"} type={"propsal"} userId={userId} />
-        );
+        content = <MyList title={"나의 제안 현황"} asc={"오래된순"} desc={"최신순"} type={"propsal"} userId={userId} />;
     } else if (type === "participate") {
-        content = (
-            <MyList title={"나의 참여내역"} asc={"오래된순"} desc={"최신순"} type={"participate"} userId={userId} />
-        );
+        content = <MyList title={"나의 참여내역"} asc={"오래된순"} desc={"최신순"} type={"participate"} userId={userId} />;
     } else if (type === "bookmark") {
-        content = (
-            <MyList title={"즐겨찾기"} asc={"오래된순"} desc={"최신순"} type={"bookmark"} userId={userId} />
-        );
+        content = <MyList title={"즐겨찾기"} asc={"제안"} desc={"결과"} type={"bookmark"} userId={userId} />;
     } else if (type === "setting") {
         content = (
             <div className="my-setting">
@@ -126,7 +117,9 @@ export default function MyPage() {
                             <MyPageButton type={type === "setting" ? "hover" : "default"} content="설정" arrow={false} onClick={() => setType("setting")}>
                                 <SettingIcon size={44} color="inherit" />
                             </MyPageButton>
-                            <MyPageButton content="로그아웃" arrow={false}
+                            <MyPageButton
+                                content="로그아웃"
+                                arrow={false}
                                 onClick={() => {
                                     sessionStorage.clear();
                                     window.location.href = "/";
@@ -136,9 +129,9 @@ export default function MyPage() {
                             </MyPageButton>
                         </div>
                     </div>
-                    <div>{content}</div>
+                    <div style={{ width: "100%" }}>{content}</div>
                 </div>
             </div>
-        </div >
+        </div>
     );
 }

@@ -53,7 +53,7 @@ public class ProposalService {
         @Transactional(readOnly = true)
         public ProposalDTO getProposal(Long proposalId) {
                 Proposal proposal = proposalRepository.findById(proposalId)
-                                .orElseThrow(() -> new IllegalArgumentException("질문을 찾을 수 없습니다"));
+                                .orElseThrow(() -> new IllegalArgumentException("제안을 찾을 수 없습니다"));
 
                 return proposalDTO(proposal);
         }

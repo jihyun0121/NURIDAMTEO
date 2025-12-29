@@ -16,11 +16,13 @@
 }
 
 .my-contents {
+    width: 95rem;
     display: flex;
     align-items: flex-start;
     gap: 2rem;
     justify-content: center;
 }
+
 .my-titles {
     color: var(--Gray-Darker, #1e1e1e);
 

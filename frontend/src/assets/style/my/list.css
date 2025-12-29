@@ -24,7 +24,7 @@
     align-items: center;
     gap: 0.75rem;
 
-    color: var(--Gray-Normal, #555);
+    color: var(--gray-normal-base);
     text-align: right;
 
     font-size: var(--label-small-size);
