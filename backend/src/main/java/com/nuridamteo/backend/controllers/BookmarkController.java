@@ -21,4 +21,9 @@ public class BookmarkController {
         bookmarkService.createBookmark(dto);
         return ResponseEntity.ok(Map.of("message", "즐겨찾기 성공"));
     }
+
+    @GetMapping("/{userId}/proposal")
+    public ResponseEntity<?> getBookmarkProposal(@PathVariable("userId") Long userId) {
+        return ResponseEntity.ok(bookmarkService.getBookmarkProposal(userId));
+    }
 }

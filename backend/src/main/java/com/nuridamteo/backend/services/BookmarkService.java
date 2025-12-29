@@ -1,6 +1,9 @@
 package com.nuridamteo.backend.services;
 
+import java.util.*;
+
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
 import com.nuridamteo.backend.dtos.BookmarkDTO;
 import com.nuridamteo.backend.entities.Bookmark;
@@ -47,6 +50,14 @@ public class BookmarkService {
 
         Bookmark saved = bookmarkRepository.save(bookmark);
         return bookmarkDTO(saved);
+    }
+
+    @Transactional(readOnly = true)
+    public List<BookmarkDTO> getBookmarkProposal(Long userId) {
+        return bookmarkRepository.findByUser_UserIdAndProposalIsNotNullOrderByBookmarkIdDesc(userId)
+                .stream()
+                .map(this::bookmarkDTO)
+                .toList();
     }
 
     private BookmarkDTO bookmarkDTO(Bookmark p) {
