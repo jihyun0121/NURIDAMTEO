@@ -183,7 +183,7 @@ export default function SignupPage() {
                                     }
                                 }}
                             />
-                            <TextInputBox type="long" placeholder="거주지" value={form.address} readOnly={true}>
+                            <TextInputBox type="long" placeholder="거주지" value={form.address} readOnly={true} onClick={handleClick} style={{ cursor: "pointer" }}>
                                 <SearchIcon size={44} color="inherit" style={{ cursor: "pointer" }} onClick={handleClick} />
                             </TextInputBox>
                             <div className="Signup-address-row">
