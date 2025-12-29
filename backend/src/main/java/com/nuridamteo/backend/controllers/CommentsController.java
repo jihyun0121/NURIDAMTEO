@@ -5,7 +5,7 @@ import java.util.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import com.nuridamteo.backend.dtos.CommentsDTO;
+import com.nuridamteo.backend.dtos.comment.CommentsDTO;
 import com.nuridamteo.backend.services.CommentsService;
 
 import lombok.*;
@@ -25,11 +25,5 @@ public class CommentsController {
     @GetMapping("/{targetId}")
     public ResponseEntity<?> getComments(@PathVariable("targetId") Long targetId) {
         return ResponseEntity.ok(commentsService.getComments(targetId));
-    }
-
-    @DeleteMapping("/{commentId}")
-    public ResponseEntity<?> deleteComment(@PathVariable("commentId") Long commentId) {
-        commentsService.deleteComment(commentId);
-        return ResponseEntity.ok(Map.of("message", "댓글 삭제 성공"));
     }
 }
