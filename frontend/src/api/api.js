@@ -19,7 +19,7 @@ api.interceptors.request.use(
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        const errorMessage = error.response?.data?.message || error.response?.data?.error || "서버 요청 중 오류가 발생했습니다.";
+        const errorMessage = error.response?.data?.message || error.response?.data?.error || "서버 요청 중 오류가 발생했습니다";
 
         console.error("API 오류:", errorMessage);
 
@@ -72,9 +72,10 @@ export const ProposalAPI = {
     createProposal: (userId, dto) => api.post(`/proposals/${userId}`, dto),
     getProposals: () => api.get(`/proposals`),
     getProposal: (proposalId) => api.get(`/proposals/${proposalId}`),
+    UserProposal: (userId) => api.get(`/proposals/user/${userId}`),
     setState: (proposalId, dto) => api.patch(`/proposals/${proposalId}/state`, dto),
-    updateView: (proposalId) => api.put(`/surveys/${proposalId}/view`),
-    updateParticipate: (proposalId) => api.put(`/surveys/${proposalId}/view`),
+    updateView: (proposalId) => api.put(`/proposals/${proposalId}/view`),
+    updateParticipate: (proposalId, type) => api.put(`/proposals/${proposalId}/participate?type=${type}`),
 };
 
 export const SurveyAPI = {
@@ -85,7 +86,7 @@ export const SurveyAPI = {
     getOptionsByQuestion: (questionId) => api.get(`/surveys/${questionId}/options`),
     checkSurveySelection: (surveyId, userId) => api.get(`/surveys/${surveyId}/selection`, userId),
     updateView: (surveyId) => api.put(`/surveys/${surveyId}/view`),
-    updateParticipate: (surveyId) => api.put(`/surveys/${surveyId}/view`),
+    updateParticipate: (surveyId, type) => api.put(`/surveys/${surveyId}/participate?type=${type}`),
 };
 
 export const AnswerAPI = {

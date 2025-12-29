@@ -56,7 +56,9 @@ public class SurveyController {
     }
 
     @PutMapping("/{surveyId}/participate")
-    public ResponseEntity<?> updateParticipate(@PathVariable("surveyId") Long surveyId) {
-        return ResponseEntity.ok(surveyService.updateParticipate(surveyId));
+    public ResponseEntity<?> updateParticipate(
+            @PathVariable("surveyId") Long surveyId,
+            @RequestParam("type") String type) {
+        return ResponseEntity.ok(surveyService.updateParticipate(surveyId, type));
     }
 }

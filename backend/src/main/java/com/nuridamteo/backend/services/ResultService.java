@@ -32,7 +32,7 @@ public class ResultService {
     @Transactional
     public ResultDTO updateView(Long noticeId) {
         Result result = resultRepository.findById(noticeId)
-                .orElseThrow(() -> new IllegalArgumentException("결과를 찾을 수 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("결과를 찾을 수 없습니다"));
 
         result.setViewCount(result.getViewCount() + 1);
         return resultDTO(result);

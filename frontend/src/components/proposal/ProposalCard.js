@@ -2,6 +2,7 @@ import { colors } from "../../assets/style/tokens/colors";
 import LabelButton from "../../ui/button/LabelButton";
 import HeartIcon from "../../ui/icons/HeartIcon";
 import ChatIcon from "../../ui/icons/ChatIcon";
+import { ProposalAPI } from "../../api/api";
 
 export default function ProposalCard({ type = "default", proposal }) {
     let state = proposal.status;
@@ -18,6 +19,7 @@ export default function ProposalCard({ type = "default", proposal }) {
         const end = new Date(end_at);
         return Math.ceil((end - now) / (1000 * 60 * 60 * 24));
     };
+
     if (state === "WAIT") {
         content = "대기중";
         color = "gray";
@@ -34,11 +36,17 @@ export default function ProposalCard({ type = "default", proposal }) {
         content = "미채택";
         color = "gray";
     }
+
+    const addViewCount = (p) => {
+        ProposalAPI.updateView(p);
+    };
+
     return (
         <div
             className="proposal-card-container"
             style={{ borderColor: `${type === "light" ? colors.orange.normal.base : colors.gray.light.active}` }}
             onClick={() => {
+                addViewCount(proposal.proposal_id);
                 window.location.href = `/proposal/${proposal.proposal_id}`;
             }}
         >
@@ -56,8 +64,8 @@ export default function ProposalCard({ type = "default", proposal }) {
             </div>
 
             <div className="proposal-card-footer">
-                <HeartIcon size={44} type={type === "light" ? "hover" : "fill"} /> {proposal.view_count}
-                <ChatIcon size={44} type={type === "light" ? "hover" : "fill"} /> {proposal.participation_count}
+                <HeartIcon size={44} type={type === "light" ? "hover" : "fill"} /> {proposal.participation_count}
+                <ChatIcon size={44} type={type === "light" ? "hover" : "fill"} /> {proposal.view_count}
             </div>
         </div>
     );

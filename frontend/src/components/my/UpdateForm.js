@@ -47,7 +47,6 @@ export default function UpdateForm({ user, userId }) {
         }));
     }, [user]);
 
-
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = "";
@@ -110,23 +109,22 @@ export default function UpdateForm({ user, userId }) {
                 });
             }
 
-            alert("회원정보가 수정되었습니다.");
+            alert("회원정보가 수정되었습니다");
         } catch (e) {
             setError(e?.response?.data?.error || "회원정보 수정 실패");
         }
     };
 
-
     const validatePassword = (password) => {
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=<>?{}[\]~]).+$/;
 
         if (password.length < 8) {
-            setPasswordError("비밀번호는 최소 8자리 이상이어야 합니다.");
+            setPasswordError("비밀번호는 최소 8자리 이상이어야 합니다");
             return false;
         }
 
         if (!regex.test(password)) {
-            setPasswordError("비밀번호는 대문자, 소문자, 숫자, 특수문자를 모두 포함해야 합니다.");
+            setPasswordError("비밀번호는 대문자, 소문자, 숫자, 특수문자를 모두 포함해야 합니다");
             return false;
         }
 
@@ -173,7 +171,6 @@ export default function UpdateForm({ user, userId }) {
                 <TextInputBox type="large" placeholder="이메일" value={form.email} onChange={handleChange("email")} />
             </div>
 
-
             <div className="my-update-content">
                 <span className="my-update-text">비밀번호</span>
                 <TextInputBox type="large" placeholder="현재 비밀번호" inputType={visible ? "text" : "password"} value={form.password} onChange={handleChange("password")}>
@@ -194,7 +191,8 @@ export default function UpdateForm({ user, userId }) {
                     content="생년월일"
                     type="large"
                     placeholder="생년월일(YYYYMMDD)"
-                    onChange={handleChange("birthday")} value={form.birthday}
+                    onChange={handleChange("birthday")}
+                    value={form.birthday}
                     onBlur={() => {
                         const formatted = normalizeBirthday(form.birthday);
                         if (formatted) {

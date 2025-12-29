@@ -34,6 +34,11 @@ public class ProposalController {
         return ResponseEntity.ok(proposal);
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getUserProposal(@PathVariable("userId") Long userId) {
+        return ResponseEntity.ok(proposalService.getUserProposal(userId));
+    }
+
     @PatchMapping("/{proposalId}/state")
     public ResponseEntity<?> setState(@PathVariable("proposalId") Long proposalId, @RequestBody ProposalDTO dto) {
         ProposalDTO proposal = proposalService.setState(proposalId, dto);
@@ -46,7 +51,9 @@ public class ProposalController {
     }
 
     @PutMapping("/{proposalId}/participate")
-    public ResponseEntity<?> updateParticipate(@PathVariable("proposalId") Long proposalId) {
-        return ResponseEntity.ok(proposalService.updateParticipate(proposalId));
+    public ResponseEntity<?> updateParticipate(
+            @PathVariable("proposalId") Long proposalId,
+            @RequestParam("type") String type) {
+        return ResponseEntity.ok(proposalService.updateParticipate(proposalId, type));
     }
 }

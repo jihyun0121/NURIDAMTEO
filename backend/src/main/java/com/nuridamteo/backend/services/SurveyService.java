@@ -76,9 +76,9 @@ public class SurveyService {
 	@Transactional(readOnly = true)
 	public boolean checkSurveySelection(Long surveyId, Long userId) {
 		userRepository.findById(userId)
-				.orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+				.orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다"));
 		surveyRepository.findById(surveyId)
-				.orElseThrow(() -> new IllegalArgumentException("설문을 찾을 수 없습니다."));
+				.orElseThrow(() -> new IllegalArgumentException("설문을 찾을 수 없습니다"));
 
 		return panelRepository
 				.existsBySurvey_SurveyIdAndUser_UserId(surveyId, userId);
@@ -87,18 +87,21 @@ public class SurveyService {
 	@Transactional
 	public SurveyDTO updateView(Long surveyId) {
 		Survey survey = surveyRepository.findById(surveyId)
-				.orElseThrow(() -> new IllegalArgumentException("설문을 찾을 수 없습니다."));
+				.orElseThrow(() -> new IllegalArgumentException("설문을 찾을 수 없습니다"));
 
 		survey.setViewCount(survey.getViewCount() + 1);
 		return surveyDTO(survey);
 	}
 
 	@Transactional
-	public SurveyDTO updateParticipate(Long surveyId) {
+	public SurveyDTO updateParticipate(Long surveyId, String type) {
 		Survey survey = surveyRepository.findById(surveyId)
-				.orElseThrow(() -> new IllegalArgumentException("설문을 찾을 수 없습니다."));
+				.orElseThrow(() -> new IllegalArgumentException("설문을 찾을 수 없습니다"));
 
-		survey.setParticipationCount(survey.getParticipationCount() + 1);
+		if (type.equals("plus"))
+			survey.setParticipationCount(survey.getParticipationCount() + 1);
+		if (type.equals("minus"))
+			survey.setParticipationCount(survey.getParticipationCount() - 1);
 		return surveyDTO(survey);
 	}
 

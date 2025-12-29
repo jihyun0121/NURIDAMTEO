@@ -38,7 +38,7 @@ export default function Choice({ userId }) {
 
         try {
             await InterestAPI.selectInterests(userId, selectedIds);
-            setSuccess("관심 주제 선택이 완료되었습니다.");
+            setSuccess("관심 주제 선택이 완료되었습니다");
             setSaved(true);
         } catch (e) {
             setError(e?.response?.data?.error || "관심 주제 저장 실패");
@@ -83,18 +83,9 @@ export default function Choice({ userId }) {
 
             {error && <div className="signup-warning">{error}</div>}
 
-            <TextButtonS
-                content="선택 완료"
-                type={isDisabled ? "none" : "hover"}
-                readOnly={isDisabled}
-                onClick={handleSubmit}
-            />
+            <TextButtonS content="선택 완료" type={isDisabled ? "none" : "hover"} readOnly={isDisabled} onClick={handleSubmit} />
 
-            {success && (
-                <div style={{ marginTop: "0.75rem", color: "#595959", fontSize: "1rem" }}>
-                    {success}
-                </div>
-            )}
+            {success && <div style={{ marginTop: "0.75rem", color: "#595959", fontSize: "1rem" }}>{success}</div>}
         </div>
     );
 }

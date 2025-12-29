@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import banner from "../assets/image/proposal/proposalbanner.svg";
-import DropdownBox from "../ui/input/FormDropdown";
 import TextButtonS from "../ui/button/TextButtonS";
+import FormDropdown from "../ui/input/FormDropdown";
 
 export default function WriteProposalPage() {
     const optionData = [
@@ -19,15 +19,7 @@ export default function WriteProposalPage() {
             <Header />
             <img src={banner} width="100%" alt="" style={{ marginTop: "6.25rem" }} />
             <div className="writeproposal-wrapper">
-                <DropdownBox optionData={optionData} placeholder="카테고리" />
-                <div className="writeproposal-contant">
-                    <input className="title-input" style={{ width: "95rem" }} placeholder="제목을 입력해주세요." />
-                    <textarea className="content-input" style={{ width: "95rem", height: "37.5rem" }} placeholder="내용을 입력해주세요." />
-                </div>
-                <div className="writeproposal-button">
-                    <TextButtonS content="사진첨부" />
-                    <TextButtonS content="제안하기" onClick={() => (window.location.href = "/proposal")} />
-                </div>
+                <FormDropdown />
             </div>
         </div>
     );
