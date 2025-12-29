@@ -38,9 +38,16 @@
     border: 1px solid #d9d9d9;
     border-radius: 0.625rem;
     padding: 1rem;
-    font-size: 1.25rem;
-    font-style: normal;
-    font-weight: 600;
+    font-size: var(--title-medium-size);
+    font-weight: var(--title-medium-weight);
+}
+
+.title-input::placeholder {
+    align-self: stretch;
+
+    font-size: var(--title-medium-size);
+    font-weight: var(--title-medium-weight);
+    color: var(--Gray-Normal, #cacaca);
 }
 
 .content-input {
@@ -55,8 +62,18 @@
     gap: 0.625rem;
     align-self: stretch;
 
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: var(--title-medium-size);
+    font-weight: var(--title-medium-weight);
+
+    vertical-align: top;
+}
+
+.content-input::placeholder {
+    align-self: stretch;
+
+    font-size: var(--title-medium-size);
+    font-weight: var(--title-medium-weight);
+    color: var(--Gray-Normal, #cacaca);
 
     vertical-align: top;
 }
