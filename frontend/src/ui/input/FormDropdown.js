@@ -12,7 +12,7 @@ export default function FormDropdown({ size = "short", optionData = [], value, o
     let width;
     if (size === "short") width = "14.1875rem";
     else if (size === "long") width = "40.5rem";
-    else width = "70.75rem";
+    else if (size === "large") width = "70.75rem";
 
     const handleSelect = (val, e) => {
         e.stopPropagation();

@@ -104,8 +104,8 @@ export default function SignupPage() {
 
             console.log("회원가입 성공");
 
-            alert("회원가입에 성공하였습니다. 로그인 화면으로 돌아갑니다.");
-            window.location.href = "/login";
+            alert("회원가입에 성공하였습니다");
+            window.location.href = "/onboarding";
         } catch (e) {
             setError(e?.response?.data?.error || "회원가입 실패");
         }

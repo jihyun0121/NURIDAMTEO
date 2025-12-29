@@ -6,9 +6,68 @@
     align-items: center;
     gap: 0.75rem;
 
-    color: #FF9B43;
+    color: var(--orange-normal-base);
 
     font-size: 1.75rem;
     font-weight: 700;
     line-height: normal;
+}
+
+.onboarding-label {
+    width: 46.5rem;
+    display: flex;
+    padding: 1rem 1.5rem 1rem 11.25rem;
+    align-items: center;
+    gap: 1.5rem;
+    align-self: stretch;
+
+    border-radius: 1.5rem;
+    background: var(--white);
+
+    font-size: var(--body-medium-size);
+    font-weight: var(--body-medium-weight);
+    line-height: var(--body-medium-line);
+}
+
+.choice-container {
+    display: flex;
+    width: 95rem;
+    padding: 3rem 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+
+    color: var(--Gray-Dark, #404040);
+
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    line-height: var(--title-xlarge-line);
+}
+
+.choice-buttons {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
+}
+.choice-button {
+    display: flex;
+    padding: 2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+
+    border-radius: 0.75rem;
+    background: var(--white);
+
+    color: var(--orange-normal-base);
+    text-align: center;
+
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    line-height: var(--title-xlarge-line);
+
+    cursor: pointer;
 }

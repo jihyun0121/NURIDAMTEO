@@ -79,7 +79,7 @@ export default function ProfileCard({ userId }) {
             <ProfileDetail mileage={user?.total_mileage} type={activeTab} />
 
             <div className="profile-card-footer">
-                <AuthButton content="마이페이지" type="nuri" />
+                <AuthButton content="마이페이지" type="nuri" onClick={() => window.location.href = `/my`} />
             </div>
         </div>
     );

@@ -2,19 +2,25 @@ import { useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
 import ArrowIcon from "../icons/ArrowIcon";
 
-export default function MyPageButton({ children, content, type = "default", onClick }) {
+export default function MyPageButton({ children, content, type = "default", onClick, arrow = true }) {
     const [state, setState] = useState("default");
 
     const styles = {
         default: {
             boxShadow: type === "line" ? `0 0 0 1px ${colors.orange.normal.base} inset` : "none",
-            color: colors.gray.normal.base,
-            backgroundColor: colors.white,
+            color: type === "hover"
+                ? colors.white
+                : type === "line"
+                    ? colors.orange.normal.base
+                    : colors.gray.normal.base,
+            backgroundColor: type === "hover" ? colors.orange.normal.base : colors.white,
         },
         action: {
             boxShadow: type === "line" ? `0 0 0 1px ${colors.orange.normal.base} inset` : "none",
-            color: colors.white,
-            backgroundColor: colors.orange.normal.base,
+            color: type === "hover"
+                ? colors.gray.normal.base
+                : colors.white,
+            backgroundColor: type === "hover" ? colors.white : colors.orange.normal.base,
         },
     };
 
@@ -24,7 +30,7 @@ export default function MyPageButton({ children, content, type = "default", onCl
                 {children}
                 {content}
             </div>
-            <ArrowIcon direction="right" size="44" color="inherit" />
+            {arrow === true && <ArrowIcon direction="right" size="44" color="inherit" />}
         </button>
     );
 }

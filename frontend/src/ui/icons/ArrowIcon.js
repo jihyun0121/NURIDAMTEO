@@ -13,7 +13,7 @@ export default function ArrowIcon({ direction, type = "default", size, color = "
     let iconColor;
 
     if (color === "default") iconColor = colors.gray.normal.base;
-    else if (color === "inherit") iconColor = colors.gray.normal.base;
+    else if (color === "inherit") iconColor = "inherit";
     else iconColor = color;
 
     if (type === "default") {
