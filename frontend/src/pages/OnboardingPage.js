@@ -46,8 +46,8 @@ export default function OnboardingPage() {
                 <img src={nuri} alt="" />
                 <Choice userId={sessionStorage.getItem("user_id")} />
                 <div className="onboarding-content" style={{ gap: "5rem", flexDirection: "row" }}>
-                    <TextButtonS content="누리담터 둘러보기" onClick={() => window.location.href = "/nurisodam"} />
-                    <TextButtonS content="제안 시작하기" type="action" onClick={() => window.location.href = "/writeproposal"} />
+                    <TextButtonS content="누리담터 둘러보기" onClick={() => (window.location.href = "/nurisodam")} />
+                    <TextButtonS content="제안 시작하기" type="action" onClick={() => (window.location.href = "/proposal")} />
                 </div>
             </div>
         </div>
