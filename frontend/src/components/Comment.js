@@ -13,12 +13,12 @@ export default function Comment({ user, comment, onClick, active = false }) {
           };
 
     return (
-        <div>
-            <div>
-                {user}
-                {/* <p>{comment.created_at}</p> */}
+        <div className="comment-wraper">
+            <div className="comment-name">
+                {user}왕**
+                {/* <p>{comment.created_at}</p> */} 2025.11.27
             </div>
-            {/* <div>{comment.content}</div> */}
+            <div className="comment-content">{/* {comment.content} */} 좋은 의견인 것 같습니다.</div>
         </div>
     );
 }

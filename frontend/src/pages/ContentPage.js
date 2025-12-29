@@ -160,19 +160,7 @@ export default function ContentPage() {
     let title = null;
     let content = null;
     let form = null;
-    let comments = (
-        <div>
-            <div>
-                <div></div>
-                <div></div>
-                <></>
-                <div></div>
-            </div>
-            <div>
-                <Comment />
-            </div>
-        </div>
-    );
+    let comments = null;
     let color = null;
     let text = null;
 
@@ -198,33 +186,46 @@ export default function ContentPage() {
         return `${year}.${month}.${day}`;
     };
 
+    const [isLiking, setIsLiking] = useState(false);
+
     const handleLike = async () => {
         if (!contents) return;
+        if (!loginUser) return;
 
-        const like = participations.find((p) => p.target_id === contents.proposal_id && p.target_type === "PROPOSAL" && p.participation_type === "LIKE");
+        // ✅ 이미 공감했으면 다시 못 누르게
+        if (hasParticipated) return;
 
-        if (!hasParticipated) {
-            setHasParticipated(true);
+        // ✅ 연타 방지
+        if (isLiking) return;
+
+        try {
+            setIsLiking(true);
+
             const dto = {
                 user_id: Number(loginUser),
                 target_type: "PROPOSAL",
                 target_id: contents.proposal_id,
                 participation_type: "LIKE",
             };
+
             const res = await ParticipationAPI.createParticipaiton(dto);
-            ProposalAPI.updateParticipate(contents.proposal_id, "plus");
+
+            // ✅ 서버 카운트 증가
+            await ProposalAPI.updateParticipate(contents.proposal_id, "plus");
+
+            // ✅ 상태 반영
+            setHasParticipated(true);
+
             if (res?.data) {
                 setParticipations((prev) => [...prev, res.data]);
             } else {
                 const fresh = await ParticipationAPI.getUserParticipaiton(loginUser);
                 setParticipations(fresh.data || []);
             }
-        } else {
-            if (!like) return;
-            setHasParticipated(false);
-            await ParticipationAPI.deleteParticipaiton(like.participation_id);
-            ProposalAPI.updateParticipate(contents.proposal_id, "minus");
-            setParticipations((prev) => prev.filter((p) => p.participation_id !== like.participation_id));
+        } catch (e) {
+            console.log("공감 처리 실패", e);
+        } finally {
+            setIsLiking(false);
         }
     };
 
@@ -310,6 +311,22 @@ export default function ContentPage() {
         );
         content = <div dangerouslySetInnerHTML={{ __html: contents?.description }} />;
         form = <AnswerForm survey={contents} />;
+        comments = (
+            <div className="comments-container">
+                <div className="comments-titles">
+                    <div className="comments-title">댓글의견</div>
+                    <div className="comments-description">위 제안에 공감하신다면 공감버튼을 누르고 제안을 발전시킬 수 있는 구체적인 댓글을 달아주세요.</div>
+                    <textarea className="comments-input" />
+
+                    <div style={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
+                        <TextButtonS content="의견 등록" />
+                    </div>
+                </div>
+                <div className="comments-list">
+                    <Comment />
+                </div>
+            </div>
+        );
     } else if (pageType === "proposal") {
         if (state === "WAIT") {
             text = "대기중";
@@ -352,12 +369,28 @@ export default function ContentPage() {
                 </div>
             </div>
         );
-        content = loading ? <div>불러오는 중...</div> : <div dangerouslySetInnerHTML={{ __html: contents?.content }} />;
+        content = <div dangerouslySetInnerHTML={{ __html: contents?.content }} />;
         form = (
             <div className="content-buttons">
-                <TextButtonS content="공감" type={hasParticipated ? "hover" : "default"} onClick={handleLike} />
+                <TextButtonS content="공감" type={hasParticipated ? "none" : "default"} onClick={handleLike} disabled={hasParticipated} />
                 <TextButtonS content="즐겨찾기" type={isBookmarked ? "hover" : "default"} onClick={handleBookmark} />
                 <TextButtonS content="목록" onClick={() => navigate(-1)} />
+            </div>
+        );
+        comments = (
+            <div className="comments-container" style={{ boxShadow: "inset 0 1px 0 0 var(--gray-light-active)", padding: "5rem 0" }}>
+                <div className="comments-titles">
+                    <div className="comments-title">댓글의견</div>
+                    <div className="comments-description">위 제안에 공감하신다면 공감버튼을 누르고 제안을 발전시킬 수 있는 구체적인 댓글을 달아주세요.</div>
+                    <textarea className="comments-input" />
+
+                    <div style={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
+                        <TextButtonS content="의견 등록" />
+                    </div>
+                </div>
+                <div className="comments-list">
+                    <Comment />
+                </div>
             </div>
         );
     } else if (pageType === "notice") {
