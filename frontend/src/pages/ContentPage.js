@@ -370,7 +370,7 @@ export default function ContentPage() {
                     <div className="comments-title">댓글의견</div>
                     <div className="comments-description">위 제안에 공감하신다면 공감버튼을 누르고 제안을 발전시킬 수 있는 구체적인 댓글을 달아주세요.</div>
 
-                    <textarea className="comments-input" value={commentInput} onChange={(e) => setCommentInput(e.target.value)} placeholder="댓글을 입력하세요" />
+                    <textarea className="comments-input" value={commentInput} onChange={(e) => setCommentInput(e.target.value)} />
 
                     <div style={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
                         <TextButtonS content={commentLoading ? "등록 중..." : "의견 등록"} onClick={handleCreateComment} type={commentLoading ? "none" : "default"} disabled={commentLoading} />
