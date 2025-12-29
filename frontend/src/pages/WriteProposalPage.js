@@ -50,7 +50,7 @@ export default function WriteProposalPage() {
                 title: title,
                 content: content,
                 start_at: new Date().toISOString().slice(0, 10),
-                end_at: new Date(Date.now() + 31 * 86400000).toISOString().slice(0, 10),
+                end_at: new Date(Date.now() + 30 * 86400000).toISOString().slice(0, 10),
             };
 
             await ProposalAPI.createProposal(loginUser, dto);
