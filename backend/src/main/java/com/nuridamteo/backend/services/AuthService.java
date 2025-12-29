@@ -28,7 +28,7 @@ public class AuthService {
     private final JWToken jwToken;
 
     @Transactional
-    public void signUp(SignupDTO dto) {
+    public Long signUp(SignupDTO dto) {
         if (userRepository.existsByEmail(dto.getEmail())) {
             throw new IllegalArgumentException("이미 가입된 이메일입니다");
         }
@@ -44,10 +44,10 @@ public class AuthService {
                 .updatedAt(LocalDateTime.now())
                 .build();
 
-        userRepository.save(user);
+        Users savedUser = userRepository.save(user);
 
         Profile profile = Profile.builder()
-                .user(user)
+                .user(savedUser)
                 .name(dto.getName())
                 .gender(dto.getGender())
                 .birthday(dto.getBirthday())
@@ -57,6 +57,8 @@ public class AuthService {
                 .build();
 
         profileRepository.save(profile);
+
+        return savedUser.getUserId();
     }
 
     @Transactional(readOnly = true)

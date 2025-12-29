@@ -91,7 +91,7 @@ export default function SignupPage() {
         console.log(form);
 
         try {
-            await UserAPI.createUser({
+            const res = await UserAPI.createUser({
                 email: form.email,
                 password: form.password,
                 name: form.name,
@@ -102,7 +102,10 @@ export default function SignupPage() {
                 postal_code: form.postal_code,
             });
 
-            console.log("회원가입 성공");
+            const userId = res.data?.user_id;
+            if (userId) {
+                sessionStorage.setItem("user_id", userId);
+            }
 
             alert("회원가입에 성공하였습니다");
             window.location.href = "/onboarding";

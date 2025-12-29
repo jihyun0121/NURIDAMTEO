@@ -19,8 +19,10 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> signUp(@RequestBody SignupDTO dto) {
-        authService.signUp(dto);
-        return ResponseEntity.ok(Map.of("message", "회원가입 성공"));
+        Long userId = authService.signUp(dto);
+        return ResponseEntity.ok(Map.of(
+                "message", "회원가입 성공",
+                "user_id", userId));
     }
 
     @PostMapping("/login")
