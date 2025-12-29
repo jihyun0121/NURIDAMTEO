@@ -27,14 +27,14 @@ public class CommentsService {
 
     public CommentsDTO createComment(CommentsDTO dto) {
         Users user = userRepository.findById(dto.getUser())
-                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다"));
 
         if (dto.getTargetType() == TargetType.SURVEY) {
             surveyRepository.findById(dto.getTargetId())
-                    .orElseThrow(() -> new RuntimeException("설문을 찾을 수 없습니다."));
+                    .orElseThrow(() -> new RuntimeException("설문을 찾을 수 없습니다"));
         } else if (dto.getTargetType() == TargetType.PROPOSAL) {
             proposalRepository.findById(dto.getTargetId())
-                    .orElseThrow(() -> new RuntimeException("제안을 찾을 수 없습니다."));
+                    .orElseThrow(() -> new RuntimeException("제안을 찾을 수 없습니다"));
         }
 
         Comments comments = Comments.builder()

@@ -22,7 +22,7 @@ export default function PanelAnswerForm() {
     // useEffect(() => {
     //     const userId = sessionStorage.getItem("user_id");
     //     if (!userId) {
-    //         alert("로그인이 필요합니다.");
+    //         alert("로그인이 필요합니다");
     //         navigate("/auth");
     //         return;
     //     }
@@ -80,7 +80,7 @@ export default function PanelAnswerForm() {
                 }
             } catch (e) {
                 console.error("설문/질문 로드 실패", e);
-                alert("설문을 불러오는 중 문제가 발생했습니다.");
+                alert("설문을 불러오는 중 문제가 발생했습니다");
             }
         }
 
@@ -140,7 +140,7 @@ export default function PanelAnswerForm() {
             try {
                 const userId = sessionStorage.getItem("user_id");
                 if (!userId) {
-                    alert("로그인이 필요합니다.");
+                    alert("로그인이 필요합니다");
                     navigate("/auth");
                     return;
                 }
@@ -200,7 +200,7 @@ export default function PanelAnswerForm() {
                 }
 
                 if (payloadAnswers.length === 0) {
-                    alert("제출할 응답이 없습니다.");
+                    alert("제출할 응답이 없습니다");
                     setLoading(false);
                     return;
                 }
@@ -222,7 +222,7 @@ export default function PanelAnswerForm() {
                 });
             } catch (e) {
                 console.error("제출 실패", e);
-                alert("제출 중 오류가 발생했습니다.");
+                alert("제출 중 오류가 발생했습니다");
             } finally {
                 setLoading(false);
             }

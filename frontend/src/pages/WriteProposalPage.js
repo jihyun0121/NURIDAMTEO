@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import banner from "../assets/image/proposal/proposalbanner.svg";
 import ProfileCard from "../components/home/ProfileCard";
+import FormDropdown from "../ui/input/FormDropdown";
 
 export default function WriteProposalPage() {
     return (
@@ -8,7 +9,7 @@ export default function WriteProposalPage() {
             <Header />
             <img src={banner} width="100%" alt="" style={{ marginTop: "6.25rem" }} />
             <div className="writeproposal-wrapper">
-                <DropdownBox />
+                <FormDropdown />
             </div>
         </div>
     );

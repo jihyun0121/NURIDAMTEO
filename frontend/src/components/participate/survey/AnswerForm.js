@@ -12,7 +12,7 @@ export default function AnswerForm({ survey }) {
     useEffect(() => {
         const userId = sessionStorage.getItem("user_id");
         if (!userId) {
-            alert("로그인이 필요합니다.");
+            alert("로그인이 필요합니다");
             navigate("/login");
             return;
         }
@@ -29,7 +29,7 @@ export default function AnswerForm({ survey }) {
             setQuestions(q.data || []);
         } catch (e) {
             console.error("질문 로드 실패", e);
-            alert("질문을 불러오는 중 문제가 발생했습니다.");
+            alert("질문을 불러오는 중 문제가 발생했습니다");
         }
     }
 

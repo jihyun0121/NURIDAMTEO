@@ -35,7 +35,7 @@ import NoticeIcon from "../ui/icons/NoticeIcon";
 import MyPageButton from "../ui/button/MyPageButton";
 import TextInputBox from "../ui/input/TextInputBox";
 import SearchBar from "../ui/input/SearchBar";
-import DropdownBox from "../ui/input/FormDropdown";
+import FormDropdown from "../ui/input/FormDropdown";
 import ProfileCard from "../components/home/ProfileCard";
 import Toggle from "../ui/input/Toggle";
 import MileageButton from "../ui/button/MileageButton";
@@ -365,14 +365,14 @@ export default function IconPage() {
                                 flexDirection: "row",
                             }}
                         >
-                            <DropdownBox />
+                            <FormDropdown />
                             <SearchBar type="short" />
                         </div>
 
                         <div className="icons">
-                            <DropdownBox />
-                            <DropdownBox size="long" />
-                            <DropdownBox size="large" />
+                            <FormDropdown />
+                            <FormDropdown size="long" />
+                            <FormDropdown size="large" />
                         </div>
 
                         <div className="icons">

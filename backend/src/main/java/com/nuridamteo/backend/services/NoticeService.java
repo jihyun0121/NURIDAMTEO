@@ -49,7 +49,7 @@ public class NoticeService {
     @Transactional
     public NoticeDTO updateView(Long noticeId) {
         Notice notice = noticeRepository.findById(noticeId)
-                .orElseThrow(() -> new IllegalArgumentException("공지를 찾을 수 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("공지를 찾을 수 없습니다"));
 
         notice.setViewCount(notice.getViewCount() + 1);
         return noticeDTO(notice);

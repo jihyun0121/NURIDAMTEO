@@ -71,7 +71,7 @@ public class ProposalService {
         @Transactional
         public ProposalDTO updateView(Long proposalId) {
                 Proposal proposal = proposalRepository.findById(proposalId)
-                                .orElseThrow(() -> new IllegalArgumentException("제안을 찾을 수 없습니다."));
+                                .orElseThrow(() -> new IllegalArgumentException("제안을 찾을 수 없습니다"));
 
                 proposal.setViewCount(proposal.getViewCount() + 1);
                 return proposalDTO(proposal);
@@ -80,7 +80,7 @@ public class ProposalService {
         @Transactional
         public ProposalDTO updateParticipate(Long proposalId, String type) {
                 Proposal proposal = proposalRepository.findById(proposalId)
-                                .orElseThrow(() -> new IllegalArgumentException("제안을 찾을 수 없습니다."));
+                                .orElseThrow(() -> new IllegalArgumentException("제안을 찾을 수 없습니다"));
                 if (type.equals("plus"))
                         proposal.setParticipationCount(proposal.getParticipationCount() + 1);
                 if (type.equals("minus"))
