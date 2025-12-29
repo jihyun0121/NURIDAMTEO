@@ -22,9 +22,7 @@ export default function SettingForm({ user, userId }) {
 
     const [isPressed, setIsPressed] = useState(false);
 
-    const questionStyle = active
-        ? { borderRadius: "0.75rem 0.75rem 0 0" }
-        : { borderRadius: "0.75rem" };
+    const questionStyle = active ? { borderRadius: "0.75rem 0.75rem 0 0" } : { borderRadius: "0.75rem" };
 
     const answerStyle = {
         borderRadius: "0 0 0.75rem 0.75rem",
@@ -92,7 +90,7 @@ export default function SettingForm({ user, userId }) {
 
     return (
         <>
-            {isPopUpOpen && (<PopUpButton onCancel={() => setIsPopUpOpen(false)} onConfirm={hadleDelete} />)}
+            {isPopUpOpen && <PopUpButton onCancel={() => setIsPopUpOpen(false)} onConfirm={hadleDelete} />}
             <div className="my-update-content">
                 <TextInputToggle value="알림 끄기" checked={!form.notification_enabled} onChange={handleNotification} />
                 {accessError && <div className="signup-warning">{accessError}</div>}
@@ -104,29 +102,28 @@ export default function SettingForm({ user, userId }) {
             </div>
 
             <div className="my-terms-container">
-                <div
-                    className="my-terms-question"
-                    style={questionStyle}
-                    onMouseDown={() => setIsPressed(true)}
-                    onMouseUp={() => setIsPressed(false)}
-                    onMouseLeave={() => setIsPressed(false)}
-                    onClick={() => setActive((prev) => !prev)}
-                >
+                <div className="my-terms-question" style={questionStyle} onMouseDown={() => setIsPressed(true)} onMouseUp={() => setIsPressed(false)} onMouseLeave={() => setIsPressed(false)} onClick={() => setActive((prev) => !prev)}>
                     이용약관 및 개인정보 처리 안내
                     <ArrowIcon direction={active ? "up" : "down"} size={44} />
                 </div>
 
                 {active && (
                     <div className="my-terms-anwer" style={answerStyle}>
-                        이용약관
-                        개인정보 처리방침
+                        <p>이용약관 안내 </p>
+                        <p>누리담터는 시민의 의견을 존중하며, 모두가 안전하게 참여할 수 있는 공간을 만들기 위해 아래와 같은 이용 기준을 두고 있습니다. 본 서비스는 시민 제안, 의견 공유 및 참여를 목적으로 제공됩니다. 타인을 비방하거나 혐오, 욕설, 허위 정보가 포함된 게시물은 사전 안내 없이 삭제될 수 있습니다. 서비스 운영 목적에 맞지 않는 활동은 이용이 제한될 수 있습니다. 회원은 본인의 계정 정보를 안전하게 관리할 책임이 있습니다. 누리담터는 건강한 시민 소통 환경을 위해 지속적으로 노력하겠습니다.</p>
+                        <p>개인정보 처리 안내</p>
+                        <p>누리담터는 이용자의 개인정보를 소중히 보호하며, 관련 법령을 준수합니다. 수집된 개인정보는 회원 관리 및 서비스 제공을 위해서만 사용됩니다. 이용자의 동의 없이 개인정보를 제3자에게 제공하지 않습니다. 개인정보는 목적 달성 후 안전하게 파기됩니다. 이용자는 언제든지 개인정보 열람, 수정, 삭제를 요청할 수 있습니다. 안전하고 신뢰할 수 있는 서비스 운영을 위해 최선을 다하겠습니다.</p>
                     </div>
                 )}
             </div>
 
             <div className="my-update-content">
                 <span className="my-update-text"></span>
-                <TextInputBox type="large" value="로그아웃" readOnly={true} style={{ cursor: "pointer" }}
+                <TextInputBox
+                    type="large"
+                    value="로그아웃"
+                    readOnly={true}
+                    style={{ cursor: "pointer" }}
                     onClick={() => {
                         sessionStorage.clear();
                         window.location.href = "/";
