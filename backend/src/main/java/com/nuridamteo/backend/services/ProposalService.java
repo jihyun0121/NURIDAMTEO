@@ -58,6 +58,12 @@ public class ProposalService {
                 return proposalDTO(proposal);
         }
 
+        @Transactional(readOnly = true)
+        public List<ProposalDTO> getUserProposal(Long userId) {
+                return proposalRepository.findByUser_UserIdOrderByProposalIdDesc(userId).stream()
+                                .map(this::proposalDTO).toList();
+        }
+
         @Transactional
         public ProposalDTO setState(Long proposalId, ProposalDTO dto) {
                 Proposal proposal = proposalRepository.findById(proposalId)

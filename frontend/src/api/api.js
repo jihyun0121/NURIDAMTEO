@@ -72,6 +72,7 @@ export const ProposalAPI = {
     createProposal: (userId, dto) => api.post(`/proposals/${userId}`, dto),
     getProposals: () => api.get(`/proposals`),
     getProposal: (proposalId) => api.get(`/proposals/${proposalId}`),
+    UserProposal: (userId) => api.get(`/proposals/user/${userId}`),
     setState: (proposalId, dto) => api.patch(`/proposals/${proposalId}/state`, dto),
     updateView: (proposalId) => api.put(`/proposals/${proposalId}/view`),
     updateParticipate: (proposalId, type) => api.put(`/proposals/${proposalId}/participate?type=${type}`),

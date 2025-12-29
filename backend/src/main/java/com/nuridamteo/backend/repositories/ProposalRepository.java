@@ -10,4 +10,6 @@ import com.nuridamteo.backend.entities.Proposal;
 @Repository
 public interface ProposalRepository extends JpaRepository<Proposal, Long> {
     List<Proposal> findAllByOrderByProposalIdDesc();
+
+    List<Proposal> findByUser_UserIdOrderByProposalIdDesc(Long userId);
 }

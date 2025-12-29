@@ -34,6 +34,11 @@ public class ProposalController {
         return ResponseEntity.ok(proposal);
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getUserProposal(@PathVariable("userId") Long userId) {
+        return ResponseEntity.ok(proposalService.getUserProposal(userId));
+    }
+
     @PatchMapping("/{proposalId}/state")
     public ResponseEntity<?> setState(@PathVariable("proposalId") Long proposalId, @RequestBody ProposalDTO dto) {
         ProposalDTO proposal = proposalService.setState(proposalId, dto);
