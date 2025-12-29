@@ -28,6 +28,10 @@ export default function NoticeList() {
     const startIndex = (currentPage - 1) * PAGE_SIZE;
     const currentNotices = notice.slice(startIndex, startIndex + PAGE_SIZE);
 
+    const addViewCount = (n) => {
+        NoticeAPI.updateView(n);
+    };
+
     return (
         <div className="nurisodam-list-container">
             {currentNotices.map((notice) => (
@@ -36,6 +40,7 @@ export default function NoticeList() {
                     className="nurisodam-lists"
                     style={{ cursor: "pointer" }}
                     onClick={() => {
+                        addViewCount(notice.notice_id);
                         window.location.href = `/nurisodam/notice/${notice.notice_id}`;
                     }}
                 >

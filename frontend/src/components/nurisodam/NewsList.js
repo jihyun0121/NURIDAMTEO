@@ -6,7 +6,7 @@ import Pagination from "../Pagination";
 
 const PAGE_SIZE = 10;
 
-export default function NewsList() {
+export default function NewsList({ onClick }) {
     const [news, setNews] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -28,10 +28,22 @@ export default function NewsList() {
     const startIndex = (currentPage - 1) * PAGE_SIZE;
     const currentNewss = news.slice(startIndex, startIndex + PAGE_SIZE);
 
+    const addViewCount = (n) => {
+        NoticeAPI.updateView(n);
+    };
+
     return (
         <div className="nurisodam-list-container">
             {currentNewss.map((news) => (
-                <div key={news.notice_id} className="nurisodam-lists" style={{ cursor: "pointer" }} onClick={() => (window.location.href = `/nurisodam/news/${news.notice_id}`)}>
+                <div
+                    key={news.notice_id}
+                    className="nurisodam-lists"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                        addViewCount(news.notice_id);
+                        window.location.href = `/nurisodam/news/${news.notice_id}`;
+                    }}
+                >
                     <MegaphoneIcon size="44" type={news?.is_pinned ? "hover" : "default"} />
                     <span className="nurisodam-list-text">{news?.title ?? "제목 없음"}</span>
 
