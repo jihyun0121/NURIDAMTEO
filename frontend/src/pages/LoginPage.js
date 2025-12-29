@@ -71,9 +71,6 @@ export default function LoginPage() {
                                 <input type="checkbox" className="check-box" checked={remember} onChange={(e) => setRemember(e.target.checked)} />
                                 <span className="login-option-text">이메일 기억하기</span>
                             </label>
-                            <div className="login-option">
-                                <span className="find-account">이메일/비밀번호 찾기</span>
-                            </div>
                         </div>
                     </div>
 
