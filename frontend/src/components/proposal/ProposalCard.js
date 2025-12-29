@@ -1,13 +1,49 @@
+import { ParticipationAPI, ProposalAPI } from "../../api/api";
+import { useEffect, useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
+import ChatIcon from "../../ui/icons/ChatIcon";
 import LabelButton from "../../ui/button/LabelButton";
 import HeartIcon from "../../ui/icons/HeartIcon";
-import ChatIcon from "../../ui/icons/ChatIcon";
-import { ProposalAPI } from "../../api/api";
 
 export default function ProposalCard({ type = "default", proposal }) {
+    const [participations, setParticipations] = useState([]);
+    const [hasParticipated, setHasParticipated] = useState(false);
+
     let state = proposal.status;
     let content;
     let color;
+    const loginUser = sessionStorage.getItem("user_id");
+
+    useEffect(() => {
+        const fetchMyParticipations = async () => {
+            if (!loginUser) return;
+
+            try {
+                const res = await ParticipationAPI.getUserParticipaiton(loginUser);
+                setParticipations(res.data || []);
+            } catch (err) {
+                console.log("유저 참여 목록 로딩 실패", err);
+                setParticipations([]);
+            }
+        };
+
+        fetchMyParticipations();
+    }, [loginUser]);
+
+    useEffect(() => {
+        if (!proposal) return;
+
+        let targetId = null;
+        let targetType = null;
+
+        targetId = proposal?.proposal_id;
+        targetType = "PROPOSAL";
+
+        if (!targetId || !targetType) return;
+
+        const participated = participations.some((p) => p.target_id === targetId && p.target_type === targetType);
+        setHasParticipated(participated);
+    }, [proposal, participations]);
 
     const stripHtml = (html) => {
         const doc = new DOMParser().parseFromString(html, "text/html");
@@ -64,8 +100,8 @@ export default function ProposalCard({ type = "default", proposal }) {
             </div>
 
             <div className="proposal-card-footer">
-                <HeartIcon size={44} type={type === "light" ? "hover" : "fill"} /> {proposal.participation_count}
-                <ChatIcon size={44} type={type === "light" ? "hover" : "fill"} /> {proposal.view_count}
+                <HeartIcon size={44} type={type === "light" || hasParticipated ? "hover" : "fill"} /> {proposal.participation_count}
+                <ChatIcon size={44} type={type === "light" || hasParticipated ? "hover" : "fill"} /> {proposal.view_count}
             </div>
         </div>
     );
