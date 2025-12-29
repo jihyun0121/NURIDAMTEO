@@ -10,4 +10,6 @@ import com.nuridamteo.backend.entities.Bookmark;
 @Repository
 public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
     List<Bookmark> findByUser_UserIdAndProposalIsNotNullOrderByBookmarkIdDesc(Long userId);
+
+    List<Bookmark> findByUser_UserIdAndResultIsNotNullOrderByBookmarkIdDesc(Long userId);
 }

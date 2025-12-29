@@ -60,6 +60,14 @@ public class BookmarkService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
+    public List<BookmarkDTO> getBookmarkResult(Long userId) {
+        return bookmarkRepository.findByUser_UserIdAndResultIsNotNullOrderByBookmarkIdDesc(userId)
+                .stream()
+                .map(this::bookmarkDTO)
+                .toList();
+    }
+
     private BookmarkDTO bookmarkDTO(Bookmark p) {
         return BookmarkDTO.builder()
                 .bookmarkId(p.getBookmarkId())

@@ -26,4 +26,9 @@ public class BookmarkController {
     public ResponseEntity<?> getBookmarkProposal(@PathVariable("userId") Long userId) {
         return ResponseEntity.ok(bookmarkService.getBookmarkProposal(userId));
     }
+
+    @GetMapping("/{userId}/result")
+    public ResponseEntity<?> getBookmarkResult(@PathVariable("userId") Long userId) {
+        return ResponseEntity.ok(bookmarkService.getBookmarkResult(userId));
+    }
 }
