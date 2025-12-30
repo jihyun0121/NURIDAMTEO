@@ -8,6 +8,7 @@ import HeaderButton from "../components/HeaderButton";
 import BellPopup from "./home/BellPopUp";
 import { NotificationAPI } from "../api/api";
 import { useNotificationRefresh } from "./proposal/NotificationContext";
+import UserIcon from "../ui/icons/UserIcon";
 
 export default function Header({ style }) {
     const location = useLocation();
@@ -64,6 +65,10 @@ export default function Header({ style }) {
         }
     };
 
+    const HeaderIcons = ({ hasUnread, handleBellClick }) => {
+        const navigate = useNavigate();
+    };
+
     return (
         <>
             <div className="header-container" style={{ ...style }}>
@@ -82,7 +87,7 @@ export default function Header({ style }) {
                 <div className="header-icons">
                     <SearchIcon size={44} type="fill" />
                     <BellIcon size={44} type={hasUnread ? "hover" : "fill"} onClick={handleBellClick} style={{ cursor: "pointer" }} />
-                    <Icon size={44} type="fill" />
+                    <UserIcon size={44} type="fill" onClick={() => (window.location.href = "/my")} style={{ cursor: "pointer" }} />
                 </div>
             </div>
         </>
