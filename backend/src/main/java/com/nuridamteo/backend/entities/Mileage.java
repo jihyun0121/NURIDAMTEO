@@ -31,11 +31,12 @@ public class Mileage {
     @JsonProperty("reason_detail")
     private String reasonDetail;
 
+    @Column(name = "total_mileage", nullable = false)
+    @JsonProperty("total_mileage")
+    @Builder.Default
+    private Long totalMileage = 0L;
+
     @Column(name = "created_at", nullable = false)
     @JsonProperty("created_at")
     private LocalDateTime createdAt;
-
-    @Column(name = "expiration_at", nullable = false)
-    @JsonProperty("expiration_at")
-    private LocalDateTime expirationAt;
 }

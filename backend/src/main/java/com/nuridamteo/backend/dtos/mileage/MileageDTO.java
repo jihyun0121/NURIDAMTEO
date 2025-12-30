@@ -1,6 +1,6 @@
-package com.nuridamteo.backend.dtos;
+package com.nuridamteo.backend.dtos.mileage;
 
-import java.time.LocalDateTime;
+import java.time.*;
 
 import com.fasterxml.jackson.annotation.*;
 
@@ -21,9 +21,10 @@ public class MileageDTO {
     @JsonProperty("reason_detail")
     private String reasonDetail;
 
+    @JsonProperty("total_mileage")
+    @Builder.Default
+    private Long totalMileage = 0L;
+
     @JsonProperty("created_at")
     private LocalDateTime createdAt;
-
-    @JsonProperty("expiration_at")
-    private LocalDateTime expirationAt;
 }
