@@ -10,6 +10,11 @@ export default function AnswerForm({ survey }) {
     const [answers, setAnswers] = useState({});
     const [loading, setLoading] = useState(false);
 
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [myParticipationId, setMyParticipationId] = useState(null);
+    const [allAnswers, setAllAnswers] = useState([]);
+    const [myAnswers, setMyAnswers] = useState([]);
+
     useEffect(() => {
         const userId = sessionStorage.getItem("user_id");
         if (!userId) {
@@ -17,7 +22,6 @@ export default function AnswerForm({ survey }) {
             navigate("/login");
             return;
         }
-
         if (!survey?.survey_id) return;
 
         init();
@@ -27,14 +31,59 @@ export default function AnswerForm({ survey }) {
     async function init() {
         try {
             const q = await SurveyAPI.getQuestionsBySurvey(survey.survey_id);
-            setQuestions(q.data || []);
+            const qList = q.data || [];
+            setQuestions(qList);
+
+            const userId = Number(sessionStorage.getItem("user_id"));
+            const pRes = await ParticipationAPI.getUserParticipaiton(userId);
+            const myParticipations = pRes.data || [];
+
+            const mySurveyParticipation = myParticipations.find((p) => Number(p.target_id) === Number(survey.survey_id) && String(p.target_type).toUpperCase() === "SURVEY");
+
+            if (mySurveyParticipation) {
+                setIsSubmitted(true);
+                setMyParticipationId(mySurveyParticipation.participation_id);
+
+                const [myARes, allARes] = await Promise.all([AnswerAPI.getAnswersByParticipation(myParticipationId), AnswerAPI.getAnswersBySurvey(survey.survey_id)]);
+
+                setMyAnswers(myARes.data || []);
+                setAllAnswers(allARes.data || []);
+
+                setAnswers(buildAnswersStateFromMyAnswers(qList, myARes.data || []));
+            } else {
+                setIsSubmitted(false);
+                setMyParticipationId(null);
+                setMyAnswers([]);
+                setAllAnswers([]);
+            }
         } catch (e) {
             console.error("질문 로드 실패", e);
             alert("질문을 불러오는 중 문제가 발생했습니다");
         }
     }
 
+    function buildAnswersStateFromMyAnswers(qList, myAnswerList) {
+        const next = {};
+        qList.forEach((q) => {
+            const qId = q.question_id;
+            const type = (q.question_type || "").toUpperCase();
+            const list = myAnswerList.filter((a) => Number(a.question_id) === Number(qId));
+
+            if (type === "RADIO") {
+                next[String(qId)] = list[0]?.option_id ?? "";
+            } else if (type === "CHECK") {
+                list.forEach((a) => {
+                    if (a.option_id) next[`${qId}_${a.option_id}`] = true;
+                });
+            } else {
+                next[String(qId)] = list[0]?.answer_text ?? "";
+            }
+        });
+        return next;
+    }
+
     function updateAnswer(answerKey, value) {
+        if (isSubmitted) return;
         setAnswers((prev) => ({ ...prev, [answerKey]: value }));
     }
 
@@ -45,7 +94,7 @@ export default function AnswerForm({ survey }) {
             const qId = q.question_id;
             const type = (q.question_type || "").toUpperCase();
 
-            if (type === "CHECKBOX") {
+            if (type === "CHECK" || type === "CHECKBOX") {
                 const prefix = `${qId}_`;
                 const ok = Object.entries(answers).some(([key, val]) => key.startsWith(prefix) && !!val);
                 if (!ok) return false;
@@ -58,6 +107,7 @@ export default function AnswerForm({ survey }) {
     }
 
     async function submit() {
+        if (isSubmitted) return;
         if (loading) return;
 
         if (!validateRequired()) {
@@ -85,7 +135,6 @@ export default function AnswerForm({ survey }) {
             const participationId = participationRes?.data?.participation_id;
             if (!participationId) {
                 alert("참여 정보 생성에 실패했습니다.");
-                setLoading(false);
                 return;
             }
 
@@ -96,13 +145,11 @@ export default function AnswerForm({ survey }) {
                 const type = (q.question_type || "").toUpperCase();
                 const qKey = String(qId);
 
-                if (type === "CHECKBOX") {
+                if (type === "CHECK" || type === "CHECKBOX") {
                     const prefix = `${qId}_`;
-
                     Object.entries(answers).forEach(([key, val]) => {
                         if (!key.startsWith(prefix)) return;
                         if (!val) return;
-
                         const [, optIdStr] = key.split("_");
                         if (!optIdStr) return;
 
@@ -138,7 +185,6 @@ export default function AnswerForm({ survey }) {
 
             if (payloadAnswers.length === 0) {
                 alert("제출할 응답이 없습니다.");
-                setLoading(false);
                 return;
             }
 
@@ -153,7 +199,7 @@ export default function AnswerForm({ survey }) {
             }
 
             alert("제출이 완료되었습니다!");
-            navigate(-1);
+            await init();
         } catch (e) {
             console.error("제출 실패", e);
         } finally {
@@ -165,12 +211,13 @@ export default function AnswerForm({ survey }) {
         <div className="answer-container">
             <div className="answer-wrapper">
                 {questions.map((q) => (
-                    <QuestionRenderer key={q.question_id} question={q} answers={answers} onChange={updateAnswer} />
+                    <QuestionRenderer key={q.question_id} question={q} answers={answers} onChange={updateAnswer} isSubmitted={isSubmitted} allAnswers={allAnswers} myAnswers={myAnswers} />
                 ))}
             </div>
+
             <div className="answer-buttons">
                 <TextButtonS content="목록으로" onClick={() => navigate(-1)} />
-                <TextButtonS content={loading ? "제출 중..." : "제출하기"} type="hover" onClick={submit} disabled={loading} />
+                <TextButtonS content={isSubmitted ? "이미 제출했습니다" : loading ? "제출 중..." : "제출하기"} type={isSubmitted ? "default" : "hover"} onClick={submit} disabled={loading || isSubmitted} />
             </div>
         </div>
     );

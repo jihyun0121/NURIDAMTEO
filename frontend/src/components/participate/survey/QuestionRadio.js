@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { SurveyAPI } from "../../../api/api";
 
-export default function QuestionRadio({ questionId, value, onChange }) {
+export default function QuestionRadio({ questionId, value, onChange, readOnly, stats, showStats }) {
     const [options, setOptions] = useState([]);
 
     useEffect(() => {
@@ -20,12 +20,32 @@ export default function QuestionRadio({ questionId, value, onChange }) {
 
     return (
         <>
-            {options.map((opt) => (
-                <div className="option-wrapper " key={opt.option_id}>
-                    <input className="radio-box" name={`q_${questionId}`} type="radio" checked={String(value) === String(opt.option_id)} onChange={() => onChange(opt.option_id)}></input>
-                    <label className="option-text">{opt.option_content}</label>
-                </div>
-            ))}
+            {options.map((opt) => {
+                const percent = Number(stats?.[opt.option_id] ?? 0);
+                const pctText = `${percent.toFixed(1)}%`;
+
+                return (
+                    <div key={opt.option_id}>
+                        <div className="option-wrapper">
+                            <input className="radio-box" name={`q_${questionId}`} type="radio" checked={String(value) === String(opt.option_id)} readOnly={readOnly} style={{ cursor: `${readOnly && "default"}` }} onChange={() => onChange(opt.option_id)} />
+                            <label className="option-text">{opt.option_content}</label>
+                        </div>
+
+                        {showStats && (
+                            <div className="result-percent">
+                                <div
+                                    className="percent-bar"
+                                    style={{
+                                        width: `${percent}%`,
+                                    }}
+                                />
+
+                                <span className="">{pctText}</span>
+                            </div>
+                        )}
+                    </div>
+                );
+            })}
         </>
     );
 }

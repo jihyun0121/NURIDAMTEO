@@ -129,4 +129,8 @@ export const MileageAPI = {
     getMileageHistory: (userId) => api.get(`/mileage/history/${userId}`),
 };
 
+export const StatisticAPI = {
+    getOptionStats: (questionId) => api.get(`/statistics/questions/${questionId}/options`),
+};
+
 export default api;
