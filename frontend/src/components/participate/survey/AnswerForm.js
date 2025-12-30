@@ -75,6 +75,20 @@ export default function AnswerForm({ survey }) {
         setLoading(true);
 
         try {
+            const participationRes = await ParticipationAPI.createParticipaiton({
+                user_id: Number(userId),
+                target_type: "SURVEY",
+                target_id: survey.survey_id,
+                participation_type: "JOIN",
+            });
+
+            const participationId = participationRes?.data?.participation_id;
+            if (!participationId) {
+                alert("참여 정보 생성에 실패했습니다.");
+                setLoading(false);
+                return;
+            }
+
             const payloadAnswers = [];
 
             for (const q of questions) {
@@ -93,10 +107,10 @@ export default function AnswerForm({ survey }) {
                         if (!optIdStr) return;
 
                         payloadAnswers.push({
+                            participation_id: participationId,
                             question_id: qId,
                             option_id: Number(optIdStr),
                             answer_text: null,
-                            answer_long: null,
                         });
                     });
                 } else if (type === "RADIO") {
@@ -104,32 +118,21 @@ export default function AnswerForm({ survey }) {
                     if (selectedOptionId == null || selectedOptionId === "") continue;
 
                     payloadAnswers.push({
+                        participation_id: participationId,
                         question_id: qId,
                         option_id: Number(selectedOptionId),
                         answer_text: null,
-                        answer_long: null,
                     });
                 } else {
                     const val = answers[qKey];
                     if (val == null || String(val).trim() === "") continue;
 
-                    const text = String(val);
-
-                    if (type === "LONG") {
-                        payloadAnswers.push({
-                            question_id: qId,
-                            option_id: null,
-                            answer_text: null,
-                            answer_long: text,
-                        });
-                    } else {
-                        payloadAnswers.push({
-                            question_id: qId,
-                            option_id: null,
-                            answer_text: text,
-                            answer_long: null,
-                        });
-                    }
+                    payloadAnswers.push({
+                        participation_id: participationId,
+                        question_id: qId,
+                        option_id: null,
+                        answer_text: String(val),
+                    });
                 }
             }
 
@@ -140,23 +143,14 @@ export default function AnswerForm({ survey }) {
             }
 
             for (const ans of payloadAnswers) {
-                await AnswerAPI.createAnswer({
-                    question_id: ans.question_id,
-                    option_id: ans.option_id,
-                    answer_text: ans.answer_text,
-                    answer_long: ans.answer_long,
-                    user_id: Number(userId),
-                });
+                await AnswerAPI.createAnswer(ans);
             }
 
-            await ParticipationAPI.createParticipaiton({
-                user_id: Number(userId),
-                target_type: "SURVEY",
-                target_id: survey.survey_id,
-                participation_type: "JOIN",
-            });
-
-            await SurveyAPI.updateParticipate(survey.survey_id, "plus");
+            try {
+                await SurveyAPI.updateParticipate(survey.survey_id, "plus");
+            } catch (e) {
+                console.log("참여 수 업데이트 실패", e);
+            }
 
             alert("제출이 완료되었습니다!");
             navigate(-1);
