@@ -58,9 +58,9 @@ export default function Header({ style }) {
 
     return (
         <>
-            {isBellOpen && <BellPopup onClose={() => setIsBellOpen(false)} onRefresh={fetchUnread} />}
-
             <div className="header-container" style={{ ...style }}>
+                {isBellOpen && <BellPopup onClose={() => setIsBellOpen(false)} onRefresh={fetchUnread} />}
+
                 <div style={{ cursor: "pointer" }} onClick={() => (window.location.href = "/")}>
                     <Logo size="m" />
                 </div>
