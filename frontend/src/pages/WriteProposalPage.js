@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import banner from "../assets/image/proposal/proposalbanner.svg";
 import DropdownBox from "../ui/input/FormDropdown";
 import TextButtonS from "../ui/button/TextButtonS";
-import { ProposalAPI } from "../api/api";
+import { MileageAPI, NotificationAPI, ProposalAPI } from "../api/api";
 
 export default function WriteProposalPage() {
     const optionData = [
@@ -46,6 +46,30 @@ export default function WriteProposalPage() {
 
         try {
             const dto = {
+                user_id: Number(loginUser),
+                message: "100 마일리지가 지급되었습니다.",
+                notification_type: "MILEAGE",
+            };
+
+            await NotificationAPI.createNotifications(dto);
+        } catch (e) {
+            console.log("알림 생성 실패", e);
+        }
+
+        try {
+            const dto = {
+                user_id: Number(loginUser),
+                mileage: 100,
+                reason_detail: "제안 작성 마일리지 지급",
+            };
+
+            await MileageAPI.addMileage(dto);
+        } catch (e) {
+            console.log("마일리지 지급 실패", e);
+        }
+
+        try {
+            const dto = {
                 category_id: category,
                 title: title,
                 content: content,
@@ -55,7 +79,6 @@ export default function WriteProposalPage() {
 
             await ProposalAPI.createProposal(loginUser, dto);
 
-            alert("제안이 등록되었습니다!");
             window.location.href = "/proposal";
         } catch (e) {
             console.log("제안 등록 실패", e);

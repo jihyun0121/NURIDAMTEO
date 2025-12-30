@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UserAPI } from "../api/api";
+import { MileageAPI, NotificationAPI, UserAPI } from "../api/api";
 import Header from "../components/Header";
 import Logo from "../ui/Logo";
 import TextInputBox from "../ui/input/TextInputBox";
@@ -110,7 +110,30 @@ export default function SignupPage() {
             sessionStorage.setItem("token", res.data.token);
             sessionStorage.setItem("user_id", res.data.user_id);
 
-            alert("회원가입에 성공하였습니다");
+            try {
+                const dto = {
+                    user_id: Number(res.data.user_id),
+                    message: "신규 가입 3000 마일리지가 지급되었습니다.",
+                    notification_type: "MILEAGE",
+                };
+
+                await NotificationAPI.createNotifications(dto);
+            } catch (e) {
+                console.log("알림 생성 실패", e);
+            }
+
+            try {
+                const dto = {
+                    user_id: Number(res.data.user_id),
+                    mileage: 3000,
+                    reason_detail: "신규 가입 마일리지 지급",
+                };
+
+                await MileageAPI.addMileage(dto);
+            } catch (e) {
+                console.log("마일리지 지급 실패", e);
+            }
+
             window.location.href = "/onboarding";
         } catch (e) {
             setError(e?.response?.data?.error || "회원가입 실패");

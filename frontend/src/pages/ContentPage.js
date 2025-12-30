@@ -498,7 +498,11 @@ export default function ContentPage() {
                 </div>
             </div>
         );
-        content = <div dangerouslySetInnerHTML={{ __html: contents?.description }} />;
+        content = (
+            <div class="survey-content-text">
+                <div dangerouslySetInnerHTML={{ __html: contents?.description }} />
+            </div>
+        );
         form = <AnswerForm survey={contents} />;
         comment = (
             <div className="comments-container">
@@ -558,7 +562,7 @@ export default function ContentPage() {
                 </div>
             </div>
         );
-        content = <div dangerouslySetInnerHTML={{ __html: contents?.content }} />;
+        content = <div class="survey-content-text">{contents?.content}</div>;
         form = (
             <div className="content-buttons">
                 <TextButtonS content="공감" type={hasParticipated ? "none" : "default"} onClick={handleLike} disabled={hasParticipated} />
@@ -592,7 +596,11 @@ export default function ContentPage() {
                 </div>
             </div>
         );
-        content = <div dangerouslySetInnerHTML={{ __html: contents?.content }} />;
+        content = (
+            <div class="survey-content-text">
+                <div dangerouslySetInnerHTML={{ __html: contents?.content }} />
+            </div>
+        );
         form = (
             <div className="content-buttons">
                 <TextButtonS content="즐겨찾기" type={isBookmarked ? "hover" : "default"} onClick={handleBookmark} />
@@ -642,7 +650,11 @@ export default function ContentPage() {
                 </div>
             </div>
         );
-        content = <div dangerouslySetInnerHTML={{ __html: contents?.content }} />;
+        content = (
+            <div class="survey-content-text">
+                <div dangerouslySetInnerHTML={{ __html: contents?.content }} />
+            </div>
+        );
         form = (
             <div className="content-buttons">
                 <TextButtonS content="즐겨찾기" type={isBookmarked ? "hover" : "default"} onClick={handleBookmark} />
@@ -692,7 +704,11 @@ export default function ContentPage() {
                 </div>
             </div>
         );
-        content = <div dangerouslySetInnerHTML={{ __html: contents?.result_content }} />;
+        content = (
+            <div class="survey-content-text">
+                <div dangerouslySetInnerHTML={{ __html: contents?.result_content }} />
+            </div>
+        );
         form = (
             <div className="content-buttons">
                 <TextButtonS content="즐겨찾기" type={isBookmarked ? "hover" : "default"} onClick={handleBookmark} />
