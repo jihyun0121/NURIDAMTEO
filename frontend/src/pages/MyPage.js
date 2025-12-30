@@ -16,7 +16,7 @@ import MyList from "../components/my/MyList";
 
 export default function MyPage() {
     const [user, setUser] = useState(null);
-    const [type, setType] = useState("update");
+    const [type, setType] = useState("mileage");
 
     const userId = sessionStorage.getItem("user_id");
 
@@ -57,7 +57,7 @@ export default function MyPage() {
                 <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                     <div className="my-mileage-total">
                         <p>보유 마일리지</p>
-                        <p className="my-mileage-mileages">{user.total_mileage}</p>
+                        <p className="my-mileage-mileages">{user?.total_mileage}M</p>
                     </div>
                     <div className="my-mileage-buttons">
                         <MileageButton content="누리담페이 전환" />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ProposalAPI, ParticipationAPI, BookmarkAPI, SurveyAPI, ResultAPI } from "../../api/api";
+import { ProposalAPI, ParticipationAPI, BookmarkAPI, SurveyAPI, ResultAPI, MileageAPI } from "../../api/api";
 import { colors } from "../../assets/style/tokens/colors";
 import MileageStatus from "./MileageStatus";
 import SurveyList from "../home/SurveyList";
@@ -30,11 +30,8 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
                             try {
                                 let detail = null;
 
-                                if (item.target_type === "PROPOSAL") {
-                                    detail = await ProposalAPI.getProposal(item.target_id);
-                                } else if (item.target_type === "SURVEY" || item.target_type === "PANEL") {
-                                    detail = await SurveyAPI.getSurvey(item.target_id);
-                                }
+                                if (item.target_type === "PROPOSAL") detail = await ProposalAPI.getProposal(item.target_id);
+                                else if (item.target_type === "SURVEY" || item.target_type === "PANEL") detail = await SurveyAPI.getSurvey(item.target_id);
 
                                 return { ...item, ...detail?.data };
                             } catch (e) {
@@ -49,11 +46,8 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
                 }
 
                 if (type === "bookmark") {
-                    if (bookmarkType === "proposal") {
-                        res = await BookmarkAPI.getBookmarkProposal(userId);
-                    } else {
-                        res = await BookmarkAPI.getBookmarkResult(userId);
-                    }
+                    if (bookmarkType === "proposal") res = await BookmarkAPI.getBookmarkProposal(userId);
+                    else res = await BookmarkAPI.getBookmarkResult(userId);
 
                     const enriched = await Promise.all(
                         res.data.map(async (item) => {
@@ -64,7 +58,6 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
                                     detail = await ProposalAPI.getProposal(item.proposal_id);
                                 } else if (item.result_id) {
                                     detail = await ResultAPI.getResult(item.result_id);
-                                    console.log(detail);
                                 }
 
                                 return { ...item, ...detail?.data };
@@ -79,6 +72,13 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
                     return;
                 }
 
+                if (type === "mileage") {
+                    res = await MileageAPI.getMileageHistory(userId);
+                    console.log(res.data);
+                    setList(res.data);
+                    return;
+                }
+
                 setList([]);
             } catch (e) {
                 console.log("목록 불러오기 실패", e);
@@ -89,11 +89,11 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
     }, [type, userId, bookmarkType]);
 
     const sortedList = (() => {
-        if (type === "propsal" || type === "participate") {
+        if (type === "propsal" || type === "participate" || type === "mileage") {
             const copied = [...list];
             return copied.sort((a, b) => {
-                const dateA = new Date(a.created_at || a.createdAt);
-                const dateB = new Date(b.created_at || b.createdAt);
+                const dateA = new Date(a.created_at);
+                const dateB = new Date(b.created_at);
                 return sortType === "asc" ? dateA - dateB : dateB - dateA;
             });
         }
@@ -101,22 +101,22 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
     })();
 
     const getRouteInfo = (item) => {
-    if (type === "propsal") {
-        return { page: "proposal", id: item.proposal_id || item.proposalId };
-    }
+        if (type === "propsal") {
+            return { page: "proposal", id: item.proposal_id || item.proposalId };
+        }
 
-    if (type === "participate") {
-        if (item.target_type === "PROPOSAL") return { page: "proposal", id: item.target_id };
-        if (item.target_type === "SURVEY" || item.target_type === "PANEL") return { page: "participate", id: item.target_id };
-    }
+        if (type === "participate") {
+            if (item.target_type === "PROPOSAL") return { page: "proposal", id: item.target_id };
+            if (item.target_type === "SURVEY" || item.target_type === "PANEL") return { page: "participate", id: item.target_id };
+        }
 
-    if (type === "bookmark") {
-        if (bookmarkType === "proposal") return { page: "proposal", id: item.proposal_id };
-        if (bookmarkType === "result") return { page: "nurisodam/result", id: item.result_id };
-    }
+        if (type === "bookmark") {
+            if (bookmarkType === "proposal") return { page: "proposal", id: item.proposal_id };
+            if (bookmarkType === "result") return { page: "nurisodam/result", id: item.result_id };
+        }
 
-    return { page: "", id: null };
-};
+        return { page: "", id: null };
+    };
 
     return (
         <div className="my-list-container">
@@ -147,33 +147,13 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
             </div>
 
             <div className="my-list">
-                {type === "mileage" ? (
-                    <>
-                    <MileageStatus />
-                    <MileageStatus />
-                    <MileageStatus />
-                    </>
-                ) : (
-                    sortedList.map((s, i) => {
-                    const { page, id } = getRouteInfo(s);
-
-                    return (
-                        <SurveyList
-                        key={s.bookmark_id || s.participation_id || s.proposal_id || i}
-                        num={i + 1}
-                        size="long"
-                        title={s.title || s.result_title}
-                        start={s.start_at}
-                        end={s.end_at}
-                        type={s.status ? "default" : "none"}
-                        state={s.status}
-                        onClick={() => page && id && (window.location.href = `/${page}/${id}`)}
-                        />
-                    );
-                    })
-                )}
+                {type === "mileage"
+                    ? sortedList.map((s, i) => <MileageStatus key={s.mileage_id || i} num={i + 1} title={s.reason_detail} date={s.created_at} total={s.total_mileage} mileage={s.mileage} />)
+                    : sortedList.map((s, i) => {
+                          const { page, id } = getRouteInfo(s);
+                          return <SurveyList key={s.bookmark_id || s.participation_id || s.proposal_id || i} num={i + 1} size="long" title={s.title || s.result_title} start={s.start_at} end={s.end_at} type={s.status ? "default" : "none"} state={s.status} onClick={() => page && id && (window.location.href = `/${page}/${id}`)} />;
+                      })}
             </div>
-
         </div>
     );
 }
