@@ -1,8 +1,10 @@
 package com.nuridamteo.backend.services;
 
 import java.time.LocalDateTime;
+import java.util.*;
 
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
 import com.nuridamteo.backend.dtos.norification.CreateNorificationDTO;
 import com.nuridamteo.backend.dtos.norification.NotificationDTO;
@@ -38,6 +40,12 @@ public class NotificationService {
 
         Notification saved = notificationRepository.save(notification);
         return notificationDTO(saved);
+    }
+
+    @Transactional(readOnly = true)
+    public List<NotificationDTO> getNotifications(Long userId) {
+        return notificationRepository.findAllByUser_UserIdOrderByCreatedAtDesc(userId).stream()
+                .map(this::notificationDTO).toList();
     }
 
     private NotificationDTO notificationDTO(Notification n) {

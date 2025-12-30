@@ -22,4 +22,9 @@ public class NotificationController {
         notificationService.createNotifications(dto);
         return ResponseEntity.ok(Map.of("message", "알림 생성 성공"));
     }
+
+    @GetMapping("/{userId}")
+    public List<NotificationDTO> getNotifications(@PathVariable("userId") Long userId) {
+        return notificationService.getNotifications(userId);
+    }
 }

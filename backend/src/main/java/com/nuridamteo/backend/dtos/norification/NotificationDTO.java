@@ -1,4 +1,4 @@
-package com.nuridamteo.backend.dtos;
+package com.nuridamteo.backend.dtos.norification;
 
 import java.time.LocalDateTime;
 
@@ -18,10 +18,9 @@ public class NotificationDTO {
     @JsonProperty("user_id")
     private Long user;
 
-    @JsonProperty("title")
-    private String title;
+    @JsonProperty("proposal_id")
+    private Long proposal;
 
-    @JsonProperty("message")
     private String message;
 
     @JsonProperty("notification_type")
