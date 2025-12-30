@@ -43,6 +43,7 @@ public class UserService {
                 .addressDetail(profile.getAddressDetail())
                 .postalCode(profile.getPostalCode())
                 .totalMileage(user.getTotalMileage())
+                .mileage(user.getMileage())
                 .accessibilityMode(user.getAccessibilityMode())
                 .notificationEnabled(user.getNotificationEnabled())
                 .isDeleted(user.getIsDeleted())
@@ -79,6 +80,8 @@ public class UserService {
             users.setEmail(dto.getEmail());
         if (dto.getTotalMileage() != null)
             users.setTotalMileage(dto.getTotalMileage());
+        if (dto.getMileage() != null)
+            users.setTotalMileage(dto.getMileage());
         if (dto.getAccessibilityMode() != null)
             users.setAccessibilityMode(dto.getAccessibilityMode());
         if (dto.getNotificationEnabled() != null)

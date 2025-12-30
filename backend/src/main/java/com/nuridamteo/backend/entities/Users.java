@@ -38,6 +38,10 @@ public class Users {
     @Builder.Default
     private Long totalMileage = 0L;
 
+    @Column(nullable = false)
+    @Builder.Default
+    private Long mileage = 0L;
+
     @Column(name = "accessibility_mode", nullable = false)
     @JsonProperty("accessibility_mode")
     @Builder.Default

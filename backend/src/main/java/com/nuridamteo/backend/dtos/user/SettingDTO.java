@@ -21,6 +21,9 @@ public class SettingDTO {
     @Builder.Default
     private Long totalMileage = 0L;
 
+    @Builder.Default
+    private Long mileage = 0L;
+
     @JsonProperty("accessibility_mode")
     @Builder.Default
     private Boolean accessibilityMode = false;
