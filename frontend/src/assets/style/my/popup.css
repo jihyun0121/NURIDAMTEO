@@ -11,6 +11,7 @@
 
     z-index: 1000;
 }
+
 .popup-button-content {
     display: inline-flex;
     padding: 3rem 1.5rem;
@@ -26,6 +27,7 @@
     width: 32.875rem;
     height: 22.25rem;
 }
+
 .popup-button-text {
     width: 22.5625rem;
     color: var(--Gray-Dark, #404040);
@@ -66,6 +68,7 @@
 
 .notification-popup-content {
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
@@ -95,7 +98,7 @@
 
 .alarm-container {
     display: flex;
-    width: 27.3125rem;
+    width: 100%;
     padding: 1rem;
     flex-direction: column;
     justify-content: center;

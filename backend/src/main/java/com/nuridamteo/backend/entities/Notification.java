@@ -50,7 +50,7 @@ public class Notification {
     @JsonProperty("created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "read_at", nullable = false)
+    @Column(name = "read_at")
     @JsonProperty("read_at")
     private LocalDateTime readAt;
 }

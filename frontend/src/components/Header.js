@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "../ui/Logo";
 import SearchIcon from "../ui/icons/SearchIcon";
 import BellIcon from "../ui/icons/BellIcon";
@@ -9,6 +9,7 @@ import BellPopup from "./home/BellPopUp";
 
 export default function Header({ style }) {
     const location = useLocation();
+    const navigate = useNavigate();
     const pathname = location.pathname;
 
     const [isBellOpen, setIsBellOpen] = useState(false);
@@ -19,6 +20,18 @@ export default function Header({ style }) {
         document.body.style.overflow = isBellOpen ? "hidden" : "auto";
         return () => (document.body.style.overflow = "auto");
     }, [isBellOpen]);
+
+    const handleBellClick = () => {
+        const token = sessionStorage.getItem("token");
+        const userId = sessionStorage.getItem("user_id");
+
+        if (!token || !userId) {
+            navigate("/login");
+            return;
+        }
+
+        setIsBellOpen((prev) => !prev);
+    };
 
     return (
         <>
@@ -37,7 +50,7 @@ export default function Header({ style }) {
 
                 <div className="header-icons">
                     <SearchIcon size={44} type="fill" />
-                    <BellIcon size={44} type="fill" onClick={() => setIsBellOpen((prev) => !prev)} />
+                    <BellIcon size={44} type="fill" onClick={handleBellClick} />
                     <Icon size={44} type="fill" />
                 </div>
             </div>
