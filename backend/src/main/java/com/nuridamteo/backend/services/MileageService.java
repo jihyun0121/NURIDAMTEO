@@ -1,6 +1,7 @@
 package com.nuridamteo.backend.services;
 
 import java.time.LocalDateTime;
+import java.util.*;
 
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
@@ -34,6 +35,12 @@ public class MileageService {
                 .totalMileage(user.getTotalMileage())
                 .createdAt(LocalDateTime.now())
                 .build()));
+    }
+
+    @Transactional(readOnly = true)
+    public List<MileageDTO> getMileageHistory(Long userId) {
+        return mileageRepository.findAllByUser_UserIdOrderByCreatedAtDesc(userId).stream()
+                .map(this::mileageDTO).toList();
     }
 
     private MileageDTO mileageDTO(Mileage m) {
