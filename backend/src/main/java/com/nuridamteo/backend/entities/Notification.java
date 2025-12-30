@@ -27,9 +27,11 @@ public class Notification {
     @JsonIgnore
     private Users user;
 
-    @Column(columnDefinition = "TEXT", name = "title", nullable = false)
-    @JsonProperty("title")
-    private String title;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "proposal_id")
+    @JsonProperty("proposal_id")
+    @JsonIgnore
+    private Proposal proposal;
 
     @Column(name = "message", nullable = false, length = 200)
     @JsonProperty("message")

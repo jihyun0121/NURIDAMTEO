@@ -1,0 +1,55 @@
+package com.nuridamteo.backend.services;
+
+import java.time.LocalDateTime;
+
+import org.springframework.stereotype.*;
+
+import com.nuridamteo.backend.dtos.norification.CreateNorificationDTO;
+import com.nuridamteo.backend.dtos.norification.NotificationDTO;
+import com.nuridamteo.backend.entities.Notification;
+import com.nuridamteo.backend.entities.Proposal;
+import com.nuridamteo.backend.entities.Users;
+import com.nuridamteo.backend.repositories.NotificationRepository;
+import com.nuridamteo.backend.repositories.ProposalRepository;
+import com.nuridamteo.backend.repositories.UserRepository;
+
+import lombok.*;
+
+@Service
+@RequiredArgsConstructor
+public class NotificationService {
+    private final NotificationRepository notificationRepository;
+    private final UserRepository userRepository;
+    private final ProposalRepository proposalRepository;
+
+    public NotificationDTO createNotifications(CreateNorificationDTO dto) {
+        Users user = userRepository.findById(dto.getUser())
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다"));
+        Proposal proposal = proposalRepository.findById(dto.getProposal())
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다"));
+
+        Notification notification = Notification.builder()
+                .user(user)
+                .proposal(proposal)
+                .message(dto.getMessage())
+                .notificationType(dto.getNotificationType())
+                .createdAt(LocalDateTime.now())
+                .build();
+
+        Notification saved = notificationRepository.save(notification);
+        return notificationDTO(saved);
+    }
+
+    private NotificationDTO notificationDTO(Notification n) {
+        return NotificationDTO.builder()
+                .notificationId(n.getNotificationId())
+                .user(n.getUser().getUserId())
+                .proposal(n.getProposal().getProposalId())
+                .message(n.getMessage())
+                .notificationType(n.getNotificationType())
+                .isRead(n.getIsRead())
+                .createdAt(n.getCreatedAt())
+                .readAt(n.getReadAt())
+                .build();
+    }
+}
