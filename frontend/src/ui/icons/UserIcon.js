@@ -1,7 +1,21 @@
+import { useState } from "react";
 import { colors } from "../../assets/style/tokens/colors";
 
-export default function UserIcon({ type = "default", size, color = "default" }) {
+export default function UserIcon({ type = "default", size, color = "default", onClick, style }) {
+    const [state, setState] = useState("default");
     let icon = null;
+
+    const fillColors = {
+        default: colors.gray.light.base,
+        hover: colors.orange.light.hover,
+        active: colors.orange.light.active,
+    };
+
+    const strokeColors = {
+        default: colors.gray.normal.base,
+        hover: colors.orange.normal.base,
+        active: colors.orange.normal.base,
+    };
 
     if (type === "default") {
         icon = (
@@ -13,9 +27,9 @@ export default function UserIcon({ type = "default", size, color = "default" }) 
     } else if (type === "fill") {
         icon = (
             <>
-                <rect width="44" height="44" rx="22" fill={colors.gray.light.base} />
-                <path d="M22 23C25.3137 23 28 20.3137 28 17C28 13.6863 25.3137 11 22 11C18.6863 11 16 13.6863 16 17C16 20.3137 18.6863 23 22 23Z" stroke={colors.gray.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M31 33C31 30.3478 30.0518 27.8043 28.364 25.9289C26.6761 24.0536 24.3869 23 22 23C19.6131 23 17.3239 24.0536 15.636 25.9289C13.9482 27.8043 13 30.3478 13 33" stroke={colors.gray.normal.base} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <rect width="44" height="44" rx="22" fill={fillColors[state]} />
+                <path d="M22 23C25.3137 23 28 20.3137 28 17C28 13.6863 25.3137 11 22 11C18.6863 11 16 13.6863 16 17C16 20.3137 18.6863 23 22 23Z" stroke={strokeColors[state]} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M31 33C31 30.3478 30.0518 27.8043 28.364 25.9289C26.6761 24.0536 24.3869 23 22 23C19.6131 23 17.3239 24.0536 15.636 25.9289C13.9482 27.8043 13 30.3478 13 33" stroke={strokeColors[state]} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </>
         );
     } else if (type === "hover") {
@@ -38,7 +52,7 @@ export default function UserIcon({ type = "default", size, color = "default" }) 
     }
 
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" style={{ color: color === "default" ? colors.gray.normal.base : "inherit" }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 44 44" fill="none" onClick={onClick} style={{ cursor: "pointer", ...style, color: color === "default" ? colors.gray.normal.base : "inherit" }} onMouseEnter={() => type === "fill" && setState("hover")} onMouseLeave={() => type === "fill" && setState("default")} onMouseDown={() => type === "fill" && setState("active")} onMouseUp={() => type === "fill" && setState("hover")}>
             {icon}
         </svg>
     );

@@ -567,7 +567,7 @@ export default function ContentPage() {
             <div className="content-buttons">
                 <TextButtonS content="공감" type={hasParticipated ? "none" : "default"} onClick={handleLike} disabled={hasParticipated} />
                 <TextButtonS content="즐겨찾기" type={isBookmarked ? "hover" : "default"} onClick={handleBookmark} />
-                <TextButtonS content="목록" onClick={() => navigate(-1)} />
+                <TextButtonS content="목록" onClick={() => (window.location.href = "/proposal")} />
             </div>
         );
         comment = (
@@ -604,7 +604,7 @@ export default function ContentPage() {
         form = (
             <div className="content-buttons">
                 <TextButtonS content="즐겨찾기" type={isBookmarked ? "hover" : "default"} onClick={handleBookmark} />
-                <TextButtonS content="목록" onClick={() => navigate(-1)} />
+                <TextButtonS content="목록" onClick={() => (window.location.href = "/nurisodam")} />
             </div>
         );
         comment = (
@@ -658,7 +658,7 @@ export default function ContentPage() {
         form = (
             <div className="content-buttons">
                 <TextButtonS content="즐겨찾기" type={isBookmarked ? "hover" : "default"} onClick={handleBookmark} />
-                <TextButtonS content="목록" onClick={() => navigate(-1)} />
+                <TextButtonS content="목록" onClick={() => (window.location.href = "/nurisodam?category=동네소식")} />
             </div>
         );
         comment = (
@@ -712,7 +712,7 @@ export default function ContentPage() {
         form = (
             <div className="content-buttons">
                 <TextButtonS content="즐겨찾기" type={isBookmarked ? "hover" : "default"} onClick={handleBookmark} />
-                <TextButtonS content="목록" onClick={() => navigate(-1)} />
+                <TextButtonS content="목록" onClick={() => (window.location.href = "/nurisodam?category=결과+게시판")} />
             </div>
         );
         comment = (
