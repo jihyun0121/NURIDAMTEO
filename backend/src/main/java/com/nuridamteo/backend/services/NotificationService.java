@@ -27,8 +27,13 @@ public class NotificationService {
     public NotificationDTO createNotifications(CreateNorificationDTO dto) {
         Users user = userRepository.findById(dto.getUser())
                 .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다"));
-        Proposal proposal = proposalRepository.findById(dto.getProposal())
-                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다"));
+
+        Proposal proposal = null;
+
+        if (dto.getProposal() != null) {
+            proposal = proposalRepository.findById(dto.getProposal())
+                    .orElseThrow(() -> new RuntimeException("제안을 찾을 수 없습니다"));
+        }
 
         Notification notification = Notification.builder()
                 .user(user)
@@ -65,7 +70,7 @@ public class NotificationService {
         return NotificationDTO.builder()
                 .notificationId(n.getNotificationId())
                 .user(n.getUser().getUserId())
-                .proposal(n.getProposal().getProposalId())
+                .proposal(n.getProposal() != null ? n.getProposal().getProposalId() : null)
                 .message(n.getMessage())
                 .notificationType(n.getNotificationType())
                 .isRead(n.getIsRead())
