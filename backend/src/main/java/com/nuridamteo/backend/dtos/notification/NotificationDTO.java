@@ -1,4 +1,4 @@
-package com.nuridamteo.backend.dtos.norification;
+package com.nuridamteo.backend.dtos.notification;
 
 import java.time.LocalDateTime;
 
