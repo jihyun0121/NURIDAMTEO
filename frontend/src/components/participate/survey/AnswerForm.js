@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SurveyAPI } from "../../../api/api";
+import { SurveyAPI, AnswerAPI, ParticipationAPI } from "../../../api/api";
 import QuestionRenderer from "./QuestionRenderer";
 import { useNavigate } from "react-router-dom";
 import TextButtonS from "../../../ui/button/TextButtonS";
@@ -8,6 +8,7 @@ export default function AnswerForm({ survey }) {
     const navigate = useNavigate();
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState({});
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const userId = sessionStorage.getItem("user_id");
@@ -57,12 +58,113 @@ export default function AnswerForm({ survey }) {
     }
 
     async function submit() {
+        if (loading) return;
+
         if (!validateRequired()) {
             alert("필수 질문에 응답해주세요.");
             return;
         }
 
-        alert("제출 로직");
+        const userId = sessionStorage.getItem("user_id");
+        if (!userId) {
+            alert("로그인이 필요합니다.");
+            navigate("/login");
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const payloadAnswers = [];
+
+            for (const q of questions) {
+                const qId = q.question_id;
+                const type = (q.question_type || "").toUpperCase();
+                const qKey = String(qId);
+
+                if (type === "CHECKBOX") {
+                    const prefix = `${qId}_`;
+
+                    Object.entries(answers).forEach(([key, val]) => {
+                        if (!key.startsWith(prefix)) return;
+                        if (!val) return;
+
+                        const [, optIdStr] = key.split("_");
+                        if (!optIdStr) return;
+
+                        payloadAnswers.push({
+                            question_id: qId,
+                            option_id: Number(optIdStr),
+                            answer_text: null,
+                            answer_long: null,
+                        });
+                    });
+                } else if (type === "RADIO") {
+                    const selectedOptionId = answers[qKey];
+                    if (selectedOptionId == null || selectedOptionId === "") continue;
+
+                    payloadAnswers.push({
+                        question_id: qId,
+                        option_id: Number(selectedOptionId),
+                        answer_text: null,
+                        answer_long: null,
+                    });
+                } else {
+                    const val = answers[qKey];
+                    if (val == null || String(val).trim() === "") continue;
+
+                    const text = String(val);
+
+                    if (type === "LONG") {
+                        payloadAnswers.push({
+                            question_id: qId,
+                            option_id: null,
+                            answer_text: null,
+                            answer_long: text,
+                        });
+                    } else {
+                        payloadAnswers.push({
+                            question_id: qId,
+                            option_id: null,
+                            answer_text: text,
+                            answer_long: null,
+                        });
+                    }
+                }
+            }
+
+            if (payloadAnswers.length === 0) {
+                alert("제출할 응답이 없습니다.");
+                setLoading(false);
+                return;
+            }
+
+            for (const ans of payloadAnswers) {
+                await AnswerAPI.createAnswer({
+                    question_id: ans.question_id,
+                    option_id: ans.option_id,
+                    answer_text: ans.answer_text,
+                    answer_long: ans.answer_long,
+                    user_id: Number(userId),
+                });
+            }
+
+            await ParticipationAPI.createParticipaiton({
+                user_id: Number(userId),
+                target_type: "SURVEY",
+                target_id: survey.survey_id,
+                participation_type: "JOIN",
+            });
+
+            await SurveyAPI.updateParticipate(survey.survey_id, "plus");
+
+            alert("제출이 완료되었습니다!");
+            navigate(-1);
+        } catch (e) {
+            console.error("제출 실패", e);
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -74,7 +176,7 @@ export default function AnswerForm({ survey }) {
             </div>
             <div className="answer-buttons">
                 <TextButtonS content="목록으로" onClick={() => navigate(-1)} />
-                <TextButtonS content="제출하기" type="hover" onClick={submit} />
+                <TextButtonS content={loading ? "제출 중..." : "제출하기"} type="hover" onClick={submit} disabled={loading} />
             </div>
         </div>
     );

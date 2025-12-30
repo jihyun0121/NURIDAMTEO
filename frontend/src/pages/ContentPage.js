@@ -499,7 +499,7 @@ export default function ContentPage() {
             </div>
         );
         content = (
-            <div class="survey-content-text">
+            <div className="survey-content-text">
                 <div dangerouslySetInnerHTML={{ __html: contents?.description }} />
             </div>
         );
@@ -562,7 +562,7 @@ export default function ContentPage() {
                 </div>
             </div>
         );
-        content = <div class="survey-content-text">{contents?.content}</div>;
+        content = <div className="survey-content-text">{contents?.content}</div>;
         form = (
             <div className="content-buttons">
                 <TextButtonS content="공감" type={hasParticipated ? "none" : "default"} onClick={handleLike} disabled={hasParticipated} />
@@ -597,7 +597,7 @@ export default function ContentPage() {
             </div>
         );
         content = (
-            <div class="survey-content-text">
+            <div className="survey-content-text">
                 <div dangerouslySetInnerHTML={{ __html: contents?.content }} />
             </div>
         );
@@ -651,7 +651,7 @@ export default function ContentPage() {
             </div>
         );
         content = (
-            <div class="survey-content-text">
+            <div className="survey-content-text">
                 <div dangerouslySetInnerHTML={{ __html: contents?.content }} />
             </div>
         );
@@ -705,7 +705,7 @@ export default function ContentPage() {
             </div>
         );
         content = (
-            <div class="survey-content-text">
+            <div className="survey-content-text">
                 <div dangerouslySetInnerHTML={{ __html: contents?.result_content }} />
             </div>
         );
