@@ -118,4 +118,15 @@ export const BookmarkAPI = {
     deleteBookmark: (bookmarkId) => api.delete(`/bookmarks/${bookmarkId}`),
 };
 
+export const NotificationAPI = {
+    createNotifications: () => api.post(`/notifications`),
+    getNotifications: (userId) => api.get(`/notifications/${userId}`),
+    readNotification: (userId) => api.patch(`/notifications/${userId}/read`),
+};
+
+export const MileageAPI = {
+    addMileage: () => api.post(`/mileage`),
+    getMileageHistory: (userId) => api.get(`/mileage/history/${userId}`),
+};
+
 export default api;
