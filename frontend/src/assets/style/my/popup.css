@@ -108,6 +108,8 @@
     border-radius: 0.75rem;
     border: 1px solid var(--gray-light-active, #cacaca);
     background: var(--Gray-White, #fff);
+
+    cursor: pointer;
 }
 
 .alarm-text {
