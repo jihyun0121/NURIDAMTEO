@@ -76,12 +76,12 @@ public class BookmarkService {
         bookmarkRepository.deleteById(bookmarkId);
     }
 
-    private BookmarkDTO bookmarkDTO(Bookmark p) {
+    private BookmarkDTO bookmarkDTO(Bookmark b) {
         return BookmarkDTO.builder()
-                .bookmarkId(p.getBookmarkId())
-                .user(p.getUser().getUserId())
-                .proposal(p.getProposal() != null ? p.getProposal().getProposalId() : null)
-                .result(p.getResult() != null ? p.getResult().getResultId() : null)
+                .bookmarkId(b.getBookmarkId())
+                .user(b.getUser().getUserId())
+                .proposal(b.getProposal() != null ? b.getProposal().getProposalId() : null)
+                .result(b.getResult() != null ? b.getResult().getResultId() : null)
                 .build();
     }
 

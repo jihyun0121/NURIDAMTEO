@@ -94,19 +94,19 @@ public class ProposalService {
                 return proposalDTO(proposal);
         }
 
-        private ProposalDTO proposalDTO(Proposal s) {
+        private ProposalDTO proposalDTO(Proposal p) {
                 return ProposalDTO.builder()
-                                .proposalId(s.getProposalId())
-                                .user(s.getUser().getUserId())
-                                .category(s.getCategory().getCategoryId())
-                                .title(s.getTitle())
-                                .content(s.getContent())
-                                .status(s.getStatus())
-                                .startAt(s.getStartAt())
-                                .endAt(s.getEndAt())
-                                .viewCount(s.getViewCount())
-                                .participationCount(s.getParticipationCount())
-                                .createdAt(s.getCreatedAt())
+                                .proposalId(p.getProposalId())
+                                .user(p.getUser().getUserId())
+                                .category(p.getCategory().getCategoryId())
+                                .title(p.getTitle())
+                                .content(p.getContent())
+                                .status(p.getStatus())
+                                .startAt(p.getStartAt())
+                                .endAt(p.getEndAt())
+                                .viewCount(p.getViewCount())
+                                .participationCount(p.getParticipationCount())
+                                .createdAt(p.getCreatedAt())
                                 .build();
         }
 }

@@ -45,30 +45,31 @@ public class AnswerService {
                 .answerText(dto.getAnswerText())
                 .build();
 
-        return toDTO(answerRepository.save(answer));
+        return answerDTO(answerRepository.save(answer));
     }
 
     @Transactional(readOnly = true)
     public List<AnswerDTO> getAnswers(Long answerId) {
-        return answerRepository.findById(answerId).stream().map(this::toDTO).toList();
+        return answerRepository.findById(answerId).stream().map(this::answerDTO).toList();
     }
 
     @Transactional(readOnly = true)
     public List<AnswerDTO> getAnswersBySurvey(Long surveyId) {
-        return answerRepository.findByParticipation_TargetId(surveyId).stream().map(this::toDTO).toList();
+        return answerRepository.findByParticipation_TargetId(surveyId).stream().map(this::answerDTO).toList();
     }
 
     @Transactional(readOnly = true)
     public List<AnswerDTO> getAnswersByQuestion(Long questionId) {
-        return answerRepository.findByQuestion_QuestionId(questionId).stream().map(this::toDTO).toList();
+        return answerRepository.findByQuestion_QuestionId(questionId).stream().map(this::answerDTO).toList();
     }
 
     @Transactional(readOnly = true)
     public List<AnswerDTO> getAnswersByParticipation(Long participationId) {
-        return answerRepository.findByParticipation_ParticipationId(participationId).stream().map(this::toDTO).toList();
+        return answerRepository.findByParticipation_ParticipationId(participationId).stream().map(this::answerDTO)
+                .toList();
     }
 
-    private AnswerDTO toDTO(Answer a) {
+    private AnswerDTO answerDTO(Answer a) {
         return AnswerDTO.builder()
                 .answerId(a.getAnswerId())
                 .participation(a.getParticipation().getParticipationId())

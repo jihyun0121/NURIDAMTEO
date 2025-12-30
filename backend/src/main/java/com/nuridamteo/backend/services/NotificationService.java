@@ -6,8 +6,8 @@ import java.util.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
-import com.nuridamteo.backend.dtos.norification.CreateNorificationDTO;
-import com.nuridamteo.backend.dtos.norification.NotificationDTO;
+import com.nuridamteo.backend.dtos.notification.CreateNorificationDTO;
+import com.nuridamteo.backend.dtos.notification.NotificationDTO;
 import com.nuridamteo.backend.entities.Notification;
 import com.nuridamteo.backend.entities.Proposal;
 import com.nuridamteo.backend.entities.Users;

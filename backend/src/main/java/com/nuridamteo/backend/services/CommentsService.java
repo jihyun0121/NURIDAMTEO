@@ -59,30 +59,30 @@ public class CommentsService {
                 .stream().map(this::getCommentDTO).toList();
     }
 
-    private GetCommentDTO getCommentDTO(Comments p) {
-        String name = profileRepository.findByUser_UserId(p.getUser().getUserId())
+    private GetCommentDTO getCommentDTO(Comments dto) {
+        String name = profileRepository.findByUser_UserId(dto.getUser().getUserId())
                 .map(Profile::getName)
                 .orElse("알수없음");
 
         return GetCommentDTO.builder()
-                .commentId(p.getCommentId())
-                .user(p.getUser().getUserId())
+                .commentId(dto.getCommentId())
+                .user(dto.getUser().getUserId())
                 .name(name)
-                .targetType(p.getTargetType())
-                .targetId(p.getTargetId())
-                .content(p.getContent())
-                .createdAt(p.getCreatedAt())
+                .targetType(dto.getTargetType())
+                .targetId(dto.getTargetId())
+                .content(dto.getContent())
+                .createdAt(dto.getCreatedAt())
                 .build();
     }
 
-    private CommentsDTO commentsDTO(Comments p) {
+    private CommentsDTO commentsDTO(Comments c) {
         return CommentsDTO.builder()
-                .commentId(p.getCommentId())
-                .user(p.getUser().getUserId())
-                .targetType(p.getTargetType())
-                .targetId(p.getTargetId())
-                .content(p.getContent())
-                .createdAt(p.getCreatedAt())
+                .commentId(c.getCommentId())
+                .user(c.getUser().getUserId())
+                .targetType(c.getTargetType())
+                .targetId(c.getTargetId())
+                .content(c.getContent())
+                .createdAt(c.getCreatedAt())
                 .build();
     }
 }

@@ -5,8 +5,8 @@ import java.util.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import com.nuridamteo.backend.dtos.norification.CreateNorificationDTO;
-import com.nuridamteo.backend.dtos.norification.NotificationDTO;
+import com.nuridamteo.backend.dtos.notification.CreateNorificationDTO;
+import com.nuridamteo.backend.dtos.notification.NotificationDTO;
 import com.nuridamteo.backend.services.NotificationService;
 
 import lombok.*;

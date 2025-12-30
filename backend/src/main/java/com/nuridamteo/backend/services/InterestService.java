@@ -52,10 +52,10 @@ public class InterestService {
 
         return interestRepository.findAllByUser_UserId(userId).stream()
                 .map(interest -> {
-                    Category c = interest.getCategory();
+                    Category category = interest.getCategory();
                     return new CategoryDTO(
-                            c.getCategoryId(),
-                            c.getCategoryName());
+                            category.getCategoryId(),
+                            category.getCategoryName());
                 })
                 .toList();
     }
