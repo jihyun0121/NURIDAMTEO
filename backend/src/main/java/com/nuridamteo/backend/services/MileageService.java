@@ -32,6 +32,7 @@ public class MileageService {
         return mileageDTO(mileageRepository.save(Mileage.builder()
                 .user(user)
                 .reasonDetail(dto.getReasonDetail())
+                .mileage(dto.getMileage())
                 .totalMileage(user.getTotalMileage())
                 .createdAt(LocalDateTime.now())
                 .build()));
@@ -49,6 +50,7 @@ public class MileageService {
                 .user(m.getUser().getUserId())
                 .reasonDetail(m.getReasonDetail())
                 .totalMileage(m.getTotalMileage())
+                .mileage(m.getMileage())
                 .createdAt(m.getCreatedAt())
                 .build();
     }
