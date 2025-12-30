@@ -78,10 +78,6 @@ public class UserService {
 
         if (dto.getEmail() != null)
             users.setEmail(dto.getEmail());
-        if (dto.getTotalMileage() != null)
-            users.setTotalMileage(dto.getTotalMileage());
-        if (dto.getMileage() != null)
-            users.setTotalMileage(dto.getMileage());
         if (dto.getAccessibilityMode() != null)
             users.setAccessibilityMode(dto.getAccessibilityMode());
         if (dto.getNotificationEnabled() != null)

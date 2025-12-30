@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { NotificationProvider } from "./components/proposal/NotificationContext";
 
 import HomePage from "./pages/HomePage";
 import ParticipatePage from "./pages/ParticipatePage";
@@ -14,25 +15,27 @@ import MyPage from "./pages/MyPage";
 
 function App() {
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<SignupPage />} />
-                <Route path="/onboarding" element={<OnboardingPage />} />
-                <Route path="/participate" element={<ParticipatePage />} />
-                <Route path="/participate/:surveyId" element={<ContentPage />} />
-                <Route path="/proposal" element={<ProposalPage />} />
-                <Route path="/writeproposal" element={<WriteProposalPage />} />
-                <Route path="/proposal/:proposalId" element={<ContentPage />} />
-                <Route path="/nurisodam" element={<NurisodamPage />} />
-                <Route path="/nurisodam/news/:noticeId" element={<ContentPage />} />
-                <Route path="/nurisodam/notice/:noticeId" element={<ContentPage />} />
-                <Route path="/nurisodam/result/:resultId" element={<ContentPage />} />
-                <Route path="/my" element={<MyPage />} />
-                <Route path="/icons" element={<IconPage />} />
-            </Routes>
-        </Router>
+        <NotificationProvider>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/signup" element={<SignupPage />} />
+                    <Route path="/onboarding" element={<OnboardingPage />} />
+                    <Route path="/participate" element={<ParticipatePage />} />
+                    <Route path="/participate/:surveyId" element={<ContentPage />} />
+                    <Route path="/proposal" element={<ProposalPage />} />
+                    <Route path="/writeproposal" element={<WriteProposalPage />} />
+                    <Route path="/proposal/:proposalId" element={<ContentPage />} />
+                    <Route path="/nurisodam" element={<NurisodamPage />} />
+                    <Route path="/nurisodam/news/:noticeId" element={<ContentPage />} />
+                    <Route path="/nurisodam/notice/:noticeId" element={<ContentPage />} />
+                    <Route path="/nurisodam/result/:resultId" element={<ContentPage />} />
+                    <Route path="/my" element={<MyPage />} />
+                    <Route path="/icons" element={<IconPage />} />
+                </Routes>
+            </Router>
+        </NotificationProvider>
     );
 }
 

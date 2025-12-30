@@ -7,6 +7,7 @@ import Icon from "../ui/icons/TextIcon";
 import HeaderButton from "../components/HeaderButton";
 import BellPopup from "./home/BellPopUp";
 import { NotificationAPI } from "../api/api";
+import { useNotificationRefresh } from "./proposal/NotificationContext";
 
 export default function Header({ style }) {
     const location = useLocation();
@@ -18,6 +19,13 @@ export default function Header({ style }) {
 
     const [isBellOpen, setIsBellOpen] = useState(false);
     const [hasUnread, setHasUnread] = useState(false);
+
+    const { refreshKey } = useNotificationRefresh();
+
+    useEffect(() => {
+        fetchUnread();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname, refreshKey]);
 
     const activeTab = pathname.startsWith("/participate") ? "join" : pathname.startsWith("/proposal") ? "prop" : pathname.startsWith("/nurisodam") ? "nuri" : "none";
 

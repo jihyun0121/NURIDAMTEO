@@ -119,13 +119,13 @@ export const BookmarkAPI = {
 };
 
 export const NotificationAPI = {
-    createNotifications: () => api.post(`/notifications`),
+    createNotifications: (dto) => api.post(`/notifications`, dto),
     getNotifications: (userId) => api.get(`/notifications/${userId}`),
     readNotification: (userId) => api.patch(`/notifications/${userId}/read`),
 };
 
 export const MileageAPI = {
-    addMileage: () => api.post(`/mileage`),
+    addMileage: (dto) => api.post(`/mileage`, dto),
     getMileageHistory: (userId) => api.get(`/mileage/history/${userId}`),
 };
 

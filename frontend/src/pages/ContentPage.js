@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { NoticeAPI, ProposalAPI, UserAPI, ResultAPI, SurveyAPI, ParticipationAPI, BookmarkAPI, CommentAPI } from "../api/api";
+import { NoticeAPI, ProposalAPI, UserAPI, ResultAPI, SurveyAPI, ParticipationAPI, BookmarkAPI, CommentAPI, NotificationAPI, MileageAPI } from "../api/api";
 import Header from "../components/Header";
 
 import participateBanner from "../assets/image/participate/participatebanner.svg";
@@ -16,6 +16,7 @@ import MegaphoneIcon from "../ui/icons/MegaphoneIcon";
 import useResults from "../components/nurisodam/hook/useResults";
 import useNotices from "../components/nurisodam/hook/useNotice";
 import useNews from "../components/nurisodam/hook/useNews";
+import { useNotificationRefresh } from "../components/proposal/NotificationContext";
 
 export default function ContentPage() {
     const navigate = useNavigate();
@@ -36,6 +37,7 @@ export default function ContentPage() {
     const [nextResult, setNextResult] = useState(null);
     const [nextNotice, setNextNotice] = useState(null);
     const [nextNews, setNextNews] = useState(null);
+    const { refreshNotifications } = useNotificationRefresh();
 
     const location = useLocation();
     const pathname = location.pathname;
@@ -280,6 +282,47 @@ export default function ContentPage() {
         } finally {
             setIsLiking(false);
         }
+
+        if (contents.user_id !== Number(loginUser)) {
+            try {
+                const dto = {
+                    user_id: contents.user_id,
+                    proposal_id: contents.proposal_id,
+                    message: "회원님의 제안에 새로운 공감이 달렸습니다",
+                    notification_type: "LIKE",
+                };
+
+                await NotificationAPI.createNotifications(dto);
+                refreshNotifications();
+            } catch (e) {
+                console.log("알림 생성 실패", e);
+            }
+
+            try {
+                const dto = {
+                    user_id: Number(loginUser),
+                    message: "20 마일리지가 지급되었습니다.",
+                    notification_type: "MILEAGE",
+                };
+
+                await NotificationAPI.createNotifications(dto);
+                refreshNotifications();
+            } catch (e) {
+                console.log("알림 생성 실패", e);
+            }
+
+            try {
+                const dto = {
+                    user_id: Number(loginUser),
+                    mileage: 20,
+                    reason_detail: "제안 공감 마일리지 지급",
+                };
+
+                await MileageAPI.addMileage(dto);
+            } catch (e) {
+                console.log("마일리지 지급 실패", e);
+            }
+        }
     };
 
     const handleBookmark = async () => {
@@ -357,6 +400,47 @@ export default function ContentPage() {
             console.log("댓글 등록 실패", e);
         } finally {
             setCommentLoading(false);
+        }
+
+        if (contents.user_id !== Number(loginUser)) {
+            try {
+                const dto = {
+                    user_id: contents.user_id,
+                    proposal_id: contents.proposal_id,
+                    message: "회원님의 제안에 새로운 댓글이 달렸습니다",
+                    notification_type: "COMMENT",
+                };
+
+                await NotificationAPI.createNotifications(dto);
+                refreshNotifications();
+            } catch (e) {
+                console.log("알림 생성 실패", e);
+            }
+
+            try {
+                const dto = {
+                    user_id: Number(loginUser),
+                    message: "50 마일리지가 지급되었습니다.",
+                    notification_type: "MILEAGE",
+                };
+
+                await NotificationAPI.createNotifications(dto);
+                refreshNotifications();
+            } catch (e) {
+                console.log("알림 생성 실패", e);
+            }
+
+            try {
+                const dto = {
+                    user_id: Number(loginUser),
+                    mileage: 50,
+                    reason_detail: "댓글 작성 마일리지 지급",
+                };
+
+                await MileageAPI.addMileage(dto);
+            } catch (e) {
+                console.log("마일리지 지급 실패", e);
+            }
         }
     };
 
