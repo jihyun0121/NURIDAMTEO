@@ -48,6 +48,19 @@ public class NotificationService {
                 .map(this::notificationDTO).toList();
     }
 
+    @Transactional
+    public void readNotification(Long userId) {
+        List<Notification> notifications = notificationRepository.findAllByUser_UserIdAndIsReadFalse(userId);
+
+        if (notifications.isEmpty())
+            return;
+
+        notifications.forEach(notification -> {
+            notification.setIsRead(true);
+            notification.setReadAt(LocalDateTime.now());
+        });
+    }
+
     private NotificationDTO notificationDTO(Notification n) {
         return NotificationDTO.builder()
                 .notificationId(n.getNotificationId())

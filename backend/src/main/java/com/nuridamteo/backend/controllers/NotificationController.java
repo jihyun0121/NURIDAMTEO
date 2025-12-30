@@ -27,4 +27,10 @@ public class NotificationController {
     public List<NotificationDTO> getNotifications(@PathVariable("userId") Long userId) {
         return notificationService.getNotifications(userId);
     }
+
+    @PatchMapping("/{userId}/read")
+    public ResponseEntity<?> readNotification(@PathVariable("userId") Long userId) {
+        notificationService.readNotification(userId);
+        return ResponseEntity.ok(Map.of("message", "읽지 않은 알림 전체 읽음 처리 완료"));
+    }
 }
