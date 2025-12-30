@@ -28,7 +28,7 @@ export default function ParticipateCard({ type = "default", survey, participate 
         fetchCommentCount();
     }, [survey?.survey_id, survey?.survey_type]);
 
-    const hasParticipated = participate.some((p) => p.target_id === survey.survey_id);
+    const hasParticipated = participate.some((p) => p.target_id === survey.survey_id && (p.target_type === "SURVEY" || p.target_type === "PANEL" || p.target_type === "SELECT"));
 
     const stripHtml = (html) => {
         const doc = new DOMParser().parseFromString(html, "text/html");
