@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "../ui/Logo";
 import SearchIcon from "../ui/icons/SearchIcon";
 import BellIcon from "../ui/icons/BellIcon";
-import Icon from "../ui/icons/TextIcon";
 import HeaderButton from "../components/HeaderButton";
 import BellPopup from "./home/BellPopUp";
 import { NotificationAPI } from "../api/api";
