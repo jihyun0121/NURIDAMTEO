@@ -66,3 +66,12 @@
     align-items: flex-start;
     gap: 2rem;
 }
+
+.search-none {
+    text-align: center;
+    color: var(--gray-darker-base);
+
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    line-height: var(--title-xlarge-line);
+}

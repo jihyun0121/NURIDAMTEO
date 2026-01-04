@@ -5,7 +5,7 @@ import ParticipateCard from "./ParticipateCard";
 
 const PAGE_SIZE = 8;
 
-export default function PanelContent({ filterCategory }) {
+export default function PanelContent({ filterCategory, keyword }) {
     const [survey, setSurvey] = useState([]);
     const [participate, setParticipate] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -19,9 +19,22 @@ export default function PanelContent({ filterCategory }) {
     }, []);
 
     const filteredParticipate = useMemo(() => {
-        if (!filterCategory) return survey;
-        return survey.filter((p) => p.category_id === filterCategory.key);
-    }, [survey, filterCategory]);
+        let list = survey;
+
+        if (filterCategory) {
+            list = list.filter((p) => p.category_id === filterCategory.key);
+        }
+
+        if (keyword.trim()) {
+            list = list.filter((p) =>
+                (p.title || "").includes(keyword) ||
+                (p.description || "").includes(keyword)
+            );
+        }
+
+        return list;
+    }, [survey, filterCategory, keyword]);
+
 
     useEffect(() => {
         setCurrentPage(1);
@@ -37,6 +50,10 @@ export default function PanelContent({ filterCategory }) {
         loadMyParticipation();
     }, []);
 
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [keyword]);
+
     const totalPages = Math.ceil(filteredParticipate.length / PAGE_SIZE);
 
     const startIndex = (currentPage - 1) * PAGE_SIZE;
@@ -45,9 +62,11 @@ export default function PanelContent({ filterCategory }) {
     return (
         <div className="participate-list-wrapper">
             <div className="participate-list">
-                {currentParticipate.map((survey) => (
+                {currentParticipate.length === 0 ? (
+                    <div className="search-none">'{keyword}'에 대한 검색 결과가 없습니다.</div>
+                ) : (currentParticipate.map((survey) => (
                     <ParticipateCard key={survey.survey_id} survey={survey} participate={participate} />
-                ))}
+                )))}
             </div>
 
             <Pagination currentPage={currentPage} totalPages={totalPages} onChange={setCurrentPage} />
