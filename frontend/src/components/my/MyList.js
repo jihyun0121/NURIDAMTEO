@@ -16,7 +16,7 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
             try {
                 let res;
 
-                if (type === "propsal") {
+                if (type === "proposal") {
                     res = await ProposalAPI.getUserProposal(userId);
                     setList(res.data);
                     return;
@@ -89,7 +89,7 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
     }, [type, userId, bookmarkType]);
 
     const sortedList = (() => {
-        if (type === "propsal" || type === "participate" || type === "mileage") {
+        if (type === "proposal" || type === "participate" || type === "mileage") {
             const copied = [...list];
             return copied.sort((a, b) => {
                 const dateA = new Date(a.created_at);
@@ -101,7 +101,7 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
     })();
 
     const getRouteInfo = (item) => {
-        if (type === "propsal") {
+        if (type === "proposal") {
             return { page: "proposal", id: item.proposal_id || item.proposalId };
         }
 
@@ -150,9 +150,9 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
                 {type === "mileage"
                     ? sortedList.map((s, i) => <MileageStatus key={s.mileage_id || i} num={i + 1} title={s.reason_detail} date={s.created_at} total={s.total_mileage} mileage={s.mileage} />)
                     : sortedList.map((s, i) => {
-                          const { page, id } = getRouteInfo(s);
-                          return <SurveyList key={s.bookmark_id || s.participation_id || s.proposal_id || i} num={i + 1} size="long" title={s.title || s.result_title} start={s.start_at} end={s.end_at} type={s.status ? "default" : "none"} state={s.status} onClick={() => page && id && (window.location.href = `/${page}/${id}`)} />;
-                      })}
+                        const { page, id } = getRouteInfo(s);
+                        return <SurveyList key={s.bookmark_id || s.participation_id || s.proposal_id || i} num={i + 1} size="long" title={s.title || s.result_title} start={s.start_at} end={s.end_at} type={s.status ? "default" : "none"} state={s.status} onClick={() => page && id && (window.location.href = `/${page}/${id}`)} />;
+                    })}
             </div>
         </div>
     );

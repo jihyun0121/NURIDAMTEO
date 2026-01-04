@@ -22,7 +22,7 @@ export default function ProfileDetail({ mileage = 0, type = "coin" }) {
                     <AuthButton content="상품권 신청" type="line" />
                     <AuthButton content="기부 신청" type="line" />
                 </div>
-                <div className="nav-text">내역 보기</div>
+                <div className="nav-text" onClick={() => window.location.href = "/my"}>내역 보기</div>
             </>
         );
         style = {
@@ -31,18 +31,18 @@ export default function ProfileDetail({ mileage = 0, type = "coin" }) {
     } else if (type === "vote") {
         content = (
             <>
-                <SurveyList type="default" />
-                <SurveyList type="default" />
-                <div className="nav-text">전체 보기</div>
+                <SurveyList type="default" num="1" title="text" state="WAIT" />
+                <SurveyList type="default" num="2" title="text" state="WAIT" />
+                <div className="nav-text" onClick={() => window.location.href = "/my?type=proposal"}>전체 보기</div>
             </>
         );
         style = { gap: "0.5rem", borderRadius: "1.5rem" };
     } else if (type === "bookmark") {
         content = (
             <>
-                <SurveyList />
-                <SurveyList />
-                <div className="nav-text">전체 보기</div>
+                <SurveyList num="1" title="text" />
+                <SurveyList num="2" title="text" />
+                <div className="nav-text" onClick={() => window.location.href = "/my?type=bookmark"}>전체 보기</div>
             </>
         );
         style = { gap: "0.5rem", borderRadius: "1.5rem 0 1.5rem 1.5rem" };
