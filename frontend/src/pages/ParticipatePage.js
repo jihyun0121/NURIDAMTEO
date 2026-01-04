@@ -16,21 +16,16 @@ export default function ParticipatePage() {
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const keyword = searchParams.get("keyword") || "";
     const defaultCategory = searchParams.get("category") || "설문조사";
-
-    const [searchKeyword, setSearchKeyword] = useState(keyword);
     const [selected, setSelected] = useState(defaultCategory);
 
-    useEffect(() => setSearchKeyword(keyword), [keyword]);
-    useEffect(() => setSelected(defaultCategory), [defaultCategory]);
+    useEffect(() => {
+        setSelected(defaultCategory);
+    }, [defaultCategory]);
 
     const handleChange = (value) => {
         setSelected(value);
-        setSearchParams({
-            category: value,
-            keyword: searchKeyword,
-        });
+        setSearchParams({ category: value });
     };
 
     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -82,21 +77,9 @@ export default function ParticipatePage() {
                 {content}
                 <div style={{ display: "flex", width: "95rem", alignItems: "center", gap: "2rem" }}>
                     <FormDropdown size="short" optionData={optionData} value={selected} onChange={handleChange} />
-                    <SearchBar
-                        type="short"
-                        value={searchKeyword}
-                        onChange={(v) => setSearchKeyword(v)}
-                        onSearch={() => {
-                            setSearchParams({
-                                category: selected,
-                                keyword: searchKeyword,
-                            });
-                        }}
-                        onCategoryChange={handleCategoryChange}
-                    />
-
+                    <SearchBar type="short" onCategoryChange={handleCategoryChange} />
                 </div>
-                <ParticipateContent category={selected} filterCategory={selectedCategory} keyword={searchKeyword} />
+                <ParticipateContent category={selected} filterCategory={selectedCategory} />
             </div>
         </div>
     );
