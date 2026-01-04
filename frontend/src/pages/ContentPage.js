@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { NoticeAPI, ProposalAPI, UserAPI, ResultAPI, SurveyAPI, ParticipationAPI, BookmarkAPI, CommentAPI, NotificationAPI, MileageAPI } from "../api/api";
+import { useNotificationRefresh } from "../components/proposal/NotificationContext";
 import Header from "../components/Header";
-
 import participateBanner from "../assets/image/participate/participatebanner.svg";
 import proposalBanner from "../assets/image/proposal/proposalbanner.svg";
 import noticeBanner from "../assets/image/nurisodam/banner.svg";
@@ -16,7 +16,6 @@ import MegaphoneIcon from "../ui/icons/MegaphoneIcon";
 import useResults from "../components/nurisodam/hook/useResults";
 import useNotices from "../components/nurisodam/hook/useNotice";
 import useNews from "../components/nurisodam/hook/useNews";
-import { useNotificationRefresh } from "../components/proposal/NotificationContext";
 
 export default function ContentPage() {
     const navigate = useNavigate();
