@@ -9,6 +9,7 @@ import com.nuridamteo.backend.entities.Notice;
 import com.nuridamteo.backend.entities.Proposal;
 import com.nuridamteo.backend.entities.Result;
 import com.nuridamteo.backend.entities.Survey;
+import com.nuridamteo.backend.enums.NoticeType;
 import com.nuridamteo.backend.repositories.NoticeRepository;
 import com.nuridamteo.backend.repositories.ProposalRepository;
 import com.nuridamteo.backend.repositories.ResultRepository;
@@ -35,11 +36,11 @@ public class SearchService {
     }
 
     public List<Notice> searchNotices(String keyword) {
-        return noticeRepository.searchByKeywordAndType(keyword.trim(), "NOTICE");
+        return noticeRepository.searchByKeywordAndType(keyword.trim(), NoticeType.NOTICE);
     }
 
     public List<Notice> searchNews(String keyword) {
-        return noticeRepository.searchByKeywordAndType(keyword.trim(), "NEWS");
+        return noticeRepository.searchByKeywordAndType(keyword.trim(), NoticeType.NEWS);
     }
 
     public List<Result> searchResults(String keyword) {

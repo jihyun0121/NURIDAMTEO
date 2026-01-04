@@ -22,5 +22,5 @@ public interface NoticeRepository extends JpaRepository<Notice, Long> {
         AND (n.title LIKE %:keyword% OR n.content LIKE %:keyword%)
         ORDER BY n.noticeId DESC
     """)
-    List<Notice> searchByKeywordAndType(@Param("keyword") String keyword, @Param("type") String type);
+    List<Notice> searchByKeywordAndType(@Param("keyword") String keyword, @Param("type") NoticeType type);
 }
