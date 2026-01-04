@@ -133,4 +133,12 @@ export const StatisticAPI = {
     getOptionStats: (questionId) => api.get(`/statistics/questions/${questionId}/options`),
 };
 
+export const SearchAPI = {
+    searchProposals: (keyword) => api.get(`/search/proposals?keyword=${encodeURIComponent(keyword)}`),
+    searchSurveys: (keyword) => api.get(`/search/surveys?keyword=${encodeURIComponent(keyword)}`),
+    searchNotices: (keyword) => api.get(`/search/notices?keyword=${encodeURIComponent(keyword)}`),
+    searchNews: (keyword) => api.get(`/search/news?keyword=${encodeURIComponent(keyword)}`),
+    searchResults: (keyword) => api.get(`/search/results?keyword=${encodeURIComponent(keyword)}`),
+};
+
 export default api;

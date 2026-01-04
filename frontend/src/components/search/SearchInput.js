@@ -1,33 +1,29 @@
-import { useEffect, useRef } from "react";
+import { useState } from "react";
 import SearchIcon from "../../ui/icons/SearchIcon";
+import { useNavigate } from "react-router-dom";
 
-export default function SearchInput({ onClose, onClick }) {
-    const ref = useRef(null);
+export default function SearchInput({ onClose }) {
+    const [keyword, setKeyword] = useState("");
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        const handleClickOutside = (e) => {
-            if (ref.current && !ref.current.contains(e.target)) {
-                onClose();
-            }
-        };
-
-        const handleEsc = (e) => {
-            if (e.key === "Escape") onClose();
-        };
-
-        document.addEventListener("mousedown", handleClickOutside);
-        document.addEventListener("keydown", handleEsc);
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-            document.removeEventListener("keydown", handleEsc);
-        };
-    }, [onClose]);
+    const handleSearch = () => {
+        if (!keyword.trim()) return;
+        onClose?.();
+        navigate(`/search?keyword=${encodeURIComponent(keyword)}`);
+    };
 
     return (
-        <div ref={ref} className="search-input-container">
-            <input className="search-input-content" placeholder="검색어를 입력해주세요" autoFocus />
-            <SearchIcon size={44} style={{ cursor: "pointer" }} onClick={onClick} />
+        <div className="search-input-container">
+            <input
+                className="search-input-content"
+                placeholder="검색어를 입력해주세요"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter") handleSearch();
+                }}
+            />
+            <SearchIcon size={44} style={{ cursor: "pointer" }} onClick={handleSearch} />
         </div>
     );
 }
