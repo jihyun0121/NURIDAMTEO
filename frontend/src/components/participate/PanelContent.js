@@ -1,26 +1,40 @@
 import { useEffect, useState, useMemo } from "react";
-import { ParticipationAPI, SurveyAPI } from "../../api/api";
+import { ParticipationAPI, SearchAPI, SurveyAPI } from "../../api/api";
 import Pagination from "../Pagination";
 import ParticipateCard from "./ParticipateCard";
 
 const PAGE_SIZE = 8;
 
-export default function PanelContent({ filterCategory }) {
+export default function PanelContent({ filterCategory, keyword }) {
     const [survey, setSurvey] = useState([]);
+    const [allSurvey, setAllSurvey] = useState([]);
     const [participate, setParticipate] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
 
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         async function loadParticipate() {
-            const res = await SurveyAPI.getPanelList(0);
-            setSurvey(res.data);
+            setLoading(true);
+            try {
+                const res = await SurveyAPI.getPanelList();
+                setSurvey(res.data || []);
+                setAllSurvey(res.data || []);
+            } catch (e) {
+                console.log("패널 로딩 실패", e);
+            } finally {
+                setLoading(false);
+            }
         }
         loadParticipate();
     }, []);
 
     const filteredParticipate = useMemo(() => {
-        if (!filterCategory) return survey;
-        return survey.filter((p) => p.category_id === filterCategory.key);
+        let list = survey;
+        if (filterCategory) {
+            list = list.filter((p) => p.category_id === filterCategory.key);
+        }
+        return list;
     }, [survey, filterCategory]);
 
     useEffect(() => {
@@ -32,25 +46,55 @@ export default function PanelContent({ filterCategory }) {
             const userId = sessionStorage.getItem("user_id");
             if (!userId) return;
             const res = await ParticipationAPI.getUserParticipaiton(userId);
-            setParticipate(res.data);
+            setParticipate(res.data || []);
         }
         loadMyParticipation();
     }, []);
 
-    const totalPages = Math.ceil(filteredParticipate.length / PAGE_SIZE);
+    useEffect(() => {
+        async function search() {
+            setCurrentPage(1);
+            setLoading(true);
 
+            try {
+                if (!keyword.trim()) {
+                    setSurvey(allSurvey);
+                    return;
+                }
+
+                const res = await SearchAPI.searchSurveys(keyword);
+                setSurvey(res.data || []);
+            } catch (e) {
+                console.log("패널 검색 실패", e);
+                setSurvey([]);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        search();
+    }, [keyword, allSurvey]);
+
+    const totalPages = Math.max(1, Math.ceil(filteredParticipate.length / PAGE_SIZE));
     const startIndex = (currentPage - 1) * PAGE_SIZE;
     const currentParticipate = filteredParticipate.slice(startIndex, startIndex + PAGE_SIZE);
 
     return (
         <div className="participate-list-wrapper">
-            <div className="participate-list">
-                {currentParticipate.map((survey) => (
-                    <ParticipateCard key={survey.survey_id} survey={survey} participate={participate} />
-                ))}
-            </div>
-
-            <Pagination currentPage={currentPage} totalPages={totalPages} onChange={setCurrentPage} />
+            {loading ? (
+                <div className="search-page-none">로딩중...</div>
+            ) : filteredParticipate.length === 0 ? (
+                <div className="search-page-none">검색 결과가 없습니다.</div>
+            ) : (
+                <>
+                    <div className="participate-list">
+                        {currentParticipate.map((survey) => (
+                            <ParticipateCard key={survey.survey_id} survey={survey} participate={participate} />
+                        ))}
+                    </div>
+                    <Pagination currentPage={currentPage} totalPages={totalPages} onChange={setCurrentPage} />
+                </>
+            )}
         </div>
     );
 }

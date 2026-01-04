@@ -81,13 +81,13 @@ export default function SearchPage() {
 
     function renderSection(title, list, sectionKey, renderItem) {
         const base = moreLinkMap[sectionKey];
-        const url = `${base}${base.includes("?") ? "&" : "?"}keyword=${encodeURIComponent(keyword)}`;
+        // const url = `${base}${base.includes("?") ? "&" : "?"}keyword=${encodeURIComponent(keyword)}`;
 
         return (
             <div className="search-result">
                 <div className="search-sub-title">
                     <div className="search-sub-text">{title}</div>
-                    <div className="nav-text" onClick={() => (window.location.href = url)}>
+                    <div className="nav-text" onClick={() => (window.location.href = base)}>
                         더보기
                     </div>
                 </div>

@@ -15,6 +15,7 @@ export default function ParticipatePage() {
     ];
 
     const [searchParams, setSearchParams] = useSearchParams();
+    const [keyword, setKeyword] = useState("");
 
     const defaultCategory = searchParams.get("category") || "설문조사";
     const [selected, setSelected] = useState(defaultCategory);
@@ -32,6 +33,10 @@ export default function ParticipatePage() {
 
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
+    };
+
+    const handleSearch = () => {
+        // SurveyContent / PanelContent에 검색어 전달만 해주면 됨
     };
 
     let content;
@@ -77,9 +82,9 @@ export default function ParticipatePage() {
                 {content}
                 <div style={{ display: "flex", width: "95rem", alignItems: "center", gap: "2rem" }}>
                     <FormDropdown size="short" optionData={optionData} value={selected} onChange={handleChange} />
-                    <SearchBar type="short" onCategoryChange={handleCategoryChange} />
+                    <SearchBar type="short" value={keyword} onChange={setKeyword} onSearch={handleSearch} onCategoryChange={handleCategoryChange} />
                 </div>
-                <ParticipateContent category={selected} filterCategory={selectedCategory} />
+                <ParticipateContent category={selected} filterCategory={selectedCategory} keyword={keyword} onSearch={handleSearch} />
             </div>
         </div>
     );
