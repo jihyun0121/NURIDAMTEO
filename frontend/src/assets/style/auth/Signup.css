@@ -60,7 +60,7 @@
 
 .signup-option-text {
     font-size: var(--body-small-size);
-    color: var(--gray-normal, #555);
+    color: var(--gray-normal-base);
     /* margin-top: 1rem; */
 }
 

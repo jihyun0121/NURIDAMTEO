@@ -29,7 +29,7 @@
 .participate-card-date {
     flex: 1 0 0;
 
-    color: var(--Gray-Normal, #555);
+    color: var(--gray-normal-base);
     text-align: right;
 
     font-size: var(--body-small-size);
@@ -51,7 +51,7 @@
 .participate-card-title {
     align-self: stretch;
 
-    color: var(--Gray-Normal, #555);
+    color: var(--gray-normal-base);
 
     font-size: var(--title-xlarge-size);
     font-weight: var(--title-xlarge-weight);
@@ -68,7 +68,7 @@
     height: 3.5rem;
     align-self: stretch;
 
-    color: var(--Gray-Normal, #555);
+    color: var(--gray-normal-base);
 
     font-size: var(--body-medium-size);
     font-weight: var(--body-medium-weight);

@@ -43,6 +43,7 @@ import MileageStatus from "../components/my/MileageStatus";
 import SurveyList from "../components/home/SurveyList";
 import TextInputToggle from "../ui/input/TextInputToggle";
 import ProposalCard from "../components/proposal/ProposalCard";
+import SearchInput from "../components/search/SearchInput";
 
 export default function IconPage() {
     const [proposal, setProposal] = useState([]);
@@ -341,6 +342,11 @@ export default function IconPage() {
                         </div>
 
                         <div className="icons">
+                            <SearchInput content="Text" />
+                        </div>
+
+
+                        <div className="icons">
                             <TextButtonS content="Text">
                                 <CheckIcon size={44} color="inherit" />
                             </TextButtonS>
@@ -350,7 +356,6 @@ export default function IconPage() {
                             <TextButtonL content="Text" />
                             <TextButtonL content="Text" type="hover" />
                         </div>
-
                         <div className="icons">
                             <SearchBar type="long" />
                         </div>

@@ -8,6 +8,7 @@ import BellPopup from "./home/BellPopUp";
 import { NotificationAPI } from "../api/api";
 import { useNotificationRefresh } from "./proposal/NotificationContext";
 import UserIcon from "../ui/icons/UserIcon";
+import SearchInput from "./search/SearchInput";
 
 export default function Header({ style }) {
     const location = useLocation();
@@ -18,6 +19,7 @@ export default function Header({ style }) {
     const userId = sessionStorage.getItem("user_id");
 
     const [isBellOpen, setIsBellOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [hasUnread, setHasUnread] = useState(false);
 
     const { refreshKey } = useNotificationRefresh();
@@ -64,10 +66,6 @@ export default function Header({ style }) {
         }
     };
 
-    const HeaderIcons = ({ hasUnread, handleBellClick }) => {
-        const navigate = useNavigate();
-    };
-
     return (
         <>
             <div className="header-container" style={{ ...style }}>
@@ -84,7 +82,11 @@ export default function Header({ style }) {
                 </div>
 
                 <div className="header-icons">
-                    <SearchIcon size={44} type="fill" />
+                    {isSearchOpen ? (
+                        <SearchInput onClose={() => setIsSearchOpen(false)} />
+                    ) : (
+                        <SearchIcon size={44} type="fill" onClick={() => setIsSearchOpen(true)} style={{ cursor: "pointer" }} />
+                    )}
                     <BellIcon size={44} type={hasUnread ? "hover" : "fill"} onClick={handleBellClick} style={{ cursor: "pointer" }} />
                     <UserIcon size={44} type="fill" onClick={() => (window.location.href = "/my")} style={{ cursor: "pointer" }} />
                 </div>

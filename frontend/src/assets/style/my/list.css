@@ -12,7 +12,7 @@
     align-items: flex-end;
     align-self: stretch;
 
-    color: var(--Gray-Darker, #1e1e1e);
+    color: var(--gray-darker-base);
 
     font-size: var(--title-xlarge-size);
     font-weight: var(--title-xlarge-weight);

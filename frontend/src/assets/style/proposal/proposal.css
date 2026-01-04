@@ -68,7 +68,7 @@
 
 .comments-title {
     align-self: stretch;
-    color: var(--Grey-Darker, #2A2A2A);
+    color: var(--Grey-Darker, #2a2a2a);
 
     font-size: var(--headline-large-size);
     font-weight: var(--headline-large-weight);
@@ -77,7 +77,7 @@
 
 .comments-next {
     align-self: stretch;
-    color: var(--Grey-Darker, #2A2A2A);
+    color: var(--Grey-Darker, #2a2a2a);
 
     font-size: var(--body-large-size);
     font-weight: var(--body-large-weight);
@@ -100,7 +100,7 @@
     align-self: stretch;
 
     border-radius: 1.25rem;
-    border: 1px solid var(--grey-light-active, #D5D5D5);
+    border: 1px solid var(--grey-light-active, #d5d5d5);
     background: var(--white);
     color: var(--Grey-Dark, #595959);
 
@@ -136,7 +136,7 @@
 
 .comment-date {
     flex: 1 0 0;
-    color: var(--Gray-Normal, #555);
+    color: var(--gray-normal-base);
 
     font-size: var(--title-small-size);
     font-weight: var(--title-small-weight);

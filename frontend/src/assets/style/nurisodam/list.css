@@ -13,13 +13,13 @@
     gap: 1rem;
 
     border-radius: 0.75rem;
-    border: 1px solid var(--gray-light-active, #CACACA);
+    border: 1px solid var(--gray-light-active, #cacaca);
 }
 
 .nurisodam-list-text {
     flex: 1 0 0;
 
-    color: var(--Gray-Normal, #555);
+    color: var(--gray-normal-base);
 
     font-size: var(--title-xlarge-size);
     font-weight: var(--title-xlarge-weight);

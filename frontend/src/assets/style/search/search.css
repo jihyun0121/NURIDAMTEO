@@ -1,0 +1,68 @@
+.search-page-container {
+    display: flex;
+    width: 120rem;
+    padding-bottom: 7.5rem;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 9.12rem;
+}
+
+.search-page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7.5rem;
+}
+
+.search-page-title {
+    width: 95rem;
+    color: var(--gray-darker-base);
+
+    font-size: var(--headline-medium-size);
+    font-weight: var(--headline-medium-weight);
+    line-height: var(--headline-medium-line);
+}
+
+.search-page-none {
+    width: 95rem;
+
+    color: var(--gray-darker-base);
+
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    line-height: var(--title-xlarge-line);
+}
+
+.search-result {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.search-sub-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-self: stretch;
+}
+
+.search-sub-text {
+    color: var(--gray-darker-base);
+
+    font-size: var(--title-xlarge-size);
+    font-weight: var(--title-xlarge-weight);
+    line-height: var(--title-xlarge-line);
+}
+
+.search-result-container {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+}

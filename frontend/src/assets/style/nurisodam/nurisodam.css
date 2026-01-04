@@ -26,7 +26,7 @@
     border-radius: 0.75rem 0.75rem 0 0;
     border: 1px solid var(--gray-light-active, #cacaca);
 
-    color: var(--Gray-Normal, #555);
+    color: var(--gray-normal-base);
 
     font-size: var(--title-xlarge-size);
     font-weight: var(--title-xlarge-weight);
@@ -47,7 +47,7 @@
     border-bottom: 1px solid var(--gray-light-active, #cacaca);
     border-left: 1px solid var(--gray-light-active, #cacaca);
 
-    color: var(--Gray-Normal, #555);
+    color: var(--gray-normal-base);
 
     font-size: var(--body-medium-size);
     font-weight: var(--body-medium-weight);
