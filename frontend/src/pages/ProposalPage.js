@@ -44,9 +44,9 @@ export default function ProposalPage() {
         try {
             if (!keyword.trim()) {
                 setProposal(allProposal);
+                setLoading(false);
                 return;
             }
-
             const res = await SearchAPI.searchProposals(keyword);
             setProposal(res.data || []);
         } catch (e) {
@@ -57,7 +57,7 @@ export default function ProposalPage() {
         }
     };
 
-    const totalPages = Math.ceil(proposal.length / PAGE_SIZE);
+    const totalPages = Math.max(1, Math.ceil(proposal.length / PAGE_SIZE));
 
     const startIndex = (currentPage - 1) * PAGE_SIZE;
     const currentProposal = proposal.slice(startIndex, startIndex + PAGE_SIZE);
