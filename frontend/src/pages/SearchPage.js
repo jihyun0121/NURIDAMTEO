@@ -51,77 +51,49 @@ export default function SearchPage() {
         news.length > 0 ||
         result.length > 0;
 
+    function renderSection(title, list, keyName, renderTitle) {
+        return (
+            <div className="search-result">
+                <div className="search-sub-title">
+                    <div className="search-sub-text">{title}</div>
+                    <div className="nav-text">더보기</div>
+                </div>
+
+                {list.length === 0 ? (
+                    <div className="search-none">검색 결과 없음</div>
+                ) : (
+                    list.map((item) => (
+                        <div key={item[keyName]} className="search-item">
+                            {renderTitle(item)}
+                        </div>
+                    ))
+                )}
+            </div>
+        );
+    }
+
     return (
         <div className="search-page-container">
             <Header />
+
             <div className="search-page-content">
                 <div className="search-page-title">검색결과</div>
 
-                {!loading && !hasAny ? (
+                {loading && <div className="search-page-none">검색 중...</div>}
+
+                {!loading && !hasAny && (
                     <div className="search-page-none">'{keyword}'에 대한 검색 결과가 없습니다.</div>
-                ) : (
-                    <><div className="search-result">
-                        <div className="search-sub-title">
-                            <div className="search-sub-text">제안</div>
-                            <div className="nav-text">더보기</div>
-                        </div>
-                        {proposal.map((item) => (
-                            <div key={item.proposal_id} className="search-item">
-                                {item.title}
-                            </div>
-                        ))}
-                    </div>
-
-                        <div className="search-result">
-                            <div className="search-sub-title">
-                                <div className="search-sub-text">설문</div>
-                                <div className="nav-text">더보기</div>
-                            </div>
-                            {survey.map((item) => (
-                                <div key={item.survey_id} className="search-item">
-                                    {item.title}
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="search-result">
-                            <div className="search-sub-title">
-                                <div className="search-sub-text">공지 사항</div>
-                                <div className="nav-text">더보기</div>
-                            </div>
-                            {notice.map((item) => (
-                                <div key={item.notice_id} className="search-item">
-                                    {item.title}
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="search-result">
-                            <div className="search-sub-title">
-                                <div className="search-sub-text">누리소담</div>
-                                <div className="nav-text">더보기</div>
-                            </div>
-                            {news.map((item) => (
-                                <div key={item.notice_id} className="search-item">
-                                    {item.title}
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="search-result">
-                            <div className="search-sub-title">
-                                <div className="search-sub-text">결과 게시판</div>
-                                <div className="nav-text">더보기</div>
-                            </div>
-                            {result.map((item) => (
-                                <div key={item.result_id} className="search-item">
-                                    {item.result_title}
-                                </div>
-                            ))}
-                        </div>
-                    </>
                 )}
 
+                {!loading && hasAny && (
+                    <>
+                        {renderSection("제안", proposal, "proposal_id", (item) => item.title)}
+                        {renderSection("설문", survey, "survey_id", (item) => item.title)}
+                        {renderSection("공지 사항", notice, "notice_id", (item) => item.title)}
+                        {renderSection("누리소담", news, "notice_id", (item) => item.title)}
+                        {renderSection("결과 게시판", result, "result_id", (item) => item.result_title)}
+                    </>
+                )}
             </div>
         </div>
     );
