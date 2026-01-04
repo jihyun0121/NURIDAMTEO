@@ -74,7 +74,6 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
 
                 if (type === "mileage") {
                     res = await MileageAPI.getMileageHistory(userId);
-                    console.log(res.data);
                     setList(res.data);
                     return;
                 }

@@ -61,8 +61,7 @@ export default function ParticipateCard({ type = "default", survey, participate 
     }
 
     const addViewCount = (s) => {
-        const res = SurveyAPI.updateView(s);
-        console.log(res);
+        SurveyAPI.updateView(s);
     };
 
     return (

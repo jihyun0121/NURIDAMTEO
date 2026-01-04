@@ -11,13 +11,10 @@ export default function OptionStatsBar({ question }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [question.question_id]);
 
-    console.log("OptionStatsBar questionId:", question.question_id);
-
     async function load() {
         try {
             const [optRes, statRes] = await Promise.all([SurveyAPI.getOptionsByQuestion(question.question_id), StatisticAPI.getOptionStats(question.question_id)]);
 
-            console.log(optRes.data, statRes.data);
             setOptions(optRes.data || []);
             setStats(statRes.data || {});
         } catch (e) {
