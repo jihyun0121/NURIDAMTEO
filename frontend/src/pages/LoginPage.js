@@ -43,7 +43,6 @@ export default function LoginPage() {
             sessionStorage.setItem("token", res.data.token);
             sessionStorage.setItem("user_id", res.data.user_id);
 
-            console.log("로그인 성공");
             window.location.href = "/";
         } catch (e) {
             const msg = e.response.data.error || "로그인 실패";

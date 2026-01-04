@@ -17,8 +17,7 @@ export default function ResultList() {
     const currentResults = results.slice(startIndex, startIndex + PAGE_SIZE);
 
     const addViewCount = (r) => {
-        const res = ResultAPI.updateView(r);
-        console.log(res);
+        ResultAPI.updateView(r);
     };
 
     return (

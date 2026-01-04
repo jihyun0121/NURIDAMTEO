@@ -84,11 +84,9 @@ export default function SignupPage() {
 
         if (!form.name || !form.gender || !form.birthday || !form.address || !form.address_detail || !form.postal_code) {
             setAgreeError("모든 정보를 입력해주세요.");
-            console.log(form);
             return;
         }
 
-        console.log(form);
 
         try {
             await UserAPI.createUser({
