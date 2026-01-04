@@ -21,6 +21,7 @@ export default function ContentPage() {
     const navigate = useNavigate();
     const [contents, setContents] = useState(null);
     const [user, setUser] = useState(null);
+    const [loginUser, setLoginUser] = useState(null);
     const [state, setState] = useState(false);
     const [participations, setParticipations] = useState([]);
     const [hasParticipated, setHasParticipated] = useState(false);
@@ -41,7 +42,7 @@ export default function ContentPage() {
     const location = useLocation();
     const pathname = location.pathname;
     const params = useParams();
-    const loginUser = sessionStorage.getItem("user_id");
+    const userId = sessionStorage.getItem("user_id");
 
     const pageType = useMemo(() => {
         if (pathname.startsWith("/participate")) return "participate";
@@ -61,15 +62,29 @@ export default function ContentPage() {
             6: "문화·관광",
             7: "청년·일자리",
         };
-        return contents?.category_id ? map[contents.category_id] : null;
+        return contents?.category_id ? map[contents?.category_id] : null;
     }, [contents?.category_id]);
 
     useEffect(() => {
+        if (!userId) return;
+
+        async function fetchUser() {
+            try {
+                const res = await UserAPI.getUser(userId);
+                setLoginUser(res.data);
+            } catch (e) {
+                console.log("유저 정보 불러오기 실패", e);
+            }
+        }
+        fetchUser();
+    }, [userId]);
+
+    useEffect(() => {
         const fetchMyParticipations = async () => {
-            if (!loginUser) return;
+            if (!loginUser?.user_id) return;
 
             try {
-                const res = await ParticipationAPI.getUserParticipaiton(loginUser);
+                const res = await ParticipationAPI.getUserParticipaiton(loginUser?.user_id);
                 setParticipations(res.data || []);
             } catch (err) {
                 console.log("유저 참여 목록 로딩 실패", err);
@@ -78,7 +93,7 @@ export default function ContentPage() {
         };
 
         fetchMyParticipations();
-    }, [loginUser]);
+    }, [loginUser?.user_id]);
 
     useEffect(() => {
         if (!contents) return;
@@ -139,18 +154,18 @@ export default function ContentPage() {
 
     useEffect(() => {
         const fetchMyBookmarks = async () => {
-            if (!loginUser) return;
+            if (!loginUser?.user_id) return;
 
             try {
                 if (pageType === "proposal" && contents?.proposal_id) {
-                    const res = await BookmarkAPI.getBookmarkProposal(loginUser);
+                    const res = await BookmarkAPI.getBookmarkProposal(loginUser?.user_id);
                     const list = res.data || [];
                     setBookmarks(list);
 
                     const bookmarked = list.some((b) => b.proposal_id === contents?.proposal_id);
                     setIsBookmarked(bookmarked);
                 } else if (pageType === "result" && contents?.result_id) {
-                    const res = await BookmarkAPI.getBookmarkResult(loginUser);
+                    const res = await BookmarkAPI.getBookmarkResult(loginUser?.user_id);
                     const list = res.data || [];
                     setBookmarks(list);
 
@@ -165,7 +180,7 @@ export default function ContentPage() {
         };
 
         fetchMyBookmarks();
-    }, [loginUser, pageType, contents?.proposal_id, contents?.result_id]);
+    }, [loginUser?.user_id, pageType, contents?.proposal_id, contents?.result_id]);
 
     useEffect(() => {
         const fetchComments = async () => {
@@ -190,7 +205,7 @@ export default function ContentPage() {
         if (!contents?.result_id) return;
         if (!results.length) return;
 
-        const idx = results.findIndex((r) => Number(r.result_id) === Number(contents.result_id));
+        const idx = results.findIndex((r) => Number(r.result_id) === Number(contents?.result_id));
         if (idx === -1) return;
 
         setNextResult(results[idx + 1] || null);
@@ -201,7 +216,7 @@ export default function ContentPage() {
         if (!contents?.notice_id) return;
         if (!notices.length) return;
 
-        const idx = notices.findIndex((n) => Number(n.notice_id) === Number(contents.notice_id));
+        const idx = notices.findIndex((n) => Number(n.notice_id) === Number(contents?.notice_id));
         if (idx === -1) return;
 
         setNextNotice(notices[idx + 1] || null);
@@ -212,7 +227,7 @@ export default function ContentPage() {
         if (!contents?.notice_id) return;
         if (!news.length) return;
 
-        const idx = news.findIndex((n) => Number(n.notice_id) === Number(contents.notice_id));
+        const idx = news.findIndex((n) => Number(n.notice_id) === Number(contents?.notice_id));
         if (idx === -1) return;
 
         setNextNews(news[idx + 1] || null);
@@ -250,7 +265,7 @@ export default function ContentPage() {
 
     const handleLike = async () => {
         if (!contents) return;
-        if (!loginUser) return;
+        if (!loginUser?.user_id) return;
 
         if (hasParticipated) return;
         if (isLiking) return;
@@ -259,21 +274,21 @@ export default function ContentPage() {
             setIsLiking(true);
 
             const dto = {
-                user_id: Number(loginUser),
+                user_id: Number(loginUser?.user_id),
                 target_type: "PROPOSAL",
-                target_id: contents.proposal_id,
+                target_id: contents?.proposal_id,
                 participation_type: "LIKE",
             };
 
             const res = await ParticipationAPI.createParticipaiton(dto);
 
-            await ProposalAPI.updateParticipate(contents.proposal_id, "plus");
+            await ProposalAPI.updateParticipate(contents?.proposal_id, "plus");
             setHasParticipated(true);
 
             if (res?.data) {
                 setParticipations((prev) => [...prev, res.data]);
             } else {
-                const fresh = await ParticipationAPI.getUserParticipaiton(loginUser);
+                const fresh = await ParticipationAPI.getUserParticipaiton(loginUser?.user_id);
                 setParticipations(fresh.data || []);
             }
         } catch (e) {
@@ -282,37 +297,41 @@ export default function ContentPage() {
             setIsLiking(false);
         }
 
-        if (contents.user_id !== Number(loginUser)) {
-            try {
-                const dto = {
-                    user_id: contents.user_id,
-                    proposal_id: contents.proposal_id,
-                    message: "회원님의 제안에 새로운 공감이 달렸습니다",
-                    notification_type: "LIKE",
-                };
+        if (contents?.user_id && contents.user_id !== Number(loginUser?.user_id)) {
+            if (user?.notification_enabled === true) {
+                try {
+                    const dto = {
+                        user_id: contents?.user_id,
+                        proposal_id: contents?.proposal_id,
+                        message: "회원님의 제안에 새로운 공감이 달렸습니다",
+                        notification_type: "LIKE",
+                    };
 
-                await NotificationAPI.createNotifications(dto);
-                refreshNotifications();
-            } catch (e) {
-                console.log("알림 생성 실패", e);
+                    await NotificationAPI.createNotifications(dto);
+                    refreshNotifications();
+                } catch (e) {
+                    console.log("알림 생성 실패", e);
+                }
+            }
+
+            if (loginUser?.notification_enabled === true) {
+                try {
+                    const dto = {
+                        user_id: Number(loginUser?.user_id),
+                        message: "20 마일리지가 지급되었습니다.",
+                        notification_type: "MILEAGE",
+                    };
+
+                    await NotificationAPI.createNotifications(dto);
+                    refreshNotifications();
+                } catch (e) {
+                    console.log("알림 생성 실패", e);
+                }
             }
 
             try {
                 const dto = {
-                    user_id: Number(loginUser),
-                    message: "20 마일리지가 지급되었습니다.",
-                    notification_type: "MILEAGE",
-                };
-
-                await NotificationAPI.createNotifications(dto);
-                refreshNotifications();
-            } catch (e) {
-                console.log("알림 생성 실패", e);
-            }
-
-            try {
-                const dto = {
-                    user_id: Number(loginUser),
+                    user_id: Number(loginUser?.user_id),
                     mileage: 20,
                     reason_detail: "제안 공감 마일리지 지급",
                 };
@@ -326,7 +345,7 @@ export default function ContentPage() {
 
     const handleBookmark = async () => {
         if (!contents) return;
-        if (!loginUser) return;
+        if (!loginUser?.user_id) return;
 
         const isProposal = pageType === "proposal";
         const isResult = pageType === "result";
@@ -348,14 +367,14 @@ export default function ContentPage() {
         }
 
         const dto = {
-            user_id: Number(loginUser),
+            user_id: Number(loginUser?.user_id),
             proposal_id: isProposal ? targetId : null,
             result_id: isResult ? targetId : null,
         };
 
         await BookmarkAPI.createBookmark(dto);
 
-        const fresh = isProposal ? await BookmarkAPI.getBookmarkProposal(loginUser) : await BookmarkAPI.getBookmarkResult(loginUser);
+        const fresh = isProposal ? await BookmarkAPI.getBookmarkProposal(loginUser?.user_id) : await BookmarkAPI.getBookmarkResult(loginUser?.user_id);
 
         const list = fresh.data || [];
         setBookmarks(list);
@@ -364,16 +383,16 @@ export default function ContentPage() {
 
     const getCommentTarget = () => {
         if (pageType === "proposal" && contents?.proposal_id) {
-            return { targetType: "PROPOSAL", targetId: contents.proposal_id };
+            return { targetType: "PROPOSAL", targetId: contents?.proposal_id };
         }
         if (pageType === "participate" && contents?.survey_id) {
-            return { targetType: "SURVEY", targetId: contents.survey_id };
+            return { targetType: "SURVEY", targetId: contents?.survey_id };
         }
         return { targetType: null, targetId: null };
     };
 
     const handleCreateComment = async () => {
-        if (!loginUser) return alert("로그인이 필요합니다.");
+        if (!loginUser?.user_id) return alert("로그인이 필요합니다.");
         if (!commentInput.trim()) return;
 
         const { targetType, targetId } = getCommentTarget();
@@ -383,7 +402,7 @@ export default function ContentPage() {
             setCommentLoading(true);
 
             const dto = {
-                user_id: Number(loginUser),
+                user_id: Number(loginUser?.user_id),
                 target_type: targetType,
                 target_id: targetId,
                 content: commentInput,
@@ -401,37 +420,42 @@ export default function ContentPage() {
             setCommentLoading(false);
         }
 
-        if (contents.user_id !== Number(loginUser)) {
-            try {
-                const dto = {
-                    user_id: contents.user_id,
-                    proposal_id: contents.proposal_id,
-                    message: "회원님의 제안에 새로운 댓글이 달렸습니다",
-                    notification_type: "COMMENT",
-                };
+        if (contents?.user_id && contents.user_id !== Number(loginUser?.user_id)) {
+            if (user?.notification_enabled === true) {
+                try {
+                    const dto = {
+                        user_id: contents?.user_id,
+                        proposal_id: contents?.proposal_id,
+                        message: "회원님의 제안에 새로운 댓글이 달렸습니다",
+                        notification_type: "COMMENT",
+                    };
 
-                await NotificationAPI.createNotifications(dto);
-                refreshNotifications();
-            } catch (e) {
-                console.log("알림 생성 실패", e);
+                    await NotificationAPI.createNotifications(dto);
+                    refreshNotifications();
+                } catch (e) {
+                    console.log("알림 생성 실패", e);
+                }
+            }
+
+
+            if (loginUser?.notification_enabled === true) {
+                try {
+                    const dto = {
+                        user_id: Number(loginUser?.user_id),
+                        message: "50 마일리지가 지급되었습니다.",
+                        notification_type: "MILEAGE",
+                    };
+
+                    await NotificationAPI.createNotifications(dto);
+                    refreshNotifications();
+                } catch (e) {
+                    console.log("알림 생성 실패", e);
+                }
             }
 
             try {
                 const dto = {
-                    user_id: Number(loginUser),
-                    message: "50 마일리지가 지급되었습니다.",
-                    notification_type: "MILEAGE",
-                };
-
-                await NotificationAPI.createNotifications(dto);
-                refreshNotifications();
-            } catch (e) {
-                console.log("알림 생성 실패", e);
-            }
-
-            try {
-                const dto = {
-                    user_id: Number(loginUser),
+                    user_id: Number(loginUser?.user_id),
                     mileage: 50,
                     reason_detail: "댓글 작성 마일리지 지급",
                 };

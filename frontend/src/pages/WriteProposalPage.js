@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import banner from "../assets/image/proposal/proposalbanner.svg";
 import DropdownBox from "../ui/input/FormDropdown";
 import TextButtonS from "../ui/button/TextButtonS";
-import { MileageAPI, NotificationAPI, ProposalAPI } from "../api/api";
+import { MileageAPI, NotificationAPI, ProposalAPI, UserAPI } from "../api/api";
 
 export default function WriteProposalPage() {
     const optionData = [
@@ -18,9 +18,25 @@ export default function WriteProposalPage() {
 
     const loginUser = sessionStorage.getItem("user_id");
 
+    const [user, setUser] = useState(null);
+
     const [category, setCategory] = useState(null);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+
+    useEffect(() => {
+        if (!loginUser) return;
+
+        async function fetchUser() {
+            try {
+                const res = await UserAPI.getUser(loginUser);
+                setUser(res.data);
+            } catch (e) {
+                console.log("유저 정보 불러오기 실패", e);
+            }
+        }
+        fetchUser();
+    }, [loginUser]);
 
     const handleSubmit = async () => {
         if (!loginUser) {
@@ -44,16 +60,18 @@ export default function WriteProposalPage() {
             return;
         }
 
-        try {
-            const dto = {
-                user_id: Number(loginUser),
-                message: "100 마일리지가 지급되었습니다.",
-                notification_type: "MILEAGE",
-            };
+        if (user.notification_enabled === true) {
+            try {
+                const dto = {
+                    user_id: Number(loginUser),
+                    message: "100 마일리지가 지급되었습니다.",
+                    notification_type: "MILEAGE",
+                };
 
-            await NotificationAPI.createNotifications(dto);
-        } catch (e) {
-            console.log("알림 생성 실패", e);
+                await NotificationAPI.createNotifications(dto);
+            } catch (e) {
+                console.log("알림 생성 실패", e);
+            }
         }
 
         try {

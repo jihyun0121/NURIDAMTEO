@@ -72,18 +72,19 @@ export default function MyPage() {
             else if (res.data.level_id === 2) mileage = 50;
             else if (res.data.level_id === 3) mileage = 100;
 
+            if (user.notification_enabled === true) {
+                try {
+                    const dto = {
+                        user_id: Number(userId),
+                        message: `출석체크 ${mileage} 마일리지가 지급되었습니다.`,
+                        notification_type: "MILEAGE",
+                    };
 
-            try {
-                const dto = {
-                    user_id: Number(userId),
-                    message: `출석체크 ${mileage} 마일리지가 지급되었습니다.`,
-                    notification_type: "MILEAGE",
-                };
-
-                await NotificationAPI.createNotifications(dto);
-                refreshNotifications();
-            } catch (e) {
-                console.log("알림 생성 실패", e);
+                    await NotificationAPI.createNotifications(dto);
+                    refreshNotifications();
+                } catch (e) {
+                    console.log("알림 생성 실패", e);
+                }
             }
 
             try {
