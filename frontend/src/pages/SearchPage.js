@@ -13,36 +13,58 @@ export default function SearchPage() {
     const [news, setNews] = useState([]);
     const [result, setResult] = useState([]);
 
-    const [loading, setLoading] = useState(true);
+    const [loadingMap, setLoadingMap] = useState({
+        proposal: false,
+        survey: false,
+        notice: false,
+        news: false,
+        result: false,
+    });
 
     useEffect(() => {
         if (!keyword.trim()) return;
 
-        async function load() {
-            setLoading(true);
-            try {
-                const [p, s, n, nw, r] = await Promise.all([
-                    SearchAPI.searchProposals(keyword),
-                    SearchAPI.searchSurveys(keyword),
-                    SearchAPI.searchNotices(keyword),
-                    SearchAPI.searchNews(keyword),
-                    SearchAPI.searchResults(keyword),
-                ]);
+        setProposal([]);
+        setSurvey([]);
+        setNotice([]);
+        setNews([]);
+        setResult([]);
 
-                setProposal((p.data || []).slice(0, 4));
-                setSurvey((s.data || []).slice(0, 4));
-                setNotice((n.data || []).slice(0, 5));
-                setNews((nw.data || []).slice(0, 5));
-                setResult((r.data || []).slice(0, 5));
-            } catch (e) {
-                console.log("검색 실패", e);
-            } finally {
-                setLoading(false);
-            }
-        }
+        setLoadingMap({
+            proposal: true,
+            survey: true,
+            notice: true,
+            news: true,
+            result: true,
+        });
 
-        load();
+        const timer = setTimeout(() => {
+            loadAll();
+        }, 300);
+
+        return () => clearTimeout(timer);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [keyword]);
+
+    async function fetchSection(sectionKey, apiFn, setter, sliceSize) {
+        try {
+            const res = await apiFn(keyword);
+            setter((res.data || []).slice(0, sliceSize));
+        } catch (e) {
+            console.log(`${sectionKey} 검색 실패`, e);
+            setter([]);
+        } finally {
+            setLoadingMap((prev) => ({ ...prev, [sectionKey]: false }));
+        }
+    }
+
+    async function loadAll() {
+        fetchSection("proposal", SearchAPI.searchProposals, setProposal, 4);
+        fetchSection("survey", SearchAPI.searchSurveys, setSurvey, 4);
+        fetchSection("notice", SearchAPI.searchNotices, setNotice, 5);
+        fetchSection("news", SearchAPI.searchNews, setNews, 5);
+        fetchSection("result", SearchAPI.searchResults, setResult, 5);
+    }
 
     const hasAny =
         proposal.length > 0 ||
@@ -51,7 +73,7 @@ export default function SearchPage() {
         news.length > 0 ||
         result.length > 0;
 
-    function renderSection(title, list, keyName, renderTitle) {
+    function renderSection(title, list, keyName, renderTitle, sectionKey) {
         return (
             <div className="search-result">
                 <div className="search-sub-title">
@@ -59,7 +81,9 @@ export default function SearchPage() {
                     <div className="nav-text">더보기</div>
                 </div>
 
-                {list.length === 0 ? (
+                {loadingMap[sectionKey] ? (
+                    <div className="search-none">로딩중...</div>
+                ) : list.length === 0 ? (
                     <div className="search-none">검색 결과 없음</div>
                 ) : (
                     list.map((item) => (
@@ -78,22 +102,18 @@ export default function SearchPage() {
 
             <div className="search-page-content">
                 <div className="search-page-title">검색결과</div>
-
-                {loading && <div className="search-page-none">검색 중...</div>}
-
-                {!loading && !hasAny && (
-                    <div className="search-page-none">'{keyword}'에 대한 검색 결과가 없습니다.</div>
-                )}
-
-                {!loading && hasAny && (
-                    <>
-                        {renderSection("제안", proposal, "proposal_id", (item) => item.title)}
-                        {renderSection("설문", survey, "survey_id", (item) => item.title)}
-                        {renderSection("공지 사항", notice, "notice_id", (item) => item.title)}
-                        {renderSection("누리소담", news, "notice_id", (item) => item.title)}
-                        {renderSection("결과 게시판", result, "result_id", (item) => item.result_title)}
-                    </>
-                )}
+                {!hasAny ?
+                    Object.values(loadingMap).every((v) => v === false) && (
+                        <div className="search-page-none">
+                            '{keyword}'에 대한 검색 결과가 없습니다.
+                        </div>
+                    ) : (<>
+                        {renderSection("제안", proposal, "proposal_id", (item) => item.title, "proposal")}
+                        {renderSection("설문", survey, "survey_id", (item) => item.title, "survey")}
+                        {renderSection("공지 사항", notice, "notice_id", (item) => item.title, "notice")}
+                        {renderSection("누리소담", news, "notice_id", (item) => item.title, "news")}
+                        {renderSection("결과 게시판", result, "result_id", (item) => item.result_title, "result")}
+                    </>)}
             </div>
         </div>
     );
