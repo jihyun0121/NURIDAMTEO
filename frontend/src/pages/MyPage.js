@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { AttendanceAPI, UserAPI } from "../api/api";
-import { useNavigate } from "react-router-dom";
+import { AttendanceAPI, MileageAPI, NotificationAPI, UserAPI } from "../api/api";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNotificationRefresh } from "../components/proposal/NotificationContext";
 import { colors } from "../assets/style/tokens/colors";
 import Header from "../components/Header";
 import Profile from "../ui/Profile";
@@ -15,12 +16,12 @@ import SettingForm from "../components/my/SettingForm";
 import MileageButton from "../ui/button/MileageButton";
 import MyList from "../components/my/MyList";
 
-import { useSearchParams } from "react-router-dom";
-
 export default function MyPage() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const [user, setUser] = useState(null);
+
+    const { refreshNotifications } = useNotificationRefresh();
 
     const urlType = searchParams.get("type");
 
@@ -63,6 +64,39 @@ export default function MyPage() {
             }
 
             await AttendanceAPI.checkAttendance(userId);
+
+            const res = await UserAPI.getUser(userId);
+
+            let mileage = 20;
+            if (res.data.level_id === 1) mileage = 20;
+            else if (res.data.level_id === 2) mileage = 50;
+            else if (res.data.level_id === 3) mileage = 100;
+
+
+            try {
+                const dto = {
+                    user_id: Number(userId),
+                    message: `출석체크 ${mileage} 마일리지가 지급되었습니다.`,
+                    notification_type: "MILEAGE",
+                };
+
+                await NotificationAPI.createNotifications(dto);
+                refreshNotifications();
+            } catch (e) {
+                console.log("알림 생성 실패", e);
+            }
+
+            try {
+                const dto = {
+                    user_id: Number(userId),
+                    mileage: mileage,
+                    reason_detail: "출석체크 마일리지 지급",
+                };
+
+                await MileageAPI.addMileage(dto);
+            } catch (e) {
+                console.log("마일리지 지급 실패", e);
+            }
 
             alert("출석체크 완료!");
         } catch (e) {
