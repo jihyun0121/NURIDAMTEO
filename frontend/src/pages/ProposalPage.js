@@ -44,9 +44,9 @@ export default function ProposalPage() {
         try {
             if (!keyword.trim()) {
                 setProposal(allProposal);
+                setLoading(false);
                 return;
             }
-
             const res = await SearchAPI.searchProposals(keyword);
             setProposal(res.data || []);
         } catch (e) {
@@ -57,7 +57,7 @@ export default function ProposalPage() {
         }
     };
 
-    const totalPages = Math.ceil(proposal.length / PAGE_SIZE);
+    const totalPages = Math.max(1, Math.ceil(proposal.length / PAGE_SIZE));
 
     const startIndex = (currentPage - 1) * PAGE_SIZE;
     const currentProposal = proposal.slice(startIndex, startIndex + PAGE_SIZE);
@@ -91,7 +91,9 @@ export default function ProposalPage() {
                 {loading ? (
                     <div className="search-page-none">로딩중...</div>
                 ) : proposal.length === 0 ? (
-                    <div className="search-page-none">검색 결과가 없습니다.</div>
+                    <div className="search-page-none">
+                        {keyword.trim() ? "검색 결과가 없습니다." : "등록된 제안이 없습니다."}
+                    </div>
                 ) : (
                     <>
                         <div className="proposal-list">
