@@ -91,7 +91,9 @@ export default function ProposalPage() {
                 {loading ? (
                     <div className="search-page-none">로딩중...</div>
                 ) : proposal.length === 0 ? (
-                    <div className="search-page-none">검색 결과가 없습니다.</div>
+                    <div className="search-page-none">
+                        {keyword.trim() ? "검색 결과가 없습니다." : "등록된 제안이 없습니다."}
+                    </div>
                 ) : (
                     <>
                         <div className="proposal-list">
