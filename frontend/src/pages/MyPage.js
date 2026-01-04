@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { UserAPI } from "../api/api";
+import { AttendanceAPI, UserAPI } from "../api/api";
+import { useNavigate } from "react-router-dom";
 import { colors } from "../assets/style/tokens/colors";
 import Header from "../components/Header";
 import Profile from "../ui/Profile";
@@ -14,9 +15,21 @@ import SettingForm from "../components/my/SettingForm";
 import MileageButton from "../ui/button/MileageButton";
 import MyList from "../components/my/MyList";
 
+import { useSearchParams } from "react-router-dom";
+
 export default function MyPage() {
+    const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const [user, setUser] = useState(null);
-    const [type, setType] = useState("mileage");
+
+    const urlType = searchParams.get("type");
+
+    const [type, setType] = useState(urlType || "mileage");
+
+    useEffect(() => {
+        if (urlType) setType(urlType);
+    }, [urlType]);
+
 
     const userId = sessionStorage.getItem("user_id");
 
@@ -33,6 +46,36 @@ export default function MyPage() {
         }
         fetchUser();
     }, [userId]);
+
+    const handleAttendance = async () => {
+        if (!userId) {
+            alert("로그인이 필요합니다.");
+            navigate("/login");
+            return;
+        }
+
+        try {
+            const todayRes = await AttendanceAPI.getTodayAttendance(userId);
+
+            if (todayRes.data) {
+                alert("오늘은 이미 출석체크를 했습니다!");
+                return;
+            }
+
+            await AttendanceAPI.checkAttendance(userId);
+
+            alert("출석체크 완료!");
+        } catch (e) {
+            const msg = e.response?.data?.message || "출석체크 중 오류가 발생했습니다.";
+
+            if (msg.includes("이미 출석")) {
+                alert("오늘은 이미 출석체크를 했습니다!");
+            } else {
+                alert(msg);
+            }
+        }
+    };
+
 
     let content = null;
 
@@ -68,8 +111,8 @@ export default function MyPage() {
                 <MyList title={"보상 내역"} asc={"지급순"} desc={"최신순"} userId={userId} />
             </div>
         );
-    } else if (type === "propsal") {
-        content = <MyList title={"나의 제안 현황"} asc={"오래된순"} desc={"최신순"} type={"propsal"} userId={userId} />;
+    } else if (type === "proposal") {
+        content = <MyList title={"나의 제안 현황"} asc={"오래된순"} desc={"최신순"} type={"proposal"} userId={userId} />;
     } else if (type === "participate") {
         content = <MyList title={"나의 참여내역"} asc={"오래된순"} desc={"최신순"} type={"participate"} userId={userId} />;
     } else if (type === "bookmark") {
@@ -95,7 +138,7 @@ export default function MyPage() {
                             <MyPageButton content="회원정보 수정" onClick={() => setType("update")} />
                         </div>
                         <div className="my-menu-content">
-                            <MyPageButton type="line" content="출석체크" arrow={false}>
+                            <MyPageButton type="line" content="출석체크" arrow={false} onClick={handleAttendance}>
                                 <CheckIcon size={44} color="inherit" />
                             </MyPageButton>
                         </div>
@@ -103,7 +146,7 @@ export default function MyPage() {
                             <MyPageButton type={type === "mileage" ? "hover" : "default"} content="마일리지" arrow={false} onClick={() => setType("mileage")}>
                                 <CoinIcon size={44} color="inherit" />
                             </MyPageButton>
-                            <MyPageButton type={type === "propsal" ? "hover" : "default"} content="제안현황" arrow={false} onClick={() => setType("propsal")}>
+                            <MyPageButton type={type === "proposal" ? "hover" : "default"} content="제안현황" arrow={false} onClick={() => setType("proposal")}>
                                 <VoteIcon variant="line" size={44} color="inherit" />
                             </MyPageButton>
                             <MyPageButton type={type === "participate" ? "hover" : "default"} content="참여내역" arrow={false} onClick={() => setType("participate")}>

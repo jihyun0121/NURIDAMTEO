@@ -62,7 +62,7 @@ export const ResultAPI = {
 
 export const AttendanceAPI = {
     checkAttendance: (userId) => api.post(`/attendance/check/${userId}`),
-    getTodayAttendance: (userId) => api.get(`/attendance/today/${userId}`, userId),
+    getTodayAttendance: (userId) => api.get(`/attendance/today/${userId}`),
     getMonthlyAttendance(userId, year, month) {
         return api.get(`/attendance/month/${userId}/?year=${year}&month=${month}`);
     },
