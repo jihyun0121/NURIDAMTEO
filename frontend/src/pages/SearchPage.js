@@ -7,6 +7,14 @@ import ParticipateCard from "../components/participate/ParticipateCard";
 import MegaphoneIcon from "../ui/icons/MegaphoneIcon";
 import EyeIcon from "../ui/icons/EyeIcon";
 
+const moreLinkMap = {
+    proposal: "/proposal",
+    survey: "/participate",
+    notice: "/nurisodam?category=공지사항",
+    news: "/nurisodam?category=동네소식",
+    result: "/nurisodam?category=결과+게시판",
+};
+
 export default function SearchPage() {
     const [searchParams] = useSearchParams();
     const keyword = searchParams.get("keyword") || "";
@@ -72,11 +80,16 @@ export default function SearchPage() {
     const hasAny = proposal.length > 0 || survey.length > 0 || notice.length > 0 || news.length > 0 || result.length > 0;
 
     function renderSection(title, list, sectionKey, renderItem) {
+        const base = moreLinkMap[sectionKey];
+        const url = `${base}${base.includes("?") ? "&" : "?"}keyword=${encodeURIComponent(keyword)}`;
+
         return (
             <div className="search-result">
                 <div className="search-sub-title">
                     <div className="search-sub-text">{title}</div>
-                    <div className="nav-text">더보기</div>
+                    <div className="nav-text" onClick={() => (window.location.href = url)}>
+                        더보기
+                    </div>
                 </div>
 
                 {loadingMap[sectionKey] ? (
@@ -84,9 +97,7 @@ export default function SearchPage() {
                 ) : list.length === 0 ? (
                     <div className="search-page-none">검색 결과 없음</div>
                 ) : (
-                    <div className="search-items">
-                        {list.map((item) => renderItem(item))}
-                    </div>
+                    <div className="search-items">{list.map((item) => renderItem(item))}</div>
                 )}
             </div>
         );
