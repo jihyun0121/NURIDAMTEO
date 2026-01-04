@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ProposalAPI } from "../api/api";
+import { ProposalAPI, SearchAPI } from "../api/api";
 import Header from "../components/Header";
 import banner from "../assets/image/proposal/proposalbanner.svg";
 import SearchBar from "../ui/input/SearchBar";
@@ -13,20 +13,49 @@ const PAGE_SIZE = 8;
 
 export default function ProposalPage() {
     const [proposal, setProposal] = useState([]);
+    const [allProposal, setAllProposal] = useState([]);
+
     const [currentPage, setCurrentPage] = useState(1);
+    const [keyword, setKeyword] = useState("");
+
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function loadProposal() {
+            setLoading(true);
             try {
-                const res = await ProposalAPI.getProposals(0);
-                setProposal(res.data);
+                const res = await ProposalAPI.getProposals();
+                setProposal(res.data || []);
+                setAllProposal(res.data || []);
             } catch (err) {
                 console.log("제안 로딩 실패", err);
+            } finally {
+                setLoading(false);
             }
         }
 
         loadProposal();
     }, []);
+
+    const handleSearch = async () => {
+        setCurrentPage(1);
+        setLoading(true);
+
+        try {
+            if (!keyword.trim()) {
+                setProposal(allProposal);
+                return;
+            }
+
+            const res = await SearchAPI.searchProposals(keyword);
+            setProposal(res.data || []);
+        } catch (e) {
+            console.log("제안 검색 실패", e);
+            setProposal([]);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const totalPages = Math.ceil(proposal.length / PAGE_SIZE);
 
@@ -56,16 +85,30 @@ export default function ProposalPage() {
                     <TextButtonS content="제안 작성하기" type="yellow" style={{ boxShadow: "none" }} onClick={() => (window.location.href = "/writeproposal")} />
                 </div>
                 <div className="proposal-searchbar">
-                    <SearchBar type="long" />
+                    <SearchBar type="long" value={keyword} onChange={setKeyword} onSearch={handleSearch} />
                 </div>
-                <div className="proposal-list">
-                    {currentProposal.map((proposal) => (
-                        <div key={proposal.proposal_id}>
-                            <ProposalCard proposal={proposal} />
+
+                {loading ? (
+                    <div className="search-page-none">로딩중...</div>
+                ) : proposal.length === 0 ? (
+                    <div className="search-page-none">검색 결과가 없습니다.</div>
+                ) : (
+                    <>
+                        <div className="proposal-list">
+                            {currentProposal.map((p) => (
+                                <div key={p.proposal_id}>
+                                    <ProposalCard proposal={p} />
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
-                <Pagination currentPage={currentPage} totalPages={totalPages} onChange={setCurrentPage} />
+
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onChange={setCurrentPage}
+                        />
+                    </>
+                )}
             </div>
         </div>
     );
