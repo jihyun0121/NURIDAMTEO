@@ -75,3 +75,17 @@
     font-weight: var(--title-xlarge-weight);
     line-height: var(--title-xlarge-line);
 }
+
+.search-items-card {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.search-items-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+}

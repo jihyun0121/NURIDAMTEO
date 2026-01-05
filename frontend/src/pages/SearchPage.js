@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { NoticeAPI, ResultAPI, SearchAPI } from "../api/api";
+import { NoticeAPI, ParticipationAPI, ResultAPI, SearchAPI } from "../api/api";
 import Header from "../components/Header";
 import ProposalCard from "../components/proposal/ProposalCard";
 import ParticipateCard from "../components/participate/ParticipateCard";
@@ -24,6 +24,7 @@ export default function SearchPage() {
     const [notice, setNotice] = useState([]);
     const [news, setNews] = useState([]);
     const [result, setResult] = useState([]);
+    const [participate, setParticipate] = useState([]);
 
     const [loadingMap, setLoadingMap] = useState({
         proposal: false,
@@ -56,6 +57,16 @@ export default function SearchPage() {
         return () => clearTimeout(timer);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [keyword]);
+
+    useEffect(() => {
+        async function loadMyParticipation() {
+            const userId = sessionStorage.getItem("user_id");
+            if (!userId) return;
+            const res = await ParticipationAPI.getUserParticipaiton(userId);
+            setParticipate(res.data || []);
+        }
+        loadMyParticipation();
+    }, []);
 
     async function fetchSection(sectionKey, apiFn, setter, sliceSize) {
         try {
@@ -92,13 +103,7 @@ export default function SearchPage() {
                     </div>
                 </div>
 
-                {loadingMap[sectionKey] ? (
-                    <div className="search-page-none">로딩중...</div>
-                ) : list.length === 0 ? (
-                    <div className="search-page-none">검색 결과 없음</div>
-                ) : (
-                    <div className="search-items">{list.map((item) => renderItem(item))}</div>
-                )}
+                {loadingMap[sectionKey] ? <div className="search-page-none">로딩중...</div> : list.length === 0 ? <div className="search-page-none">검색 결과 없음</div> : <div className="search-items-list">{list.map((item) => renderItem(item))}</div>}
             </div>
         );
     }
@@ -119,9 +124,7 @@ export default function SearchPage() {
                 <div className="search-page-title">검색결과</div>
 
                 {!hasAny && Object.values(loadingMap).every((v) => v === false) ? (
-                    <div className="search-page-none">
-                        '{keyword}'에 대한 검색 결과가 없습니다.
-                    </div>
+                    <div className="search-page-none">'{keyword}'에 대한 검색 결과가 없습니다.</div>
                 ) : (
                     <>
                         {renderSection("제안", proposal, "proposal", (item) => (
@@ -129,7 +132,7 @@ export default function SearchPage() {
                         ))}
 
                         {renderSection("설문", survey, "survey", (item) => (
-                            <ParticipateCard key={item.survey_id} survey={item} />
+                            <ParticipateCard key={item.survey_id} survey={item} participate={participate} />
                         ))}
 
                         {renderSection("공지 사항", notice, "notice", (item) => (
