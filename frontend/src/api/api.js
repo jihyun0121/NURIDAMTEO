@@ -113,6 +113,7 @@ export const CommentAPI = {
 
 export const BookmarkAPI = {
     createBookmark: (dto) => api.post(`/bookmarks`, dto),
+    getBookmarkUser: (userId) => api.get(`/bookmarks/${userId}`),
     getBookmarkProposal: (userId) => api.get(`/bookmarks/${userId}/proposal`),
     getBookmarkResult: (userId) => api.get(`/bookmarks/${userId}/result`),
     deleteBookmark: (bookmarkId) => api.delete(`/bookmarks/${bookmarkId}`),

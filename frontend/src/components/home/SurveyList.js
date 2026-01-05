@@ -66,8 +66,10 @@ export default function SurveyList({ num, type = "none", size = "short", title, 
                     {num}
                 </div>
 
-                <div className="survey-list-title" style={{ display: size === "long" ? "flex" : "", width: size === "long" ? "56.9375rem" : "", flexDirection: size === "long" ? "column" : "", alignItems: size === "long" ? "flex-start" : "", gap: size === "long" ? "0.5rem" : "", justifyContent: size === "long" ? "center" : "" }}>
-                    {title}
+                <div className="survey-list-titles" style={{ display: size === "long" ? "flex" : "", flexDirection: size === "long" ? "column" : "", alignItems: size === "long" ? "flex-start" : "", gap: size === "long" ? "0.5rem" : "", justifyContent: size === "long" ? "center" : "" }}>
+                    <div className="survey-list-title" style={{ width: size === "long" ? "56.9375rem" : type === "none" ? "21.4375rem" : "15.9375rem" }}>
+                        {title}
+                    </div>
                     {size === "long" && start ? (
                         <div className="survey-list-day">
                             <div>시작일 {valueDate(start)}</div>

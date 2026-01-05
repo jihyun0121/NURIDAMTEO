@@ -183,7 +183,7 @@
     text-align: center;
 }
 
-.survey-list-title {
+.survey-list-titles {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -196,6 +196,14 @@
     font-size: var(--title-medium-size);
     font-weight: var(--title-medium-weight);
     line-height: var(--title-medium-line);
+}
+
+.survey-list-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+
 }
 
 .survey-list-day {
