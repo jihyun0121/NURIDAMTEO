@@ -142,7 +142,8 @@ export const SearchAPI = {
     searchNews: (keyword) => api.get(`/search/news?keyword=${encodeURIComponent(keyword)}`),
     searchResults: (keyword) => api.get(`/search/results?keyword=${encodeURIComponent(keyword)}`),
     searchCategoryProposals: (categoryId) => api.get(`/search/category/proposals?categoryId=${encodeURIComponent(categoryId)}`),
-    searchCategorySurveys: (categoryId) => api.get(`/search/category/surveys?categoryId=${encodeURIComponent(categoryId)}`),
+    searchCategorySurveys: (categoryId) => api.get(`/search/category/surveys/survey?categoryId=${encodeURIComponent(categoryId)}`),
+    searchCategoryPanels: (categoryId) => api.get(`/search/category/surveys/panel?categoryId=${encodeURIComponent(categoryId)}`),
 };
 
 export default api;

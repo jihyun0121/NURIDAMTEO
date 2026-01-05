@@ -15,10 +15,11 @@ export default function ParticipatePage() {
     ];
 
     const [searchParams, setSearchParams] = useSearchParams();
-    const [keyword, setKeyword] = useState("");
 
     const defaultCategory = searchParams.get("category") || "설문조사";
     const [selected, setSelected] = useState(defaultCategory);
+    const [keyword, setKeyword] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
     useEffect(() => {
         setSelected(defaultCategory);
@@ -27,20 +28,21 @@ export default function ParticipatePage() {
     const handleChange = (value) => {
         setSelected(value);
         setSearchParams({ category: value });
+        setKeyword("");
+        setSelectedCategory(null);
     };
-
-    const [selectedCategory, setSelectedCategory] = useState(null);
 
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
+        setKeyword("");
     };
 
-    const handleSearch = () => {
-        // SurveyContent / PanelContent에 검색어 전달만 해주면 됨
+    const handleSearch = (text) => {
+        setKeyword(text ?? "");
+        setSelectedCategory(null);
     };
 
     let content;
-
     if (selected === "설문조사") {
         content = (
             <div className="participate-notice">
@@ -82,9 +84,9 @@ export default function ParticipatePage() {
                 {content}
                 <div style={{ display: "flex", width: "95rem", alignItems: "center", gap: "2rem" }}>
                     <FormDropdown size="short" optionData={optionData} value={selected} onChange={handleChange} />
-                    <SearchBar type="short" value={keyword} onChange={setKeyword} onSearch={handleSearch} onCategoryChange={handleCategoryChange} />
+                    <SearchBar type="short" value={keyword} onChange={setKeyword} onSearch={handleSearch} onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
                 </div>
-                <ParticipateContent category={selected} filterCategory={selectedCategory} keyword={keyword} onSearch={handleSearch} />
+                <ParticipateContent category={selected} filterCategory={selectedCategory} keyword={keyword} />
             </div>
         </div>
     );

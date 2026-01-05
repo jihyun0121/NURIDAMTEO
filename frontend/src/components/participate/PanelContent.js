@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { ParticipationAPI, SearchAPI, SurveyAPI } from "../../api/api";
 import Pagination from "../Pagination";
 import ParticipateCard from "./ParticipateCard";
@@ -10,11 +10,10 @@ export default function PanelContent({ filterCategory, keyword }) {
     const [allSurvey, setAllSurvey] = useState([]);
     const [participate, setParticipate] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        async function loadParticipate() {
+        async function load() {
             setLoading(true);
             try {
                 const res = await SurveyAPI.getPanelList();
@@ -26,20 +25,8 @@ export default function PanelContent({ filterCategory, keyword }) {
                 setLoading(false);
             }
         }
-        loadParticipate();
+        load();
     }, []);
-
-    const filteredParticipate = useMemo(() => {
-        let list = survey;
-        if (filterCategory) {
-            list = list.filter((p) => p.category_id === filterCategory.key);
-        }
-        return list;
-    }, [survey, filterCategory]);
-
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [filterCategory]);
 
     useEffect(() => {
         async function loadMyParticipation() {
@@ -52,44 +39,49 @@ export default function PanelContent({ filterCategory, keyword }) {
     }, []);
 
     useEffect(() => {
-        async function search() {
+        async function run() {
             setCurrentPage(1);
             setLoading(true);
 
             try {
-                if (!keyword.trim()) {
-                    setSurvey(allSurvey);
+                if (filterCategory) {
+                    const res = await SearchAPI.searchCategoryPanels(filterCategory.key);
+                    setSurvey(res.data || []);
                     return;
                 }
 
-                const res = await SearchAPI.searchSurveys(keyword);
-                setSurvey(res.data || []);
+                if (keyword.trim()) {
+                    const res = await SearchAPI.searchPanels(keyword);
+                    setSurvey(res.data || []);
+                    return;
+                }
+                setSurvey(allSurvey);
             } catch (e) {
-                console.log("패널 검색 실패", e);
+                console.log("패널 조회 실패", e);
                 setSurvey([]);
             } finally {
                 setLoading(false);
             }
         }
 
-        search();
-    }, [keyword, allSurvey]);
+        run();
+    }, [keyword, filterCategory, allSurvey]);
 
-    const totalPages = Math.max(1, Math.ceil(filteredParticipate.length / PAGE_SIZE));
+    const totalPages = Math.max(1, Math.ceil(survey.length / PAGE_SIZE));
     const startIndex = (currentPage - 1) * PAGE_SIZE;
-    const currentParticipate = filteredParticipate.slice(startIndex, startIndex + PAGE_SIZE);
+    const currentParticipate = survey.slice(startIndex, startIndex + PAGE_SIZE);
 
     return (
         <div className="participate-list-wrapper">
             {loading ? (
                 <div className="search-page-none">로딩중...</div>
-            ) : filteredParticipate.length === 0 ? (
+            ) : survey.length === 0 ? (
                 <div className="search-page-none">검색 결과가 없습니다.</div>
             ) : (
                 <>
                     <div className="participate-list">
-                        {currentParticipate.map((survey) => (
-                            <ParticipateCard key={survey.survey_id} survey={survey} participate={participate} />
+                        {currentParticipate.map((s) => (
+                            <ParticipateCard key={s.survey_id} survey={s} participate={participate} />
                         ))}
                     </div>
                     <Pagination currentPage={currentPage} totalPages={totalPages} onChange={setCurrentPage} />
