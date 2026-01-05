@@ -90,9 +90,12 @@ export default function SearchPage() {
 
     const hasAny = proposal.length > 0 || survey.length > 0 || notice.length > 0 || news.length > 0 || result.length > 0;
 
-    function renderSection(title, list, sectionKey, renderItem) {
+    function renderSection(title, list, sectionKey, type, renderItem) {
         const base = moreLinkMap[sectionKey];
         // const url = `${base}${base.includes("?") ? "&" : "?"}keyword=${encodeURIComponent(keyword)}`;
+
+        console.log(type);
+        const className = type === "card" ? "search-items-card" : type === "list" ? "search-items-list" : "";
 
         return (
             <div className="search-result">
@@ -103,7 +106,7 @@ export default function SearchPage() {
                     </div>
                 </div>
 
-                {loadingMap[sectionKey] ? <div className="search-page-none">로딩중...</div> : list.length === 0 ? <div className="search-page-none">검색 결과 없음</div> : <div className="search-items-list">{list.map((item) => renderItem(item))}</div>}
+                {loadingMap[sectionKey] ? <div className="search-page-none">로딩중...</div> : list.length === 0 ? <div className="search-page-none">검색 결과 없음</div> : <div className={className}>{list.map((item) => renderItem(item))}</div>}
             </div>
         );
     }
@@ -127,15 +130,15 @@ export default function SearchPage() {
                     <div className="search-page-none">'{keyword}'에 대한 검색 결과가 없습니다.</div>
                 ) : (
                     <>
-                        {renderSection("제안", proposal, "proposal", (item) => (
+                        {renderSection("제안", proposal, "proposal", "card", (item) => (
                             <ProposalCard key={item.proposal_id} proposal={item} />
                         ))}
 
-                        {renderSection("설문", survey, "survey", (item) => (
+                        {renderSection("설문", survey, "survey", "card", (item) => (
                             <ParticipateCard key={item.survey_id} survey={item} participate={participate} />
                         ))}
 
-                        {renderSection("공지 사항", notice, "notice", (item) => (
+                        {renderSection("공지 사항", notice, "notice", "list", (item) => (
                             <div
                                 key={item.notice_id}
                                 className="nurisodam-lists"
@@ -155,7 +158,7 @@ export default function SearchPage() {
                             </div>
                         ))}
 
-                        {renderSection("누리소담", news, "news", (item) => (
+                        {renderSection("누리소담", news, "news", "list", (item) => (
                             <div
                                 key={item.notice_id}
                                 className="nurisodam-lists"
@@ -175,7 +178,7 @@ export default function SearchPage() {
                             </div>
                         ))}
 
-                        {renderSection("결과 게시판", result, "result", (item) => (
+                        {renderSection("결과 게시판", result, "result", "list", (item) => (
                             <div
                                 key={item.result_id}
                                 className="nurisodam-lists"

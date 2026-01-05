@@ -1,15 +1,18 @@
 .search-page-container {
+    overflow-y: auto;
     display: flex;
-    width: 120rem;
-    padding-bottom: 7.5rem;
     flex-direction: column;
     align-items: center;
-    margin-top: 9.12rem;
 }
 
 .search-page-content {
     display: flex;
+    width: 95rem;
+    padding-bottom: 7.5rem;
     flex-direction: column;
+    align-items: center;
+    margin-top: 9.12rem;
+
     align-items: flex-start;
     gap: 7.5rem;
 }
