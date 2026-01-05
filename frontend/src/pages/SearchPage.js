@@ -10,6 +10,7 @@ import EyeIcon from "../ui/icons/EyeIcon";
 const moreLinkMap = {
     proposal: "/proposal",
     survey: "/participate",
+    panel: "/participate?category=패널조사",
     notice: "/nurisodam?category=공지사항",
     news: "/nurisodam?category=동네소식",
     result: "/nurisodam?category=결과+게시판",
@@ -21,6 +22,7 @@ export default function SearchPage() {
 
     const [proposal, setProposal] = useState([]);
     const [survey, setSurvey] = useState([]);
+    const [panel, setPanel] = useState([]);
     const [notice, setNotice] = useState([]);
     const [news, setNews] = useState([]);
     const [result, setResult] = useState([]);
@@ -29,6 +31,7 @@ export default function SearchPage() {
     const [loadingMap, setLoadingMap] = useState({
         proposal: false,
         survey: false,
+        panel: true,
         notice: false,
         news: false,
         result: false,
@@ -39,12 +42,14 @@ export default function SearchPage() {
 
         setProposal([]);
         setSurvey([]);
+        setPanel([]);
         setNotice([]);
         setNews([]);
         setResult([]);
         setLoadingMap({
             proposal: true,
             survey: true,
+            panel: true,
             notice: true,
             news: true,
             result: true,
@@ -83,12 +88,13 @@ export default function SearchPage() {
     async function loadAll() {
         fetchSection("proposal", SearchAPI.searchProposals, setProposal, 4);
         fetchSection("survey", SearchAPI.searchSurveys, setSurvey, 4);
+        fetchSection("panel", SearchAPI.searchPanels, setPanel, 4);
         fetchSection("notice", SearchAPI.searchNotices, setNotice, 5);
         fetchSection("news", SearchAPI.searchNews, setNews, 5);
         fetchSection("result", SearchAPI.searchResults, setResult, 5);
     }
 
-    const hasAny = proposal.length > 0 || survey.length > 0 || notice.length > 0 || news.length > 0 || result.length > 0;
+    const hasAny = proposal.length > 0 || survey.length > 0 || panel.length > 0 || notice.length > 0 || news.length > 0 || result.length > 0;
 
     function renderSection(title, list, sectionKey, type, renderItem) {
         const base = moreLinkMap[sectionKey];
@@ -115,6 +121,8 @@ export default function SearchPage() {
             NoticeAPI.updateView(id);
         } else if (type === "result") {
             ResultAPI.updateView(id);
+        } else if (type === "survey" || type === "panel") {
+            ResultAPI.updateView(id);
         }
     };
 
@@ -134,6 +142,10 @@ export default function SearchPage() {
                         ))}
 
                         {renderSection("설문", survey, "survey", "card", (item) => (
+                            <ParticipateCard key={item.survey_id} survey={item} participate={participate} />
+                        ))}
+
+                        {renderSection("패널조사", panel, "panel", "card", (item) => (
                             <ParticipateCard key={item.survey_id} survey={item} participate={participate} />
                         ))}
 

@@ -136,10 +136,13 @@ export const StatisticAPI = {
 
 export const SearchAPI = {
     searchProposals: (keyword) => api.get(`/search/proposals?keyword=${encodeURIComponent(keyword)}`),
-    searchSurveys: (keyword) => api.get(`/search/surveys?keyword=${encodeURIComponent(keyword)}`),
+    searchSurveys: (keyword) => api.get(`/search/surveys/survey?keyword=${encodeURIComponent(keyword)}`),
+    searchPanels: (keyword) => api.get(`/search/surveys/panel?keyword=${encodeURIComponent(keyword)}`),
     searchNotices: (keyword) => api.get(`/search/notices?keyword=${encodeURIComponent(keyword)}`),
     searchNews: (keyword) => api.get(`/search/news?keyword=${encodeURIComponent(keyword)}`),
     searchResults: (keyword) => api.get(`/search/results?keyword=${encodeURIComponent(keyword)}`),
+    searchCategoryProposals: (categoryId) => api.get(`/search/category/proposals?categoryId=${encodeURIComponent(categoryId)}`),
+    searchCategorySurveys: (categoryId) => api.get(`/search/category/surveys?categoryId=${encodeURIComponent(categoryId)}`),
 };
 
 export default api;
