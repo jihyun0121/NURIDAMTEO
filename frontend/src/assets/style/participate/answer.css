@@ -51,6 +51,14 @@
     align-self: stretch;
 }
 
+.options-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    align-self: stretch;
+    flex-direction: column;
+}
+
 .option-wrapper {
     display: flex;
     align-items: center;

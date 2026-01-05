@@ -25,7 +25,7 @@ export default function QuestionRadio({ questionId, value, onChange, readOnly, s
                 const pctText = `${percent.toFixed(1)}%`;
 
                 return (
-                    <div key={opt.option_id}>
+                    <div key={opt.option_id} className="options-wrapper">
                         <div className="option-wrapper">
                             <input className="radio-box" name={`q_${questionId}`} type="radio" checked={String(value) === String(opt.option_id)} readOnly={readOnly} style={{ cursor: `${readOnly && "default"}` }} onChange={() => onChange(opt.option_id)} />
                             <label className="option-text">{opt.option_content}</label>

@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { NoticeAPI, ProposalAPI, UserAPI, ResultAPI, SurveyAPI, ParticipationAPI, BookmarkAPI, CommentAPI, NotificationAPI, MileageAPI } from "../api/api";
 import { useNotificationRefresh } from "../components/proposal/NotificationContext";
 import Header from "../components/Header";
@@ -18,7 +18,6 @@ import useNotices from "../components/nurisodam/hook/useNotice";
 import useNews from "../components/nurisodam/hook/useNews";
 
 export default function ContentPage() {
-    const navigate = useNavigate();
     const [contents, setContents] = useState(null);
     const [user, setUser] = useState(null);
     const [loginUser, setLoginUser] = useState(null);
@@ -420,7 +419,7 @@ export default function ContentPage() {
             setCommentLoading(false);
         }
 
-        if (contents?.user_id && contents.user_id !== Number(loginUser?.user_id)) {
+        if ((contents?.user_id && contents.user_id !== Number(loginUser?.user_id)) || !contents.user_id) {
             if (user?.notification_enabled === true) {
                 try {
                     const dto = {
@@ -436,7 +435,6 @@ export default function ContentPage() {
                     console.log("알림 생성 실패", e);
                 }
             }
-
 
             if (loginUser?.notification_enabled === true) {
                 try {

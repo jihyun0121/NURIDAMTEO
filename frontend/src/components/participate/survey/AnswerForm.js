@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
-import { SurveyAPI, AnswerAPI, ParticipationAPI } from "../../../api/api";
+import { SurveyAPI, AnswerAPI, ParticipationAPI, NotificationAPI, MileageAPI, UserAPI } from "../../../api/api";
 import QuestionRenderer from "./QuestionRenderer";
 import { useNavigate } from "react-router-dom";
 import TextButtonS from "../../../ui/button/TextButtonS";
+import { useNotificationRefresh } from "../../proposal/NotificationContext";
 
 export default function AnswerForm({ survey }) {
     const navigate = useNavigate();
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState({});
     const [loading, setLoading] = useState(false);
-
+    const [loginUser, setLoginUser] = useState(null);
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [myParticipationId, setMyParticipationId] = useState(null);
+    const [, setMyParticipationId] = useState(null);
     const [allAnswers, setAllAnswers] = useState([]);
     const [myAnswers, setMyAnswers] = useState([]);
+    const { refreshNotifications } = useNotificationRefresh();
+    const userId = sessionStorage.getItem("user_id");
 
     useEffect(() => {
-        const userId = sessionStorage.getItem("user_id");
         if (!userId) {
             alert("로그인이 필요합니다");
             navigate("/login");
@@ -28,13 +30,26 @@ export default function AnswerForm({ survey }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [survey?.survey_id]);
 
+    useEffect(() => {
+        if (!userId) return;
+
+        async function fetchUser() {
+            try {
+                const res = await UserAPI.getUser(userId);
+                setLoginUser(res.data);
+            } catch (e) {
+                console.log("유저 정보 불러오기 실패", e);
+            }
+        }
+        fetchUser();
+    }, [userId]);
+
     async function init() {
         try {
             const q = await SurveyAPI.getQuestionsBySurvey(survey.survey_id);
             const qList = q.data || [];
             setQuestions(qList);
 
-            const userId = Number(sessionStorage.getItem("user_id"));
             const pRes = await ParticipationAPI.getUserParticipaiton(userId);
             const myParticipations = pRes.data || [];
 
@@ -42,13 +57,14 @@ export default function AnswerForm({ survey }) {
 
             if (mySurveyParticipation) {
                 setIsSubmitted(true);
-                setMyParticipationId(mySurveyParticipation.participation_id);
 
-                const [myARes, allARes] = await Promise.all([AnswerAPI.getAnswersByParticipation(myParticipationId), AnswerAPI.getAnswersBySurvey(survey.survey_id)]);
+                const participationId = mySurveyParticipation.participation_id;
+                setMyParticipationId(participationId);
 
-                setMyAnswers(myARes.data || []);
-                setAllAnswers(allARes.data || []);
+                const [myARes, allARes] = await Promise.all([AnswerAPI.getAnswersByParticipation(participationId), AnswerAPI.getAnswersBySurvey(survey.survey_id)]);
 
+                setMyAnswers(myARes?.data || []);
+                setAllAnswers(allARes?.data || []);
                 setAnswers(buildAnswersStateFromMyAnswers(qList, myARes.data || []));
             } else {
                 setIsSubmitted(false);
@@ -115,7 +131,6 @@ export default function AnswerForm({ survey }) {
             return;
         }
 
-        const userId = sessionStorage.getItem("user_id");
         if (!userId) {
             alert("로그인이 필요합니다.");
             navigate("/login");
@@ -198,7 +213,33 @@ export default function AnswerForm({ survey }) {
                 console.log("참여 수 업데이트 실패", e);
             }
 
-            alert("제출이 완료되었습니다!");
+            if (loginUser?.notification_enabled === true) {
+                try {
+                    const dto = {
+                        user_id: Number(loginUser?.user_id),
+                        message: "200 마일리지가 지급되었습니다.",
+                        notification_type: "MILEAGE",
+                    };
+
+                    await NotificationAPI.createNotifications(dto);
+                    refreshNotifications();
+                } catch (e) {
+                    console.log("알림 생성 실패", e);
+                }
+            }
+
+            try {
+                const dto = {
+                    user_id: Number(loginUser?.user_id),
+                    mileage: 200,
+                    reason_detail: "제안 공감 마일리지 지급",
+                };
+
+                await MileageAPI.addMileage(dto);
+            } catch (e) {
+                console.log("마일리지 지급 실패", e);
+            }
+
             await init();
         } catch (e) {
             console.error("제출 실패", e);
@@ -217,7 +258,7 @@ export default function AnswerForm({ survey }) {
 
             <div className="answer-buttons">
                 <TextButtonS content="목록으로" onClick={() => navigate(-1)} />
-                <TextButtonS content={isSubmitted ? "이미 제출했습니다" : loading ? "제출 중..." : "제출하기"} type={isSubmitted ? "default" : "hover"} onClick={submit} disabled={loading || isSubmitted} />
+                <TextButtonS content={isSubmitted ? "제출완료" : loading ? "제출 중..." : "제출하기"} type={isSubmitted ? "default" : "hover"} onClick={submit} disabled={loading || isSubmitted} />
             </div>
         </div>
     );
