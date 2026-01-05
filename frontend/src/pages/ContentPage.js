@@ -568,6 +568,7 @@ export default function ContentPage() {
                 {contents?.title}
                 <div className="content-author-text">
                     <p>{contents?.author}</p>
+                    <p>{contents?.survey_type === "SELECT" && `모집인원 : ${contents?.recruit}명`}</p>
                     {normalizeDay(contents?.start_at)} ~ {normalizeDay(contents?.end_at)}
                 </div>
                 <div className="content-data-container">
