@@ -43,9 +43,6 @@ public class SurveyDTO {
     @JsonProperty("end_at")
     private LocalDate endAt;
 
-    @Builder.Default
-    private Long rewarded = 0L;
-
     @JsonProperty("view_count")
     @Builder.Default
     private Long viewCount = 0L;

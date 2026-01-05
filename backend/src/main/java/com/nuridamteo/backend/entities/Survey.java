@@ -62,10 +62,6 @@ public class Survey {
     @JsonProperty("end_at")
     private LocalDate endAt;
 
-    @Column(nullable = false)
-    @Builder.Default
-    private Long rewarded = 0L;
-
     @Column(name = "view_count", nullable = false)
     @JsonProperty("view_count")
     @Builder.Default

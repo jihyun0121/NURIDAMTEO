@@ -118,7 +118,6 @@ public class SurveyService {
 				.status(s.getStatus())
 				.startAt(s.getStartAt())
 				.endAt(s.getEndAt())
-				.rewarded(s.getRewarded())
 				.viewCount(s.getViewCount())
 				.participationCount(s.getParticipationCount())
 				.build();
