@@ -48,8 +48,13 @@ public class SearchController {
         return ResponseEntity.ok(searchService.searchCategoryProposals(categoryId));
     }
 
-    @GetMapping("/category/surveys")
+    @GetMapping("/category/surveys/survey")
     public ResponseEntity<?> searchCategorySurveys(@RequestParam("categoryId") Long categoryId) {
         return ResponseEntity.ok(searchService.searchCategorySurveys(categoryId));
+    }
+
+    @GetMapping("/category/surveys/panel")
+    public ResponseEntity<?> searchCategoryPanel(@RequestParam("categoryId") Long categoryId) {
+        return ResponseEntity.ok(searchService.searchCategoryPanels(categoryId));
     }
 }

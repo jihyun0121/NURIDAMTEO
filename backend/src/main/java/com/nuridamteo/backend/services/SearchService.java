@@ -57,6 +57,11 @@ public class SearchService {
     }
 
     public List<Survey> searchCategorySurveys(Long categoryId) {
-        return surveyRepository.findByCategory_CategoryIdOrderBySurveyIdDesc(categoryId);
+        return surveyRepository.searchByCategoryAndType(categoryId, SurveyType.SURVEY);
     }
+
+    public List<Survey> searchCategoryPanels(Long categoryId) {
+        return surveyRepository.searchByCategoryAndTypes(categoryId, List.of(SurveyType.PANEL, SurveyType.SELECT));
+    }
+
 }
