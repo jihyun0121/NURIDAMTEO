@@ -44,10 +44,12 @@
 .proposal-card-container {
     display: flex;
     width: 22.25rem;
+    height: 20.875rem;
     padding: 1.5rem;
     flex-direction: column;
     align-items: flex-start;
     gap: 1.5rem;
+    justify-content: space-between;
 
     border-radius: 1.5rem;
     border: 1px solid;
@@ -81,6 +83,7 @@
 }
 
 .proposal-card-content {
+    height: 9.5rem;
     display: flex;
     padding-bottom: 1.5rem;
     flex-direction: column;
