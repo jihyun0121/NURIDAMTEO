@@ -185,7 +185,7 @@ export default function MyPage() {
                             <MyPageButton type={type === "participate" ? "hover" : "default"} content="참여내역" arrow={false} onClick={() => setType("participate")}>
                                 <VoteIcon size={44} color="inherit" />
                             </MyPageButton>
-                            <MyPageButton type={type === "bookmark" ? "hover" : "default"} content="북마크" arrow={false} onClick={() => setType("bookmark")}>
+                            <MyPageButton type={type === "bookmark" ? "hover" : "default"} content="즐겨찾기" arrow={false} onClick={() => setType("bookmark")}>
                                 <BookmarkIcon size={44} color="inherit" />
                             </MyPageButton>
                         </div>
