@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ProposalAPI, ParticipationAPI, BookmarkAPI, SurveyAPI, ResultAPI, MileageAPI } from "../../api/api";
+import { ProposalAPI, ParticipationAPI, BookmarkAPI, SurveyAPI, ResultAPI, MileageAPI, NoticeAPI } from "../../api/api";
 import { colors } from "../../assets/style/tokens/colors";
 import MileageStatus from "./MileageStatus";
 import SurveyList from "../home/SurveyList";
@@ -53,13 +53,17 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
                         res.data.map(async (item) => {
                             try {
                                 let detail = null;
+                                console.log(item);
 
                                 if (item.proposal_id) {
                                     detail = await ProposalAPI.getProposal(item.proposal_id);
                                 } else if (item.result_id) {
                                     detail = await ResultAPI.getResult(item.result_id);
+                                } else if (item.notice_id) {
+                                    detail = await NoticeAPI.getDetail(item.notice_id);
                                 }
 
+                                console.log(detail?.data);
                                 return { ...item, ...detail?.data };
                             } catch (e) {
                                 console.log("북마크 상세 조회 실패:", item, e);
@@ -111,7 +115,7 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
 
         if (type === "bookmark") {
             if (bookmarkType === "proposal") return { page: "proposal", id: item.proposal_id };
-            if (bookmarkType === "result") return { page: "nurisodam/result", id: item.result_id };
+            if (bookmarkType === "result") return { page: "nurisodam/result", id: item.result_id || item.notice_id };
         }
 
         return { page: "", id: null };
@@ -149,9 +153,9 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
                 {type === "mileage"
                     ? sortedList.map((s, i) => <MileageStatus key={s.mileage_id || i} num={i + 1} title={s.reason_detail} date={s.created_at} total={s.total_mileage} mileage={s.mileage} />)
                     : sortedList.map((s, i) => {
-                        const { page, id } = getRouteInfo(s);
-                        return <SurveyList key={s.bookmark_id || s.participation_id || s.proposal_id || i} num={i + 1} size="long" title={s.title || s.result_title} start={s.start_at} end={s.end_at} type={s.status ? "default" : "none"} state={s.status} onClick={() => page && id && (window.location.href = `/${page}/${id}`)} />;
-                    })}
+                          const { page, id } = getRouteInfo(s);
+                          return <SurveyList key={s.bookmark_id || s.participation_id || s.proposal_id || i} num={i + 1} size="long" title={s.title || s.result_title} start={s.start_at} end={s.end_at} type={s.status ? "default" : "none"} state={s.status} onClick={() => page && id && (window.location.href = `/${page}/${id}`)} />;
+                      })}
             </div>
         </div>
     );

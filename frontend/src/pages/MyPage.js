@@ -31,7 +31,6 @@ export default function MyPage() {
         if (urlType) setType(urlType);
     }, [urlType]);
 
-
     const userId = sessionStorage.getItem("user_id");
 
     useEffect(() => {
@@ -111,7 +110,6 @@ export default function MyPage() {
         }
     };
 
-
     let content = null;
 
     if (type === "update") {
@@ -151,7 +149,7 @@ export default function MyPage() {
     } else if (type === "participate") {
         content = <MyList title={"나의 참여내역"} asc={"오래된순"} desc={"최신순"} type={"participate"} userId={userId} />;
     } else if (type === "bookmark") {
-        content = <MyList title={"즐겨찾기"} asc={"제안"} desc={"결과"} type={"bookmark"} userId={userId} />;
+        content = <MyList title={"즐겨찾기"} asc={"제안"} desc={"공지사항"} type={"bookmark"} userId={userId} />;
     } else if (type === "setting") {
         content = (
             <div className="my-setting">

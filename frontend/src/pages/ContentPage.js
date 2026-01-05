@@ -348,14 +348,16 @@ export default function ContentPage() {
 
         const isProposal = pageType === "proposal";
         const isResult = pageType === "result";
+        const isNotice = pageType === "notice";
+        const isNews = pageType === "news";
 
-        if (!isProposal && !isResult) return;
+        if (!isProposal && !isResult && !isNotice && !isNews) return;
 
-        const targetId = isProposal ? contents?.proposal_id : contents?.result_id;
+        const targetId = isProposal ? contents?.proposal_id : isResult ? contents?.result_id : contents?.notice_id;
         if (!targetId) return;
 
         if (isBookmarked) {
-            const target = bookmarks.find((b) => (isProposal ? b.proposal_id === targetId : b.result_id === targetId));
+            const target = bookmarks.find((b) => (isProposal ? b.proposal_id === targetId : isResult ? b.result_id === targetId : b.notice_id));
             if (!target) return;
 
             await BookmarkAPI.deleteBookmark(target.bookmark_id);
@@ -369,6 +371,7 @@ export default function ContentPage() {
             user_id: Number(loginUser?.user_id),
             proposal_id: isProposal ? targetId : null,
             result_id: isResult ? targetId : null,
+            notice_id: isNotice || isNews ? targetId : null,
         };
 
         await BookmarkAPI.createBookmark(dto);
