@@ -55,5 +55,5 @@
 .percent-bar {
     height: 0.5rem;
     background: var(--orange-light-active);
-    border-radius: "999px";
+    border-radius: 999px;
 }
