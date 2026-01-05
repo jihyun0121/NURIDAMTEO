@@ -53,7 +53,6 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
                         res.data.map(async (item) => {
                             try {
                                 let detail = null;
-                                console.log(item);
 
                                 if (item.proposal_id) {
                                     detail = await ProposalAPI.getProposal(item.proposal_id);
@@ -62,8 +61,6 @@ export default function MyList({ title, asc, desc, type = "mileage", userId }) {
                                 } else if (item.notice_id) {
                                     detail = await NoticeAPI.getDetail(item.notice_id);
                                 }
-
-                                console.log(detail?.data);
                                 return { ...item, ...detail?.data };
                             } catch (e) {
                                 console.log("북마크 상세 조회 실패:", item, e);

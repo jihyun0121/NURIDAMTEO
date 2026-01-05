@@ -94,7 +94,6 @@ export default function SearchPage() {
         const base = moreLinkMap[sectionKey];
         // const url = `${base}${base.includes("?") ? "&" : "?"}keyword=${encodeURIComponent(keyword)}`;
 
-        console.log(type);
         const className = type === "card" ? "search-items-card" : type === "list" ? "search-items-list" : "";
 
         return (
