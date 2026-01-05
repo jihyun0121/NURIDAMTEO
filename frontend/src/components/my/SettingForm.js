@@ -17,10 +17,9 @@ export default function SettingForm({ user, userId }) {
     const [accessError, setAccessError] = useState("");
     const [isPopUpOpen, setIsPopUpOpen] = useState(false);
     const [form, setForm] = useState(initialForm);
-    const [error, setError] = useState("");
     const [active, setActive] = useState(false);
 
-    const [isPressed, setIsPressed] = useState(false);
+    const [, setIsPressed] = useState(false);
 
     const questionStyle = active ? { borderRadius: "0.75rem 0.75rem 0 0" } : { borderRadius: "0.75rem" };
 
