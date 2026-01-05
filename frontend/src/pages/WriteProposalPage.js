@@ -16,7 +16,7 @@ export default function WriteProposalPage() {
         { key: 7, value: "청년·일자리" },
     ];
 
-    const loginUser = sessionStorage.getItem("user_id");
+    const loginUser = Number(sessionStorage.getItem("user_id"));
 
     const [user, setUser] = useState(null);
 
@@ -91,6 +91,7 @@ export default function WriteProposalPage() {
                 category_id: category,
                 title: title,
                 content: content,
+                status: "WAIT",
                 start_at: new Date().toISOString().slice(0, 10),
                 end_at: new Date(Date.now() + 30 * 86400000).toISOString().slice(0, 10),
             };

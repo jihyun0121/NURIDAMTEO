@@ -43,7 +43,7 @@ export default function BellPopUp({ onClose, onRefresh }) {
     useEffect(() => {
         const fetchNotifications = async () => {
             const token = sessionStorage.getItem("token");
-            const userId = sessionStorage.getItem("user_id");
+            const userId = Number(sessionStorage.getItem("user_id"));
             if (!token || !userId) {
                 setNotifications([]);
                 setLoading(false);
@@ -64,7 +64,7 @@ export default function BellPopUp({ onClose, onRefresh }) {
     useEffect(() => {
         const markAsRead = async () => {
             const token = sessionStorage.getItem("token");
-            const userId = sessionStorage.getItem("user_id");
+            const userId = Number(sessionStorage.getItem("user_id"));
             if (!token || !userId) return;
 
             await NotificationAPI.readNotification(userId);

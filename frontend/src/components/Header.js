@@ -16,7 +16,7 @@ export default function Header({ style }) {
     const pathname = location.pathname;
 
     const token = sessionStorage.getItem("token");
-    const userId = sessionStorage.getItem("user_id");
+    const userId = Number(sessionStorage.getItem("user_id"));
 
     const [isBellOpen, setIsBellOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -82,11 +82,7 @@ export default function Header({ style }) {
                 </div>
 
                 <div className="header-icons">
-                    {isSearchOpen ? (
-                        <SearchInput onClose={() => setIsSearchOpen(false)} />
-                    ) : (
-                        <SearchIcon size={44} type="fill" onClick={() => setIsSearchOpen(true)} style={{ cursor: "pointer" }} />
-                    )}
+                    {isSearchOpen ? <SearchInput onClose={() => setIsSearchOpen(false)} /> : <SearchIcon size={44} type="fill" onClick={() => setIsSearchOpen(true)} style={{ cursor: "pointer" }} />}
                     <BellIcon size={44} type={hasUnread ? "hover" : "fill"} onClick={handleBellClick} style={{ cursor: "pointer" }} />
                     <UserIcon size={44} type="fill" onClick={() => (window.location.href = "/my")} style={{ cursor: "pointer" }} />
                 </div>

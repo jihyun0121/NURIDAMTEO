@@ -31,7 +31,7 @@ export default function MyPage() {
         if (urlType) setType(urlType);
     }, [urlType]);
 
-    const userId = sessionStorage.getItem("user_id");
+    const userId = Number(sessionStorage.getItem("user_id"));
 
     useEffect(() => {
         if (!userId) return;

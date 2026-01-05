@@ -31,7 +31,7 @@ export default function SurveyContent({ keyword }) {
 
     useEffect(() => {
         async function loadMyParticipation() {
-            const userId = sessionStorage.getItem("user_id");
+            const userId = Number(sessionStorage.getItem("user_id"));
             if (!userId) return;
             const res = await ParticipationAPI.getUserParticipaiton(userId);
             setParticipate(res.data || []);

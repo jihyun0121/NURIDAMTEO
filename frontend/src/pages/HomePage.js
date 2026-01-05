@@ -10,7 +10,7 @@ export default function HomePage() {
     const token = sessionStorage.getItem("token");
     const login = !!token;
 
-    const userId = sessionStorage.getItem("user_id");
+    const userId = Number(sessionStorage.getItem("user_id"));
 
     return (
         <div className="home-container">

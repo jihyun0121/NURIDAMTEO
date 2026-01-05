@@ -12,7 +12,7 @@ export default function ProposalCard({ type = "default", proposal }) {
     let state = proposal.status;
     let content;
     let color;
-    const loginUser = sessionStorage.getItem("user_id");
+    const loginUser = Number(sessionStorage.getItem("user_id"));
 
     const [commentCount, setCommentCount] = useState(0);
 
@@ -70,7 +70,10 @@ export default function ProposalCard({ type = "default", proposal }) {
     const getRemainDays = (end_at) => {
         const now = new Date();
         const end = new Date(end_at);
-        return Math.ceil((end - now) / (1000 * 60 * 60 * 24));
+        let day = Math.ceil((end - now) / (1000 * 60 * 60 * 24));
+
+        if (day <= 0) day = 0;
+        return day;
     };
 
     if (state === "WAIT") {
