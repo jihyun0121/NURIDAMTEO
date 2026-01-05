@@ -15,7 +15,7 @@ export default function Faq({ question, anwer, active = false, onClick }) {
             {active && (
                 <div className="faq-anwer" style={{ borderRadius: `${active || isPressed ? { borderRadius: "0 0 0.75rem 0.75rem" } : { borderRadius: "0.75rem" }}` }}>
                     <div className="faq-icon">A.</div>
-                    {anwer}
+                    <div dangerouslySetInnerHTML={{ __html: anwer }} />
                 </div>
             )}
         </div>
