@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/auth/signup", "/auth/login", "/users/{userId}",
-                                "/notices", "/notices/**", "/search", "/comments", "/result",
+                                "/notices", "/notices/**", "/search", "/search/**", "/comments", "/result",
                                 "/surveys", "/surveys/{surveyId}", "/surveys/survey", "/surveys/panel",
                                 "/surveys/type/{surveyType}", "/surveys/{surveyId}/view",
                                 "/proposals", "/proposals/{proposalId}",
