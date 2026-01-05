@@ -7,10 +7,12 @@ import org.springframework.transaction.annotation.*;
 
 import com.nuridamteo.backend.dtos.BookmarkDTO;
 import com.nuridamteo.backend.entities.Bookmark;
+import com.nuridamteo.backend.entities.Notice;
 import com.nuridamteo.backend.entities.Proposal;
 import com.nuridamteo.backend.entities.Result;
 import com.nuridamteo.backend.entities.Users;
 import com.nuridamteo.backend.repositories.BookmarkRepository;
+import com.nuridamteo.backend.repositories.NoticeRepository;
 import com.nuridamteo.backend.repositories.ProposalRepository;
 import com.nuridamteo.backend.repositories.ResultRepository;
 import com.nuridamteo.backend.repositories.UserRepository;
@@ -23,6 +25,7 @@ public class BookmarkService {
     private final BookmarkRepository bookmarkRepository;
     private final UserRepository userRepository;
     private final ResultRepository resultRepository;
+    private final NoticeRepository noticeRepository;
     private final ProposalRepository proposalRepository;
 
     public BookmarkDTO createBookmark(BookmarkDTO dto) {
@@ -31,6 +34,7 @@ public class BookmarkService {
 
         Result result = null;
         Proposal proposal = null;
+        Notice notice = null;
 
         if (dto.getResult() != null) {
             result = resultRepository.findById(dto.getResult())
@@ -38,6 +42,9 @@ public class BookmarkService {
         } else if (dto.getProposal() != null) {
             proposal = proposalRepository.findById(dto.getProposal())
                     .orElseThrow(() -> new RuntimeException("제안을 찾을 수 없습니다"));
+        } else if (dto.getNotice() != null) {
+            notice = noticeRepository.findById(dto.getNotice())
+                    .orElseThrow(() -> new RuntimeException("공지를 찾을 수 없습니다"));
         } else {
             throw new IllegalArgumentException("결과 또는 제안 중 하나는 반드시 있어야 합니다");
         }
@@ -46,6 +53,7 @@ public class BookmarkService {
                 .user(user)
                 .result(result)
                 .proposal(proposal)
+                .notice(notice)
                 .build();
 
         Bookmark saved = bookmarkRepository.save(bookmark);
@@ -62,7 +70,7 @@ public class BookmarkService {
 
     @Transactional(readOnly = true)
     public List<BookmarkDTO> getBookmarkResult(Long userId) {
-        return bookmarkRepository.findByUser_UserIdAndResultIsNotNullOrderByBookmarkIdDesc(userId)
+        return bookmarkRepository.findNoticeOrResultBookmarks(userId)
                 .stream()
                 .map(this::bookmarkDTO)
                 .toList();
@@ -82,6 +90,7 @@ public class BookmarkService {
                 .user(b.getUser().getUserId())
                 .proposal(b.getProposal() != null ? b.getProposal().getProposalId() : null)
                 .result(b.getResult() != null ? b.getResult().getResultId() : null)
+                .notice(b.getNotice() != null ? b.getNotice().getNoticeId() : null)
                 .build();
     }
 

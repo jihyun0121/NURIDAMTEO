@@ -32,6 +32,12 @@ public class Bookmark {
     private Proposal proposal;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "notice_id")
+    @JsonProperty("notice_id")
+    @JsonIgnore
+    private Notice notice;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "result_id")
     @JsonProperty("result_id")
     @JsonIgnore

@@ -19,6 +19,9 @@ public class BookmarkDTO {
     @JsonProperty("proposal_id")
     private Long proposal;
 
+    @JsonProperty("notice_id")
+    private Long notice;
+
     @JsonProperty("result_id")
     private Long result;
 }
