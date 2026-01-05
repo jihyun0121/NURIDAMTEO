@@ -16,6 +16,7 @@ import MegaphoneIcon from "../ui/icons/MegaphoneIcon";
 import useResults from "../components/nurisodam/hook/useResults";
 import useNotices from "../components/nurisodam/hook/useNotice";
 import useNews from "../components/nurisodam/hook/useNews";
+import PanelForm from "../components/participate/survey/PanelForm";
 
 export default function ContentPage() {
     const [contents, setContents] = useState(null);
@@ -41,7 +42,7 @@ export default function ContentPage() {
     const location = useLocation();
     const pathname = location.pathname;
     const params = useParams();
-    const userId = sessionStorage.getItem("user_id");
+    const userId = Number(sessionStorage.getItem("user_id"));
 
     const pageType = useMemo(() => {
         if (pathname.startsWith("/participate")) return "participate";
@@ -480,12 +481,12 @@ export default function ContentPage() {
         }
     };
 
-    if (pageType === "participate") {
+    if (pageType === "participate" && contents?.survey_type === "SURVEY") {
         if (state === "WAIT") {
             text = "대기중";
             color = "gray";
         } else if (state === "OPEN") {
-            if (contents?.survey_type === "PANEL") {
+            if (contents?.survey_type === "SELECT") {
                 text = "선정조사";
                 color = "red";
             } else {
@@ -544,6 +545,49 @@ export default function ContentPage() {
                 <div className="comments-list">{comments.length === 0 ? null : comments.map((c) => <Comment key={c.comment_id} user={c.name} createdAt={c.created_at} content={c.content} />)}</div>
             </div>
         );
+    } else if ((pageType === "participate" && contents?.survey_type === "PANEL") || contents?.survey_type === "SELECT") {
+        if (state === "WAIT") {
+            text = "대기중";
+            color = "gray";
+        } else if (state === "OPEN") {
+            if (contents?.survey_type === "SELECT") {
+                text = "선정조사";
+                color = "red";
+            } else {
+                text = "진행중";
+                color = "red";
+            }
+        } else if (state === "CLOSE") {
+            text = "조사종료";
+            color = "gray";
+        }
+
+        banner = participateBanner;
+        title = (
+            <div className="content-title-container">
+                {contents?.title}
+                <div className="content-author-text">
+                    <p>{contents?.author}</p>
+                    {normalizeDay(contents?.start_at)} ~ {normalizeDay(contents?.end_at)}
+                </div>
+                <div className="content-data-container">
+                    <div className="content-data-text">
+                        <LabelButton content={text} type={color} />
+                        {hasParticipated && <LabelButton content="참여완료" type="green" />}
+                    </div>
+                    <div className="content-data-text">
+                        <EyeIcon size={44} />
+                        {contents?.view_count}
+                    </div>
+                    <div className="content-data-text">{categoryName}</div>
+                    <div className="content-data-text">
+                        <HeartIcon variant="line" size={44} />
+                        {contents?.participation_count}
+                    </div>
+                </div>
+            </div>
+        );
+        form = <PanelForm survey={contents} />;
     } else if (pageType === "proposal") {
         if (state === "WAIT") {
             text = "대기중";
@@ -780,10 +824,10 @@ export default function ContentPage() {
             {banner && <img src={banner} width="100%" alt="" style={{ marginTop: "6.25rem" }} />}
 
             <div className="participate-wrapper">
-                <div>{title}</div>
-                <div>{content}</div>
-                <div>{form}</div>
-                <div>{comment}</div>
+                {title !== null && <div>{title}</div>}
+                {content !== null && <div>{content}</div>}
+                {form !== null && <div>{form}</div>}
+                {comment !== null && <div>{comment}</div>}
             </div>
         </div>
     );

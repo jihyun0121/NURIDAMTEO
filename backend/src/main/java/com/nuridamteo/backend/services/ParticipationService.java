@@ -36,7 +36,7 @@ public class ParticipationService {
             proposalRepository.findById(dto.getTargetId())
                     .orElseThrow(() -> new RuntimeException("설문을 찾을 수 없습니다"));
         } else if (dto.getTargetType() == TargetType.PANEL) {
-            proposalRepository.findById(dto.getTargetId())
+            surveyRepository.findById(dto.getTargetId())
                     .orElseThrow(() -> new RuntimeException("설문을 찾을 수 없습니다"));
         }
 

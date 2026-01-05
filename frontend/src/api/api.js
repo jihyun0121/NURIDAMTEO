@@ -84,7 +84,7 @@ export const SurveyAPI = {
     getPanelList: () => api.get(`/surveys/panel`),
     getQuestionsBySurvey: (surveyId) => api.get(`/surveys/${surveyId}/questions`),
     getOptionsByQuestion: (questionId) => api.get(`/surveys/${questionId}/options`),
-    checkSurveySelection: (surveyId, userId) => api.get(`/surveys/${surveyId}/selection`, userId),
+    checkSurveySelection: (surveyId, userId) => api.get(`/surveys/${surveyId}/selection?userId=${userId}`),
     updateView: (surveyId) => api.put(`/surveys/${surveyId}/view`),
     updateParticipate: (surveyId, type) => api.put(`/surveys/${surveyId}/participate?type=${type}`),
 };
