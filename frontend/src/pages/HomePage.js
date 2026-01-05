@@ -15,7 +15,7 @@ export default function HomePage() {
     return (
         <div className="home-container">
             <Header />
-            <img src={banner} width="100%" alt="" />
+            <img src={banner} width="100%" alt="" onClick={() => (window.location.href = "/nurisodam/news/10")} />
             <div className="home-content">
                 <ShortcutButton />
                 <NewsList />
