@@ -232,7 +232,7 @@ export default function AnswerForm({ survey }) {
                 const dto = {
                     user_id: Number(loginUser?.user_id),
                     mileage: 200,
-                    reason_detail: "제안 공감 마일리지 지급",
+                    reason_detail: "설문조사 참여 마일리지 지급",
                 };
 
                 await MileageAPI.addMileage(dto);

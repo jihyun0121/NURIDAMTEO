@@ -76,7 +76,7 @@ export default function ParticipateCard({ type = "default", survey, participate 
             <div className="participate-card-header">
                 <div className="participate-card-state">
                     <LabelButton content={content} type={color} />
-                    {survey.survey_type === "PANEL" && <LabelButton content="선정조사" type="red" />}
+                    {survey.survey_type === "SELECT" && <LabelButton content="선정조사" type="red" />}
                 </div>
                 <div className="participate-card-date">종료 {getRemainDays(survey.end_at)}일 전</div>
             </div>
