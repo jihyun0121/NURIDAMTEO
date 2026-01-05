@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ArrowIcon from "../icons/ArrowIcon";
 
-export default function SearchDropdown({ onChange }) {
+export default function SearchDropdown({ onChange, selectedCategory }) {
     const [currentValue, setCurrentValue] = useState("주제 선택");
     const [showOptions, setShowOptions] = useState(false);
 
@@ -15,12 +15,24 @@ export default function SearchDropdown({ onChange }) {
         { key: 7, value: "청년·일자리" },
     ];
 
+    useEffect(() => {
+        if (!selectedCategory) setCurrentValue("주제 선택");
+        else setCurrentValue(selectedCategory.value);
+    }, [selectedCategory]);
+
     const handleSelect = (option, e) => {
         e.stopPropagation();
         setCurrentValue(option.value);
         onChange(option);
         setShowOptions(false);
     };
+
+    // const handleReset = (e) => {
+    //     e.stopPropagation();
+    //     setCurrentValue("주제 선택");
+    //     onChange(null);
+    //     setShowOptions(false);
+    // };
 
     return (
         <div className="search-dropdown" onClick={() => setShowOptions(!showOptions)}>
@@ -29,6 +41,10 @@ export default function SearchDropdown({ onChange }) {
 
             {showOptions && (
                 <div className="search-dropdown-option">
+                    {/* <div className="dropdown-text" onClick={handleReset}>
+                        주제 선택
+                    </div> */}
+
                     {optionData.map((opt) => (
                         <div key={opt.key} className="dropdown-text" onClick={(e) => handleSelect(opt, e)}>
                             {opt.value}

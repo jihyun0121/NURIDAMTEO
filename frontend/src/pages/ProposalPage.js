@@ -18,6 +18,8 @@ export default function ProposalPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [keyword, setKeyword] = useState("");
 
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -37,17 +39,19 @@ export default function ProposalPage() {
         loadProposal();
     }, []);
 
-    const handleSearch = async () => {
+    const handleSearch = async (text) => {
+        const nextKeyword = (text ?? keyword).trim();
         setCurrentPage(1);
+        setSelectedCategory(null);
         setLoading(true);
-
         try {
-            if (!keyword.trim()) {
+            if (!nextKeyword) {
                 setProposal(allProposal);
-                setLoading(false);
+                setKeyword("");
                 return;
             }
-            const res = await SearchAPI.searchProposals(keyword);
+
+            const res = await SearchAPI.searchProposals(nextKeyword);
             setProposal(res.data || []);
         } catch (e) {
             console.log("제안 검색 실패", e);
@@ -57,8 +61,32 @@ export default function ProposalPage() {
         }
     };
 
-    const totalPages = Math.max(1, Math.ceil(proposal.length / PAGE_SIZE));
+    const handleCategoryChange = async (option) => {
+        setCurrentPage(1);
 
+        setKeyword("");
+
+        if (!option) {
+            setSelectedCategory(null);
+            setProposal(allProposal);
+            return;
+        }
+
+        setSelectedCategory(option);
+
+        setLoading(true);
+        try {
+            const res = await SearchAPI.searchCategoryProposals(option.key);
+            setProposal(res.data || []);
+        } catch (e) {
+            console.log("카테고리 검색 실패", e);
+            setProposal([]);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const totalPages = Math.max(1, Math.ceil(proposal.length / PAGE_SIZE));
     const startIndex = (currentPage - 1) * PAGE_SIZE;
     const currentProposal = proposal.slice(startIndex, startIndex + PAGE_SIZE);
 
@@ -76,6 +104,7 @@ export default function ProposalPage() {
                     <div className="notice-line" />
                     <NoticeLabel children={<NoticeIcon type="news" size="44" />} text="채택 시 정책 반영" />
                 </div>
+
                 <div className="proposal-notice-wrapper">
                     <div className="proposal-notice-texts">
                         <p>· 누리소담시의 정책과 행정운영에 대해 제안해주세요.</p>
@@ -84,8 +113,9 @@ export default function ProposalPage() {
                     </div>
                     <TextButtonS content="제안 작성하기" type="yellow" style={{ boxShadow: "none" }} onClick={() => (window.location.href = "/writeproposal")} />
                 </div>
+
                 <div className="proposal-searchbar">
-                    <SearchBar type="long" value={keyword} onChange={setKeyword} onSearch={handleSearch} />
+                    <SearchBar type="long" value={keyword} onChange={setKeyword} onSearch={handleSearch} onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
                 </div>
 
                 {loading ? (

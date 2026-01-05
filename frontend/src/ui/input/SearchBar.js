@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SearchIcon from "../icons/SearchIcon";
 import SearchDropdown from "../input/SearchDropdown";
 
-export default function SearchBar({ type = "short", value, onChange, onSearch, onCategoryChange }) {
+export default function SearchBar({ type = "short", value, onChange, onSearch, onCategoryChange, selectedCategory }) {
     const styles = { width: type === "long" ? "95rem" : "78.8125rem" };
 
     const [tempValue, setTempValue] = useState(value || "");
@@ -18,7 +18,7 @@ export default function SearchBar({ type = "short", value, onChange, onSearch, o
 
     return (
         <div className="search-container" style={styles}>
-            <SearchDropdown onChange={onCategoryChange} />
+            <SearchDropdown onChange={onCategoryChange} selectedCategory={selectedCategory} />
 
             <div className="search-content" style={styles}>
                 <input
