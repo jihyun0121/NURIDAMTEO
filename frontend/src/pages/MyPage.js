@@ -34,7 +34,11 @@ export default function MyPage() {
     const userId = Number(sessionStorage.getItem("user_id"));
 
     useEffect(() => {
-        if (!userId) return;
+        if (!userId) {
+            alert("로그인이 필요합니다.");
+            navigate("/login");
+            return;
+        }
 
         async function fetchUser() {
             try {
@@ -45,7 +49,7 @@ export default function MyPage() {
             }
         }
         fetchUser();
-    }, [userId]);
+    }, [userId, navigate]);
 
     const handleAttendance = async () => {
         if (!userId) {
