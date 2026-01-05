@@ -10,6 +10,7 @@ import com.nuridamteo.backend.entities.Proposal;
 import com.nuridamteo.backend.entities.Result;
 import com.nuridamteo.backend.entities.Survey;
 import com.nuridamteo.backend.enums.NoticeType;
+import com.nuridamteo.backend.enums.SurveyType;
 import com.nuridamteo.backend.repositories.NoticeRepository;
 import com.nuridamteo.backend.repositories.ProposalRepository;
 import com.nuridamteo.backend.repositories.ResultRepository;
@@ -32,7 +33,11 @@ public class SearchService {
     }
 
     public List<Survey> searchSurveys(String keyword) {
-        return surveyRepository.searchByKeyword(keyword.trim());
+        return surveyRepository.searchByKeywordAndType(keyword.trim(), SurveyType.SURVEY);
+    }
+
+    public List<Survey> searchPanels(String keyword) {
+        return surveyRepository.searchByKeywordAndTypes(keyword.trim(), List.of(SurveyType.PANEL, SurveyType.SELECT));
     }
 
     public List<Notice> searchNotices(String keyword) {
@@ -45,5 +50,13 @@ public class SearchService {
 
     public List<Result> searchResults(String keyword) {
         return resultRepository.searchByKeyword(keyword.trim());
+    }
+
+    public List<Proposal> searchCategoryProposals(Long categoryId) {
+        return proposalRepository.findByCategory_CategoryIdOrderByProposalIdDesc(categoryId);
+    }
+
+    public List<Survey> searchCategorySurveys(Long categoryId) {
+        return surveyRepository.findByCategory_CategoryIdOrderBySurveyIdDesc(categoryId);
     }
 }

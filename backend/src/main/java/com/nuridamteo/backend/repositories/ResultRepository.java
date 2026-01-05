@@ -14,10 +14,10 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
     List<Result> findAllByOrderByResultIdDesc();
 
     @Query("""
-        SELECT r FROM Result r
-        WHERE r.resultTitle LIKE %:keyword%
-        OR r.resultContent LIKE %:keyword%
-        ORDER BY r.resultId DESC
-    """)
+                SELECT r FROM Result r
+                WHERE r.resultTitle LIKE %:keyword%
+                OR r.resultContent LIKE %:keyword%
+                ORDER BY r.resultId DESC
+            """)
     List<Result> searchByKeyword(@Param("keyword") String keyword);
 }
