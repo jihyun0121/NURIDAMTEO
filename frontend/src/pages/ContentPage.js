@@ -265,7 +265,7 @@ export default function ContentPage() {
 
     const handleLike = async () => {
         if (!contents) return;
-        if (!loginUser?.user_id) return;
+        if (!loginUser?.user_id) return alert("로그인이 필요합니다.");
 
         if (hasParticipated) return;
         if (isLiking) return;
@@ -345,7 +345,7 @@ export default function ContentPage() {
 
     const handleBookmark = async () => {
         if (!contents) return;
-        if (!loginUser?.user_id) return;
+        if (!loginUser?.user_id) return alert("로그인이 필요합니다.");
 
         const isProposal = pageType === "proposal";
         const isResult = pageType === "result";

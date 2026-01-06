@@ -48,13 +48,12 @@ export default function ParticipateCard({ type = "default", survey, participate 
         content = "대기중";
         color = "gray";
     } else if (state === "OPEN") {
-        if (hasParticipated) {
-            content = "참여완료";
-            color = "green";
+        if (survey.survey_type === "SELECT") {
+            content = "선정조사";
         } else {
             content = "진행중";
-            color = "red";
         }
+        color = "red";
     } else if (state === "CLOSE") {
         content = "조사종료";
         color = "gray";
@@ -76,7 +75,7 @@ export default function ParticipateCard({ type = "default", survey, participate 
             <div className="participate-card-header">
                 <div className="participate-card-state">
                     <LabelButton content={content} type={color} />
-                    {survey.survey_type === "SELECT" && <LabelButton content="선정조사" type="red" />}
+                    {hasParticipated && <LabelButton content="참여완료" type="green" />}
                 </div>
                 <div className="participate-card-date">종료 {getRemainDays(survey.end_at)}일 전</div>
             </div>

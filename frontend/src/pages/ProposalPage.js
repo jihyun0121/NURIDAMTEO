@@ -22,6 +22,8 @@ export default function ProposalPage() {
 
     const [loading, setLoading] = useState(false);
 
+    const userId = Number(sessionStorage.getItem("user_id"));
+
     useEffect(() => {
         async function loadProposal() {
             setLoading(true);
@@ -111,7 +113,15 @@ export default function ProposalPage() {
                         <p>· 좋은 정책으로 이어질 수 있도록 댓글로 토론하고 공감해주세요.</p>
                         <p>· 30일 내 100개의 공감을 얻은 제안은 관련부서의 검토를 통해 정책에 반영합니다.</p>
                     </div>
-                    <TextButtonS content="제안 작성하기" type="yellow" style={{ boxShadow: "none" }} onClick={() => (window.location.href = "/writeproposal")} />
+                    <TextButtonS
+                        content="제안 작성하기"
+                        type="yellow"
+                        style={{ boxShadow: "none" }}
+                        onClick={() => {
+                            if (!userId?.user_id) return alert("로그인이 필요합니다.");
+                            window.location.href = "/writeproposal";
+                        }}
+                    />
                 </div>
 
                 <div className="proposal-searchbar">
