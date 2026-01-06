@@ -118,7 +118,9 @@ export default function ProposalPage() {
                         type="yellow"
                         style={{ boxShadow: "none" }}
                         onClick={() => {
-                            if (!userId?.user_id) return alert("로그인이 필요합니다.");
+                            if (!userId) {
+                                return alert("로그인이 필요합니다.");
+                            }
                             window.location.href = "/writeproposal";
                         }}
                     />
